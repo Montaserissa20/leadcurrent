@@ -48,7 +48,7 @@ jobs:
         env:
           RAILS_ENV: production
           SECRET_KEY_BASE_DUMMY: '1'
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: failure-screenshots
