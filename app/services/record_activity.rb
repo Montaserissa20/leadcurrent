@@ -2,6 +2,7 @@ class RecordActivity
   def self.call(record, actor:, kind:, body:, follow_up_at: nil)
     WorkspaceAccess.authorize!(actor, record)
     record.with_lock do
+      WorkspaceAccess.authorize!(actor, record)
       raise WorkflowError, "This lead is closed; use the connected opportunity" if record.is_a?(Lead) && record.status.in?(%w[converted disqualified])
       raise WorkflowError, "This opportunity is closed" if record.is_a?(Opportunity) && record.terminal?
       activity = Activity.create!(organization: record.organization, actor: actor, record.class.name.underscore => record, kind: kind, body: body, completed_at: Time.current)

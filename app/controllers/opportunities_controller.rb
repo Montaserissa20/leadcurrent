@@ -21,6 +21,7 @@ class OpportunitiesController < ApplicationController
       data[:owner_id] = current_user.organization.users.find(data[:owner_id]).id
     end
     @opportunity.with_lock do
+      WorkspaceAccess.authorize!(current_user, @opportunity)
       @opportunity.update!(data)
       AuditEvent.record!(current_user, @opportunity, "updated", fields: data.keys)
     end

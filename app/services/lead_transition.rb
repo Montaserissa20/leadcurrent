@@ -6,6 +6,7 @@ class LeadTransition
   def self.call(lead, to:, actor:)
     WorkspaceAccess.authorize!(actor, lead)
     lead.with_lock do
+      WorkspaceAccess.authorize!(actor, lead)
       raise WorkflowError, "Cannot move #{lead.status} to #{to}" unless TRANSITIONS.fetch(lead.status).include?(to)
       raise WorkflowError, "Record a completed customer contact first" if to == "contacted" && lead.first_contact_at.nil?
       from = lead.status

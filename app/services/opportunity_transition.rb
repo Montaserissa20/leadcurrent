@@ -6,6 +6,7 @@ class OpportunityTransition
   def self.call(opportunity, to:, actor:)
     WorkspaceAccess.authorize!(actor, opportunity)
     opportunity.with_lock do
+      WorkspaceAccess.authorize!(actor, opportunity)
       raise WorkflowError, "Cannot move #{opportunity.status} to #{to}" unless TRANSITIONS.fetch(opportunity.status).include?(to)
       from = opportunity.status
       opportunity.workflow_change = true

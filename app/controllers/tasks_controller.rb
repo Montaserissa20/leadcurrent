@@ -7,6 +7,7 @@ class TasksController < ApplicationController
     task = scope(Task).find(params[:id])
     WorkspaceAccess.authorize!(current_user, task)
     task.with_lock do
+      WorkspaceAccess.authorize!(current_user, task)
       raise WorkflowError, "This task is already complete" if task.completed_at
       task.update!(completed_at: Time.current)
       AuditEvent.record!(current_user, task, "completed")

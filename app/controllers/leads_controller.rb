@@ -29,6 +29,7 @@ class LeadsController < ApplicationController
       data[:owner_id] = current_user.organization.users.find(data[:owner_id]).id
     end
     @lead.with_lock do
+      WorkspaceAccess.authorize!(current_user, @lead)
       @lead.update!(data)
       AuditEvent.record!(current_user, @lead, "updated", fields: data.keys)
     end

@@ -2,6 +2,7 @@ class LeadConversion
   def self.call(lead, actor:, attributes:)
     WorkspaceAccess.authorize!(actor, lead)
     lead.with_lock do
+      WorkspaceAccess.authorize!(actor, lead)
       raise WorkflowError, "Only a qualified lead can be converted once" unless lead.status == "qualified" && !lead.opportunity
       opportunity = Opportunity.new(attributes.slice(:title, :value, :currency, :expected_closing_date))
       opportunity.assign_attributes(organization: lead.organization, owner: lead.owner, company: lead.company, contact: lead.contact, lead: lead, last_activity_at: Time.current)

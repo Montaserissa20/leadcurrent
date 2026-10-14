@@ -2,6 +2,7 @@ require "application_system_test_case"
 class SalesWorkflowTest < ApplicationSystemTestCase
   setup { @user = make_user }
   def sign_in
+    page.current_window.resize_to(1440, 1000)
     visit login_path
     fill_in "Email address", with: @user.email
     fill_in "Password", with: "test-password-123"
