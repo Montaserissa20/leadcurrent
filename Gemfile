@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "3.4.7"
 gem "bcrypt", "~> 3.1"
-gem "json", "< 3.0"
+gem "json", "< 4.0"
 gem "irb", "~> 1.15.3"
 gem "rdoc", "~> 6.15.0"
 
