@@ -2,6 +2,7 @@ require "application_system_test_case"
 class SalesWorkflowTest < ApplicationSystemTestCase
   setup { @user = make_user }
   def sign_in
+    page.driver.browser.execute_cdp("Emulation.clearDeviceMetricsOverride")
     page.current_window.resize_to(1440, 1000)
     visit login_path
     fill_in "Email address", with: @user.email
@@ -56,6 +57,8 @@ class SalesWorkflowTest < ApplicationSystemTestCase
     page.refresh
     assert_not_equal before, page.evaluate_script('document.documentElement.dataset.theme')
     page.current_window.resize_to(390, 844)
+    page.driver.browser.execute_cdp("Emulation.setDeviceMetricsOverride", width: 390, height: 844, deviceScaleFactor: 1, mobile: true)
+    assert_equal 390, page.evaluate_script('window.innerWidth')
     assert_selector '.mobile-menu', visible: true
     click_button "Toggle navigation"
     assert_selector '#sidebar.open'

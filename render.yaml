@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: leadcurrent
+    runtime: ruby
+    region: frankfurt
+    plan: free
+    buildCommand: bash bin/render-build.sh
+    startCommand: bundle exec puma -C config/puma.rb
+    healthCheckPath: /up
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: leadcurrent-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_ENV
+        value: production
+      - key: WEB_CONCURRENCY
+        value: '0'
+      - key: RAILS_MAX_THREADS
+        value: '3'
+      - key: DEMO_SEED_ENABLED
+        value: 'true'
+      - key: DEMO_EMAIL
+        value: demo@leadcurrent.test
+      - key: DEMO_PASSWORD
+        sync: false
+databases:
+  - name: leadcurrent-db
+    region: frankfurt
+    plan: free
+    databaseName: leadcurrent
+    user: leadcurrent
