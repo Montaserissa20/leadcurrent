@@ -21,6 +21,7 @@ begin
   driver.manage.window.resize_to(390, 844)
   driver.execute_cdp("Emulation.setDeviceMetricsOverride", width: 390, height: 844, deviceScaleFactor: 1, mobile: true)
   wait.until { driver.find_element(css: ".mobile-menu").displayed? }
+  wait.until { driver.execute_script("return document.getElementById('sidebar').getBoundingClientRect().right <= 0.5") }
   driver.save_screenshot("docs/screenshots/dashboard-mobile.png")
   raise "Mobile overflow" unless driver.execute_script("return document.documentElement.scrollWidth <= window.innerWidth")
   raise "Wrong mobile width" unless driver.execute_script("return window.innerWidth") == 390
