@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby "3.4.7"
 gem "bcrypt", "~> 3.1"
 gem "json", "< 3.0"
-gem "irb", "~> 1.15.3"
+gem "irb", "~> 1.18.0"
 gem "rdoc", "~> 6.15.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
