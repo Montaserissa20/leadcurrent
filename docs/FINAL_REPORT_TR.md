@@ -8,7 +8,7 @@
 
 4. **Gerçek testler:** 37 test / 401 assertion; 2 gerçek browser test / 24 assertion; failure/error/skip yok. `travel_to`, tüm geçiş çiftleri, yetki, rollback, iki eşzamanlı conversion, HTTP/browser lead-to-won, dashboard refresh, NBA persistence, CSRF, gerçek 390px mobile ve theme. Brakeman 0 warning; Zeitwerk ve production assets geçti. [Doğrulama](VERIFICATION_TR.md).
 
-5. **GitHub Actions:** gerçek [repository](https://github.com/Montaserissa20/leadcurrent) ve [CI workflow](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml). Uygulama commit `2df2d13` için [başarılı run](https://github.com/Montaserissa20/leadcurrent/actions/runs/38576922384) doğrulandı; son teslim commit'inin sonucu ayrıca doğrulama raporuna yazılır. Badge README'de gerçek workflow URL'sidir.
+5. **GitHub Actions:** gerçek [repository](https://github.com/Montaserissa20/leadcurrent) ve [CI workflow](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml). Son uygulama/screenshot commit `1872bad` için [başarılı run](https://github.com/Montaserissa20/leadcurrent/actions/runs/38578911109) doğrulandı; ayrıntılar doğrulama raporunda. Badge README'de gerçek workflow URL'sidir.
 
 6. **Deployment:** `render.yaml` ve build/start/health/migrate/secret/fictional seed hazır; **Render hesabı bağlantısı olmadığı için yayın yapılmadı, genel URL yok**. [Eksik kesin adım ve production kontrolleri](DEPLOYMENT_TR.md).
 

@@ -30,7 +30,9 @@ Doğrulanan uygulama CI commit'i: **2df2d1370b84ebbdf44b298b651d7f67ba17b888**. 
 
 Gerçek run: https://github.com/Montaserissa20/leadcurrent/actions/runs/38576922384.
 
-Kontrol edilen adımların tamamı başarılı: PostgreSQL hazırlama; domain/HTTP tests; headless Chrome system tests; Zeitwerk; Brakeman; production assets. Dependabot sonuçları uygulama CI kanıtı sayılmadı. İlk browser run'ında testler arasında kalan dar viewport sorunu görüldü; viewport reset düzeltmesi sonraki run'da doğrulandı. Son teslim commit'inin kontrolü aşağıya ayrıca eklenmelidir.
+Kontrol edilen adımların tamamı başarılı: PostgreSQL hazırlama; domain/HTTP tests; headless Chrome system tests; Zeitwerk; Brakeman; production assets. Dependabot sonuçları uygulama CI kanıtı sayılmadı. İlk browser run'ında testler arasında kalan dar viewport sorunu görüldü; viewport reset düzeltmesi sonraki run'da doğrulandı.
+
+Son uygulama/screenshot commit'i **1872bad593b6204ac5ae24667f4b428e765957d1** ayrıca doğrulandı: **LeadCurrent CI / success**. [Son başarılı uygulama run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38578911109). 390px assertion dahil **37 + 2 = 39 test, 401 + 24 = 425 assertion**. Bu kayıt eklenirken uygulama kodu değiştirilmedi.
 
 ## Deployment
 
