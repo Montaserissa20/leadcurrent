@@ -1,0 +1,1 @@
+<% flash.each do |kind, message| %><div class="flash <%= kind %>" role="<%= kind == 'alert' ? 'alert' : 'status' %>"><%= message %></div><% end %>

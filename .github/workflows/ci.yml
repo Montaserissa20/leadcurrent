@@ -1,0 +1,56 @@
+name: LeadCurrent CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: leadcurrent_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s --health-timeout=5s --health-retries=5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/leadcurrent_test
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Prepare PostgreSQL
+        run: bundle exec rails db:prepare
+      - name: Domain and HTTP workflow tests
+        run: bundle exec rails test
+      - name: Real browser workflow tests
+        run: bundle exec rails test:system
+      - name: Autoload check
+        run: bundle exec rails zeitwerk:check
+      - name: Security scan
+        run: bundle exec brakeman --no-pager --quiet
+      - name: Production assets
+        run: bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: production
+          SECRET_KEY_BASE_DUMMY: '1'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: failure-screenshots
+          path: tmp/capybara
+          if-no-files-found: ignore

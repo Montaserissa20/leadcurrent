@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-controller="appearance">
+<head>
+  <title>LeadCurrent · Move relationships forward</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A focused workspace for leads, meaningful follow-ups, and your next win.">
+  <%= csrf_meta_tags %><%= csp_meta_tag %>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+<% if current_user %>
+  <aside class="sidebar" id="sidebar" data-appearance-target="sidebar">
+    <%= link_to root_path, class: "brand" do %><img src="/icon.svg" alt="" width="34" height="34">LeadCurrent<% end %>
+    <div class="workspace-label"><span class="workspace-avatar"><%= current_user.organization.name.first.upcase %></span><div><strong><%= current_user.organization.name %></strong><small>Sales workspace</small></div></div>
+    <p class="nav-heading">WORKSPACE</p>
+    <nav aria-label="Main navigation">
+      <% [["◫", "Overview", root_path], ["↗", "Leads", leads_path], ["◇", "Opportunities", opportunities_path], ["▥", "Pipeline", pipeline_path], ["✓", "Tasks", tasks_path], ["◷", "Activity", activity_path]].each do |icon, label, url| %>
+        <%= link_to url, class: "nav-link #{'active' if request.path == url}" do %><span aria-hidden="true"><%= icon %></span><%= label %><% end %>
+      <% end %>
+    </nav>
+    <div class="sidebar-note"><span class="live-dot"></span>Every relationship counts.<p>Keep your next move in sight.</p></div>
+    <%= link_to "⚙  Settings & team", settings_path, class: "nav-link" %>
+    <div class="user-card"><span class="avatar"><%= current_user.name.split.map(&:first).first(2).join.upcase %></span><div><strong><%= current_user.name %></strong><small><%= current_user.role.humanize %></small></div><%= button_to "↪", logout_path, method: :delete, class: "icon-button", aria: { label: "Sign out" } %></div>
+  </aside>
+  <div class="app-shell">
+    <header class="topbar"><div class="topbar-start"><button type="button" class="icon-button mobile-menu" data-action="appearance#toggleMenu" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button><span class="breadcrumb">Workspace <span>/</span> <strong><%= content_for(:page_title).presence || 'Overview' %></strong></span></div><div class="topbar-end"><span class="today"><%= Date.current.strftime('%a, %d %b') %></span><button type="button" class="icon-button" data-action="appearance#toggleTheme" aria-label="Toggle color theme">◐</button><%= link_to "+ New lead", new_lead_path, class: "button small" %></div></header>
+    <main id="main-content"><%= render "shared/flash" %><%= yield %></main>
+  </div>
+<% else %>
+  <main class="auth-shell"><%= render "shared/flash" %><%= yield %></main>
+<% end %>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<% content_for :page_title, "Action unavailable" %><section class="panel error-state"><span class="eyebrow">LET’S GET BACK ON TRACK</span><h1>This action couldn’t be completed.</h1><p role="alert"><%= message %></p><%= link_to "Return to overview", current_user ? root_path : login_path, class: "button" %></section>
