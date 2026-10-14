@@ -12,7 +12,7 @@
 
 6. **Deployment:** `render.yaml` ve build/start/health/migrate/secret/fictional seed hazır; **Render hesabı bağlantısı olmadığı için yayın yapılmadı, genel URL yok**. [Eksik kesin adım ve production kontrolleri](DEPLOYMENT_TR.md).
 
-7. **Kural kaynakları:** [FollowUpDeadline](../app/services/follow_up_deadline.rb:2) `FIRST_CONTACT_WINDOW`, `deadline`, `overdue?`; [LeadTransition](../app/services/lead_transition.rb:2) ve [OpportunityTransition](../app/services/opportunity_transition.rb:2) `TRANSITIONS/call`; [LeadConversion](../app/services/lead_conversion.rb), [RecordActivity](../app/services/record_activity.rb). GitHub satır bağlantıları ve gerçek konumlar sunumda da var.
+7. **Kural kaynakları:** [FollowUpDeadline](../app/services/follow_up_deadline.rb#L2) `FIRST_CONTACT_WINDOW`, `deadline`, `overdue?`; [LeadTransition](../app/services/lead_transition.rb#L2) ve [OpportunityTransition](../app/services/opportunity_transition.rb#L2) `TRANSITIONS/call`; [LeadConversion](../app/services/lead_conversion.rb), [RecordActivity](../app/services/record_activity.rb). GitHub satır bağlantıları ve gerçek konumlar sunumda da var.
 
 8. **Araştırma:** README'de Fortune resmi profilleri, Ford/Amex ürün hikâyeleri, Zylo 2026, Open Hub güncel sayım ve doğrulanmış khyan A. / 15 Mart 2026 Capterra yorumu. Tam nüfus min/max, özel şirket değeri ve gerçek sözleşme tutarlarının bilinmediği açıkça yazıldı. Enterprise SaaS benchmarkı Fortune 500 nüfus ölçümü diye sunulmadı.
 
