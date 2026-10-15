@@ -21,7 +21,7 @@ Windows Ruby'nin gelecekteki fiddle gem ayrımı uyarısı ve Brakeman'ın Windo
 
 ## Kaynak, Markdown ve kapsam
 
-README'nin istenen 19 bölümü ve doğru repo/workflow badge'i kontrol edildi. 14 Markdown dosyası, 40 yerel dosya/anchor bağlantısı, 14 tablo, code fence/heading yapısı ve diff whitespace kontrolü geçti; bu yapısal kontroldür, tam görsel Markdown renderer testi değildir. Dış kaynakların erişim ve yöntem sınırları [araştırma kaydındadır](RESEARCH_AUDIT_TR.md). Capterra doğrudan otomatik okumada hata verdi; arama indeksi üzerinden yazar/tarih/metin eşleştirildi.
+README'nin istenen 19 bölümü ve doğru repo/workflow badge'i kontrol edildi. 14 Markdown dosyası, 41 yerel dosya/anchor bağlantısı, 14 tablo, code fence/heading yapısı ve diff whitespace kontrolü geçti; bu yapısal kontroldür, tam görsel Markdown renderer testi değildir. Dış kaynakların erişim ve yöntem sınırları [araştırma kaydındadır](RESEARCH_AUDIT_TR.md). Capterra doğrudan otomatik okumada hata verdi; arama indeksi üzerinden yazar/tarih/metin eşleştirildi.
 
 Başlangıçtaki 90 app/test/db/routes/Gemfile dosyasının hash'leri aynı kaldı; yerel master key değişmedi. Gerçek key veya fingerprint rapora konmaz. 16 ignore/template kontrolü ve 161 kaynak dosyası üzerinde paketleme içerik politikası geçti. Testler yalnız test DB'sine çalıştırıldı; development DB reset/migration/seed yapılmadı. Eski Fixture projesinde değişiklik yoktur.
 
@@ -31,6 +31,6 @@ Bu belge değiştiğinde yeni commit için yeni paket oluşturulur; son teslim p
 
 ## CI ve teslim sınırı
 
-Denetim başlangıcındaki exact HEAD `9949b3d` için gerçek [LeadCurrent CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38579245639) API ile success olarak doğrulandı. Bu, sonraki commit'lerin CI sonucu değildir. Doğrulanmış denetim commit'i push edildikten sonra `node script/check_ci.mjs` yalnız o exact HEAD ve **LeadCurrent CI** workflow'unun sonucunu sorgular; son run URL ve sonucu teslim mesajında belirtilir. Dependabot işinin başarısı uygulama CI başarısı yerine geçmez.
+Denetim başlangıcındaki exact HEAD `9949b3d` için gerçek [LeadCurrent CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38579245639) API ile success olarak doğrulandı. Denetim commit'i `845bef91cd1feb4fbdb0dab607f1b99b404db6c8` push edildikten sonra [38742014762 numaralı LeadCurrent CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38742014762) API ile **completed / success** olarak doğrulandı: domain/HTTP, gerçek browser, autoload, security ve production assets adımları başarılı. Bu kaydı ekleyen sonraki belge commit'inin sonucu ayrıca `node script/check_ci.mjs` ile exact HEAD üzerinden kontrol edilir ve teslim mesajında verilir. Dependabot işinin başarısı uygulama CI başarısı yerine geçmez.
 
 Belge/güvenlik denetimi ve yerel testler tamamlanabilir; canlı deployment ayrı ve eksiktir. Render deploy yapılmadı, public URL veya production demo iddia edilmez. Gerçek billing/timesheet ve Salesforce'un kapalı kaynak LOC verisi mevcut değildir; ilgili sınırlamalar [README](../README.md) içinde açıktır.

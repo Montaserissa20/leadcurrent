@@ -179,6 +179,8 @@ Remove-Item Env:SECRET_KEY_BASE_DUMMY
 
 14 Ekim 2026 yerel doğrulama: **37 model/service/integration testi, 401 assertion; 2 gerçek browser testi, 24 assertion; sıfır failure/error/skip**. Brakeman: **0 security warning**. Zeitwerk ve production asset derlemesi geçti. Browser Windows'ta headless Edge, GitHub Linux'ta headless Chrome kullanır. Testler gerçek PostgreSQL'e yazar; deadline sonuçları mock edilmez. Doğrulama raporu: [VERIFICATION_TR.md](docs/VERIFICATION_TR.md).
 
+15 Ekim denetiminde aynı suite yeniden çalıştırıldı: **39 test, 425 assertion, sıfır failure/error/skip**; Zeitwerk ve Brakeman tekrar geçti. Denetim commit'i `845bef9` için [gerçek LeadCurrent CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38742014762) success olarak doğrulandı. Paketleme, hash ve tarama kayıtları: [AUDIT_VERIFICATION_TR.md](docs/AUDIT_VERIFICATION_TR.md).
+
 CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini, Zeitwerk, Brakeman ve asset build'i çalıştırır. Badge yukarıdaki gerçek repository/workflow'ya aittir; son durum Actions sayfasından kontrol edilmelidir. En son kontrol edilen commit/run ayrıca doğrulama raporunda kayıtlıdır.
 
 ## Canlı Uygulama
