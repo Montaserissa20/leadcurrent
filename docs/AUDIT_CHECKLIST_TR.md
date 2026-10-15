@@ -10,12 +10,12 @@
 - [x] Resmî fiyatlarla sayısal USD tahmini, token matematiği ve abonelik alternatifini yaz.
 - [x] Gerçek tarihler ile bilinmeyen saat/fatura/model kullanımını ayrı tabloda göster; bilinmeyeni sıfır sayma.
 - [x] Ignore ve Docker paylaşım kurallarını hassas dosya/dump/arşiv/cache kapsamıyla tamamla.
-- [ ] Yalnızca Git kaynaklarından üretip dosya adları ve içerik kontrolünden geçiren güvenli ZIP script'i ekle; normal ve reddetme yollarını doğrula.
+- [x] Yalnızca Git kaynaklarından üretip dosya adları ve içerik kontrolünden geçiren güvenli ZIP script'i ekle; normal ve reddetme yollarını doğrula.
 - [x] docs/SECURITY_AUDIT.md yaz; eski güvensiz ZIP varsa koşullu müdahale/rotasyon adımlarını belirt.
 - [x] Mevcut domain/HTTP/browser testlerini, Brakeman ve Zeitwerk kontrolünü çalıştır; gerçek çıktıyı kaydet.
 - [x] Markdown, yerel link, dış kaynak, badge, diff ve tekrar secret taramasını doğrula.
 - [x] Başlangıçtaki uygulama/test/DB/iş kuralı dosyalarının değişmediğini hash ile doğrula.
 - [ ] Doğrulanmış değişiklikleri commit/push et; ilgili uygulama CI run'ını kontrol et.
-- [ ] Belge / güvenlik / CI durumunu tamamla; genel deployment eksikliğini açık bırak.
+- [x] Belge / güvenlik durumunu tamamla; CI teslim adımı aşağıdaki raporda izlenir; genel deployment eksikliğini açık bırak.
 
 Yerel master key veya DB silinmez. Credential rotasyonu ve Git geçmişi yeniden yazımı yapılmaz. Eski Fixture projesinde işlem yapılmaz. Envanter ayrıntıları özel `.local/` dizininde kalır; paylaşılan rapor yalnızca redakte bulgular içerir.

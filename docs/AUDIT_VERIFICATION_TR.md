@@ -25,7 +25,9 @@ README'nin istenen 19 bölümü ve doğru repo/workflow badge'i kontrol edildi. 
 
 Başlangıçtaki 90 app/test/db/routes/Gemfile dosyasının hash'leri aynı kaldı; yerel master key değişmedi. Gerçek key veya fingerprint rapora konmaz. 16 ignore/template kontrolü ve 161 kaynak dosyası üzerinde paketleme içerik politikası geçti. Testler yalnız test DB'sine çalıştırıldı; development DB reset/migration/seed yapılmadı. Eski Fixture projesinde değişiklik yoktur.
 
-Paketleme yalnız temiz commit'te çalıştığından gerçek kaynak ZIP üretimi commit sonrasında yürütülür; ZIP doğrulama metadata'sı ignored `.local/packages/` içinde ve teslim mesajında kaydedilir. Working tree kirliyken build'in reddi ayrıca kontrol edilir. ZIP içeriğinin isim ve credential taraması geçmeden dağıtım yapılmaz.
+Gerçek kaynak ZIP üretimi [434e29d](https://github.com/Montaserissa20/leadcurrent/commit/434e29d40a36b475510f6fe5a064291655ca47ee) temiz commit'inde başarılı: 161 dosya, 491.098 açılmış byte, SHA256 `6a52dd9b6e5c3ea118c34783d8a6e25111a79ae598bdcf74d3aacdc9daa0a6fd`. Aynı ZIP `--verify` ile yeniden doğrulandı. İlk gerçek build boş kaynak dosyası okumasındaki nil durumunu yakaladı; sadece paket script'i düzeltildi ve boş dosya regresyon kontrolü eklendi. 25 sentetik kontrol geçti. Kirli working tree'den build ve var olan ZIP üzerine yazma beklendiği gibi reddedildi; önceki ZIP değiştirilmedi.
+
+Bu belge değiştiğinde yeni commit için yeni paket oluşturulur; son teslim paketinin metadata'sı teslim mesajında verilir. Paketler ignored `.local/packages/` altındadır ve Git'e eklenmez. İsim ve credential taraması geçmeden dağıtım yapılmaz. Kaynak paketindeki 161 dosyanın tamamı içerik politikasından geçti; log/tmp/storage placeholder'ları dahi export edilmedi. Son görünür geçmiş Gitleaks taraması da temizdi.
 
 ## CI ve teslim sınırı
 
