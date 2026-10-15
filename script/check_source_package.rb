@@ -56,5 +56,8 @@ Dir.mktmpdir("package-check-", LeadCurrentSourcePackage::OUTPUT_DIR) do |directo
   template = fixture.call(".env.example", "PGHOST=127.0.0.1\nSECRET_KEY_BASE=replace-with-your-own\n")
   LeadCurrentSourcePackage.verify_archive!(template)
   checks += 1
+  empty_source = fixture.call("app/models/.keep", "")
+  LeadCurrentSourcePackage.verify_archive!(empty_source)
+  checks += 1
 end
 puts "Source package policy: #{checks} checks, 0 failures (synthetic fixtures only)"

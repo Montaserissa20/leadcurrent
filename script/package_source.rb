@@ -79,7 +79,7 @@ module LeadCurrentSourcePackage
         raise "Archive exceeds verification limit" if total > MAX_ARCHIVE_BYTES
         raise "File exceeds verification limit: #{entry.name}" if entry.size > MAX_TEXT_BYTES
         raise "Non-source file in archive: #{entry.name}" if expected && !expected.include?(entry.name)
-        entry.get_input_stream { |stream| inspect_content!(stream.read(MAX_TEXT_BYTES + 1), entry.name, secrets) }
+        entry.get_input_stream { |stream| inspect_content!(stream.read(MAX_TEXT_BYTES + 1) || "".b, entry.name, secrets) }
         file_count += 1
       end
     end

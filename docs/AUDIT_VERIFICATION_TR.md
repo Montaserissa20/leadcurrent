@@ -11,7 +11,7 @@ Başlangıç commit'i: `9949b3d8bb65e1ff1703b63f0cd6f032511faedf`. Değişiklikl
 | Toplam | 39 test, 425 assertion; başarılı |
 | `bundle exec rails zeitwerk:check` | All is good |
 | `bundle exec brakeman --no-pager --quiet` | Brakeman 8.1.0: 0 warning, 0 error |
-| `bundle exec ruby script/check_source_package.rb` | 24 sentetik kontrol, 0 failure; gerçek key fixture'a yazılmaz |
+| `bundle exec ruby script/check_source_package.rb` | 25 sentetik kontrol, 0 failure; gerçek key fixture'a yazılmaz; boş kaynak dosyaları da doğrulanır |
 | Gitleaks 8.30.1, `git --log-opts=--all --redact=100` | Erişilebilir geçmiş tarandı; iki tekil false positive gerekçelendirilip kesin fingerprint ile hariç tutuldu; gözden geçirilmiş tarama temiz |
 | Public credential-path kontrolü | `master.key`, production credential key ve `.env` mevcut içerikte 404; görünür varsayılan branch path geçmişinde 0 commit |
 
