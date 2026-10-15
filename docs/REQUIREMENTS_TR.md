@@ -12,6 +12,9 @@
 | 24 saat zaman kuralı | FollowUpDeadline, Lead | deadline_test: gerçek travel_to, boundary, timezone, DST |
 | Next Best Action | NextBestAction, ActionsController, dashboard | ranking/reasons/action/tenant/no-AI + browser tek submit |
 | DB dashboard / currency totals | DashboardController | sales_flow_test, browser refresh |
+| Customer 360 | CustomerProfile, shared customer_context/history/profile_tasks | pro_upgrade_test: conversion sonrası ortak geçmiş, tenant sınırı |
+| Görev oluştur/düzenle/tamamla | ScheduleFollowUp, ManageTask, TasksController | HTTP ve browser testleri; duplicate reuse, yetki ve ilk temas ayrımı |
+| Analytics / günlük otomasyon | SalesMetrics, NextBestAction, AnalyticsController | SQL toplam/ortalama, boş veri, 4/72 saat sınırları, timezone ve query-growth testi |
 | Kanban / filters | opportunities/pipeline, filter_records | stage form persistence ve filtre testleri |
 | Responsive / theme | appearance_controller.js, application.css | mobile, theme persistence browser testi |
 | CI | .github/workflows/ci.yml | GitHub named workflow + exact commit; VERIFICATION_TR |

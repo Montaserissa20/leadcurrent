@@ -6,6 +6,8 @@
 
 LeadCurrent; müşteri adayını ilk temastan kazanılan satış fırsatına taşıyan, üniversite ödevi için geliştirilmiş bağımsız bir CRM SaaS uygulamasıdır. Özgün yeşil/krem görsel kimlik, logo, responsive arayüz, açık/koyu tema ve PostgreSQL kalıcılığı kullanır. Dashboard istatistikleri gerçek veritabanı sorgularından hesaplanır; USD, EUR ve TRY birbirine eklenmez.
 
+**Pro geliştirmesi:** etkileşimli günlük satış merkezi, Customer 360 kişi/şirket/deal geçmişi, profil içinde düzenleme ve görev oluşturma, çağrı/toplantı/not kaydı, görev düzenleme/tamamlama ve filtreler, SQL tabanlı Analytics sayfası eklendi. Next Best Action bugün/gecikmiş takipleri de sıralar; görev tamamlama ve geçerli sonraki aşama işlemleri dashboard'a dönerek önerileri yeniler. Otomasyon kayıtlı verilerden hesaplanır; kendiliğinden satış durumu değiştirmez veya reminder kaydı üretmez. [Kısa ilerleme ve doğrulama kaydı](docs/UPGRADE_PROGRESS.md).
+
 ## Teknolojiler
 
 Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions ve Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
@@ -132,6 +134,8 @@ Capterra, **khyan A.**, Senior Business Development Representative, Computer Sof
 
 **Çözüm: Next Best Action.** Gecikmiş ilk temas, yaklaşan deadline, 72 saatlik fırsat durgunluğu ve yaklaşan kapanış deterministik olarak sıralanır. Her öneri nedenini açıklar. Dashboard formu tamamlanmış teması ve takip görevini **tek gönderimde** kaydeder. Sadece takip planlama ilk temas deadline'ını kapatmaz. [Öncelik servisi](app/services/next_best_action.rb), [eylem endpoint'i](app/controllers/actions_controller.rb), [testler](test/models/next_best_action_test.rb).
 
+Pro öncelikleri: gecikmiş temas 100, gecikmiş görev 95, dört saat içinde temas 90, bugünkü görev 85, 72 saat hareketsiz fırsat 80, yedi gün içinde kapanış 70, yeni temas 50. Aynı kayıt için en öncelikli öneri gösterilir; en fazla sekiz öneri vardır. Bugünün sınırı kullanıcının saat dilimidir. Uygun kayıtlar SQL'de sınırlandırılır, ilişkiler eager load edilir. Planlı takip bulunan fırsata ikinci otomatik planlama önerilmez; aynı başlık/tarihteki pending takip tekrar gönderilirse aynı görev kullanılır.
+
 15 Ekim denetiminde yorumun yazar/tarih/şikâyet bilgisi Capterra'nın arama indeksindeki ayrıntıyla yeniden eşleştirildi; doğrudan sayfa açılışı araçta içerik-türü hatası verdi. Bu erişim sınırı [kaynak kontrol kaydında](docs/RESEARCH_AUDIT_TR.md) tutulur. Başka yorumcunun “fazla tıklama” cümlesi bu kişiye atfedilmedi. Salesforce'un [resmî sayfası](https://www.salesforce.com/sales/cloud/) da önceliklendirme ve süreç araçlarını listeler; LeadCurrent'ın iddiası sade bir günlük akış sunmaktır, rakipte ilgili özelliklerin bulunmadığı değildir.
 
 **Ölçülen akış:** dashboard zaten açıkken varsayılan yarın takip zamanı korunursa “What happened?” alanına odaklanma 1 tıklama, sonuç yazma, “Save action” 1 tıklama: **2 fare tıklaması, 1 submit, 0 ek sayfa navigasyonu**. Klavye ile odaklanılırsa fare sayısı daha düşük olabilir. Farklı tarih seçimi ek etkileşim gerektirir. Gerçek Selenium testi bu formu doldurup tek submit ile Activity/Task kalıcılığını doğrular. Salesforce için karşılaştırmalı tıklama sayısı ölçülmedi; ürünler arası sayısal üstünlük iddiası yoktur.
@@ -180,6 +184,8 @@ Remove-Item Env:SECRET_KEY_BASE_DUMMY
 14 Ekim 2026 yerel doğrulama: **37 model/service/integration testi, 401 assertion; 2 gerçek browser testi, 24 assertion; sıfır failure/error/skip**. Brakeman: **0 security warning**. Zeitwerk ve production asset derlemesi geçti. Browser Windows'ta headless Edge, GitHub Linux'ta headless Chrome kullanır. Testler gerçek PostgreSQL'e yazar; deadline sonuçları mock edilmez. Doğrulama raporu: [VERIFICATION_TR.md](docs/VERIFICATION_TR.md).
 
 15 Ekim denetiminde aynı suite yeniden çalıştırıldı: **39 test, 425 assertion, sıfır failure/error/skip**; Zeitwerk ve Brakeman tekrar geçti. Denetim commit'i `845bef9` için [gerçek LeadCurrent CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38742014762) success olarak doğrulandı. Paketleme, hash ve tarama kayıtları: [AUDIT_VERIFICATION_TR.md](docs/AUDIT_VERIFICATION_TR.md).
+
+**Pro sürümünün son yerel kontrolü:** 53 model/service/HTTP testi ve 5 gerçek browser testi; toplam **58 test, 588 assertion, sıfır failure/error/skip**. Customer 360, görev CRUD/tamamlama, otomasyon zaman sınırları, NBA eylemleri, SQL metrikleri, tenant/owner yetkisi ve 390px mobil görünüm dahil. Güncel upgrade/CI kaydı: [UPGRADE_PROGRESS.md](docs/UPGRADE_PROGRESS.md). Önceki doğrulama raporlarının test sayıları tarihî snapshot'lardır.
 
 CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini, Zeitwerk, Brakeman ve asset build'i çalıştırır. Badge yukarıdaki gerçek repository/workflow'ya aittir; son durum Actions sayfasından kontrol edilmelidir. En son kontrol edilen commit/run ayrıca doğrulama raporunda kayıtlıdır.
 

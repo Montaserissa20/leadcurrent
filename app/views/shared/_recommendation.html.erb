@@ -1,0 +1,13 @@
+<article class="recommendation" data-recommendation-id="<%= entry.record.id %>" data-priority="<%= entry.priority %>">
+  <div class="recommendation-header"><span class="company-avatar"><%= entry.record.company.name.first %></span><div class="grow"><%= link_to entry.record.title, entry.record, class: "record-title" %><small><%= entry.record.company.name %> · <%= entry.record.owner.name %></small></div><span class="badge <%= entry.priority >= 90 ? 'status-lost' : 'neutral' %>">Priority <%= entry.priority %></span></div>
+  <p class="reason <%= 'urgent' if entry.priority >= 90 %>"><span aria-hidden="true">◷</span> <%= entry.reason %></p>
+  <% if entry.action == :complete_task %>
+    <p class="task-title"><%= entry.task.title %></p><div class="inline-actions"><%= button_to "Complete follow-up", complete_task_path(entry.task), params: { from_dashboard: from_dashboard, from_profile: !from_dashboard }, class: "button small", data: { turbo_submits_with: "Completing…" } %><%= link_to "Edit task", edit_task_path(entry.task), class: "text-link" %><%= link_to "Customer profile →", entry.record, class: "text-link" %></div>
+    <p class="form-hint">Completing a task does not record a customer conversation. Log actual contact from the profile.</p>
+  <% elsif entry.action == :advance %>
+    <%= render "opportunities/stage_form", opportunity: entry.record, from_pipeline: false, from_dashboard: from_dashboard %>
+    <%= link_to "Open customer profile →", entry.record, class: "text-link" %>
+  <% else %>
+    <%= render "shared/action_form", record: entry.record, from_dashboard: from_dashboard, action: entry.action %>
+  <% end %>
+</article>

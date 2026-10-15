@@ -5,7 +5,13 @@ class ActionsController < ApplicationController
     record = scope(model).find(params[:record_id])
     case params[:action_kind]
     when "contact", "note"
-      RecordActivity.call(record, actor: current_user, kind: params[:action_kind], body: params[:body], follow_up_at: parse_time(params[:follow_up_at]))
+      body = params[:body].to_s
+      if params[:action_kind] == "contact" && params[:contact_method].present?
+        raise WorkflowError, "Choose a valid contact method" unless params[:contact_method].in?(%w[call meeting message])
+        raise WorkflowError, "Describe the conversation" if body.blank?
+        body = "[#{params[:contact_method].humanize}] #{body}"
+      end
+      RecordActivity.call(record, actor: current_user, kind: params[:action_kind], body: body, follow_up_at: parse_time(params[:follow_up_at]))
       message = "#{params[:action_kind].humanize} recorded."
       message += " Follow-up scheduled." if params[:follow_up_at].present?
     when "follow_up"

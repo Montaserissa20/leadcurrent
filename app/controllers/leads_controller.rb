@@ -1,9 +1,13 @@
 class LeadsController < ApplicationController
   def index
-    @leads = filter_records(scope(Lead)).includes(:company, :contact, :owner).order(updated_at: :desc).limit(100)
+    records = filter_records(scope(Lead))
+    records = records.overdue.where.not(status: %w[converted disqualified]) if params[:attention] == "overdue"
+    @leads = records.includes(:company, :contact, :owner).order(updated_at: :desc).limit(100)
   end
   def show
     @lead = scope(Lead).find(params[:id])
+    @profile = CustomerProfile.new(current_user, @lead)
+    @recommendation = NextBestAction.new(current_user).call(record: @lead, limit: 1).first
   end
   def new
     @lead = Lead.new

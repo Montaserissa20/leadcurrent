@@ -7,6 +7,8 @@ class OpportunitiesController < ApplicationController
   end
   def show
     @opportunity = scope(Opportunity).find(params[:id])
+    @profile = CustomerProfile.new(current_user, @opportunity)
+    @recommendation = NextBestAction.new(current_user).call(record: @opportunity, limit: 1).first
   end
   def edit
     @opportunity = scope(Opportunity).find(params[:id])
@@ -33,8 +35,13 @@ class OpportunitiesController < ApplicationController
   def transition
     opportunity = scope(Opportunity).find(params[:id])
     OpportunityTransition.call(opportunity, to: params[:status], actor: current_user)
-    redirect_to params[:from_pipeline] == "true" ? pipeline_path : opportunity_path(opportunity), notice: "Opportunity moved to #{opportunity.status.humanize}.", status: :see_other
+    destination = params[:from_dashboard] == "true" ? root_path : params[:from_pipeline] == "true" ? pipeline_path : opportunity_path(opportunity)
+    redirect_to destination, notice: "Opportunity moved to #{opportunity.status.humanize}.", status: :see_other
   end
   private
-  def filtered = filter_records(scope(Opportunity)).includes(:company, :contact, :owner).order(expected_closing_date: :asc).limit(100)
+  def filtered
+    records = filter_records(scope(Opportunity))
+    records = records.unscope(where: :status).active if params[:status] == "active"
+    records.includes(:company, :contact, :owner).order(expected_closing_date: :asc).limit(100)
+  end
 end

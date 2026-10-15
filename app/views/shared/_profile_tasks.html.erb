@@ -1,0 +1,9 @@
+<section class="panel"><div class="panel-header"><h2>Follow-ups & upcoming activities</h2><%= link_to "All tasks →", tasks_path(contact_id: record.contact_id), class: "text-link" %></div>
+  <% if @profile.tasks.empty? %><p class="empty-state compact">No tasks for this customer yet.</p><% end %>
+  <% @profile.tasks.each do |task| %><div class="task-preview"><div class="grow"><strong><%= task.title %></strong><small><%= task.owner.name %> · <%= l task.due_at, format: :short %> · <%= task.completed_at ? 'Completed' : task.due_at < Time.current ? 'Overdue' : 'Pending' %></small></div>
+    <% if !task.completed_at && editable?(task) && editable?(task.record) %><div class="inline-actions"><%= link_to "Edit", edit_task_path(task), class: "text-link" %><%= button_to "Complete", complete_task_path(task), params: { from_profile: true }, class: "button small secondary" %></div><% end %>
+  </div><% end %>
+  <% if editable?(record) && (record.is_a?(Lead) ? !record.status.in?(%w[converted disqualified]) : !record.terminal?) %>
+    <details class="inline-editor"><summary>Create a task</summary><%= form_with scope: :task, url: tasks_path do |f| %><%= hidden_field_tag :record_type, record.class.name %><%= hidden_field_tag :record_id, record.id %><div class="field"><%= f.label :title, "Task title" %><%= f.text_field :title, required: true, maxlength: 200 %></div><div class="field"><%= f.label :due_at, "Due at" %><%= f.datetime_local_field :due_at, required: true, value: 1.day.from_now.strftime('%Y-%m-%dT%H:%M') %></div><%= f.submit "Create task", class: "button small", data: { turbo_submits_with: "Creating…" } %><% end %></details>
+  <% end %>
+</section>

@@ -1,0 +1,6 @@
+<% if editable?(record) %><section class="panel"><details class="inline-editor profile-editor"><summary>Edit this <%= record.class.name.downcase %></summary>
+  <%= form_with model: record do |f| %><div class="field"><%= f.label :title, "Record title", for: "quick_#{record.class.name}_title" %><%= f.text_field :title, id: "quick_#{record.class.name}_title", required: true, maxlength: 200 %></div>
+    <% if record.is_a?(Lead) %><div class="field"><%= f.label :notes, "Lead notes" %><%= f.text_area :notes, rows: 3 %></div><% else %><div class="field"><%= f.label :value, "Deal value" %><%= f.number_field :value, min: 0, step: 0.01, required: true %></div><div class="field"><%= f.label :currency, "Deal currency" %><%= f.select :currency, Opportunity::CURRENCIES %></div><div class="field"><%= f.label :expected_closing_date, "Closing date" %><%= f.date_field :expected_closing_date, required: true %></div><% end %>
+    <%= f.submit "Save details", class: "button small", data: { turbo_submits_with: "Saving…" } %>
+  <% end %>
+</details></section><% end %>

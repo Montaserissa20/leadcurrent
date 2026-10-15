@@ -1,1 +1,7 @@
-<% if editable?(opportunity) && next_stages(opportunity).any? %><%= form_with url: transition_opportunity_path(opportunity), class: "stage-form" do |f| %><%= f.hidden_field :from_pipeline, value: from_pipeline %><%= f.label :status, "Next stage", for: "stage_#{opportunity.id}", class: "sr-only" %><%= f.select :status, next_stages(opportunity).map { |stage| [stage.humanize, stage] }, {}, id: "stage_#{opportunity.id}" %><%= f.submit "Move", class: "button small", data: { turbo_submits_with: "Moving…" } %><% end %><% end %>
+<% if editable?(opportunity) && next_stages(opportunity).any? %>
+  <%= form_with url: transition_opportunity_path(opportunity), class: "stage-form" do |f| %>
+    <%= f.hidden_field :from_pipeline, value: from_pipeline %><%= f.hidden_field :from_dashboard, value: local_assigns.fetch(:from_dashboard, false) %>
+    <%= f.label :status, "Next stage", for: "stage_#{opportunity.id}", class: "sr-only" %><%= f.select :status, next_stages(opportunity).map { |stage| [stage.humanize, stage] }, {}, id: "stage_#{opportunity.id}" %>
+    <%= f.submit "Move", class: "button small", data: { turbo_submits_with: "Moving…" } %>
+  <% end %>
+<% end %>

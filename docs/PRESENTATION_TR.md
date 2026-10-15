@@ -15,6 +15,8 @@
 5. Move: Proposal, Negotiation, Won. Terminal durumu ve audit history'yi gösterin.
 6. Overview'a dönüp won sayısı/geliri gösterin; yenileyin. Gerçek veritabanı kalıcılığını vurgulayın.
 
+Pro kısa gösterimi: müşteri profilinde Customer 360, eski lead görüşmesi ve bağlı fırsatı birlikte açın; Create a task → Edit → Complete akışını gösterin. Task completion'ın ilk temas olmadığını vurgulayın. Analytics'te stage dağılımı, ayrı para birimleri ve converted / tüm lead oranını gösterin. Dashboard kartları eşleşen filtreli listeleri açar. Bugün/gecikmiş takip önerisini doğrudan tamamlayınca dashboard yeniden hesaplanır; satış aşaması yalnız açık kullanıcı işlemiyle değişir.
+
 ## 2:30–3:30 — Kural ve test
 
 - Süre: `app/services/follow_up_deadline.rb`, **satır 2**. FIRST_CONTACT_WINDOW, deadline, overdue?. Tam deadline anı zamanında; bir saniye sonrası gecikmiş.

@@ -6,7 +6,7 @@
   <meta name="description" content="A focused workspace for leads, meaningful follow-ups, and your next win.">
   <%= csrf_meta_tags %><%= csp_meta_tag %>
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "pro", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
 <body>
@@ -16,7 +16,7 @@
     <div class="workspace-label"><span class="workspace-avatar"><%= current_user.organization.name.first.upcase %></span><div><strong><%= current_user.organization.name %></strong><small>Sales workspace</small></div></div>
     <p class="nav-heading">WORKSPACE</p>
     <nav aria-label="Main navigation">
-      <% [["◫", "Overview", root_path], ["↗", "Leads", leads_path], ["◇", "Opportunities", opportunities_path], ["▥", "Pipeline", pipeline_path], ["✓", "Tasks", tasks_path], ["◷", "Activity", activity_path]].each do |icon, label, url| %>
+      <% [["◫", "Overview", root_path], ["↗", "Leads", leads_path], ["◇", "Opportunities", opportunities_path], ["▥", "Pipeline", pipeline_path], ["◴", "Analytics", analytics_path], ["✓", "Tasks", tasks_path], ["◷", "Activity", activity_path]].each do |icon, label, url| %>
         <%= link_to url, class: "nav-link #{'active' if request.path == url}" do %><span aria-hidden="true"><%= icon %></span><%= label %><% end %>
       <% end %>
     </nav>

@@ -16,16 +16,19 @@ Workspace members can read their organization records; only record owner or mana
 - app/services/create_lead.rb: company/contact/lead creation, transaction, owner permission.
 - app/services/follow_up_deadline.rb:2: FIRST_CONTACT_WINDOW = 24.hours. deadline(created_at), overdue?(lead, now:), remaining.
 - app/services/record_activity.rb: call; first completed contact tracking and optional followup atomic write.
-- app/services/schedule_follow_up.rb: future task creation. Scheduling/completing a task is never completed first contact.
+- app/services/schedule_follow_up.rb: future task creation; parent lock and duplicate pending title/time reuse. Scheduling/completing a task is never completed first contact.
+- app/services/manage_task.rb: task edit/complete; parent-before-task lock order, current task and parent ownership checks, no status/contact side effects.
+- app/services/customer_profile.rb: contact + company + tenant scoped related records, recent combined lead/opportunity timeline and tasks. Converted lead conversations stay visible on the opportunity.
+- app/services/sales_metrics.rb: database grouped counts/sums/averages; all-time current workspace snapshot, per-currency values; converted / all leads percentage (zero-safe).
 - app/services/lead_transition.rb:2: TRANSITIONS, call. New → Contacted/Disqualified; Contacted → Qualified/Disqualified; Qualified → Disqualified. Converted/Disqualified terminal.
 - app/services/lead_conversion.rb: call. Qualified-only; lock + transaction + unique Opportunity.lead_id. Copies associations, moves pending tasks, audits and marks lead Converted.
 - app/services/opportunity_transition.rb:2: TRANSITIONS, call. Qualification → Proposal/Lost; Proposal → Negotiation/Lost; Negotiation → Won/Lost. Won/Lost terminal, closed_at persisted.
-- app/services/next_best_action.rb: deterministic priorities 100 overdue, 90 within 4h, 80 72h inactivity, 70 close within 7d, 50 other new contacts. Reasons and direct actions; no provider dependency. Pending followups suppress duplicate opportunity scheduling suggestions.
+- app/services/next_best_action.rb: PRIORITIES: 100 overdue contact, 95 overdue task, 90 within 4h, 85 today's task, 80 72h inactivity, 70 close within 7d, 50 other new contacts. Bounded SQL candidates and eager loading, one highest-priority suggestion per record, user's day boundary. Reasons and executable contact/follow-up/task/stage actions; no provider dependency. Pending followups suppress duplicate opportunity scheduling suggestions.
 - app/services/workspace_access.rb: query scope and owner/manager authorization.
 - app/controllers/actions_controller.rb: allowlisted record type and authorized contact/note/followup actions.
 - app/controllers/health_controller.rb: /up verifies DB query.
 - app/javascript/controllers/appearance_controller.js: theme/localStorage, mobile menu.
-- app/assets/stylesheets/application.css: responsive light/dark identity.
+- app/assets/stylesheets/application.css and pro.css: responsive light/dark identity, interactive metric cards, native progress visuals and compact inline forms.
 - db/migrate: independent PostgreSQL schema, FKs, check constraints, unique conversion index; db/schema.rb generated, never edited by hand.
 
 ## Rules and tests
@@ -35,6 +38,8 @@ Exactly at first-contact deadline is on time; strictly after is overdue. Use ela
 Never keep workflow_change true after a service finishes. Internal flag is trusted server-side only. Use with_lock for transitions and conversion, including rechecking latest owner. Keep unique DB index even if model uniqueness exists. Use explicit boolean parsing for redirect flags; the string 'false' is present and must not be treated as true.
 
 test/models/deadline_test.rb uses actual travel_to for creation, before/exact/after boundary, completion, scheduled tasks, midnight and DST. test/models/workflow_test.rb exercises all lead/opportunity transition pairs and rollback. test/models/concurrent_conversion_test.rb uses two DB connections and threads with transactional tests disabled only for that class; cleanup targets only its own test organization. test/models/next_best_action_test.rb covers priorities/reasons/tenants and fulfilled suggestions. test/integration covers protected HTTP flow, tampered params, authorization, CSRF, persistence, forms and all pages. test/system covers actual Turbo browser flow, theme/mobile and one-submit NBA action. Reset viewport per browser test.
+
+Pro coverage: test/models/pro_upgrade_test.rb (metrics, Customer 360, reminder idempotency, thresholds, timezone, ownership and query growth), test/integration/pro_upgrade_test.rb (task CRUD/completion, filters, profile, analytics and NBA endpoints), test/system/pro_workspace_test.rb (real inline tasks/edits, NBA task/stage actions, analytics and 390px layouts). Screenshots use fictional test records under ignored .local/upgrade-preview. They are not production evidence.
 
 ## Commands
 

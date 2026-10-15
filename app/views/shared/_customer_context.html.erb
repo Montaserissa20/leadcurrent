@@ -1,0 +1,11 @@
+<%= render "shared/quick_edit", record: record %>
+<section class="panel customer-card"><span class="eyebrow">CUSTOMER 360°</span><h2><%= record.contact.name %></h2>
+  <dl class="profile-facts"><div><dt>Company</dt><dd><%= record.company.name %></dd></div><div><dt>Industry</dt><dd><%= record.company.industry.presence || 'Not specified' %></dd></div><div><dt>Email</dt><dd><%= mail_to record.contact.email %></dd></div><div><dt>Phone</dt><dd><%= record.contact.phone.presence || 'Not provided' %></dd></div><div><dt>Assigned salesperson</dt><dd><%= record.owner.name %></dd></div></dl>
+  <p class="form-hint">Related records for this contact at this company, within your workspace.</p>
+</section>
+<section class="panel"><h2>Related opportunities</h2>
+  <% deals = @profile.opportunities.includes(:owner).order(updated_at: :desc).limit(20) %>
+  <% if deals.empty? %><p class="muted">Qualify and convert a lead to start a sales opportunity.</p><% end %>
+  <% deals.each do |deal| %><div class="record-row"><div><%= link_to deal.title, deal, class: "record-title" %><small><%= money deal.value, deal.currency %> <%= deal.currency %> · <%= deal.owner.name %></small></div><%= status_badge deal %></div><% end %>
+  <h3>Related leads</h3><% @profile.leads.order(created_at: :desc).limit(20).each do |lead| %><div class="record-row"><%= link_to lead.title, lead, class: "record-title" %><%= status_badge lead %></div><% end %>
+</section>

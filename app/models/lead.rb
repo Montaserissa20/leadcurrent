@@ -14,7 +14,7 @@ class Lead < ApplicationRecord
   validates :first_contact_deadline, presence: true
   validate :guard_workflow
   scope :awaiting_contact, -> { where(first_contact_at: nil) }
-  scope :overdue, -> { awaiting_contact.where("first_contact_deadline < ?", Time.current) }
+  scope :overdue, -> { awaiting_contact.where.not(status: %w[converted disqualified]).where("first_contact_deadline < ?", Time.current) }
   def overdue? = FollowUpDeadline.overdue?(self)
   private
   def set_deadline

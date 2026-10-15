@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   end
   post "actions", to: "actions#create"
   get "pipeline", to: "opportunities#pipeline"
-  resources :tasks, only: :index do
+  get "analytics", to: "analytics#index"
+  resources :tasks, only: %i[index create edit update] do
     post :complete, on: :member
   end
   get "activity", to: "activities#index"
