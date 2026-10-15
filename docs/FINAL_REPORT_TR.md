@@ -1,5 +1,7 @@
 # LeadCurrent teslim raporu
 
+İlk teslim raporu, 14 Ekim 2026. 15 Ekim belge/güvenlik denetimi ve güncel kanıtlar: [AUDIT_VERIFICATION_TR.md](AUDIT_VERIFICATION_TR.md). Aşağıdaki tarihî CI kaydı ilk teslim kapsamındadır.
+
 1. **Fixture incelemesi:** Devise/Pundit, şirket/kişi, Deal/Kanban, görev/not/geçmiş, dashboard, deterministik plan/risk, Ollama/agent, async işler, SQLite şeması, RSpec/system testleri ve CI incelendi. Pipeline'ın her listelenen aşamayı kabul etmesi, lead/fırsatın tek model olması, para birimi ayrımı ve kalıcı olmayan async işler öne çıktı. Lisans bulunmadığı için kod kopyalanmadı; Fixture değiştirilmedi. [İnceleme](OLD_PROJECT_INSPECTION.md).
 
 2. **Yeni mimari:** bağımsız `D:\LeadCurrent`; Ruby 3.4.7, Rails 8.1.4, PostgreSQL, ERB/Hotwire/Stimulus, bcrypt + DB sessions, organizasyon/sahip yetkisi, domain servisleri ve transaction/audit. Ayrı repo/DB/migration/özgün SVG logo. [AGENT.md](../AGENT.md).
@@ -16,7 +18,7 @@
 
 8. **Araştırma:** README'de Fortune resmi profilleri, Ford/Amex ürün hikâyeleri, Zylo 2026, Open Hub güncel sayım ve doğrulanmış khyan A. / 15 Mart 2026 Capterra yorumu. Tam nüfus min/max, özel şirket değeri ve gerçek sözleşme tutarlarının bilinmediği açıkça yazıldı. Enterprise SaaS benchmarkı Fortune 500 nüfus ölçümü diye sunulmadı.
 
-9. **Maliyet:** 30 odaklı saat bir planlama varsayımı; yeni ücretli satın alma 0 USD; mevcut abonelik/token faturası görünür olmadığından toplam gider bilinmiyor. [Gider kaydı](COSTS_TR.md).
+9. **Maliyet:** 30 odaklı saat planlama varsayımı; 2M input / 0,5M output senaryosunda API tahmini $9 veya $12.50. Gerçek toplam için **Kesin kullanım veya ödeme verisi mevcut değil.** Önceki “yeni satın alma yok” gözlemi gerçekleşen toplam $0 diye yorumlanmamalı. [Gider kaydı](COSTS_TR.md).
 
 10. **Sınırlar:** Render/public production doğrulaması tamamlanmadı; bu yüzden bütün puan koşulları sağlandı denemez. AI sağlayıcısı, password reset/MFA, dış gönderim/takvim, hafta sonu hariç deadline, büyük veri sayfalama/optimizasyon yok. Liste sınırı 100. Temas kaydı kullanıcı beyanıdır. [README / Yapamadıklarım](../README.md#yapamadıklarım), [sunum](PRESENTATION_TR.md), [gereksinim haritası](REQUIREMENTS_TR.md).
 

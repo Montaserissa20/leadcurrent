@@ -6,7 +6,9 @@
 
 LeadCurrent; müşteri adayını ilk temastan kazanılan satış fırsatına taşıyan, üniversite ödevi için geliştirilmiş bağımsız bir CRM SaaS uygulamasıdır. Özgün yeşil/krem görsel kimlik, logo, responsive arayüz, açık/koyu tema ve PostgreSQL kalıcılığı kullanır. Dashboard istatistikleri gerçek veritabanı sorgularından hesaplanır; USD, EUR ve TRY birbirine eklenmez.
 
-Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions ve Render yapılandırması. React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
+## Teknolojiler
+
+Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions ve Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
 
 Eski Fixture projesi yalnızca salt okunur referanstır. Lisans dosyası bulunmadığı için uygulama kaynak kodu kopyalanmadı; eski veri/credential kullanılmadı. Yeni repository, DB, migration ve marka bağımsızdır. İnceleme: [OLD_PROJECT_INSPECTION.md](docs/OLD_PROJECT_INSPECTION.md).
 
@@ -16,18 +18,16 @@ Salesforce Sales Cloud, satış ekiplerinin müşteri bilgilerini, adaylarını,
 
 ## Fortune 500 Araştırması
 
-Araştırma tarihi: **14 Ekim 2026**. Fortune 500 gelir sıralamasıdır; piyasa değeri sıralaması değildir. [Fortune 500](https://fortune.com/ranking/fortune500/).
+Yeniden kontrol: **15 Ekim 2026**; ilgili liste **2026 Fortune 500**. Sıralama ölçütü gelirdir. Grubun toplam istihdamı yaklaşık **30,5 milyon**. [Fortune 500](https://fortune.com/ranking/fortune500/).
 
 Gelir, dönem içindeki satış hasılatıdır. Market capitalization, halka açık özsermayenin piyasa değeridir. Enterprise value borç/nakit düzeltmeleri içerir. Özel şirket değerlemeleri borsa değeriyle aynı ölçüm değildir. Bu çalışma bu kavramları birbirinin yerine kullanmaz.
 
-| Ölçüt | Doğrulanabilen sonuç ve kapsam | Kaynak |
-|---|---|---|
-| Fortune 500 grup büyüklüğü | 2026 toplam istihdamı yaklaşık 30,5 milyon | [Resmî sıralama](https://fortune.com/ranking/fortune500/) |
-| Küçük halka açık üye örneği | Gold.com: 2026 sıra 398; 975 çalışan; piyasa değeri 1,128 milyar USD, 31 Mart 2026 | [Şirket profili](https://fortune.com/company/a-mark-precious-metals/) |
-| Büyük işveren örneği | Walmart: 2.100.000 çalışan | [Şirket profili](https://fortune.com/company/walmart/) |
-| Büyük piyasa değeri örneği | NVIDIA: 5,445390 trilyon USD, 24 Eylül 2026 | [Şirket profili](https://fortune.com/company/nvidia/) |
-| SaaS sayısı, kurumsal benchmark | Zylo 2026 örneklemi: ortalama 305, medyan 240 uygulama | [2026 SaaS Management Index](https://zylo.com/2026-saas-management-index) |
-| Yıllık SaaS harcaması, kurumsal benchmark | Aynı örneklem: ortalama 55,7 milyon USD, medyan 20,6 milyon USD | [2026 SaaS Management Index](https://zylo.com/2026-saas-management-index) |
+| Metrik | Minimum | Maksimum / Ortalama | Kaynak | Açıklama |
+|---|---|---|---|---|
+| Değerleme yerine halka açık şirket piyasa değeri proxy'si | Gözlenen örnek: Gold.com **1,128 milyar USD**, 31 Mart 2026 | Gözlenen örnek: NVIDIA **5,445390 trilyon USD**, 24 Eylül 2026 | [Gold.com](https://fortune.com/company/a-mark-precious-metals/), [NVIDIA](https://fortune.com/company/nvidia/) | Tam nüfus uçları değil; farklı tarihli özsermaye piyasa değerleri. Özel şirket değerlemeleri ve enterprise value dahil değil |
+| Çalışan sayısı | Gözlenen örnek: Gold.com **975** | Gözlenen örnek: Walmart **2.100.000** | [Gold.com](https://fortune.com/company/a-mark-precious-metals/), [Walmart](https://fortune.com/company/walmart/) | Kesin nüfus min/max değil; raporlama dönemleri farklı şirket profilleri |
+| Şirket başına SaaS uygulaması | Fortune 500 nüfus minimumu yayımlanmıyor | Zylo örnekleminde **ortalama 305**, **medyan 240** | [Zylo 2026](https://zylo.com/2026-saas-management-index) | Kurumsal benchmark; Fortune 500'e özel ölçüm değil |
+| Şirket başına yıllık SaaS harcaması | Fortune 500 nüfus minimumu yayımlanmıyor | Zylo örnekleminde **ortalama 55,7 milyon USD/yıl**, **medyan 20,6 milyon USD/yıl** | [Zylo 2026](https://zylo.com/2026-saas-management-index) | Kurumsal benchmark; şirket faturası veya Fortune 500 ortalaması değil |
 
 **Aralıkların sınırı:** erişilebilen üye örneklerinde çalışan sayısı 975–2.100.000, piyasa değeri yaklaşık 1,128 milyar–5,445 trilyon USD ölçeğindedir. Bu, 500 şirketin tamamının kanıtlanmış minimum/maksimum aralığı değildir. Piyasa değerlerinin ölçüm tarihleri de farklıdır. Özel üyelerin aynı tarihli değerlemesi açık olmayabilir; tüm üyeleri kapsayan tek bir değerleme aralığı kurulamadı. Çalışan aralığının kesin alt sınırı da tam nüfus verisi olmadan iddia edilmez. Örneklerin amacı tek şirket yerine grubun farklı ölçeklerini görünür kılmaktır.
 
@@ -44,7 +44,7 @@ Zylo verisi Fortune 500 nüfus sayımı değildir; yönetilen müşteri portföy
 
 **Ödeme ayrımı:** ticari müşteri hikâyeleri ürün kullanımını doğrular; açıklanmayan bir kontrat fiyatını veya fatura tutarını kanıtlamaz. Burada “kesin şu bedeli ödüyorlar” iddiası yoktur.
 
-## Kod Satırı ve Yazılım Ölçeği
+## SaaS Kod Satırı Tahmini
 
 Salesforce kapalı kaynak olduğundan gerçek satır sayısı kamuya açık değildir. Sayı uydurulmaz. Açık kaynak CRM karşılaştırması:
 
@@ -57,15 +57,45 @@ Open Hub, Ohcount ile kod/yorum/boş satırları ayırır. [Yöntem](https://ope
 
 **Açıkça etiketlenmiş ölçek tahmini:** yaklaşık 0,4–0,8 milyon kod satırlık olgun CRM karşılaştırma bandı, 300.000+ satır sınıfındaki kurumsal CRM karmaşıklığına işaret eder. Bu Salesforce kaynak kodunun ölçümü, alt sınırı veya kesin tahmini değildir. Salesforce'un çoklu tenant, entegrasyon, satış, analiz ve yetkilendirme kapsamı bu sınıfla nitel olarak karşılaştırılabilir. LeadCurrent, bu ürünlerin tüm kapsamı yerine seçilen iş akışını uygular.
 
-## Geliştirme Maliyet Tahmini
+Bu ürünün kurumsal ölçek seçim gerekçesi; [resmî ürün sayfasındaki](https://www.salesforce.com/sales/cloud/) lead, account/opportunity, activity, pipeline ve raporlama kapsamı ile ölçülmüş olgun CRM referanslarıdır. Orijinal kapalı kod için savunulabilir bir nokta tahmini veya kanıtlanmış satır alt sınırı yoktur. Öğretmen doğrudan orijinal kaynak sayımı isterse bu kanıt mevcut değildir. Open Hub sayıları 15 Ekim'de yeniden kontrol edildi; tabloda hizmetin bildirdiği analiz/veri tarihleri korunmuştur.
+
+## Geliştirme Süresi ve Maliyet Tahmini
 
 Planlama varsayımı: bir haftalık öğrenci projesinde 5 gün × günde 6 odaklı saat = **30 saat**; yaklaşık 6 saat analiz/kurulum, 12 saat iş akışı, 6 saat test/arayüz, 6 saat araştırma/dağıtım. Bu, piyasa araştırması veya gerçekleşmiş insan çalışma saati değildir.
 
-Coding-agent için token tüketimi ve birim ücret sağlanmadığından kesin USD maliyet tahmini yoktur. Formül: giriş tokenı × giriş birim fiyatı + çıkış tokenı × çıkış birim fiyatı; abonelik kullanılıyorsa artan proje maliyeti abonelik modeline göre değerlendirilir. Dışarıya açık AI API maliyeti bu sürümde oluşmaz; uygulamada AI sağlayıcısı yoktur.
+**Tablo A — Tahmini geliştirme maliyetleri.** Aşağıdaki token ve süreler bütçe varsayımıdır; gerçekleşmiş kullanım değildir. Fiyat kontrolü: **15 Ekim 2026**. USD liste fiyatları vergi, kur farkı, araç çağrısı ve ilave kredi bedellerini içermez.
 
-## Gerçekleşen Maliyet
+| Kalem | Tahmin / hesap varsayımı | USD tutarı | Kaynak / sınır |
+|---|---|---|---|
+| Agent destekli geliştirme süresi | Analiz + kod + test + belge için 30 odaklı saat | İnsan emeğine parasal değer atanmadı | Proje planı varsayımı; modelin çalışır durumda kaldığı ölçülmüş süre değil |
+| Takvim süresi | Günde 6 saat ile 5 çalışma günü; yaklaşık 1 hafta | — | Planlama varsayımı |
+| Toplam token bütçesi | Tüm iterasyonlar ve tekrarlanan bağlam dahil **2.000.000 input + 500.000 faturalanabilir output** | Aşağıda hesaplanır | Projeye ait tahmin; ölçülmüş token sayısı değil |
+| GPT-5.4, Standard API | 1 milyon input **2,50 USD**, output **15 USD**; `2 × 2,50 + 0,5 × 15` | **12,50 USD / proje** | [Resmî model fiyatı](https://developers.openai.com/api/docs/models/gpt-5.4); cached input indirimi varsayılmadı; her isteğin input'u en fazla 272K |
+| GPT-6.1 Sol, Standard kısa bağlam API alternatifi | 1 milyon input **2 USD**, output **10 USD**; `2 × 2 + 0,5 × 10` | **9,00 USD / proje** | [Resmî model fiyatı](https://developers.openai.com/api/docs/models/gpt-6.1-sol), [tarife](https://developers.openai.com/api/docs/pricing); cache/write kullanımı yok varsayımı |
+| Token belirsizliği, GPT-5.4 | 1M/0,25M ile 4M/1M input/output senaryoları | **6,25–25,00 USD** | Aynı fiyatlarla türetilmiş duyarlılık hesabı; süre garantisi değil |
+| Abonelik alternatifi: ChatGPT Plus + Codex | **20 USD/ay**; Pro **100 / 200 / 500 USD/ay** seçenekleri | Bir aylık abonelik; proje token tutarı değil | [Resmî abonelik fiyatı](https://learn.chatgpt.com/docs/pricing). Limitler ve model erişimi plana bağlı; API senaryolarıyla aynı model/kota varsayılmaz |
+| Ek geliştirme giderleri | Haricî görsel, alan adı ve e-posta servisi satın alınmadığı bütçe senaryosu | **0 USD planlanan ek satın alma** | Plan kapsamı; gerçekleşmiş toplam gider iddiası değil. Bilgisayar/elektrik/insan emeği dahil değil |
+| Render Free demo dağıtımı | Free web + Free Postgres; kota ve süre kısıtlarıyla | **0 USD/ay liste compute bedeli** | [Free plan](https://render.com/docs/free), [fiyat](https://render.com/pricing); veritabanı 30 gün sonra sona erer |
+| Render ücretli alternatif | Küçük web **7 USD/ay** + Postgres compute **6 USD/ay** | **13 USD/ay compute alt toplamı**, disk/traffic/vergi eklenir | [Render'ın resmî Rails maliyet rehberi](https://render.com/articles/production-rails-hosting-guide), [fiyat](https://render.com/pricing) |
 
-Bu çalışma sırasında bir ücretli hosting, domain veya AI API satın alınmadı; agent tarafından başlatılan yeni ücretli satın alma **0 USD**. Kullanıcının mevcut abonelik bedeli ve token faturası görünür olmadığından toplam geliştirme maliyeti “0” diye iddia edilmez. Render hesabında hizmet henüz oluşturulmadığından gerçek hosting faturası yoktur. Zaman kaydı ve gider sınırları: [COSTS_TR.md](docs/COSTS_TR.md).
+API matematiği: `(input / 1.000.000 × input fiyatı) + (output / 1.000.000 × output fiyatı)`. Output bütçesi faturalanan reasoning tokenlarını da kapsamalıdır. Uzun bağlam, Fast/Ultrafast, bölgesel işlem ve ücretli araçlar ek maliyet doğurabilir. GPT-5.4 için uzun input ek tarifesi bulunduğundan belirtilen istek sınırı önemlidir. API veya abonelik senaryoları **alternatiftir**, toplanmaz. Bir haftalık projeye aylık aboneliğin kesirli bedeli fatura gibi yazılmaz.
+
+## Gerçekleşen Geliştirme Maliyeti
+
+**Tablo B — Gerçekleşen geliştirme maliyetleri.** Kanıt: [başlangıç commit'i](https://github.com/Montaserissa20/leadcurrent/commit/96bd09f63c339b669188d29d2bce1491829f5b0e), [ilk teslimin son commit'i](https://github.com/Montaserissa20/leadcurrent/commit/9949b3d8bb65e1ff1703b63f0cd6f032511faedf), [gider kayıt sınırları](docs/COSTS_TR.md).
+
+| Kalem | Gözlenen gerçek bilgi | Kanıt / eksik kayıt |
+|---|---|---|
+| Takvim tarihleri | İlk geliştirme/teslim Git kayıtları **14 Ekim 2026**; bu belge/güvenlik denetimi **15 Ekim 2026** | Commit tarihleri ve bu denetimin kayıtları. İlk commit'ten önceki başlangıç saati doğrulanamaz |
+| İlk teslimin commit zaman aralığı | 14 Ekim **16:57:57–17:17:48 +03:00** | Yukarıdaki iki commit; bu aralık toplam çalışma süresi değildir |
+| Gerçek odaklı çalışma saati / agent çalışma süresi | **Kesin kullanım veya ödeme verisi mevcut değil.** | Timesheet veya güvenilir çalışma-süresi dökümü yok; 30 saat gerçekleşmiş gibi sunulmaz |
+| Gerçekte kullanılan araç/model | Oturum bağlamında Codex ile geliştirildi; faturalandırılan model kimliği doğrulanamadı | Repo/billing içinde doğrulanabilir model kullanım dökümü yok; fiyat senaryosundaki modeli kullanılmış saymayın |
+| Ödenmiş abonelik bedeli | **Kesin kullanım veya ödeme verisi mevcut değil.** | Makbuz veya hesap billing raporu sağlanmadı |
+| Gerçek input/output ve API tahsilatı | **Kesin kullanım veya ödeme verisi mevcut değil.** | Tahmini 2M/0,5M token gerçek ölçüm değildir |
+| Gerçek hosting/alan adı/diğer tahsilatlar | **Kesin kullanım veya ödeme verisi mevcut değil.** | Bu agent oturumlarında ücretli satın alma/Render deploy başlatılmadı; bu gözlem kullanıcının toplam hesap faturasını doğrulamaz |
+| Toplam gerçekleşen USD maliyeti | **Kesin kullanım veya ödeme verisi mevcut değil.** | Bilinmeyen gider sıfır yazılmadı |
+
+Karşılaştırma: **9,00 / 12,50 USD**, aynı varsayımsal token bütçesinin farklı modellerle API tahminidir; **20 USD/ay** ayrı bir abonelik alternatifidir. Gerçek billing ve saat kaydı olmadığı için tahminin altında/üstünde harcandığı veya zaman kazancı ölçüldüğü söylenemez. Uygulamanın çalışan CRM özelliğinde AI sağlayıcısı bulunmaması, geliştirme agent'ının ücretsiz olduğu anlamına gelmez.
 
 ## Aort Dilimi
 
@@ -81,7 +111,7 @@ Deadline DB'de saklanır. Tam deadline anı zamanında kabul edilir; bir saniye 
 
 Değişiklik yeri: [FollowUpDeadline](app/services/follow_up_deadline.rb#L2) `FIRST_CONTACT_WINDOW`, `deadline`, `overdue?`. İlk temas işleme: [RecordActivity.call](app/services/record_activity.rb). Gerçek `travel_to` testleri: [deadline_test.rb](test/models/deadline_test.rb#L12). Worker veya AI gerekmez.
 
-## Durum Akışı
+## Durum Geçişleri
 
 | Kayıt | İzinli geçiş |
 |---|---|
@@ -96,13 +126,23 @@ Değişiklik yeri: [FollowUpDeadline](app/services/follow_up_deadline.rb#L2) `FI
 
 [LeadTransition.call / TRANSITIONS](app/services/lead_transition.rb#L2), [LeadConversion.call](app/services/lead_conversion.rb), [OpportunityTransition.call / TRANSITIONS](app/services/opportunity_transition.rb#L2). Dönüşüm satır kilidi, transaction ve unique lead FK indeksiyle korunur. İki eşzamanlı istek testi tek fırsat ve tek reddetme üretir. Normal update parametreleri status/deadline/first-contact alanlarını kabul etmez; model de workflow dışı değişiklikleri reddeder.
 
-## Gerçek Kullanıcı Problemi
+## Kullanıcı Yorumu ve Çözüm
 
 Capterra, **khyan A.**, Senior Business Development Representative, Computer Software; **15 Mart 2026**, “Powerful but heavy - great once it’s set up properly”. Platform Verified User olarak işaretler; yorum non-incentivized olarak listelenir. Kısa özgün alıntı: **“The main downside is the complexity and cost.”** Arayüzün çok sayıda alan/iş akışıyla kalabalıklaşabilmesi ve başlangıçta sezgisel olmaması eleştiriliyor. [Doğrulanan yorum sayfası](https://www.capterra.com/p/61368/Salesforce/reviews/).
 
 **Çözüm: Next Best Action.** Gecikmiş ilk temas, yaklaşan deadline, 72 saatlik fırsat durgunluğu ve yaklaşan kapanış deterministik olarak sıralanır. Her öneri nedenini açıklar. Dashboard formu tamamlanmış teması ve takip görevini **tek gönderimde** kaydeder. Sadece takip planlama ilk temas deadline'ını kapatmaz. [Öncelik servisi](app/services/next_best_action.rb), [eylem endpoint'i](app/controllers/actions_controller.rb), [testler](test/models/next_best_action_test.rb).
 
+15 Ekim denetiminde yorumun yazar/tarih/şikâyet bilgisi Capterra'nın arama indeksindeki ayrıntıyla yeniden eşleştirildi; doğrudan sayfa açılışı araçta içerik-türü hatası verdi. Bu erişim sınırı [kaynak kontrol kaydında](docs/RESEARCH_AUDIT_TR.md) tutulur. Başka yorumcunun “fazla tıklama” cümlesi bu kişiye atfedilmedi. Salesforce'un [resmî sayfası](https://www.salesforce.com/sales/cloud/) da önceliklendirme ve süreç araçlarını listeler; LeadCurrent'ın iddiası sade bir günlük akış sunmaktır, rakipte ilgili özelliklerin bulunmadığı değildir.
+
 **Ölçülen akış:** dashboard zaten açıkken varsayılan yarın takip zamanı korunursa “What happened?” alanına odaklanma 1 tıklama, sonuç yazma, “Save action” 1 tıklama: **2 fare tıklaması, 1 submit, 0 ek sayfa navigasyonu**. Klavye ile odaklanılırsa fare sayısı daha düşük olabilir. Farklı tarih seçimi ek etkileşim gerektirir. Gerçek Selenium testi bu formu doldurup tek submit ile Activity/Task kalıcılığını doğrular. Salesforce için karşılaştırmalı tıklama sayısı ölçülmedi; ürünler arası sayısal üstünlük iddiası yoktur.
+
+## Güvenlik
+
+CSRF, bcrypt, süreli DB session, production secure/HttpOnly/SameSite cookie, SSL ve workspace/sahip yetkisi kaynakta kontrol edildi. Ayrıntılı bulgular, tarama kapsamı, iki dar kapsamlı Gitleaks yanlış-pozitif değerlendirmesi ve manuel müdahale sınırları: [SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
+
+Public GitHub ana dalında `config/master.key`, production key ve `.env` için 404; görünür path geçmişinde kayıt yok. Yerel anahtar ve PostgreSQL verisi korunmuştur. **Çalışma klasörünü doğrudan ZIP'lemeyin:** `.gitignore` bir klasör ZIP'inin içeriğini filtrelemez. Yalnızca gözden geçirilip commit edilmiş kaynak için `bundle exec ruby script/package_source.rb` kullanın. Script Git ağacını, dosya adlarını ve içerikleri doğrular; anahtar, DB, log/cache veya Git metadata içeren paketi reddeder. Çıktı `.local/packages/` içinde oluşur. Paketleme negatif testleri ve gerçek paylaşım adımları güvenlik raporundadır.
+
+Önceden anahtar/DB içeren bir paket dışarıya verildiyse ignore düzeltmesi bu kopyaları veya geçmişi temizlemez. Kopyanın geri çekilmesi, etkilenmiş sırların belirlenmesi ve etki analizi sonrası yetkili rotasyon gerekir. Bu denetimde anahtar silinmedi/değiştirilmedi; veri veya Git geçmişi yeniden yazılmadı. Üretim genel URL doğrulaması hâlâ eksiktir.
 
 ## Kurulum
 
@@ -123,7 +163,7 @@ Windows yardımcısı yalnızca proje içindeki `.local/postgres` cluster'ını 
 
 Kendi PostgreSQL kurulumunuzu kullanmak için `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD` ayarlayın. Linux/macOS: bu değişkenleri export edin, `bundle install`, `bundle exec rails db:prepare db:seed` ve `bundle exec rails server` çalıştırın. Varsayılan bağımsız DB isimleri `leadcurrent_development` / `leadcurrent_test`. `.env.example` yalnızca örnektir; env dosyası otomatik yüklenmez.
 
-## Testler
+## Testler ve GitHub Actions
 
 ```powershell
 bundle exec rails test
@@ -151,7 +191,7 @@ Build: `bash bin/render-build.sh`; start: `bundle exec puma -C config/puma.rb`; 
 
 Free Postgres 30 gün sonra sona erer; uzun süreli gösterim için süre dolmadan paid plana geçin. Free web hizmeti 15 dakika inaktiflikten sonra uyuyabilir. [Resmî free-plan sınırları](https://render.com/docs/free). Production doğrulama adımları: [DEPLOYMENT_TR.md](docs/DEPLOYMENT_TR.md). Yayın URL'si, login ve DB workflow üretimde doğrulandıktan sonra bu bölüme eklenmelidir.
 
-## GitHub
+## GitHub Deposu
 
 Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent**. İnkremental commitler mevcuttur. Eski uygulama aynı repository'ye eklenmedi.
 
@@ -160,14 +200,14 @@ Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent*
 - Render hesabı bağlı olmadığı için genel URL ve üretim smoke testi henüz tamamlanmadı. Bu nedenle bütün kabul ölçütleri tamamlandı / 85 veya 100+ puan garanti iddiası yoktur.
 - Fortune 500 tam nüfusunun aynı tarihli min/max değerleme ve çalışan aralığı belirlenemedi. Yaklaşık örneklem ve kurumsal SaaS benchmarkları açıkça ayrıldı.
 - Ticari kullanım doğrulandı, müşterilerin gerçek lisans faturaları kamuya açık değil.
-- Token/maliyet raporu sağlanmadı; gerçek agent USD gideri bilinmiyor.
+- Gerçek token/saat/fatura raporu sağlanmadı; agent USD gideri bilinmiyor. Sayısal tahmin ve gerçekleşen kayıt eksikleri ayrı tablolardadır.
 - AI entegrasyonu, e-posta/telefon gönderimi, dış takvim entegrasyonu, password reset/MFA, hafta sonu hariç SLA ve drag-and-drop eklenmedi. Bunlar temel akışı durdurmaz.
 - Liste sayfaları en fazla 100 eşleşme gösterir; büyük veri için gerçek sayfalama ve NBA sorgularının toplu optimizasyonu gerekir.
 - Temas tamamlanması kullanıcı beyanıdır. Gelişmiş kurumsal güvenlik (SSO, DB-level RLS, merkezi rate limit, denetim dışa aktarımı) bu öğrenci sürümünün kapsamı dışındadır.
 
 ## Kaynakça
 
-Tüm araştırma sayfaları 14 Ekim 2026'da kontrol edildi. Sayısal iddiaların doğrudan URL'leri ilgili tabloda bulunur. Ek başvuru:
+Kaynaklar 15 Ekim 2026 denetiminde yeniden kontrol edildi; doğrudan erişim/arama indeksi ayrımı ve ulaşılamayan sayfalar [RESEARCH_AUDIT_TR.md](docs/RESEARCH_AUDIT_TR.md) içinde kayıtlıdır. Sayısal iddiaların doğrudan URL'leri ilgili tabloda bulunur. Ek başvuru:
 
 - [Fortune sıralama yöntemi](https://fortune.com/ranking/fortune500/)
 - [Zylo 2026 ve kapsamı](https://zylo.com/2026-saas-management-index)
@@ -176,5 +216,8 @@ Tüm araştırma sayfaları 14 Ekim 2026'da kontrol edildi. Sayısal iddiaların
 - [Capterra doğrulanmış kullanıcı yorumları](https://www.capterra.com/p/61368/Salesforce/reviews/)
 - [Rails 8.1.4 yayın bilgisi](https://rubyonrails.org/category/releases)
 - [Render Rails 8 dağıtımı](https://render.com/docs/deploy-rails-8)
+- [OpenAI API tarifesi](https://developers.openai.com/api/docs/pricing), [GPT-5.4](https://developers.openai.com/api/docs/models/gpt-5.4), [GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
+- [Codex / ChatGPT abonelik listesi](https://learn.chatgpt.com/docs/pricing)
+- [Render fiyat listesi](https://render.com/pricing), [resmî Rails barındırma maliyeti](https://render.com/articles/production-rails-hosting-guide)
 
 Sunum: [PRESENTATION_TR.md](docs/PRESENTATION_TR.md). Kural haritası: [REQUIREMENTS_TR.md](docs/REQUIREMENTS_TR.md). Kod ajanı rehberi: [AGENT.md](AGENT.md).

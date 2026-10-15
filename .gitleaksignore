@@ -1,0 +1,5 @@
+# Reviewed false positives only, from the initial full reachable-history scan.
+# A public Git commit identifier in the verification report, not an API key.
+c478f8730a29a7263ab9d8c71b230df970fd6b36:docs/VERIFICATION_TR.md:generic-api-key:37
+# A synthetic password in the isolated integration test, not an account token.
+96bd09f63c339b669188d29d2bce1491829f5b0e:test/integration/authentication_test.rb:generic-api-key:46

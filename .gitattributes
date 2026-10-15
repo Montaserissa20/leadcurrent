@@ -2,3 +2,17 @@
 *.rb text eol=lf
 *.sh text eol=lf
 bin/* text eol=lf
+
+# Source distributions contain application source, never local runtime data.
+.local export-ignore
+.bundle export-ignore
+.cache export-ignore
+log export-ignore
+tmp export-ignore
+storage export-ignore
+public/assets export-ignore
+config/master.key export-ignore
+config/credentials/*.key export-ignore
+.env export-ignore
+.env.local export-ignore
+.env.production export-ignore

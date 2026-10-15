@@ -46,3 +46,32 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+# Keep private material and distributions out of the build context too.
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/.env
+**/.env.*
+**/.pgpass
+**/pgpass.conf
+**/.netrc
+**/credentials.json
+**/*service-account*.json
+**/*.db
+**/*.sqlite*
+**/*.sql
+**/*.dump
+**/*.backup
+**/*.log
+**/*.zip
+**/*.7z
+**/*.tar*
+**/*.tgz
+/backups
+/exports
+/pgdata
+/postgres
+/.cache
+/coverage
