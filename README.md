@@ -113,6 +113,16 @@ Deadline DB'de saklanır. Tam deadline anı zamanında kabul edilir; bir saniye 
 
 Değişiklik yeri: [FollowUpDeadline](app/services/follow_up_deadline.rb#L2) `FIRST_CONTACT_WINDOW`, `deadline`, `overdue?`. İlk temas işleme: [RecordActivity.call](app/services/record_activity.rb). Gerçek `travel_to` testleri: [deadline_test.rb](test/models/deadline_test.rb#L12). Worker veya AI gerekmez.
 
+**PDF s.35 için üç bağımsız zaman kuralı:**
+
+| Kural | Tam sınır | `travel_to` kanıtı |
+|---|---|---|
+| İlk temas 24 gerçek saat | Tam deadline zamanında; +1 saniyede overdue | [deadline_test.rb:12](test/models/deadline_test.rb#L12) |
+| Kalan süre ≤4 saat → acil uyarı | Tam 4 saat dahil; öncelik 90 | [time_rule_boundaries_test.rb:6](test/models/time_rule_boundaries_test.rb#L6) |
+| Fırsatta ≥72 saat hareketsizlik | Tam 72 saat dahil; öncelik 80 | [time_rule_boundaries_test.rb:20](test/models/time_rule_boundaries_test.rb#L20) |
+
+Her eşikte bir saniye önce/tam an/bir saniye sonra testlidir. İş amacı, kesin kaynak satırları, gerçek sonuç ve kısa demo anlatımı: [THREE_TIME_RULES_TR.md](docs/THREE_TIME_RULES_TR.md).
+
 ## Durum Geçişleri
 
 | Kayıt | İzinli geçiş |
@@ -138,7 +148,9 @@ Pro öncelikleri: gecikmiş temas 100, gecikmiş görev 95, dört saat içinde t
 
 15 Ekim denetiminde yorumun yazar/tarih/şikâyet bilgisi Capterra'nın arama indeksindeki ayrıntıyla yeniden eşleştirildi; doğrudan sayfa açılışı araçta içerik-türü hatası verdi. Bu erişim sınırı [kaynak kontrol kaydında](docs/RESEARCH_AUDIT_TR.md) tutulur. Başka yorumcunun “fazla tıklama” cümlesi bu kişiye atfedilmedi. Salesforce'un [resmî sayfası](https://www.salesforce.com/sales/cloud/) da önceliklendirme ve süreç araçlarını listeler; LeadCurrent'ın iddiası sade bir günlük akış sunmaktır, rakipte ilgili özelliklerin bulunmadığı değildir.
 
-**Ölçülen akış:** dashboard zaten açıkken varsayılan yarın takip zamanı korunursa “What happened?” alanına odaklanma 1 tıklama, sonuç yazma, “Save action” 1 tıklama: **2 fare tıklaması, 1 submit, 0 ek sayfa navigasyonu**. Klavye ile odaklanılırsa fare sayısı daha düşük olabilir. Farklı tarih seçimi ek etkileşim gerektirir. Gerçek Selenium testi bu formu doldurup tek submit ile Activity/Task kalıcılığını doğrular. Salesforce için karşılaştırmalı tıklama sayısı ölçülmedi; ürünler arası sayısal üstünlük iddiası yoktur.
+**Ölçülen akış:** dashboard zaten açıkken varsayılan yarın takip zamanı korunursa “What happened?” alanına odaklanma 1 tıklama, sonuç yazma, “Save action” 1 tıklama: **2 fare tıklaması, 1 submit, 0 lead-profil ziyareti**. Submit sonrası dashboard yeniden yüklenir. Klavye ile odaklanılırsa fare sayısı daha düşük olabilir. Farklı tarih seçimi ek etkileşim gerektirir. Gerçek Selenium testi bu formu doldurup tek submit ile Activity/Task kalıcılığını doğrular. Salesforce için karşılaştırmalı tıklama sayısı ölçülmedi; ürünler arası sayısal üstünlük iddiası yoktur.
+
+16 Ekim PDF denetiminde bu sayım [yeni gerçek browser testiyle](test/system/adaptation_interaction_test.rb#L4) ölçüldü: **2 click, 1 submit, 1 action POST, 0 lead-profile ziyareti**; dashboard redirect/yenilemesi ölçümde gizlenmez. Salesforce'un [Einstein Next Best Action](https://help.salesforce.com/s/articleView?id=platform.einstein_next_best_action.htm&language=en_US&type=5) özelliği vardır. Tek dashboard formu bizim doğrulanmış kullanım kolaylığı tercihimizdir; PDF s.35'in “orijinalde olmayan adaptasyon” koşulu **PARTIAL**, kanıtlanmadı. [Şikâyet, rakip işlevi, ölçüm sınırları ve dar geliştirme adayı](docs/ADAPTATION_EVIDENCE_TR.md).
 
 ## Güvenlik
 
@@ -191,6 +203,8 @@ Remove-Item Env:SECRET_KEY_BASE_DUMMY
 
 CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini, Zeitwerk, Brakeman ve asset build'i çalıştırır. Badge yukarıdaki gerçek repository/workflow'ya aittir; son durum Actions sayfasından kontrol edilmelidir. En son kontrol edilen commit/run ayrıca doğrulama raporunda kayıtlıdır.
 
+**16 Ekim PDF güncellemesi:** 56 domain/HTTP testi / 566 assertion + 7 gerçek browser testi / 66 assertion = **63 test, 632 assertion**, sıfır failure/error/skip. Üç bağımsız zaman eşiği ve browser olay/POST sayımı dahildir; Zeitwerk, Brakeman (0 warning/error) ve production assets geçti. [83b0a85 için gerçek LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/38946656482) success; Chrome job log'u da aynı sayıları doğrular. [PDF/G1–G5 ve son doğrulama kaydı](docs/G1_G5_AUDIT_TR.md#son-doğrulama). Önceki sayılar tarihli snapshot'lardır; bu kaydı ekleyen son belge commit'inin CI'ı teslimde ayrıca sorgulanır.
+
 ## Canlı Uygulama
 
 **Canlı Railway URL:** https://leadcurrent-production.up.railway.app
@@ -202,6 +216,10 @@ Bulunan CSP sorunu push sonrası canlıda yeniden test edildi; dolu script/style
 - [Üretim test raporu ve redakte kanıt](docs/PRODUCTION_TEST_REPORT.md)
 - [Ödev gereksinimleri: PASS / PARTIAL / BLOCKED](docs/ASSIGNMENT_CHECKLIST.md)
 - [Beş dakikalık son sunum](docs/FINAL_PRESENTATION_TR.md)
+- [Üç zaman kuralı: kaynak, test ve kesin sınırlar](docs/THREE_TIME_RULES_TR.md)
+- [PDF/G1–G5 tanımları, gerçek ölçümler ve konvansiyon denetimi](docs/G1_G5_AUDIT_TR.md)
+- [İlk/son AGENT evrimi](docs/AGENT_EVOLUTION_TR.md) ve [gerçek Git unified diff](docs/AGENT_FIRST_LAST.diff)
+- [Adaptasyon kanıtı ve 100+ özgünlük sınırı](docs/ADAPTATION_EVIDENCE_TR.md)
 - [Railway doğrulaması ve alternatif Render tarifi](docs/DEPLOYMENT_TR.md)
 
 Yerel `127.0.0.1` adresi canlı yayın değildir. [render.yaml](render.yaml) ve Render maliyet satırları korunmuş alternatiflerdir; bu canlı hizmetin planı/faturası olarak yorumlanmamalıdır. Mevcut üretim sırları veya demo/customer verisi bu çalışmada değiştirilmedi.
@@ -212,6 +230,8 @@ Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent*
 
 ## Yapamadıklarım
 
+- Özgün 37 sayfalık PDF bulundu ve incelendi; G1/G5'e kısmi atıflar var, tam G1–G5 görev tanımları yok. **G1–G5 BLOCKED**; özgün görev yönergesi gerekir. Gerçek token/düzeltme turu/uydurma sayısı ve review dakikası mevcut değil. [Denetim](docs/G1_G5_AUDIT_TR.md).
+- NBA Salesforce'ta da vardır. Çalışan sade akışın rakipte bulunmadığı kanıtlanmadı; PDF'nin 100+ özgün adaptasyon koşulu **PARTIAL**. [Kanıt ve önerilen dar aday](docs/ADAPTATION_EVIDENCE_TR.md).
 - Railway public akış doğrulandı; deployment panelindeki uzak release SHA/ID, backup/restore, yük testi ve uzun süreli uptime bu testle doğrulanmadı. [Ödev kontrol listesindeki](docs/ASSIGNMENT_CHECKLIST.md) PARTIAL kalemleri nedeniyle bütün kabul ölçütleri tamamlandı / puan garantisi iddiası yoktur.
 - Fortune 500 tam nüfusunun aynı tarihli min/max değerleme ve çalışan aralığı belirlenemedi. Yaklaşık örneklem ve kurumsal SaaS benchmarkları açıkça ayrıldı.
 - Ticari kullanım doğrulandı, müşterilerin gerçek lisans faturaları kamuya açık değil.

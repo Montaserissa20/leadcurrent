@@ -15,12 +15,16 @@ Canlı uygulama: https://leadcurrent-production.up.railway.app — 16 Ekim 2026 
 5. **Next stage** alanında sırayla Proposal, Negotiation, Won ve **Move**. Her aşamadaki notice/status'u ve kapanış geçmişini gösterin.
 6. Overview ve Analytics'i açın; yeni Won değerini, conversion oranını ve ayrı para birimlerini gösterin. Refresh; mümkünse logout/login sonrası aynı kaydı tekrar açın. Bunlar gerçek üretim yazmalarıdır; silme/reset yapmayın.
 
-## 2:30–3:30 — Zaman kuralı ve geçiş testleri
+## 2:30–3:30 — Üç zaman kuralı ve geçiş testleri
+
+İlk 20 saniye: “24 gerçek saatte ilk temas; tam deadline zamanında, sonrası gecikmiş. Son dört saat dahil acil uyarı. Son aktiviteden 72 saat dahil fırsat hareketsizliği. Üçünün de bir saniye önce/tam/sonra `travel_to` testi var.” Kalan 40 saniyede tabloda bir eşik ve bir yasak geçişi açın. Tüm dosyaları sırayla okumayın. [Üç kuralın ayrıntısı ve gerçek test sonucu](THREE_TIME_RULES_TR.md).
 
 | Gösterilecek yer | Gerçek dosya ve satır | Açıklama |
 |---|---|---|
 | 24 saat ve uyarı | [follow_up_deadline.rb:2](../app/services/follow_up_deadline.rb#L2), [satır 3](../app/services/follow_up_deadline.rb#L3) | `FIRST_CONTACT_WINDOW = 24.hours`, `WARNING_WINDOW = 4.hours` |
 | Deadline sınırı | [deadline_test.rb:12](../test/models/deadline_test.rb#L12) | Gerçek `travel_to`: bir saniye önce, tam anda, bir saniye sonra; tam deadline zamanındadır |
+| 4 saat uyarı sınırı | [next_best_action.rb:21](../app/services/next_best_action.rb#L21), [time_rule_boundaries_test.rb:6](../test/models/time_rule_boundaries_test.rb#L6) | Kalan 4 saat +1 / tam 4 saat / −1 saniye; öncelik 50/90/90 |
+| 72 saat hareketsizlik sınırı | [next_best_action.rb:2](../app/services/next_best_action.rb#L2), [karşılaştırma:33](../app/services/next_best_action.rb#L33), [test:20](../test/models/time_rule_boundaries_test.rb#L20) | 72 saat −1 / tam 72 / +1 saniye; öneri yok / 80 / 80 |
 | Lead grafiği | [lead_transition.rb:2](../app/services/lead_transition.rb#L2) | İzinli geçiş listesi; qualification için tamamlanmış contact gerekir |
 | Fırsat grafiği | [opportunity_transition.rb:2](../app/services/opportunity_transition.rb#L2) | Won/Lost terminal; rastgele stage update reddedilir |
 | Conversion güvenliği | [lead_conversion.rb:4](../app/services/lead_conversion.rb#L4), [workflow_test.rb:39](../test/models/workflow_test.rb#L39), [concurrent_conversion_test.rb:20](../test/models/concurrent_conversion_test.rb#L20) | Kilit/transaction, tek bağlı fırsat, eşzamanlı iki istekte tek dönüşüm |
@@ -33,10 +37,12 @@ Canlı uygulama: https://leadcurrent-production.up.railway.app — 16 Ekim 2026 
 
 Dashboard'da yeni lead önerisinin nedenini ve doğrudan contact formunu gösterin. Görüşme sonucunu yazıp **Save action** ile kaydedin: profil sayfasına gitmeden işlem yapılır, dashboard yeniden hesaplanır. Bugünkü takip varsa **Complete follow-up** ile bitirin; tamamlanmış görev gerçek contact yerine geçmez. Yakın kapanış önerisinde **Next stage → Move** çalışır. Her özelliğin üretim kanıtı test raporunda; Salesforce'a karşı ölçülmüş tıklama/süre üstünlüğü iddiası yoktur.
 
+Bu bir dakikada yalnız contact+takip kartını demo edin; task/stage alternatiflerini zaman kalırsa gösterin. [Gerçek browser ölçümü](ADAPTATION_EVIDENCE_TR.md): 2 click, 1 submit, 1 POST, 0 profil ziyareti. Tek cümle: “Satışçı, ekranlar arasında dolaşma yükünü azaltmak için gerekçeli karttan görüşme sonucunu ve sonraki takibini tek gönderimde kaydeder; Salesforce'ta bulunmadığını kanıtlamış değilim.” [Salesforce Einstein NBA](https://help.salesforce.com/s/articleView?id=platform.einstein_next_best_action.htm&language=en_US&type=5) vardır; 100+ özgünlük şartı PARTIAL.
+
 ## 4:30–5:00 — İş kuralı nereden değişir?
 
 - “48 saat olsun”: [follow_up_deadline.rb:2](../app/services/follow_up_deadline.rb#L2). Yeni lead deadline hesabı değişir; saklanmış eski deadline'lar kendiliğinden güncellenmez. Eski veriyi değiştirmek ayrı onaylı veri migration'ı gerektirir.
 - “Proposal → Lost yasak”: [opportunity_transition.rb:3](../app/services/opportunity_transition.rb#L3); grafikte ilgili kenarı değiştirin, [bütün geçiş çiftleri testini](../test/models/workflow_test.rb#L60) güncelleyin.
 - “NBA eşikleri/puanları”: [next_best_action.rb:2](../app/services/next_best_action.rb#L2), [satır 4](../app/services/next_best_action.rb#L4). Sıralama deterministiktir; dış AI servisine bağlı değildir.
 
-Kapanışta [ödev kontrol listesindeki](ASSIGNMENT_CHECKLIST.md) PARTIAL/BLOCKED kalemleri dürüstçe belirtin. Gerçek billing/timesheet ve kapalı kaynak LOC belgesi yoktur; not garantisi verilmez.
+Kapanışın son cümlesi: “G1–G5'in tam yönergesi ve gerçek agent ölçümleri eksik; 100+ özgünlük, billing/timesheet ve kapalı kaynak LOC kanıtları tamamlanmadı.” [Kontrol listesi](ASSIGNMENT_CHECKLIST.md), [G1–G5/PDF denetimi](G1_G5_AUDIT_TR.md), [AGENT evrimi](AGENT_EVOLUTION_TR.md) ve [ilk/son Git diff](AGENT_FIRST_LAST.diff) soru gelirse açılacak yedek belgelerdir; ek sunum süresi değildir. Plan toplam **0:30 + 2:00 + 1:00 + 1:00 + 0:30 = 5:00**; not garantisi verilmez.
