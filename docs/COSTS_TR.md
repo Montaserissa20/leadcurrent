@@ -1,5 +1,7 @@
 # Geliştirme maliyeti ve kanıt sınırları
 
+16 Ekim üretim eki: Railway canlı akışı [üretim raporunda](PRODUCTION_TEST_REPORT.md) doğrulandı. Aşağıdaki fiyat/takvim tabloları 15 Ekim planlama snapshot'ıdır; Render alternatifi Railway faturası değildir. Gerçek Railway/agent fatura ve saat kaydı için **Kesin kullanım veya ödeme verisi mevcut değil.**
+
 Fiyat kontrolü: 15 Ekim 2026. Önceki rapordaki “yeni satın alma yok” gözlemi toplam gideri kanıtlamaz; bilinmeyen giderler sıfır olarak gösterilmez. Uygulamada AI API entegrasyonu olmaması, geliştirme agent'ının ücretsiz olduğu anlamına gelmez.
 
 ## A — Tahmin

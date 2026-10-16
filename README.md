@@ -10,7 +10,7 @@ LeadCurrent; müşteri adayını ilk temastan kazanılan satış fırsatına ta�
 
 ## Teknolojiler
 
-Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions ve Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
+Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions; canlıda Railway/Docker, alternatif Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
 
 Eski Fixture projesi yalnızca salt okunur referanstır. Lisans dosyası bulunmadığı için uygulama kaynak kodu kopyalanmadı; eski veri/credential kullanılmadı. Yeni repository, DB, migration ve marka bağımsızdır. İnceleme: [OLD_PROJECT_INSPECTION.md](docs/OLD_PROJECT_INSPECTION.md).
 
@@ -146,7 +146,7 @@ CSRF, bcrypt, süreli DB session, production secure/HttpOnly/SameSite cookie, SS
 
 Public GitHub ana dalında `config/master.key`, production key ve `.env` için 404; görünür path geçmişinde kayıt yok. Yerel anahtar ve PostgreSQL verisi korunmuştur. **Çalışma klasörünü doğrudan ZIP'lemeyin:** `.gitignore` bir klasör ZIP'inin içeriğini filtrelemez. Yalnızca gözden geçirilip commit edilmiş kaynak için `bundle exec ruby script/package_source.rb` kullanın. Script Git ağacını, dosya adlarını ve içerikleri doğrular; anahtar, DB, log/cache veya Git metadata içeren paketi reddeder. Çıktı `.local/packages/` içinde oluşur. Paketleme negatif testleri ve gerçek paylaşım adımları güvenlik raporundadır.
 
-Önceden anahtar/DB içeren bir paket dışarıya verildiyse ignore düzeltmesi bu kopyaları veya geçmişi temizlemez. Kopyanın geri çekilmesi, etkilenmiş sırların belirlenmesi ve etki analizi sonrası yetkili rotasyon gerekir. Bu denetimde anahtar silinmedi/değiştirilmedi; veri veya Git geçmişi yeniden yazılmadı. Üretim genel URL doğrulaması hâlâ eksiktir.
+Önceden anahtar/DB içeren bir paket dışarıya verildiyse ignore düzeltmesi bu kopyaları veya geçmişi temizlemez. Kopyanın geri çekilmesi, etkilenmiş sırların belirlenmesi ve etki analizi sonrası yetkili rotasyon gerekir. Bu denetimde anahtar silinmedi/değiştirilmedi; veri veya Git geçmişi yeniden yazılmadı. 16 Ekim Railway testinde fresh-session CSP nonce ve Turbo style sorunu dar kapsamlı olarak düzeltildi; redeploy sonrası header/browser kontrolü geçti. [Üretim raporu](docs/PRODUCTION_TEST_REPORT.md).
 
 ## Kurulum
 
@@ -187,17 +187,24 @@ Remove-Item Env:SECRET_KEY_BASE_DUMMY
 
 **Pro sürümünün son yerel kontrolü:** 53 model/service/HTTP testi ve 5 gerçek browser testi; toplam **58 test, 588 assertion, sıfır failure/error/skip**. Customer 360, görev CRUD/tamamlama, otomasyon zaman sınırları, NBA eylemleri, SQL metrikleri, tenant/owner yetkisi ve 390px mobil görünüm dahil. Güncel upgrade/CI kaydı: [UPGRADE_PROGRESS.md](docs/UPGRADE_PROGRESS.md). Önceki doğrulama raporlarının test sayıları tarihî snapshot'lardır.
 
+**16 Ekim 2026 son kontrol:** CSP regresyonları dahil **54 domain/HTTP testi / 547 assertion + 6 gerçek browser testi / 54 assertion = 60 test, 601 assertion**; sıfır failure/error/skip. Zeitwerk, Brakeman (0 warning/error) ve production assets geçti. Ayrıca localhost yerine gerçek Railway URL'sinde **26/26 browser vakası** geçti; 542 gözlenen response içinde 5xx yok. [CSP düzeltmesi için doğrulanmış CI run'ı](https://github.com/Montaserissa20/leadcurrent/actions/runs/38914594060) success. Son doküman commit'inin CI sonucu ve test kapsamı [PRODUCTION_TEST_REPORT.md](docs/PRODUCTION_TEST_REPORT.md) teslim kaydındadır.
+
 CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini, Zeitwerk, Brakeman ve asset build'i çalıştırır. Badge yukarıdaki gerçek repository/workflow'ya aittir; son durum Actions sayfasından kontrol edilmelidir. En son kontrol edilen commit/run ayrıca doğrulama raporunda kayıtlıdır.
 
 ## Canlı Uygulama
 
-**Render dağıtımı tamamlanmadı; doğrulanmış genel URL henüz yok.** Yerel adres genel yayın olarak sunulmaz. Render hesabı bağlantısı bu oturumda doğrulanmadı.
+**Canlı Railway URL:** https://leadcurrent-production.up.railway.app
 
-[Render Blueprint başlat](https://dashboard.render.com/select-repo?type=blueprint). Repository: `Montaserissa20/leadcurrent`; dosya: [render.yaml](render.yaml). `DEMO_PASSWORD` için production'a özgü güçlü bir değer girin. Blueprint, ayrı Postgres hizmeti ve web hizmeti oluşturur; `SECRET_KEY_BASE` otomatik üretilir. `DATABASE_URL` servis bağıyla gelir. Rails credentials için eski projenin master key'i asla kullanılmaz.
+**Durum: PASS — 16 Ekim 2026, 17:21–17:24 Europe/Istanbul** tam browser turu. `/up` HTTP 200 ve `database=connected`; login/signup, izole QA workspace, lead → completed contact → qualified → opportunity → Proposal → Negotiation → Won, dashboard/analytics ve logout/login sonrası kalıcılık gerçekten test edildi. NBA upcoming/overdue task, tamamlama/contact ve stage eylemleri; Customer 360, USD/EUR ayrımı, tema, mobil ve organizasyon/owner yetkisi geçti. Üretim saati değiştirilmedi; 24/72 saat sınırları yerel/CI `travel_to` testleriyle doğrulandı.
 
-Build: `bash bin/render-build.sh`; start: `bundle exec puma -C config/puma.rb`; health: `/up` DB bağlantısını da kontrol eder. Free plan pre-deploy çalıştırmadığından migration build script'indedir. Paid planda migration ayrı pre-deploy komutuna taşınabilir. [Render Rails rehberi](https://render.com/docs/deploy-rails-8).
+Bulunan CSP sorunu push sonrası canlıda yeniden test edildi; dolu script/style nonce ve fresh browser'da sıfır CSP ihlali doğrulandı. Railway panelindeki deployment ID/uzak Git SHA için erişim yoktur; public uygulamanın yeni davranışı gözlendi, panel durumu tahmin edilmedi.
 
-Free Postgres 30 gün sonra sona erer; uzun süreli gösterim için süre dolmadan paid plana geçin. Free web hizmeti 15 dakika inaktiflikten sonra uyuyabilir. [Resmî free-plan sınırları](https://render.com/docs/free). Production doğrulama adımları: [DEPLOYMENT_TR.md](docs/DEPLOYMENT_TR.md). Yayın URL'si, login ve DB workflow üretimde doğrulandıktan sonra bu bölüme eklenmelidir.
+- [Üretim test raporu ve redakte kanıt](docs/PRODUCTION_TEST_REPORT.md)
+- [Ödev gereksinimleri: PASS / PARTIAL / BLOCKED](docs/ASSIGNMENT_CHECKLIST.md)
+- [Beş dakikalık son sunum](docs/FINAL_PRESENTATION_TR.md)
+- [Railway doğrulaması ve alternatif Render tarifi](docs/DEPLOYMENT_TR.md)
+
+Yerel `127.0.0.1` adresi canlı yayın değildir. [render.yaml](render.yaml) ve Render maliyet satırları korunmuş alternatiflerdir; bu canlı hizmetin planı/faturası olarak yorumlanmamalıdır. Mevcut üretim sırları veya demo/customer verisi bu çalışmada değiştirilmedi.
 
 ## GitHub Deposu
 
@@ -205,7 +212,7 @@ Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent*
 
 ## Yapamadıklarım
 
-- Render hesabı bağlı olmadığı için genel URL ve üretim smoke testi henüz tamamlanmadı. Bu nedenle bütün kabul ölçütleri tamamlandı / 85 veya 100+ puan garanti iddiası yoktur.
+- Railway public akış doğrulandı; deployment panelindeki uzak release SHA/ID, backup/restore, yük testi ve uzun süreli uptime bu testle doğrulanmadı. [Ödev kontrol listesindeki](docs/ASSIGNMENT_CHECKLIST.md) PARTIAL kalemleri nedeniyle bütün kabul ölçütleri tamamlandı / puan garantisi iddiası yoktur.
 - Fortune 500 tam nüfusunun aynı tarihli min/max değerleme ve çalışan aralığı belirlenemedi. Yaklaşık örneklem ve kurumsal SaaS benchmarkları açıkça ayrıldı.
 - Ticari kullanım doğrulandı, müşterilerin gerçek lisans faturaları kamuya açık değil.
 - Gerçek token/saat/fatura raporu sağlanmadı; agent USD gideri bilinmiyor. Sayısal tahmin ve gerçekleşen kayıt eksikleri ayrı tablolardadır.

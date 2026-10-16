@@ -10,7 +10,7 @@ Baseline verified: 37 domain/HTTP tests (401 assertions), 2 browser tests (24 as
 - [x] Interactive dashboard and database-backed analytics; currencies separated, zero-safe conversion and means.
 - [x] Responsive light/dark UI and real browser verification at 390px; screenshots visually reviewed.
 - [x] Full regression/security/build checks, docs and exact-commit CI (verified upgrade run below; final documentation HEAD checked again at delivery).
-- [ ] Live verification (requires deployed environment/access; no public deployment currently verified).
+- [x] Live verification: Railway HTTPS/DB/workflow/NBA verified 16 October 2026; CSP defect fixed and production retested. See [current production report](PRODUCTION_TEST_REPORT.md). Historical local counts below describe the upgrade snapshot.
 
 No schema, dependency, transition graph, conversion or 24-hour rule changes. Existing test files retained. Render build/start configuration retained; no paid service added.
 

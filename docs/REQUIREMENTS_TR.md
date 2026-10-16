@@ -18,8 +18,8 @@
 | Kanban / filters | opportunities/pipeline, filter_records | stage form persistence ve filtre testleri |
 | Responsive / theme | appearance_controller.js, application.css | mobile, theme persistence browser testi |
 | CI | .github/workflows/ci.yml | GitHub named workflow + exact commit; VERIFICATION_TR |
-| Render | render.yaml, render-build.sh, HealthController | Yapılandırma hazır; hesap bağlantısı ve public smoke bekliyor |
+| Genel production URL | Railway/Docker, HealthController; render.yaml alternatif | [16 Ekim gerçek Railway testleri](PRODUCTION_TEST_REPORT.md): health, workflow, persistence ve NBA geçti |
 | Araştırma / gerçek yorum / maliyet | README.md | Sourced tables, sınırlar, COSTS_TR |
 | Agent / sunum | AGENT.md, PRESENTATION_TR.md | Kaynak dosyalarından hesaplanmış satır konumları |
 
-**Henüz tamamlanmayan zorunlu koşul:** doğrulanmış genel Render URL'si ve üretimde uçtan uca kontrol. Puan garantisi yoktur.
+**Güncel durum:** Railway genel URL ve canlı uçtan uca akış doğrulandı. Eksik gerçek fatura/saat ve araştırma/LOC kanıt sınırları [ödev kontrol listesinde](ASSIGNMENT_CHECKLIST.md) PARTIAL olarak gösterilir; puan garantisi yoktur.

@@ -1,0 +1,372 @@
+{
+  "schema": 1,
+  "sourceCommit": "217c3bfe2115f14530c86ec290ef493589d55237",
+  "sourceCommitIsNotRemoteReleaseAttestation": true,
+  "productionUrl": "https://leadcurrent-production.up.railway.app",
+  "timezone": "Europe/Istanbul",
+  "browser": {
+    "base": "https://leadcurrent-production.up.railway.app",
+    "source_commit": "217c3bfe2115f14530c86ec290ef493589d55237",
+    "started": "2026-10-16T14:21:21Z",
+    "updated": "2026-10-16T14:24:17Z",
+    "qa_prefix": "QA-20261016T142121-c067",
+    "http_responses": 542,
+    "http_500": [],
+    "console_error_count": 4,
+    "capture_errors": [],
+    "cases": [
+      {
+        "id": "P01",
+        "expected": "Login/signup gerçek browser'da yüklenir; korumalı sayfa login'e yönlendirir",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:23Z"
+      },
+      {
+        "id": "P02",
+        "expected": "Ayrı QA organizasyonu oluşturulur; başlangıç metrikleri sıfır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:25Z"
+      },
+      {
+        "id": "P03",
+        "expected": "Lead + şirket/kişi oluşturulur ve listede görünür",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:28Z"
+      },
+      {
+        "id": "P04",
+        "expected": "Yeni lead NBA'da açıklama ve doğrudan contact formuyla görünür",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:28Z"
+      },
+      {
+        "id": "P05",
+        "expected": "Dashboard'da tek submit tamamlanmış temas kaydeder ve öneriyi kaldırır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:30Z"
+      },
+      {
+        "id": "P06",
+        "expected": "Lead qualified olur; değer/tarih ile tek fırsata dönüştürülür",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:33Z"
+      },
+      {
+        "id": "P07",
+        "expected": "Customer 360 eski lead, kişi/şirket ve contact geçmişini birleştirir",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:34Z"
+      },
+      {
+        "id": "P08",
+        "expected": "Fırsat Proposal → Negotiation → Won; kapanış kalıcı",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:37Z"
+      },
+      {
+        "id": "P09",
+        "expected": "Dashboard 1 won/$12,345; analytics %100 conversion ve 0 aktif gösterir",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:38Z"
+      },
+      {
+        "id": "P10",
+        "expected": "Refresh, logout ve tekrar login sonrası Won/değer korunur",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:42Z"
+      },
+      {
+        "id": "P11",
+        "expected": "Görev oluşturma, düzenleme ve tamamlama çalışır; ilk teması karşılamaz",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:48Z"
+      },
+      {
+        "id": "P12",
+        "expected": "Not ve görüşme yöntemi activity filtrelerinde görünür",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:49Z"
+      },
+      {
+        "id": "P13",
+        "expected": "USD Won ve EUR aktif tutarları ayrı hesaplanır; doğru conversion oranı",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:56Z"
+      },
+      {
+        "id": "P14",
+        "expected": "Lead/opportunity filtreleri ve pipeline doğru QA kayıtlarını gösterir",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:58Z"
+      },
+      {
+        "id": "P15",
+        "expected": "Light/dark tercihi değişir ve refresh sonrası korunur",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:21:59Z"
+      },
+      {
+        "id": "P16",
+        "expected": "390px overview/analytics/profil taşmaz; mobil navigasyon çalışır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:01Z"
+      },
+      {
+        "id": "P17",
+        "expected": "İkinci organizasyon QA A verisini okuyamaz veya değiştiremez",
+        "actual": "QA B listesinde A kaydı yok; cross-org GET/POST 404; içerik değişikliği yok",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:06Z"
+      },
+      {
+        "id": "P18",
+        "expected": "A oturumuna dönünce QA kayıtları ve gelir kalıcıdır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:09Z"
+      },
+      {
+        "id": "P19",
+        "expected": "Oturum cookie'si Secure/HttpOnly/SameSite; UI özgün marka",
+        "actual": "Cookie Secure/HttpOnly; SameSite HTTP envanterinde; UI LeadCurrent, rakip marka görünmüyor",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:09Z"
+      },
+      {
+        "id": "P20",
+        "expected": "CSS/JS browser'da çalışır; normal sayfalarda 500 hata metni yok",
+        "actual": "CSS computed style fixed; Stimulus theme/mobile ve Turbo form eylemleri geçti; ziyaret edilen normal sayfalarda 500 görünmedi",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:10Z"
+      },
+      {
+        "id": "P21",
+        "expected": "Bugünkü yaklaşan follow-up priority 85 ve açıklamayla görünür",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:22:13Z"
+      },
+      {
+        "id": "P22",
+        "expected": "Saat değiştirmeden gerçek zaman geçince aynı görev overdue priority 95 olur",
+        "actual": "Gerçek vade doğal olarak geçti; production saati/verisi geriye alınmadı; priority 85 → 95",
+        "status": "PASS",
+        "time": "2026-10-16T14:24:03Z"
+      },
+      {
+        "id": "P23",
+        "expected": "NBA'dan görev tamamlama overdue uyarısını temizler; temas ayrı kalır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:24:04Z"
+      },
+      {
+        "id": "P24",
+        "expected": "NBA contact işlemi refresh sonrasında da tamamlanmış ve öneriden kalkmış kalır",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:24:06Z"
+      },
+      {
+        "id": "P25",
+        "expected": "NBA deal-stage eylemi Proposal'a ilerler ve dashboard'a döner",
+        "actual": "Beklenen browser doğrulamaları geçti",
+        "status": "PASS",
+        "time": "2026-10-16T14:24:09Z"
+      },
+      {
+        "id": "P26",
+        "expected": "Satış temsilcisi aynı workspace'te başkasının kaydını değiştiremez; NBA yetkili eylem sunar",
+        "actual": "Aynı workspace salesperson NBA listesi boş; manager-owned kayda POST 422; veri değişmedi",
+        "status": "PASS",
+        "time": "2026-10-16T14:24:17Z"
+      }
+    ]
+  },
+  "http": {
+    "base": "https://leadcurrent-production.up.railway.app",
+    "time": "2026-10-16T14:22:33.030Z",
+    "records": [
+      {
+        "route": "/",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/up",
+        "status": 200,
+        "location": null,
+        "server": "railway-hikari",
+        "health": {
+          "status": "ok",
+          "database": "connected"
+        }
+      },
+      {
+        "route": "/login",
+        "status": 200,
+        "location": null,
+        "server": "railway-hikari",
+        "assets": [
+          {
+            "path": "/assets/application-4011312c.css",
+            "status": 200,
+            "type": "text/css"
+          },
+          {
+            "path": "/assets/pro-7894ea3d.css",
+            "status": 200,
+            "type": "text/css"
+          },
+          {
+            "path": "/assets/application-bfcdf840.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/turbo.min-9fd88cd5.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/stimulus.min-4b1e420e.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/stimulus-loading-1fc53fe7.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/controllers/appearance_controller-9aa1f480.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/controllers/application-3affb389.js",
+            "status": 200,
+            "type": "text/javascript"
+          },
+          {
+            "path": "/assets/controllers/index-ee64e1f1.js",
+            "status": 200,
+            "type": "text/javascript"
+          }
+        ],
+        "cookiePolicy": [
+          {
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "lax"
+          }
+        ]
+      },
+      {
+        "route": "/signup",
+        "status": 200,
+        "location": null,
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/leads",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/opportunities",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/tasks",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/analytics",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/pipeline",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/activity",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      },
+      {
+        "route": "/settings",
+        "status": 302,
+        "location": "https://leadcurrent-production.up.railway.app/login",
+        "server": "railway-hikari"
+      }
+    ]
+  },
+  "cspDeployment": {
+    "time": "2026-10-16T14:20:46.154Z",
+    "attempt": 15,
+    "status": 200,
+    "nonemptyNonce": true,
+    "scriptMatches": true,
+    "styleMatches": true,
+    "unsafeInline": false
+  },
+  "cspFreshBrowser": {
+    "time": "2026-10-16T14:22:33Z",
+    "anonymous_stimulus": true,
+    "turbo_navigation": true,
+    "csp_violations": 0,
+    "severe_console_entries": 0
+  },
+  "preFix": {
+    "emptyScriptNonce": true,
+    "blockedImportmapModuleScripts": true,
+    "blockedTurboProgressStyles": true
+  },
+  "local": {
+    "domain": {
+      "tests": 54,
+      "assertions": 547,
+      "seed": 10744
+    },
+    "browser": {
+      "tests": 6,
+      "assertions": 54,
+      "seed": 50096
+    },
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "notes": [
+    "Passwords, email addresses, cookies, nonce values, tokens, request bodies and production screenshots are omitted.",
+    "Generated QA credentials stayed only in browser-run process memory."
+  ]
+}

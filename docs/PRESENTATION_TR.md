@@ -1,6 +1,6 @@
 # Beş dakikalık sunum
 
-**Ön koşul:** Render yayınını bitirip doğrulanmış genel URL'yi README'ye ekleyin. Şu anda yalnızca yerel uygulama doğrulandı. Yerel gösterimi canlı genel yayınmış gibi anlatmayın. Geliştirme hesabı: demo@leadcurrent.test / LeadCurrentDemo!2026; production için ayrı parola kullanın.
+**16 Ekim güncellemesi:** Railway canlı URL ve gerçek akış doğrulandı: https://leadcurrent-production.up.railway.app. Güncel beş dakikalık metin ve dosya/satır konumları [FINAL_PRESENTATION_TR.md](FINAL_PRESENTATION_TR.md), test kanıtları [PRODUCTION_TEST_REPORT.md](PRODUCTION_TEST_REPORT.md) içindedir. Bu önceki sunum taslağında geçen yerel geliştirme hesabını üretim hesabı olarak kullanmayın; kendi özel sunum hesabınızla giriş yapın.
 
 ## 0:00–0:30 — İş değeri
 

@@ -1,6 +1,12 @@
-# Render dağıtımı ve doğrulama
+# Railway üretimi ve alternatif Render dağıtımı
 
-Mevcut durum: hesap bağlantısı doğrulanmadı; genel URL yok. Bağlantı elde edilince yalnızca dağıtım/üretim doğrulamasını tamamlamak gerekir. Yerel testler ve production asset build geçti.
+**Güncel üretim:** https://leadcurrent-production.up.railway.app — 16 Ekim 2026: `/up` 200/connected ve izole QA ile tam canlı satış akışı doğrulandı. Bulunan CSP fix'i push sonrası yeniden gözlendi; [gerçek test raporu](PRODUCTION_TEST_REPORT.md), [gereksinim durumu](ASSIGNMENT_CHECKLIST.md) ve [sunum](FINAL_PRESENTATION_TR.md) güncel kanıttır. Railway paneline erişilmediği için release ID/uzak SHA, plan/fatura ve operasyonel backup iddiası yoktur.
+
+Railway bu depodaki [Dockerfile](../Dockerfile) ile çalışır. Son aşamada rails kullanıcısından sonra `mkdir -p db log tmp` ve `chown` vardır. Mevcut `bin/docker-entrypoint` database hazırlığını yapar; üretim verisini reset/seed ederek test etmeyin. Yeni app release'i için commit push edilir, public health ve ilgili gerçek akış tekrar kontrol edilir; build/CI başarısı tek başına production kanıtı değildir.
+
+## Render alternatifi
+
+Aşağıdaki korunmuş Render tarifi alternatif dağıtım içindir; Railway servisinin planı, DB süresi veya faturası değildir. Render hesabı/dağıtımı bu çalışmada doğrulanmadı.
 
 1. GitHub repository: https://github.com/Montaserissa20/leadcurrent. Son LeadCurrent CI workflow'sunun ilgili commit için yeşil olduğunu kontrol edin.
 2. https://dashboard.render.com/select-repo?type=blueprint üzerinden repository'yi seçin. render.yaml, Frankfurt web + ayrı PostgreSQL hizmeti tanımlar.
@@ -12,4 +18,4 @@ Mevcut durum: hesap bağlantısı doğrulanmadı; genel URL yok. Bağlantı elde
 8. Ayrı /signup workspace oluşturup birinci workspace URL/ID'sine erişimde 404, yetkisiz action'da reddetme doğrulayın. Diğer kullanıcının verisi listede görünmemeli.
 9. Gerçek URL, kontrol tarihi, ilgili commit ve başarılı/başarısız adımları docs/VERIFICATION_TR.md ve README'ye yazın. Sadece build başarılıysa public workflow başarılı demeyin.
 
-Free Postgres 30 gün sonra sona erer; uzun süreli teslim için paid plan gerekir. Free web 15 dakika inaktiflikte uyuyabilir. Kaynak: https://render.com/docs/free. Hiçbir paid plan bu çalışma sırasında satın alınmadı. Her iki kaynak dosyası hazırdır; eksik olan hesap erişimidir.
+Render Free Postgres 30 gün sonra sona erer; uzun süreli teslim için paid plan gerekir. Free web 15 dakika inaktiflikte uyuyabilir. Kaynak: https://render.com/docs/free. Buradaki Render kısıtları Railway'e uygulanmaz; gerçek Railway ödeme/tüketim verisi erişilebilir değildir. Bu çalışmada yeni paid plan satın alınmadı.

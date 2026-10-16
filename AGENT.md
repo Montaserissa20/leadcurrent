@@ -4,7 +4,9 @@ This describes the implemented independent application at D:\LeadCurrent. D:\rub
 
 ## Architecture
 
-Ruby 3.4.7 / Rails 8.1.4 / PostgreSQL 17; ERB, Propshaft, importmap, Turbo, Stimulus; Minitest and Capybara/Selenium. Plain maintained CSS. No React, Redis, AI provider, worker or durable async jobs are required. Render native Ruby deployment; GitHub Actions Linux + PostgreSQL CI.
+Ruby 3.4.7 / Rails 8.1.4 / PostgreSQL 17; ERB, Propshaft, importmap, Turbo, Stimulus; Minitest and Capybara/Selenium. Plain maintained CSS. No React, Redis, AI provider, worker or durable async jobs are required. Railway Docker deployment, retained Render native Ruby alternative; GitHub Actions Linux + PostgreSQL CI.
+
+Production verified on Railway/Docker at https://leadcurrent-production.up.railway.app on 16 October 2026; Render is a retained alternative. Current evidence and deployment limitations: docs/PRODUCTION_TEST_REPORT.md. CSP uses a random per-session nonce for script-src and style-src; keep it nonempty for fresh anonymous sessions and do not add unsafe-inline. Integration/system regressions are in content_security_policy_test.rb.
 
 Domain: Organization owns Users, Companies, Contacts, Leads, Opportunities, Activities, Tasks and AuditEvents. User has bcrypt password_digest, manager/salesperson role and time_zone. Database-backed Session expires after 12 hours. Login stores only an opaque Rails signed/encrypted session reference in an HttpOnly cookie; logout destroys DB Session. Signup creates an isolated Organization and manager in one transaction. Managers can add salespeople through settings; no email is sent.
 
