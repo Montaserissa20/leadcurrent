@@ -93,6 +93,8 @@ QA otomasyonunda iki ayrı yöntem hatası düzeltildi: Turbo ile kaldırılmı�
 
 ## Sınırlar ve teslim kaydı
 
+Üretim kanıtı ve raporlar `372113eef6fbdb2680ac240660c30fa1c7f8edab` ile `main` dalına push edildi. [LeadCurrent CI run 38916046091](https://github.com/Montaserissa20/leadcurrent/actions/runs/38916046091): **completed / success**; domain/HTTP, gerçek Chrome browser, autoload, security ve production assets adımları başarılı. GitHub API, README ve üç istenen rapor ile redakte evidence JSON'u için HTTP 200 ve commit blob SHA eşleşmesini doğruladı. Markdown/yerel anchor kontrolleri ve redakte staged/history secret taramaları geçti; `.local` ve secret/runtime dosyaları commit edilmedi. Bu teslim kaydını ekleyen sonraki yalnız belge commit'inin exact-HEAD CI sonucu teslim mesajında ayrıca verilir.
+
 - Uzak deployment SHA/ID, Railway paneli, fatura ve operasyon logları hesabı erişilebilir değil; public davranış ve yeni CSP fix'i gerçekten gözlendi. Yeni release'in farklı sonraki SHA'sı tahmin edilmez.
 - Production 4/24/72 saatlik sınırlar yapay olarak değiştirilmedi; yerel/CI travel_to kanıtı üretim zaman testi diye sunulmaz.
 - Backup/restore, yük/uzun süreli uptime, e-posta/telefon/calendar provider'ları, MFA ve parola kurtarma bu testin tamamladığı işler değildir.
