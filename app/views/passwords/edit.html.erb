@@ -1,0 +1,11 @@
+<% content_for :page_title, "Security & Password" %>
+<section class="page-heading"><div><span class="eyebrow">YOUR ACCOUNT</span><h1>Security &amp; Password</h1><p><%= current_user.password_change_required? ? "Replace your temporary password to unlock your workspace." : "Keep your account protected." %></p></div></section>
+<section class="panel password-panel" aria-labelledby="password-heading">
+  <h2 id="password-heading">Change your password</h2>
+  <%= render "passwords/form" %>
+  <% if current_user.password_change_required? %>
+    <%= button_to "Sign out", logout_path, method: :delete, class: "button secondary" %>
+  <% else %>
+    <p><%= link_to "Back to settings", settings_path %></p>
+  <% end %>
+</section>

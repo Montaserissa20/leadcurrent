@@ -5,12 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="A focused workspace for leads, meaningful follow-ups, and your next win.">
   <%= csrf_meta_tags %><%= csp_meta_tag %>
+  <% if controller_name.in?(%w[settings passwords]) %><meta name="turbo-cache-control" content="no-cache"><% end %>
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <%= stylesheet_link_tag "application", "pro", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
 <body>
-<% if current_user %>
+<% if current_user&.password_change_required? %>
+  <main class="password-required-shell">
+    <div class="password-required-header"><%= link_to "LeadCurrent", edit_password_path, class: "brand" %><button type="button" class="icon-button" data-action="appearance#toggleTheme" aria-label="Toggle color theme">◐</button></div>
+    <%= render "shared/flash" %><%= yield %>
+  </main>
+<% elsif current_user %>
   <aside class="sidebar" id="sidebar" data-appearance-target="sidebar">
     <%= link_to root_path, class: "brand" do %><img src="/icon.svg" alt="" width="34" height="34">LeadCurrent<% end %>
     <div class="workspace-label"><span class="workspace-avatar"><%= current_user.organization.name.first.upcase %></span><div><strong><%= current_user.organization.name %></strong><small>Sales workspace</small></div></div>

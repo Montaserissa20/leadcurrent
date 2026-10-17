@@ -1,0 +1,19 @@
+<% if @password_errors.present? %>
+  <div class="flash alert" role="alert" id="password-errors" tabindex="-1">
+    <strong>Your password could not be changed.</strong>
+    <ul><% @password_errors.each do |error| %><li><%= error %></li><% end %></ul>
+  </div>
+<% end %>
+<p class="muted" id="password-help">Use a different password with at least 12 characters. Your other sessions will be signed out; this session will stay signed in.</p>
+<%= form_with scope: :password_change, url: password_path, method: :patch, data: { turbo: false } do |f| %>
+  <% [[:current_password, "Current password", "current-password"], [:password, "New password", "new-password"], [:password_confirmation, "Confirm new password", "new-password"]].each do |attribute, label, autocomplete| %>
+    <div class="field" data-controller="password-visibility" data-password-visibility-label-value="<%= label.downcase %>" data-action="turbo:before-cache@document->password-visibility#clear">
+      <%= f.label attribute, label %>
+      <div class="password-input">
+        <%= f.password_field attribute, value: nil, required: true, minlength: attribute == :current_password ? nil : 12, autocomplete: autocomplete, aria: { describedby: "password-help" }, data: { password_visibility_target: "input" } %>
+        <button type="button" class="button secondary small" data-password-visibility-target="toggle" data-action="password-visibility#toggle" aria-label="Show <%= label.downcase %>" aria-pressed="false">Show</button>
+      </div>
+    </div>
+  <% end %>
+  <%= f.submit "Change password", class: "button", data: { disable_with: "Changing…" } %>
+<% end %>

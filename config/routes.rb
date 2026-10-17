@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get "activity", to: "activities#index"
   get "settings", to: "settings#show"
   patch "settings", to: "settings#update"
+  get "settings/password", to: "passwords#edit", as: :edit_password
+  patch "settings/password", to: "passwords#update", as: :password
   post "settings/team", to: "settings#create_member", as: :team_members
   get "up", to: "health#show"
 end

@@ -1,1 +1,34 @@
-<% content_for :page_title, "Settings" %><section class="page-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h1>Settings & team</h1><p><%= current_user.organization.name %> · Your workspace, your rhythm.</p></div></section><div class="detail-grid"><section class="panel"><h2>Your profile</h2><%= form_with model: current_user, url: settings_path do |f| %><div class="field"><%= f.label :name %><%= f.text_field :name, required: true %></div><div class="field"><%= f.label :time_zone %><%= f.select :time_zone, (["Europe/Istanbul", "UTC"] + ActiveSupport::TimeZone.all.map(&:name)).uniq %></div><%= f.submit "Save profile", class: "button" %><% end %><h3>Appearance</h3><p class="muted">Choose a comfortable view. Your preference is saved in this browser.</p><button class="button secondary" data-action="appearance#toggleTheme">Toggle light / dark</button></section><section class="panel"><h2>Workspace team</h2><% current_user.organization.users.order(:name).each do |user| %><div class="record-row"><div><strong><%= user.name %></strong><small><%= user.email %></small></div><span class="badge neutral"><%= user.role.humanize %></span></div><% end %><% if current_user.manager? %><h3>Add salesperson</h3><%= form_with scope: :user, url: team_members_path do |f| %><div class="field"><%= f.label :name %><%= f.text_field :name, required: true %></div><div class="field"><%= f.label :email %><%= f.email_field :email, required: true %></div><div class="field"><%= f.label :password, "Temporary password (12+ characters)" %><%= f.password_field :password, required: true, minlength: 12, autocomplete: "new-password" %></div><%= f.submit "Add team member", class: "button" %><% end %><% end %></section></div>
+<% content_for :page_title, "Settings" %>
+<section class="page-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h1>Settings &amp; team</h1><p><%= current_user.organization.name %> · Your workspace, your rhythm.</p></div></section>
+<div class="detail-grid">
+  <section class="panel">
+    <h2>Your profile</h2>
+    <%= form_with model: current_user, url: settings_path do |f| %>
+      <div class="field"><%= f.label :name %><%= f.text_field :name, required: true %></div>
+      <div class="field"><%= f.label :time_zone %><%= f.select :time_zone, (["Europe/Istanbul", "UTC"] + ActiveSupport::TimeZone.all.map(&:name)).uniq %></div>
+      <%= f.submit "Save profile", class: "button" %>
+    <% end %>
+    <h3>Appearance</h3><p class="muted">Choose a comfortable view. Your preference is saved in this browser.</p>
+    <button class="button secondary" data-action="appearance#toggleTheme">Toggle light / dark</button>
+    <section class="password-section" aria-labelledby="security-heading">
+      <h3 id="security-heading">Security &amp; Password</h3>
+      <%= render "passwords/form" %>
+    </section>
+  </section>
+  <section class="panel">
+    <h2>Workspace team</h2>
+    <% current_user.organization.users.order(:name).each do |user| %>
+      <div class="record-row"><div><strong><%= user.name %></strong><small><%= user.email %></small></div><span class="badge neutral"><%= user.role.humanize %></span></div>
+    <% end %>
+    <% if current_user.manager? %>
+      <h3>Add salesperson</h3>
+      <p class="muted">Share the temporary password securely. They must replace it on first sign-in.</p>
+      <%= form_with scope: :user, url: team_members_path do |f| %>
+        <div class="field"><%= f.label :name %><%= f.text_field :name, required: true %></div>
+        <div class="field"><%= f.label :email %><%= f.email_field :email, required: true %></div>
+        <div class="field"><%= f.label :password, "Temporary password (12+ characters)" %><%= f.password_field :password, required: true, minlength: 12, autocomplete: "new-password" %></div>
+        <%= f.submit "Add team member", class: "button" %>
+      <% end %>
+    <% end %>
+  </section>
+</div>

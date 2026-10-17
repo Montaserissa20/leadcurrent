@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :require_login
+  before_action :require_password_change
   around_action :use_user_time_zone
   helper_method :current_user, :editable?
   rescue_from ActiveRecord::RecordNotFound do
@@ -17,6 +18,9 @@ class ApplicationController < ActionController::Base
   end
   def require_login
     redirect_to login_path unless current_user
+  end
+  def require_password_change
+    redirect_to edit_password_path, alert: "Replace your temporary password before using your workspace.", status: :see_other if current_user&.password_change_required?
   end
   def use_user_time_zone(&block)
     Time.use_zone(current_user&.time_zone || "Europe/Istanbul", &block)

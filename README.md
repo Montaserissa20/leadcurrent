@@ -154,6 +154,8 @@ Pro öncelikleri: gecikmiş temas 100, gecikmiş görev 95, dört saat içinde t
 
 ## Güvenlik
 
+**Parola yönetimi:** Manager ve salesperson için **Settings → Your profile → Security & Password**: mevcut parolayı doğrulama, en az 12 karakter, eşleşen tekrar, farklı yeni parola ve göster/gizle kontrolleri. Başarılı işlem mevcut oturumu yeni kimlikle korur, diğer oturumları iptal eder. Yalnız yeni manager-created salesperson hesapları ilk girişte parolalarını değiştirmek zorundadır; mevcut hesaplar migration sonrası zorlanmaz. Beş deneme/10 dakika/account süreç içi rate limit, CSRF ve boş yeniden gösterilen parola alanları vardır. İşlem başka kullanıcıyı hedefleyemez. [Türkçe güvenlik akışı, dosyalar ve gerçek test sonuçları](docs/PASSWORD_MANAGEMENT_TR.md).
+
 CSRF, bcrypt, süreli DB session, production secure/HttpOnly/SameSite cookie, SSL ve workspace/sahip yetkisi kaynakta kontrol edildi. Ayrıntılı bulgular, tarama kapsamı, iki dar kapsamlı Gitleaks yanlış-pozitif değerlendirmesi ve manuel müdahale sınırları: [SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md).
 
 Public GitHub ana dalında `config/master.key`, production key ve `.env` için 404; görünür path geçmişinde kayıt yok. Yerel anahtar ve PostgreSQL verisi korunmuştur. **Çalışma klasörünü doğrudan ZIP'lemeyin:** `.gitignore` bir klasör ZIP'inin içeriğini filtrelemez. Yalnızca gözden geçirilip commit edilmiş kaynak için `bundle exec ruby script/package_source.rb` kullanın. Script Git ağacını, dosya adlarını ve içerikleri doğrular; anahtar, DB, log/cache veya Git metadata içeren paketi reddeder. Çıktı `.local/packages/` içinde oluşur. Paketleme negatif testleri ve gerçek paylaşım adımları güvenlik raporundadır.
@@ -204,6 +206,8 @@ Remove-Item Env:SECRET_KEY_BASE_DUMMY
 CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini, Zeitwerk, Brakeman ve asset build'i çalıştırır. Badge yukarıdaki gerçek repository/workflow'ya aittir; son durum Actions sayfasından kontrol edilmelidir. En son kontrol edilen commit/run ayrıca doğrulama raporunda kayıtlıdır.
 
 **16 Ekim PDF güncellemesi:** 56 domain/HTTP testi / 566 assertion + 7 gerçek browser testi / 66 assertion = **63 test, 632 assertion**, sıfır failure/error/skip. Üç bağımsız zaman eşiği ve browser olay/POST sayımı dahildir; Zeitwerk, Brakeman (0 warning/error) ve production assets geçti. [83b0a85 için gerçek LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/38946656482) success; Chrome job log'u da aynı sayıları doğrular. [PDF/G1–G5 ve son doğrulama kaydı](docs/G1_G5_AUDIT_TR.md#son-doğrulama). Önceki sayılar tarihli snapshot'lardır; bu kaydı ekleyen son belge commit'inin CI'ı teslimde ayrıca sorgulanır.
+
+**17 Ekim parola yönetimi:** 67 domain/HTTP / 924 assertion + 9 gerçek browser / 104 assertion = **76 test, 1.028 assertion**, sıfır failure/error/skip. Mevcut CRM suite'i, üç zaman kuralı ve 13 yeni parola testi dahil; Zeitwerk, Brakeman (0 warning/error) ve production assets geçti. [Parola yönetimi güvenlik/test/deployment raporu](docs/PASSWORD_MANAGEMENT_TR.md).
 
 ## Canlı Uygulama
 
