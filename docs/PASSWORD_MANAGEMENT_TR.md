@@ -70,4 +70,28 @@ Yeni testler iki rolün kendi parolası; yanlış current/min/max/confirmation/a
 
 İki yeni gerçek browser testi manager login → Settings → parola değişimi → logout → eski parola red/yeni parola kabul → salesperson oluşturma → geçici login → CRM engeli → zorunlu değişim → CRM erişimi akışını ve validation sonrası boş alanları, Show/Hide, 390px, light/dark görünümü çalıştırır. Mevcut workspace signup, lead/contact/conversion, opportunity stage/terminal, NBA, Customer 360, analytics, tenant/owner ve üç zaman kuralı testleri tam suite içinde geçti. Önceki migration'lar ve mevcut test dosyaları değiştirilmedi; schema'da yalnız yeni boolean ve Rails'in ürettiği sürüm başlığı değişti.
 
-Exact-commit GitHub CI ve production sonucu push sonrası ayrıca kontrol edilir. Sadece local veya CI başarısı Railway deployment/test başarısı olarak sunulmaz. Railway CLI/panel kimlik bilgisi bu ortamda bulunamadı; **GitHub'daki Railway commit-status ve deployment kayıtları erişilebilir** ve yeni commit için sorgulanır. Public HTTP/browser davranışı ayrıca kontrol edilir. Production için yalnız yeni kurgusal QA hesapları kullanılabilir; mevcut kullanıcının parolası değiştirilmez, credential/screenshot yayımlanmaz.
+## GitHub CI ve Railway: gerçekten doğrulanan sonuç
+
+Uygulama commit'i: [0feb82ddd8d1d66ec2db10e3b3cc287c64305671](https://github.com/Montaserissa20/leadcurrent/commit/0feb82ddd8d1d66ec2db10e3b3cc287c64305671). [LeadCurrent CI run 39045799534](https://github.com/Montaserissa20/leadcurrent/actions/runs/39045799534): **success**, exact SHA eşleşti. Job `117434148349` gerçek log'unda 17 Ekim 15:37:13 UTC: **67/924**; 15:37:37 UTC gerçek Chrome: **9/104**, sıfır failure/error/skip. PostgreSQL hazırlığı, Zeitwerk, Brakeman ve production assets adımları da success.
+
+**Railway deployment: PASS.** Aynı SHA için Railway entegrasyonunun GitHub commit-status context'i `resourceful-nature - leadcurrent` success; [deployment 7141826282 status kaydı](https://api.github.com/repos/Montaserissa20/leadcurrent/deployments/7141826282/statuses) 17 Ekim **18:37:46 Europe/Istanbul** anında success. Bu, doğrudan Railway panel okuması değil, Railway'in GitHub'a gönderdiği aynı commit'e bağlı deployment sonucudur. Ardından gerçek public uygulamada yeni davranış test edildi. `/up` 200 / database connected ve `/login` 200 ayrıca gözlendi. Manuel redeploy, production SQL/reset, kullanıcı silme veya Railway credential/env değişikliği yapılmadı.
+
+## Gerçek production browser testi
+
+**PASS: 9/9 vaka**, 17 Ekim **18:39:13–18:39:48 Europe/Istanbul**; gerçek headless Edge, localhost yerine Railway URL'si. [Redakte edilmiş zaman/sonuç metadatası](evidence/password-production-2026-10-17.json) source commit'i içerir; parola, e-posta, cookie/token, HTML veya screenshot içermez.
+
+| Vaka | Gözlenen sonuç |
+|---|---|
+| P01 | Tek yeni kurgusal workspace/manager oluşturuldu; manager iki ayrı browser session'ında giriş yaptı |
+| P02 | Manager Security & Password formu görüldü; yanlış current parola reddedildi, bütün parola alanları boş döndü |
+| P03 | Manager parolası değişti; aynı browser Settings'te giriş yapmış kaldı, ikinci browser yeni root isteğinde login'e gitti |
+| P04 | Manager logout → eski parola reddi → yeni parola kabulü gerçekleşti |
+| P05 | Manager yalnız QA workspace'ine bir yeni salesperson/geçici parola ekledi |
+| P06 | Salesperson geçici login sonrası zorunlu parola ekranına gitti; `/leads` engellendi, CRM navigasyonu yoktu; logout çalıştı ve tekrar geçici login aynı ekrana döndü |
+| P07 | Salesperson geçici parolayı değiştirdi; Settings, Overview ve Analytics'e erişti |
+| P08 | Salesperson logout → geçici parola reddi → yeni parola kabulü; Settings'te kendi güvenlik formu var, team-create formu yok |
+| P09 | 390px light/dark formu taşma olmadan açıldı; Show/Hide gerçek input tipini değiştirdi |
+
+Kasıtlı hatalı-parola vakalarının HTTP 422 console resource kayıtları beklenir; beklenmeyen SEVERE JavaScript/CSP hatası gözlenmedi. Bu canlı test rate-limit saldırısı veya başka müşterinin kullanıcı/oturum/parola değişimi yapmadı; CSRF, yetki hedefleme, cookie replay, rate-limit ve tam CRM regresyonları yerel/CI suite'inde ayrıca kanıtlıdır. İki QA hesabının rastgele parolaları yalnız süreç belleğinde tutuldu; hiçbir mevcut production kullanıcısı değiştirilmedi. Yeni QA workspace/hesapları silinmedi.
+
+Bu üretim/CI kaydını ekleyen son belge commit'i yalnız README, bu rapor ve redakte kanıtı değiştirir. Son HEAD'in **LeadCurrent CI** sonucu ve Railway deployment durumu push sonrası ayrıca exact-commit sorgulanıp teslim mesajında bildirilir. Yukarıdaki production browser çalışması source `0feb82d` üzerinde yapıldı; son belge commit'inde yeniden tam browser turu yapılmış gibi sunulmaz.

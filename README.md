@@ -209,6 +209,8 @@ CI PostgreSQL servisini başlatır, migrate eder, domain/HTTP/browser testlerini
 
 **17 Ekim parola yönetimi:** 67 domain/HTTP / 924 assertion + 9 gerçek browser / 104 assertion = **76 test, 1.028 assertion**, sıfır failure/error/skip. Mevcut CRM suite'i, üç zaman kuralı ve 13 yeni parola testi dahil; Zeitwerk, Brakeman (0 warning/error) ve production assets geçti. [Parola yönetimi güvenlik/test/deployment raporu](docs/PASSWORD_MANAGEMENT_TR.md).
 
+[0feb82d için exact-commit LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39045799534) **success**; gerçek Chrome job log'u aynı 76/1.028 sonucunu doğruladı. Aynı commit'in Railway deployment kaydı success ve **17 Ekim 18:39 Europe/Istanbul** public browser turunda parola/ilk-login/oturum/mobil akışı **9/9 PASS**. [Kaynak SHA, deployment kaydı ve redakte production kanıtı](docs/PASSWORD_MANAGEMENT_TR.md#github-ci-ve-railway-gerçekten-doğrulanan-sonuç). Bu sonucu ekleyen son belge commit'inin CI/deployment durumu teslimde ayrıca sorgulanır.
+
 ## Canlı Uygulama
 
 **Canlı Railway URL:** https://leadcurrent-production.up.railway.app
