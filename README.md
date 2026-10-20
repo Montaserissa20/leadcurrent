@@ -8,6 +8,29 @@ LeadCurrent; müşteri adayını ilk temastan kazanılan satış fırsatına ta�
 
 **Pro geliştirmesi:** etkileşimli günlük satış merkezi, Customer 360 kişi/şirket/deal geçmişi, profil içinde düzenleme ve görev oluşturma, çağrı/toplantı/not kaydı, görev düzenleme/tamamlama ve filtreler, SQL tabanlı Analytics sayfası eklendi. Next Best Action bugün/gecikmiş takipleri de sıralar; görev tamamlama ve geçerli sonraki aşama işlemleri dashboard'a dönerek önerileri yeniler. Otomasyon kayıtlı verilerden hesaplanır; kendiliğinden satış durumu değiştirmez veya reminder kaydı üretmez. [Kısa ilerleme ve doğrulama kaydı](docs/UPGRADE_PROGRESS.md).
 
+**20 Ekim Phase 1 — LeadCurrent AI:** lead ve opportunity sayfalarına gerçek Groq LLM ile müşteri analizi, resmi NBA'nin açıklaması, aktivite özeti ve takip taslağı eklendi. İlgili PostgreSQL kaydı sınırlı ve workspace kapsamında okunur; AI hiçbir kayıt değiştirmez veya mesaj göndermez. Kullanıcı 20 Ekim'de GitHub yayını ve Railway kontrolü için açık onay verdi; yerel test ve önceki canlı uygulama kanıtları tek başına yeni üretim dağıtımını doğrulamaz. [CHALLENGE_LOG.md](CHALLENGE_LOG.md) özgün prompt, baseline ve güncel teslim kanıtlarını korur. [Kurulum/mimari/güvenlik raporu](docs/AI_SALES_ASSISTANT_TR.md).
+
+## LeadCurrent AI Sales Assistant
+
+Lead veya opportunity detayındaki **LeadCurrent AI** panelinden isteğe bağlı bir soru yazıp **Analyze customer**, **What should I do next?**, **Summarize activities**, **Draft follow-up** seçin. Sonuçlar AI-generated olarak işaretlenir; ilgili gerçek CRM kaynakları ile deterministik öncelik/neden ayrı gösterilir. Taslak yalnız kopyalanır, gönderilmez. Model hata verebilir: bütçe, taahhüt ve önerileri doğrulayın.
+
+Sunucuda `GROQ_API_KEY` gerekir; `GROQ_MODEL` varsayılanı **`openai/gpt-oss-20b`**. 20 Ekim kontrolünde Groq'un [model belgesi](https://console.groq.com/docs/model/openai/gpt-oss-20b), [free-plan limitleri](https://console.groq.com/docs/rate-limits) ve [Chat Completions API formatı](https://console.groq.com/docs/api-reference) doğrulandı. Llama 3.1 8B şu an enterprise olarak listelendiği için free-tier varsayılanı yapılmadı. Key yalnız Ruby sunucusundadır; tarayıcı kendi Rails endpoint'ine istek yapar. `.env.example` anahtar içermez ve otomatik yüklenmez.
+
+Windows kullanıcı ortam değişkeni zaten tanımlıysa yeni terminal açın veya yalnız mevcut PowerShell sürecine alın; değeri yazdırmayın:
+
+```powershell
+Set-Location D:\LeadCurrent
+$env:GROQ_API_KEY = [Environment]::GetEnvironmentVariable('GROQ_API_KEY', 'User')
+$env:GROQ_MODEL = 'openai/gpt-oss-20b'
+bundle exec rails server -b 127.0.0.1 -p 3100
+```
+
+Mevcut yerel PostgreSQL'in çalıştığından emin olun; AI için yeni migration, seed/reset veya ek gem gerekmez. Giriş yapıp mevcut bir müşteriyi açın. Key eksikse anlaşılır hata gösterilir, CRM çalışmaya devam eder. İleride **onaylı** Railway dağıtımı için aynı iki değişken Railway service Variables'ta ayarlanır; Windows kullanıcı değişkeni Railway'e taşınmaz. Key'i repo, frontend, build argümanı veya prompt içine koymayın. Bu phase push/deploy için ayrıca açık onay gerektirir.
+
+**Sınırlar:** en çok 6 aktivite ve 5 pending task, 600 karakter soru, sınırlı not alıntıları, 6.000-byte mesaj içeriği ve 1.200 completion-token. E-posta/telefon alanları dışlanır; serbest metin redaksiyonu en iyi çabadır, tam anonimleştirme değildir. Sayaçlar süreç içidir; çoklu worker/instance için ortak limiter gerekir. `NextBestAction` hâlâ kuralları/puanları hesaplar ve Groq olmadan çalışır; LLM yalnız yorum/özet/taslak üretir. [Ayrıntılı sınırlar ve doğrulama ayrımı](docs/AI_SALES_ASSISTANT_TR.md).
+
+**20 Ekim yerel doğrulama:** 100 otomatik test / 1.451 assertion geçti; normal testler HTTP'yi mock eder. Ayrı gerçek tarayıcı testinde dört Groq işlemi de geçti (1 test / 27 assertion), CRM kayıtları değişmedi. [Gerçek sağlayıcı raporu](docs/AI_LIVE_VERIFICATION_2026-10-20.json) yalnızca kurgusal yerel müşteri verisi içerir; Railway doğrulaması değildir. Başarısız ilk denemeler ve giderlerin ölçülmediği [challenge log](CHALLENGE_LOG.md) içinde açıkça kayıtlıdır.
+
 ## Teknolojiler
 
 Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions; canlıda Railway/Docker, alternatif Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
@@ -97,7 +120,7 @@ API matematiği: `(input / 1.000.000 × input fiyatı) + (output / 1.000.000 × 
 | Gerçek hosting/alan adı/diğer tahsilatlar | **Kesin kullanım veya ödeme verisi mevcut değil.** | Bu agent oturumlarında ücretli satın alma/Render deploy başlatılmadı; bu gözlem kullanıcının toplam hesap faturasını doğrulamaz |
 | Toplam gerçekleşen USD maliyeti | **Kesin kullanım veya ödeme verisi mevcut değil.** | Bilinmeyen gider sıfır yazılmadı |
 
-Karşılaştırma: **9,00 / 12,50 USD**, aynı varsayımsal token bütçesinin farklı modellerle API tahminidir; **20 USD/ay** ayrı bir abonelik alternatifidir. Gerçek billing ve saat kaydı olmadığı için tahminin altında/üstünde harcandığı veya zaman kazancı ölçüldüğü söylenemez. Uygulamanın çalışan CRM özelliğinde AI sağlayıcısı bulunmaması, geliştirme agent'ının ücretsiz olduğu anlamına gelmez.
+Karşılaştırma: **9,00 / 12,50 USD**, aynı varsayımsal token bütçesinin farklı modellerle API tahminidir; **20 USD/ay** ayrı bir abonelik alternatifidir. Gerçek billing ve saat kaydı olmadığı için tahminin altında/üstünde harcandığı veya zaman kazancı ölçüldüğü söylenemez. Önceki 14–17 Ekim CRM sürümünde AI sağlayıcısının bulunmaması, geliştirme agent'ının ücretsiz olduğu anlamına gelmez; yeni Groq özelliğinin kullanım kanıtı ayrı raporlanır.
 
 ## Aort Dilimi
 
@@ -242,7 +265,8 @@ Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent*
 - Fortune 500 tam nüfusunun aynı tarihli min/max değerleme ve çalışan aralığı belirlenemedi. Yaklaşık örneklem ve kurumsal SaaS benchmarkları açıkça ayrıldı.
 - Ticari kullanım doğrulandı, müşterilerin gerçek lisans faturaları kamuya açık değil.
 - Gerçek token/saat/fatura raporu sağlanmadı; agent USD gideri bilinmiyor. Sayısal tahmin ve gerçekleşen kayıt eksikleri ayrı tablolardadır.
-- AI entegrasyonu, e-posta/telefon gönderimi, dış takvim entegrasyonu, password reset/MFA, hafta sonu hariç SLA ve drag-and-drop eklenmedi. Bunlar temel akışı durdurmaz.
+- Groq Phase 1 yerelde eklendi; henüz yayın onayı ve production AI doğrulaması yok. AI yorumları yanılabilir, bounded history eksik bağlam bırakabilir, free-tier kota/model erişimi değişebilir. Alibaba Page Agent ve harici AI-customer API bu phase'e dahil değildir.
+- E-posta/telefon gönderimi, dış takvim entegrasyonu, password reset/MFA, hafta sonu hariç SLA ve drag-and-drop eklenmedi. Bunlar temel akışı durdurmaz.
 - Liste sayfaları en fazla 100 eşleşme gösterir; büyük veri için gerçek sayfalama ve NBA sorgularının toplu optimizasyonu gerekir.
 - Temas tamamlanması kullanıcı beyanıdır. Gelişmiş kurumsal güvenlik (SSO, DB-level RLS, merkezi rate limit, denetim dışa aktarımı) bu öğrenci sürümünün kapsamı dışındadır.
 

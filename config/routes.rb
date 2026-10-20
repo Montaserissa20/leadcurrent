@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     post :transition, on: :member
   end
   post "actions", to: "actions#create"
+  post "leads/:lead_id/ai/advice", to: "ai/advice#create", as: :lead_ai_advice
+  post "opportunities/:opportunity_id/ai/advice", to: "ai/advice#create", as: :opportunity_ai_advice
   get "pipeline", to: "opportunities#pipeline"
   get "analytics", to: "analytics#index"
   resources :tasks, only: %i[index create edit update] do

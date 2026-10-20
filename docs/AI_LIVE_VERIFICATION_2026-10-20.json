@@ -1,0 +1,104 @@
+{
+  "started_at": "2026-10-20T09:14:12Z",
+  "environment": "local test PostgreSQL + real Groq + headless browser",
+  "mocked": false,
+  "result": "PASS",
+  "calls": [
+    {
+      "mode": "analysis",
+      "result": "PASS",
+      "elapsed_seconds": 1.3,
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 886,
+        "completion_tokens": 237,
+        "total_tokens": 1123
+      },
+      "summary": "Atlas Industries is a new lead for a 40-seat subscription. No meeting or purchase commitment recorded; budget noted but not approved. Procurement and decision-maker unknown. A task to confirm seats and procurement is due today.",
+      "next_step": "Complete the pending task to confirm seat count and procurement requirements, then schedule a first contact call before the 24‑hour deadline.",
+      "draft_present": false
+    },
+    {
+      "mode": "next_action",
+      "result": "PASS",
+      "elapsed_seconds": 1.787,
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 891,
+        "completion_tokens": 275,
+        "total_tokens": 1166
+      },
+      "summary": "Atlas Industries is a new lead interested in a 40-seat subscription. A budget of $9,000 was noted but not approved. Procurement and decision-maker details are missing. The first-contact deadline is tomorrow, and a task to confirm seats and procurement is due today.",
+      "next_step": "Complete the pending task: confirm the exact number of seats and gather procurement requirements. Follow up with the lead before the first-contact deadline to ensure timely engagement.",
+      "draft_present": false
+    },
+    {
+      "mode": "summary",
+      "result": "PASS",
+      "elapsed_seconds": 1.371,
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 239,
+        "total_tokens": 1127
+      },
+      "summary": "Atlas Industries is a new lead for a 40-seat subscription. The customer has requested annual pricing and a budget of $9,000 was noted but not approved. Procurement, security review, and decision-maker details are unknown. No first contact has been made yet, and the first-contact deadline is tomorrow. A task to confirm seats and procurement requirements is due today at 16:14.",
+      "next_step": "Complete the pending task to confirm seats and procurement requirements, then schedule the first contact before the deadline.",
+      "draft_present": false
+    },
+    {
+      "mode": "draft",
+      "result": "PASS",
+      "elapsed_seconds": 1.58,
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 885,
+        "completion_tokens": 300,
+        "total_tokens": 1185
+      },
+      "summary": "Atlas Industries is a new lead interested in a 40-seat subscription. Budget of $9,000 noted but not approved. Procurement and decision-maker details unknown. No meeting or purchase commitment recorded.",
+      "next_step": "Confirm seat count and procurement requirements, then schedule a meeting to discuss pricing and decision timeline.",
+      "draft_present": true
+    }
+  ],
+  "human_effort": "not measured",
+  "coding_agent_tokens": "not measured",
+  "paid_cost": "not measured",
+  "implementation_sha256": "628ce5bb091bdc1713ff27c34b398b262c70e978d8b57429538e1d733b4b35d1",
+  "database_unchanged_by_ai": true,
+  "provider_completions": [
+    {
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 886,
+        "completion_tokens": 237,
+        "total_tokens": 1123
+      }
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 891,
+        "completion_tokens": 275,
+        "total_tokens": 1166
+      }
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 239,
+        "total_tokens": 1127
+      }
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "usage": {
+        "prompt_tokens": 885,
+        "completion_tokens": 300,
+        "total_tokens": 1185
+      }
+    }
+  ],
+  "finished_at": "2026-10-20T09:15:38Z"
+}

@@ -1,0 +1,27 @@
+<%= turbo_frame_tag dom_id(@record, :ai_advice) do %>
+  <% if @ai_error %>
+    <div class="flash alert ai-error" role="alert"><strong>AI advice is unavailable.</strong><p><%= @ai_error %></p></div>
+  <% else %>
+    <article class="ai-answer" aria-label="AI-generated advice">
+      <div class="ai-answer-header"><span class="eyebrow">AI-GENERATED · REVIEW BEFORE USE</span><button type="button" class="button secondary small" data-action="ai-sales#copy"><%= @mode == 'draft' ? 'Copy draft' : 'Copy advice' %></button><span data-ai-sales-target="copyStatus" role="status" aria-live="polite"></span></div>
+      <p class="form-hint">Based on the record as of <%= l @context.generated_at, format: :short %>. Refresh the customer page for current official workflow information.</p>
+      <div class="ai-rule">
+        <strong>Official rule-based Next Best Action</strong>
+        <% if @context.recommendation %><p>Priority <%= @context.recommendation.priority %> · <%= @context.recommendation.reason %></p>
+        <% else %><p>No eligible rule-based recommendation for this user and record.</p><% end %>
+        <small>Calculated by LeadCurrent, not by the AI. Scores and deadlines are unchanged.</small>
+      </div>
+      <% if @context.activity_count.zero? %><p class="ai-history-notice">No recorded activity history for this customer.</p><% end %>
+      <div data-copy-content="advice">
+        <h3><%= Ai::SalesAdvisor::MODES.fetch(@mode) %></h3><p class="ai-prose"><%= @result.answer['summary'] %></p>
+        <details class="ai-facts"><summary>Relevant CRM source facts</summary><ul><% @result.facts.each_value do |fact| %><li><%= fact %></li><% end %></ul><small>These are recorded fields or user-entered notes, not independently verified commitments.</small></details>
+        <% if @result.answer['risks'].any? %><h4>Risks &amp; missing information</h4><ul><% @result.answer['risks'].each do |risk| %><li><%= risk %></li><% end %></ul><% end %>
+        <h4>Suggested next step</h4><p class="ai-prose"><%= @result.answer['next_step'] %></p>
+        <h4>Why this may help</h4><p class="ai-prose"><%= @result.answer['explanation'] %></p>
+        <% if @result.answer['assumptions'].any? %><h4>Assumptions to confirm</h4><ul><% @result.answer['assumptions'].each do |assumption| %><li><%= assumption %></li><% end %></ul><% end %>
+        <% if @mode == 'draft' %><h4>Follow-up draft · not sent</h4><div class="ai-draft ai-prose" data-copy-content="draft"><%= @result.answer['draft'] %></div><% end %>
+      </div>
+      <p class="form-hint">Generated with Groq · <%= @result.model %>. Nothing was changed, scheduled, completed or sent. Copying text does not send it.</p>
+    </article>
+  <% end %>
+<% end %>

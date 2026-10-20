@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %><%= csp_meta_tag %>
   <% if controller_name.in?(%w[settings passwords]) %><meta name="turbo-cache-control" content="no-cache"><% end %>
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <%= stylesheet_link_tag "application", "pro", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "pro", "ai", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
 <body>

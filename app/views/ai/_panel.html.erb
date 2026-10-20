@@ -1,0 +1,19 @@
+<section class="panel ai-panel" aria-labelledby="ai-heading" data-controller="ai-sales"
+  data-action="turbo:submit-start->ai-sales#start turbo:submit-end->ai-sales#finish turbo:fetch-request-error->ai-sales#networkError turbo:frame-missing->ai-sales#frameMissing turbo:before-cache@document->ai-sales#clear">
+  <div class="panel-header"><div><span class="eyebrow">CUSTOMER INTELLIGENCE</span><h2 id="ai-heading">LeadCurrent AI</h2></div><span class="badge neutral">Read-only</span></div>
+  <p class="muted">A second perspective on this customer's record. AI advice can be wrong; review it before acting.</p>
+  <%= form_with url: record.is_a?(Lead) ? lead_ai_advice_path(record) : opportunity_ai_advice_path(record), data: { turbo_frame: dom_id(record, :ai_advice), action: "submit->ai-sales#guard" } do |f| %>
+    <div class="field"><%= f.label :question, "Ask about this customer (optional)" %><%= f.text_area :question, rows: 2, maxlength: 600, placeholder: "Analyze this customer and tell me what to do next…", data: { ai_sales_target: "question" } %></div>
+    <div class="ai-actions">
+      <% Ai::SalesAdvisor::MODES.each do |mode, label| %>
+        <button type="submit" name="mode" value="<%= mode %>" class="button <%= mode == 'analysis' ? '' : 'secondary' %> small" data-ai-sales-target="submit"><%= label %></button>
+      <% end %>
+    </div>
+  <% end %>
+  <p class="form-hint">Sends limited CRM context to Groq: at most 6 activities and 5 pending tasks. Contact email/phone fields are excluded. Drafts are never sent automatically.</p>
+  <p class="ai-loading" data-ai-sales-target="loading" role="status" aria-live="polite" hidden>Reading the customer context and asking Groq…</p>
+  <p class="flash alert" data-ai-sales-target="networkError" role="alert" hidden>We could not reach the assistant. Your customer page is still here; please try again.</p>
+  <%= turbo_frame_tag dom_id(record, :ai_advice), data: { ai_sales_target: "result" } do %>
+    <div class="ai-empty"><span aria-hidden="true">✦</span><p>Start with an analysis, make sense of the next action, or prepare a thoughtful follow-up.</p></div>
+  <% end %>
+</section>
