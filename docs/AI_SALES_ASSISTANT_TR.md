@@ -1,6 +1,6 @@
 # LeadCurrent AI Sales Assistant — Phase 1
 
-20 Ekim 2026. İlk yerel doğrulamadan sonra kullanıcı GitHub push ve mevcut Railway dağıtımının kontrolüne açık onay verdi. Önceki ödevin canlı uygulama kanıtları bu özelliğin üretimde çalıştığını göstermez. Özgün görev ve güncel teslim/doğrulama durumu: [CHALLENGE_LOG.md](../CHALLENGE_LOG.md).
+20 Ekim 2026. Kullanıcı onayından sonra Phase 1 GitHub main'e yayınlandı; exact-commit CI ve Railway dağıtımı success, bir gerçek üretim Groq analizi dahil public browser turu 6/6 PASS. Önceki ödevin kanıtlarından ayrı güncel [teslim raporu](evidence/phase1-release-2026-10-20.json) ve özgün görev/sonuçlar: [CHALLENGE_LOG.md](../CHALLENGE_LOG.md).
 
 ## Kullanım ve gerçek AI akışı
 
@@ -70,3 +70,7 @@ Gerçek sonuç/count ve başarısız denemeler [challenge log](../CHALLENGE_LOG.
 Bu phase için açık kullanıcı onayı olmadan GitHub'a push veya Railway'e deploy yapılmaz. Onaydan sonra gerçek değişiklik commit'i için LeadCurrent CI doğrulanmalı; Railway web service runtime Variables içine `GROQ_API_KEY` ve isteğe bağlı `GROQ_MODEL=openai/gpt-oss-20b` eklenmelidir. Windows kullanıcı ortamı Railway'e aktarılmaz. Mevcut `DATABASE_URL`, `SECRET_KEY_BASE` ve DB ayarları değiştirilmez; anahtar build argümanı değildir.
 
 Worker sayısı, ortak limiter ihtiyacı, sağlayıcı kotası ve müşteri verisi paylaşım politikası gözden geçirilmeli. Sonra yetkili canlı kullanıcıyla müşteri analizi, diğer üç işlem, tenant/CSRF sınırları ve eski satış akışı gerçek Railway URL'sinde doğrulanmalı. Yerel test, asset build veya GitHub push üretim başarısı kanıtı değildir.
+
+20 Ekim 14:16 Europe/Istanbul'da kullanıcı onaylı yayın sonrası bu kontrollerden sağlık, login, kalıcı kurgusal müşteri, bir gerçek analiz, AI sonrası değişmeyen görünür CRM durumu, satış akışı ve mobil temalar geçti. Üretimde diğer üç Groq modu ayrıca çalıştırılmadı; dört modun gerçek API kanıtı yereldir. Sağlayıcı runtime yapılandırması gerçek analizle çalışır durumdaydı; Railway değişkenleri okunmadı/değiştirilmedi. Gerçek üretim token/fatura bilgisi ve worker/instance sayısı doğrulanmadı. Kurgusal QA workspace ve Won deal kaldı; hiçbir mevcut kullanıcı/müşteri değiştirilmedi.
+
+Manuel kontrol: [canlı uygulamada](https://leadcurrent-production.up.railway.app) hesabınıza giriş yapın, kurgusal bir lead oluşturup 40-seat ihtiyacı/onaylanmamış bütçe gibi açık notlar ekleyin, kaydı tekrar açıp Analyze customer seçin. Gerçek kayıt kaynakları, bilinmeyenler ve resmi NBA ile AI yorumunun ayrımını kontrol edin. Ardından Summarize activities / What should I do next? / Draft follow-up işlevlerini sırayla deneyin; kota hatasında bekleyin. Taslağı gözden geçirin; Copy draft mesaj göndermez. Durum/deadline'ın AI nedeniyle değişmediğini doğrulayın. Sunucuda yapılandırma eksikse mevcut Railway web service runtime Variables içine `GROQ_API_KEY` ve isteğe bağlı `GROQ_MODEL=openai/gpt-oss-20b` eklenmelidir; değerleri paylaşmayın.

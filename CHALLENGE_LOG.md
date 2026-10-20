@@ -1,6 +1,6 @@
 # LeadCurrent Phase 1 challenge log
 
-Started: 20 October 2026 (Europe/Istanbul). Status: Phase 1 implemented and verified locally; user authorized GitHub publication and Railway verification on 20 October. Release verification is in progress.
+Started: 20 October 2026 (Europe/Istanbul). Status: Phase 1 published to GitHub main, exact-commit CI passed, Railway deployment and one genuine production Groq analysis verified on 20 October. See release evidence below.
 
 ## Existing project and baseline
 
@@ -63,7 +63,19 @@ The user explicitly authorized safely committing/pushing Phase 1 to the existing
 
 Pre-push local verification was repeated without `GROQ_API_KEY` or live opt-in in the test process: domain/integration seed 24657, **89 tests / 1,301 assertions**, browser seed 42431, **11 tests / 150 assertions**, all passing with zero failures/errors/skips. Zeitwerk, Brakeman (zero warnings/errors) and production asset compilation passed. These automated Groq tests use mocks; the separately recorded real Groq check above was not rerun or misrepresented as a new production test.
 
-Full reachable Git history scan: Gitleaks 8.30.1, 25 commits, exit 0, no detected secrets, using only the two already-reviewed historical false-positive fingerprints. An additional 283 unique historical blob check found no exact known local secrets or forbidden source file paths. Current source policy: 219 eligible files, no local-secret matches or forbidden paths. Existing `.gitignore` protects master/private keys, real env files, `.local`, archives, logs/temp data and database exports; encrypted Rails credentials remain unchanged. Exact staged source/security checks, delivery commit, GitHub CI and production results are pending below until actually verified.
+Full reachable Git history scan: Gitleaks 8.30.1, 25 commits, exit 0, no detected secrets, using only the two already-reviewed historical false-positive fingerprints. An additional 283 unique historical blob check found no exact known local secrets or forbidden source file paths. Pre-push source policy: 219 eligible files, no local-secret matches or forbidden paths. Existing `.gitignore` protects master/private keys, real env files, `.local`, archives, logs/temp data and database exports; encrypted Rails credentials remain unchanged. Reviewed and staged exactly 27 Phase 1 files; exact staged blob policy and Gitleaks staged scan passed with no detected secrets. No credentials, local ZIPs, runtime data or unrelated files were included; no ignore exception was added.
+
+Feature commit: [`75209db1eb4a3935f9dab67d7f76d74abf847af6`](https://github.com/Montaserissa20/leadcurrent/commit/75209db1eb4a3935f9dab67d7f76d74abf847af6), `feat: integrate Groq-powered AI sales assistant`. Normal fast-forward `git push origin main` succeeded; no force, history rewrite or new repository. GitHub main SHA matched, and all 27 published file blob IDs matched the local commit. Complete file list and non-secret evidence: [phase1-release-2026-10-20.json](docs/evidence/phase1-release-2026-10-20.json).
+
+Exact-feature-commit [LeadCurrent CI run 39413540929](https://github.com/Montaserissa20/leadcurrent/actions/runs/39413540929): **completed / success**. Domain/HTTP, real Chrome browser, autoload, security scan and production assets all succeeded. This is actual GitHub Actions evidence, separate from the local Windows results.
+
+Railway's GitHub deployment integration recorded **success** for the same feature SHA, GitHub deployment `7198221555`, environment `resourceful-nature / production`, updated **20 October 14:16:16 Europe/Istanbul**. This ID is the GitHub deployment record, not a claimed Railway-native deployment ID. Existing [Railway service](https://railway.com/project/190a3879-78ad-4f79-ac79-a4c6cab0775a/service/c66b7e7f-7372-40cc-b08b-45b56347954e) auto-deployed; no second service/project or variable change was made. Direct dashboard variables/worker count were not accessed.
+
+Production HTTP at 14:16 Europe/Istanbul: `/up` **200**, `status=ok`, `database=connected`; `/login` **200**, all 12 referenced CSS/JS assets **200**, including AI CSS/Stimulus; anonymous `/leads` redirected to login.
+
+Actual public-URL headless Edge acceptance ran **14:16:29–14:16:47 Europe/Istanbul**, **6/6 checks PASS**. Created one new fictional QA workspace/manager/40-seat customer; signed out/in and reopened the persisted lead; verified four AI controls; received one genuine Groq **Analyze customer** response using `openai/gpt-oss-20b` in **1.406 seconds**. Official priority 50 remained visibly separate, absent activity history was explicit, and lead status/deadline/tasks remained unchanged after AI and refresh. The subsequent contact → qualified → conversion → Proposal → Negotiation → Won flow persisted on refresh, and opportunity AI panel plus mobile light/dark layouts passed. No existing account/customer was modified. This production check proves one real analysis, not four production AI modes or production token usage; four real modes were separately verified locally above.
+
+The fictional QA workspace and converted Won deal remain in production; no deletion/cleanup was performed and no credentials were saved. Production token usage/cost and worker/instance count are not measured/verified. The process-local limiter still requires one process or shared storage before scaling. Prompt-injection/hallucination/privacy limitations above still apply. A documentation-only follow-up publishes this observed evidence; its own CI/deployment status is checked separately in the final delivery report.
 
 ## Original Codex prompt (verbatim)
 

@@ -8,7 +8,7 @@ LeadCurrent; müşteri adayını ilk temastan kazanılan satış fırsatına ta�
 
 **Pro geliştirmesi:** etkileşimli günlük satış merkezi, Customer 360 kişi/şirket/deal geçmişi, profil içinde düzenleme ve görev oluşturma, çağrı/toplantı/not kaydı, görev düzenleme/tamamlama ve filtreler, SQL tabanlı Analytics sayfası eklendi. Next Best Action bugün/gecikmiş takipleri de sıralar; görev tamamlama ve geçerli sonraki aşama işlemleri dashboard'a dönerek önerileri yeniler. Otomasyon kayıtlı verilerden hesaplanır; kendiliğinden satış durumu değiştirmez veya reminder kaydı üretmez. [Kısa ilerleme ve doğrulama kaydı](docs/UPGRADE_PROGRESS.md).
 
-**20 Ekim Phase 1 — LeadCurrent AI:** lead ve opportunity sayfalarına gerçek Groq LLM ile müşteri analizi, resmi NBA'nin açıklaması, aktivite özeti ve takip taslağı eklendi. İlgili PostgreSQL kaydı sınırlı ve workspace kapsamında okunur; AI hiçbir kayıt değiştirmez veya mesaj göndermez. Kullanıcı 20 Ekim'de GitHub yayını ve Railway kontrolü için açık onay verdi; yerel test ve önceki canlı uygulama kanıtları tek başına yeni üretim dağıtımını doğrulamaz. [CHALLENGE_LOG.md](CHALLENGE_LOG.md) özgün prompt, baseline ve güncel teslim kanıtlarını korur. [Kurulum/mimari/güvenlik raporu](docs/AI_SALES_ASSISTANT_TR.md).
+**20 Ekim Phase 1 — LeadCurrent AI:** lead ve opportunity sayfalarına gerçek Groq LLM ile müşteri analizi, resmi NBA'nin açıklaması, aktivite özeti ve takip taslağı eklendi. İlgili PostgreSQL kaydı sınırlı ve workspace kapsamında okunur; AI hiçbir kayıt değiştirmez veya mesaj göndermez. Kullanıcı onayıyla GitHub main'e yayınlandı; exact-commit CI, Railway dağıtımı ve gerçek üretim müşteri analizi doğrulandı. [CHALLENGE_LOG.md](CHALLENGE_LOG.md) özgün prompt, baseline ve güncel teslim kanıtlarını korur. [Kurulum/mimari/güvenlik raporu](docs/AI_SALES_ASSISTANT_TR.md).
 
 ## LeadCurrent AI Sales Assistant
 
@@ -30,6 +30,8 @@ Mevcut yerel PostgreSQL'in çalıştığından emin olun; AI için yeni migratio
 **Sınırlar:** en çok 6 aktivite ve 5 pending task, 600 karakter soru, sınırlı not alıntıları, 6.000-byte mesaj içeriği ve 1.200 completion-token. E-posta/telefon alanları dışlanır; serbest metin redaksiyonu en iyi çabadır, tam anonimleştirme değildir. Sayaçlar süreç içidir; çoklu worker/instance için ortak limiter gerekir. `NextBestAction` hâlâ kuralları/puanları hesaplar ve Groq olmadan çalışır; LLM yalnız yorum/özet/taslak üretir. [Ayrıntılı sınırlar ve doğrulama ayrımı](docs/AI_SALES_ASSISTANT_TR.md).
 
 **20 Ekim yerel doğrulama:** 100 otomatik test / 1.451 assertion geçti; normal testler HTTP'yi mock eder. Ayrı gerçek tarayıcı testinde dört Groq işlemi de geçti (1 test / 27 assertion), CRM kayıtları değişmedi. [Gerçek sağlayıcı raporu](docs/AI_LIVE_VERIFICATION_2026-10-20.json) yalnızca kurgusal yerel müşteri verisi içerir; Railway doğrulaması değildir. Başarısız ilk denemeler ve giderlerin ölçülmediği [challenge log](CHALLENGE_LOG.md) içinde açıkça kayıtlıdır.
+
+**20 Ekim üretim doğrulama:** [75209db özelliği](https://github.com/Montaserissa20/leadcurrent/commit/75209db1eb4a3935f9dab67d7f76d74abf847af6) için [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39413540929) ve Railway deployment kaydı success. Saat **14:16 Europe/Istanbul** gerçek public browser turunda **6/6 PASS**: login, kayıtlı kurgusal lead, dört AI kontrolü, bir gerçek Groq analizi (`openai/gpt-oss-20b`), değişmeyen lead durumu/deadline, mevcut lead-to-Won akışı ve mobil tema. `/up` 200 / database connected. [Tam teslim kaydı ve dosya listesi](docs/evidence/phase1-release-2026-10-20.json). Bu kanıtı ekleyen belge commit'inin CI/deployment durumu teslimde ayrıca sorgulanır.
 
 ## Teknolojiler
 
@@ -261,11 +263,11 @@ Gerçek bağımsız repository: **https://github.com/Montaserissa20/leadcurrent*
 
 - Özgün 37 sayfalık PDF bulundu ve incelendi; G1/G5'e kısmi atıflar var, tam G1–G5 görev tanımları yok. **G1–G5 BLOCKED**; özgün görev yönergesi gerekir. Gerçek token/düzeltme turu/uydurma sayısı ve review dakikası mevcut değil. [Denetim](docs/G1_G5_AUDIT_TR.md).
 - NBA Salesforce'ta da vardır. Çalışan sade akışın rakipte bulunmadığı kanıtlanmadı; PDF'nin 100+ özgün adaptasyon koşulu **PARTIAL**. [Kanıt ve önerilen dar aday](docs/ADAPTATION_EVIDENCE_TR.md).
-- Railway public akış doğrulandı; deployment panelindeki uzak release SHA/ID, backup/restore, yük testi ve uzun süreli uptime bu testle doğrulanmadı. [Ödev kontrol listesindeki](docs/ASSIGNMENT_CHECKLIST.md) PARTIAL kalemleri nedeniyle bütün kabul ölçütleri tamamlandı / puan garantisi iddiası yoktur.
+- Railway public akış ve 20 Ekim feature SHA'sı için GitHub deployment entegrasyonu doğrulandı; Railway-native panel ID'si/worker sayısı, backup/restore, yük testi ve uzun süreli uptime doğrulanmadı. [Ödev kontrol listesindeki](docs/ASSIGNMENT_CHECKLIST.md) PARTIAL kalemleri nedeniyle bütün kabul ölçütleri tamamlandı / puan garantisi iddiası yoktur.
 - Fortune 500 tam nüfusunun aynı tarihli min/max değerleme ve çalışan aralığı belirlenemedi. Yaklaşık örneklem ve kurumsal SaaS benchmarkları açıkça ayrıldı.
 - Ticari kullanım doğrulandı, müşterilerin gerçek lisans faturaları kamuya açık değil.
 - Gerçek token/saat/fatura raporu sağlanmadı; agent USD gideri bilinmiyor. Sayısal tahmin ve gerçekleşen kayıt eksikleri ayrı tablolardadır.
-- Groq Phase 1 yerelde eklendi; henüz yayın onayı ve production AI doğrulaması yok. AI yorumları yanılabilir, bounded history eksik bağlam bırakabilir, free-tier kota/model erişimi değişebilir. Alibaba Page Agent ve harici AI-customer API bu phase'e dahil değildir.
+- Groq Phase 1 yayınlandı ve bir gerçek production analizi doğrulandı. AI yorumları yanılabilir, bounded history eksik bağlam bırakabilir, free-tier kota/model erişimi değişebilir; çoklu worker öncesi ortak limiter gerekir. Alibaba Page Agent ve harici AI-customer API bu phase'e dahil değildir.
 - E-posta/telefon gönderimi, dış takvim entegrasyonu, password reset/MFA, hafta sonu hariç SLA ve drag-and-drop eklenmedi. Bunlar temel akışı durdurmaz.
 - Liste sayfaları en fazla 100 eşleşme gösterir; büyük veri için gerçek sayfalama ve NBA sorgularının toplu optimizasyonu gerekir.
 - Temas tamamlanması kullanıcı beyanıdır. Gelişmiş kurumsal güvenlik (SSO, DB-level RLS, merkezi rate limit, denetim dışa aktarımı) bu öğrenci sürümünün kapsamı dışındadır.
