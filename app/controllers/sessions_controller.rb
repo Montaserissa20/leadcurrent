@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
     end
   end
   def destroy
+    Copilot::Conversation.clear_session(current_user,@login_session.id)
     @login_session&.destroy!
     reset_session
     redirect_to login_path, notice: "You have signed out.", status: :see_other

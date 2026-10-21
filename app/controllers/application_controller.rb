@@ -39,7 +39,10 @@ class ApplicationController < ActionController::Base
     raise WorkflowError, "Choose a valid follow-up date and time"
   end
   def filter_records(records)
-    records = records.where("title ILIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].to_s)}%") if params[:q].present?
+    if params[:q].present?
+      term = "%#{ActiveRecord::Base.sanitize_sql_like(params[:q].to_s)}%"
+      records = records.where("title ILIKE ?", term).or(records.where(company_id: scope(Company).where("name ILIKE ?", term).select(:id)))
+    end
     records = records.where(status: params[:status]) if params[:status].present?
     records = records.where(owner_id: params[:owner_id]) if params[:owner_id].present?
     records

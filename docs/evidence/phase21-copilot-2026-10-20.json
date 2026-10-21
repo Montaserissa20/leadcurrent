@@ -1,0 +1,1689 @@
+{
+  "date": "2026-10-20",
+  "baseline_commit": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+  "baseline_worktree": "Phase 2 already uncommitted; source hashes captured before Phase 2.1",
+  "branch": "phase2/page-agent",
+  "committed": false,
+  "pushed": false,
+  "railway_deployed": false,
+  "remote_ci": "not run; local-only boundary",
+  "official_packages": {
+    "@page-agent/core": "1.12.4",
+    "@page-agent/page-controller": "1.12.4"
+  },
+  "baseline_tests": {
+    "rails": {
+      "tests": 104,
+      "assertions": 1526,
+      "seed": 37061,
+      "failures": 0
+    },
+    "system": {
+      "tests": 17,
+      "assertions": 249,
+      "seed": 15392,
+      "failures": 1,
+      "description": "Existing dashboard toast was found only in hidden text."
+    },
+    "unchanged_isolated_rerun": {
+      "tests": 1,
+      "assertions": 7,
+      "seed": 28098,
+      "failures": 0
+    }
+  },
+  "final_checks": {
+    "rails": {
+      "tests": 124,
+      "assertions": 1692,
+      "seed": 50371,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "system": {
+      "tests": 25,
+      "assertions": 351,
+      "seed": 33590,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "live": {
+      "tests": 1,
+      "assertions": 116,
+      "seed": 11016,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "zeitwerk": "PASS",
+    "production_assets": "PASS; dummy production secret, no DB operations, local manifest removed afterward",
+    "brakeman": {
+      "version": "8.1.0",
+      "errors": 0,
+      "warnings": 0,
+      "windows_fallback_diagnostics": true
+    },
+    "npm_audit": {
+      "vulnerabilities": 0,
+      "scope": "all locked dependencies including development/build"
+    },
+    "source_review": {
+      "result": "PASS",
+      "source_files": 268,
+      "protected_files_unchanged": 78,
+      "phase1_phase2_log_preserved": true,
+      "phase21_prompt_preserved": true,
+      "real_key_absent_from_source_bundle_and_test_log": true,
+      "baseline_head_and_local_branch_preserved": true
+    },
+    "gitleaks": {
+      "version": "8.30.1",
+      "scope": "tracked/nonignored untracked source snapshot; ignored local state excluded",
+      "raw_exit_code": 1,
+      "raw_findings": 2,
+      "new_findings": 0,
+      "reviewed_unchanged_false_positives": [
+        {
+          "file": "docs/VERIFICATION_TR.md",
+          "line": 39,
+          "reason": "public commit identifier"
+        },
+        {
+          "file": "test/integration/authentication_test.rb",
+          "line": 46,
+          "reason": "synthetic integration-test password"
+        }
+      ]
+    },
+    "documentation": {
+      "markdownFiles": 27,
+      "localLinks": 259,
+      "tables": 38,
+      "requiredSections": 19,
+      "protectedFilesUnchanged": 20,
+      "localMasterKeyUnchanged": true,
+      "ignoreChecks": 16,
+      "errors": []
+    },
+    "git_diff_check": "PASS"
+  },
+  "live_final": {
+    "started_at": "2026-10-20T20:33:45Z",
+    "result": "PASS",
+    "mocked": false,
+    "scenarios": [
+      {
+        "question": "Find my overdue leads.",
+        "expected": "overdue",
+        "result": "PASS",
+        "elapsed_seconds": 5.317,
+        "provider_completions": 4,
+        "path": "/leads",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Open Atlas Industries.",
+        "expected": "record",
+        "result": "PASS",
+        "elapsed_seconds": 51.291,
+        "provider_completions": 3,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Prepare a follow-up note for this customer.",
+        "expected": "note",
+        "result": "PASS",
+        "elapsed_seconds": 7.419,
+        "provider_completions": 3,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Tell me how can I use the system?",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 1.057,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Explain what an opportunity is.",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 49.974,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "And how does that differ from a lead?",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 1.264,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Which leads are late?",
+        "expected": "facts",
+        "result": "PASS",
+        "elapsed_seconds": 1.061,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Any overdue leads for Fictional NoMatch Company?",
+        "expected": "empty",
+        "result": "PASS",
+        "elapsed_seconds": 3.917,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Mark this deal won.",
+        "expected": "refusal",
+        "result": "PASS",
+        "elapsed_seconds": 44.003,
+        "provider_completions": 1,
+        "path": "/leads/4439",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Go to analytics.",
+        "expected": "analytics",
+        "result": "PASS",
+        "elapsed_seconds": 4.48,
+        "provider_completions": 3,
+        "path": "/analytics",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Do the thing I meant with the other one.",
+        "expected": "clarify",
+        "result": "PASS",
+        "elapsed_seconds": 1.008,
+        "provider_completions": 1,
+        "path": "/analytics",
+        "crm_unchanged": true
+      }
+    ],
+    "decisions": [
+      {
+        "intent": "show_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "overdue",
+        "destination": "leads",
+        "navigate": true
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "record",
+        "navigate": true
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "note",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "overdue",
+        "destination": "leads",
+        "navigate": false
+      },
+      {
+        "intent": "show_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "overdue",
+        "destination": "leads",
+        "navigate": true
+      },
+      {
+        "intent": "unsupported_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "analytics",
+        "navigate": true
+      },
+      {
+        "intent": "clarify",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      }
+    ],
+    "verifications": [
+      {
+        "destination": "record",
+        "model_reported_success": null,
+        "goal_matches": true
+      },
+      {
+        "destination": "record",
+        "model_reported_success": true,
+        "goal_matches": true
+      }
+    ],
+    "provider_completions": [
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1327,
+          "completion_tokens": 86,
+          "total_tokens": 1413
+        },
+        "duration_seconds": 0.548,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1284,
+          "completion_tokens": 40,
+          "total_tokens": 1324
+        },
+        "action": "click_control",
+        "duration_seconds": 0.529,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1294,
+          "completion_tokens": 129,
+          "total_tokens": 1423
+        },
+        "action": "apply_filters",
+        "duration_seconds": 0.499,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1268,
+          "completion_tokens": 77,
+          "total_tokens": 1345
+        },
+        "action": "done",
+        "duration_seconds": 0.497,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1373,
+          "completion_tokens": 93,
+          "total_tokens": 1466
+        },
+        "duration_seconds": 0.405,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1180,
+          "completion_tokens": 57,
+          "total_tokens": 1237
+        },
+        "action": "click_control",
+        "duration_seconds": 0.504,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1109,
+          "completion_tokens": 44,
+          "total_tokens": 1153
+        },
+        "action": "done",
+        "duration_seconds": 0.324,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1421,
+          "completion_tokens": 162,
+          "total_tokens": 1583
+        },
+        "duration_seconds": 0.7,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1124,
+          "completion_tokens": 51,
+          "total_tokens": 1175
+        },
+        "action": "fill_field",
+        "duration_seconds": 0.438,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1073,
+          "completion_tokens": 54,
+          "total_tokens": 1127
+        },
+        "action": "done",
+        "duration_seconds": 0.578,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1464,
+          "completion_tokens": 228,
+          "total_tokens": 1692
+        },
+        "duration_seconds": 0.611,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1503,
+          "completion_tokens": 140,
+          "total_tokens": 1643
+        },
+        "duration_seconds": 0.473,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1501,
+          "completion_tokens": 187,
+          "total_tokens": 1688
+        },
+        "duration_seconds": 0.758,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1500,
+          "completion_tokens": 89,
+          "total_tokens": 1589
+        },
+        "duration_seconds": 0.559,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1509,
+          "completion_tokens": 113,
+          "total_tokens": 1622
+        },
+        "duration_seconds": 0.445,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1518,
+          "completion_tokens": 121,
+          "total_tokens": 1639
+        },
+        "duration_seconds": 0.506,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1516,
+          "completion_tokens": 171,
+          "total_tokens": 1687
+        },
+        "duration_seconds": 0.647,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1123,
+          "completion_tokens": 39,
+          "total_tokens": 1162
+        },
+        "action": "click_control",
+        "duration_seconds": 0.377,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1102,
+          "completion_tokens": 58,
+          "total_tokens": 1160
+        },
+        "action": "done",
+        "duration_seconds": 1.387,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1512,
+          "completion_tokens": 193,
+          "total_tokens": 1705
+        },
+        "duration_seconds": 0.554,
+        "surface": "completion.copilot"
+      }
+    ],
+    "invalid_completions": [],
+    "provider_failures": [],
+    "paid_cost": "not measured",
+    "human_development_hours": "not measured",
+    "separate_user_submit": "PASS: simulated user approval saved only a note",
+    "abc_elapsed_seconds": 64.443,
+    "finished_at": "2026-10-20T20:36:41Z",
+    "csp_violations": 0,
+    "diagnostic": {
+      "failure": null,
+      "proxyError": null,
+      "status": "completed"
+    }
+  },
+  "final_usage_sum": {
+    "prompt_tokens": 26701,
+    "completion_tokens": 2132,
+    "total_tokens": 28833
+  },
+  "minimal_tool_compatibility": {
+    "started_at": "2026-10-20T20:29:58Z",
+    "model": "openai/gpt-oss-20b",
+    "mocked": false,
+    "result": "PASS",
+    "content_logged": false,
+    "named_function": "AgentOutput",
+    "usage": {
+      "prompt_tokens": 785,
+      "completion_tokens": 39,
+      "total_tokens": 824
+    },
+    "finished_at": "2026-10-20T20:29:58Z"
+  },
+  "before_batching": {
+    "started_at": "2026-10-20T20:18:25Z",
+    "result": "PASS",
+    "mocked": false,
+    "scenarios": [
+      {
+        "question": "Find my overdue leads.",
+        "expected": "overdue",
+        "result": "PASS",
+        "elapsed_seconds": 58.808,
+        "provider_completions": 7,
+        "path": "/leads",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Open Atlas Industries.",
+        "expected": "record",
+        "result": "PASS",
+        "elapsed_seconds": 53.219,
+        "provider_completions": 5,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Prepare a follow-up note for this customer.",
+        "expected": "note",
+        "result": "PASS",
+        "elapsed_seconds": 14.744,
+        "provider_completions": 4,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Tell me how can I use the system?",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 1.677,
+        "provider_completions": 1,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Explain what an opportunity is.",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 44.258,
+        "provider_completions": 1,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "And how does that differ from a lead?",
+        "expected": "help",
+        "result": "PASS",
+        "elapsed_seconds": 1.184,
+        "provider_completions": 1,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Which leads are late?",
+        "expected": "facts",
+        "result": "PASS",
+        "elapsed_seconds": 0.923,
+        "provider_completions": 1,
+        "path": "/leads/4358",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Any overdue leads for Fictional NoMatch Company?",
+        "expected": "empty",
+        "result": "PASS",
+        "elapsed_seconds": 61.641,
+        "provider_completions": 7,
+        "path": "/leads",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Mark this deal won.",
+        "expected": "refusal",
+        "result": "PASS",
+        "elapsed_seconds": 42.082,
+        "provider_completions": 1,
+        "path": "/leads",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Go to analytics.",
+        "expected": "analytics",
+        "result": "PASS",
+        "elapsed_seconds": 4.524,
+        "provider_completions": 3,
+        "path": "/analytics",
+        "crm_unchanged": true
+      },
+      {
+        "question": "Do the thing I meant with the other one.",
+        "expected": "clarify",
+        "result": "PASS",
+        "elapsed_seconds": 1.031,
+        "provider_completions": 1,
+        "path": "/analytics",
+        "crm_unchanged": true
+      }
+    ],
+    "decisions": [
+      {
+        "intent": "show_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "overdue",
+        "destination": "leads",
+        "navigate": true
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "record",
+        "navigate": true
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "note",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "leads",
+        "navigate": false
+      },
+      {
+        "intent": "show_crm_data",
+        "query": "overdue_leads",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "leads",
+        "navigate": true
+      },
+      {
+        "intent": "unsupported_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "analytics",
+        "navigate": true
+      },
+      {
+        "intent": "clarify",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      }
+    ],
+    "verifications": [
+      {
+        "destination": "record",
+        "model_reported_success": null,
+        "goal_matches": true
+      },
+      {
+        "destination": "record",
+        "model_reported_success": null,
+        "goal_matches": true
+      },
+      {
+        "destination": "record",
+        "model_reported_success": true,
+        "goal_matches": true
+      }
+    ],
+    "provider_completions": [
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1302,
+          "completion_tokens": 95,
+          "total_tokens": 1397
+        },
+        "duration_seconds": 0.632,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1194,
+          "completion_tokens": 40,
+          "total_tokens": 1234
+        },
+        "action": "click_control",
+        "duration_seconds": 1.858,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1204,
+          "completion_tokens": 53,
+          "total_tokens": 1257
+        },
+        "action": "click_control",
+        "duration_seconds": 0.418,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1322,
+          "completion_tokens": 101,
+          "total_tokens": 1423
+        },
+        "action": "choose_option",
+        "duration_seconds": 1.212,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1359,
+          "completion_tokens": 79,
+          "total_tokens": 1438
+        },
+        "action": "choose_option",
+        "duration_seconds": 0.356,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1425,
+          "completion_tokens": 68,
+          "total_tokens": 1493
+        },
+        "action": "click_control",
+        "duration_seconds": 0.636,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1520,
+          "completion_tokens": 114,
+          "total_tokens": 1634
+        },
+        "action": "done",
+        "duration_seconds": 0.568,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1348,
+          "completion_tokens": 141,
+          "total_tokens": 1489
+        },
+        "duration_seconds": 1.175,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1098,
+          "completion_tokens": 49,
+          "total_tokens": 1147
+        },
+        "action": "fill_field",
+        "duration_seconds": 0.391,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1167,
+          "completion_tokens": 37,
+          "total_tokens": 1204
+        },
+        "action": "click_control",
+        "duration_seconds": 0.39,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1293,
+          "completion_tokens": 55,
+          "total_tokens": 1348
+        },
+        "action": "click_control",
+        "duration_seconds": 1.18,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1330,
+          "completion_tokens": 67,
+          "total_tokens": 1397
+        },
+        "action": "done",
+        "duration_seconds": 0.529,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1396,
+          "completion_tokens": 254,
+          "total_tokens": 1650
+        },
+        "duration_seconds": 0.54,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1080,
+          "completion_tokens": 96,
+          "total_tokens": 1176
+        },
+        "action": "fill_field",
+        "duration_seconds": 1.004,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1173,
+          "completion_tokens": 119,
+          "total_tokens": 1292
+        },
+        "action": "fill_field",
+        "duration_seconds": 3.475,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1224,
+          "completion_tokens": 73,
+          "total_tokens": 1297
+        },
+        "action": "done",
+        "duration_seconds": 0.387,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1439,
+          "completion_tokens": 219,
+          "total_tokens": 1658
+        },
+        "duration_seconds": 1.213,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1478,
+          "completion_tokens": 216,
+          "total_tokens": 1694
+        },
+        "duration_seconds": 0.753,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1476,
+          "completion_tokens": 192,
+          "total_tokens": 1668
+        },
+        "duration_seconds": 0.589,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1475,
+          "completion_tokens": 152,
+          "total_tokens": 1627
+        },
+        "duration_seconds": 0.39,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1483,
+          "completion_tokens": 161,
+          "total_tokens": 1644
+        },
+        "duration_seconds": 0.702,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1080,
+          "completion_tokens": 63,
+          "total_tokens": 1143
+        },
+        "action": "click_control",
+        "duration_seconds": 0.559,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1208,
+          "completion_tokens": 71,
+          "total_tokens": 1279
+        },
+        "action": "choose_option",
+        "duration_seconds": 0.659,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1245,
+          "completion_tokens": 53,
+          "total_tokens": 1298
+        },
+        "action": "choose_option",
+        "duration_seconds": 0.379,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1284,
+          "completion_tokens": 82,
+          "total_tokens": 1366
+        },
+        "action": "fill_field",
+        "duration_seconds": 0.526,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1361,
+          "completion_tokens": 63,
+          "total_tokens": 1424
+        },
+        "action": "choose_option",
+        "duration_seconds": 0.369,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1401,
+          "completion_tokens": 37,
+          "total_tokens": 1438
+        },
+        "action": "click_control",
+        "duration_seconds": 0.476,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1488,
+          "completion_tokens": 147,
+          "total_tokens": 1635
+        },
+        "duration_seconds": 0.584,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1486,
+          "completion_tokens": 145,
+          "total_tokens": 1631
+        },
+        "duration_seconds": 0.556,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1096,
+          "completion_tokens": 40,
+          "total_tokens": 1136
+        },
+        "action": "click_control",
+        "duration_seconds": 1.375,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1184,
+          "completion_tokens": 59,
+          "total_tokens": 1243
+        },
+        "action": "done",
+        "duration_seconds": 0.554,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1485,
+          "completion_tokens": 139,
+          "total_tokens": 1624
+        },
+        "duration_seconds": 0.525,
+        "surface": "completion.copilot"
+      }
+    ],
+    "provider_failures": [],
+    "paid_cost": "not measured",
+    "human_development_hours": "not measured",
+    "separate_user_submit": "PASS: simulated user approval saved only a note",
+    "abc_elapsed_seconds": 127.276,
+    "finished_at": "2026-10-20T20:23:15Z",
+    "csp_violations": 0,
+    "diagnostic": {
+      "failure": null,
+      "proxyError": null,
+      "status": "completed"
+    }
+  },
+  "before_batching_usage_sum": {
+    "prompt_tokens": 42104,
+    "completion_tokens": 3280,
+    "total_tokens": 45384
+  },
+  "earlier_unsuccessful_runs": [
+    {
+      "assessment": "Correct verified data, but classified Find as read-only and did not navigate; acceptance failed.",
+      "evidence": {
+        "started_at": "2026-10-20T20:00:06Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1213,
+              "completion_tokens": 130,
+              "total_tokens": 1343
+            },
+            "duration_seconds": 0.663,
+            "surface": "completion.copilot"
+          }
+        ],
+        "provider_failures": [],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:00:32Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "proxyError": null,
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "assessment": "Repeated read-versus-navigation ambiguity; corrected with one authoritative show_crm_data intent instead of an independent boolean decision.",
+      "evidence": {
+        "started_at": "2026-10-20T20:01:07Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1236,
+              "completion_tokens": 141,
+              "total_tokens": 1377
+            },
+            "duration_seconds": 0.705,
+            "surface": "completion.copilot"
+          }
+        ],
+        "provider_failures": [],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:01:34Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "proxyError": null,
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "assessment": "Native tool generation failed with actual HTTP 400/tool_use_failed after navigation/filter selection. Exact failed argument body was not retained. Canonical function schema was narrowed and strict mode verified.",
+      "evidence": {
+        "started_at": "2026-10-20T20:04:43Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "decisions": [
+          {
+            "intent": "show_crm_data",
+            "query": "overdue_leads",
+            "audience": "mine",
+            "status": "any",
+            "period": "overdue",
+            "destination": "leads",
+            "navigate": true
+          }
+        ],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1302,
+              "completion_tokens": 103,
+              "total_tokens": 1405
+            },
+            "duration_seconds": 0.344,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1206,
+              "completion_tokens": 36,
+              "total_tokens": 1242
+            },
+            "action": "click_control",
+            "duration_seconds": 0.259,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1216,
+              "completion_tokens": 134,
+              "total_tokens": 1350
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.514,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1260,
+              "completion_tokens": 130,
+              "total_tokens": 1390
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.373,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "provider_failures": [
+          {
+            "status": 400,
+            "code": "tool_use_failed"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:04:52Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "proxyError": "tool_call_failed",
+          "status": "failed"
+        }
+      }
+    },
+    {
+      "assessment": "Overdue scenario passed; Atlas page opened but outcome verification rejected it. Exact rejected field was not captured; final verification now checks authorized state independently from model done.success and still blocks execution errors.",
+      "evidence": {
+        "started_at": "2026-10-20T20:06:55Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Find my overdue leads.",
+            "expected": "overdue",
+            "result": "PASS",
+            "elapsed_seconds": 51.113,
+            "provider_completions": 6,
+            "path": "/leads",
+            "crm_unchanged": true
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "show_crm_data",
+            "query": "overdue_leads",
+            "audience": "mine",
+            "status": "any",
+            "period": "overdue",
+            "destination": "leads",
+            "navigate": true
+          },
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "record",
+            "navigate": true
+          }
+        ],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1302,
+              "completion_tokens": 119,
+              "total_tokens": 1421
+            },
+            "duration_seconds": 1.302,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1199,
+              "completion_tokens": 37,
+              "total_tokens": 1236
+            },
+            "action": "click_control",
+            "duration_seconds": 0.42,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1209,
+              "completion_tokens": 74,
+              "total_tokens": 1283
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.687,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1246,
+              "completion_tokens": 56,
+              "total_tokens": 1302
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.531,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1286,
+              "completion_tokens": 54,
+              "total_tokens": 1340
+            },
+            "action": "click_control",
+            "duration_seconds": 0.596,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1426,
+              "completion_tokens": 76,
+              "total_tokens": 1502
+            },
+            "action": "done",
+            "duration_seconds": 0.467,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1348,
+              "completion_tokens": 186,
+              "total_tokens": 1534
+            },
+            "duration_seconds": 0.439,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1095,
+              "completion_tokens": 48,
+              "total_tokens": 1143
+            },
+            "action": "click_control",
+            "duration_seconds": 0.616,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1163,
+              "completion_tokens": 315,
+              "total_tokens": 1478
+            },
+            "action": "done",
+            "duration_seconds": 0.629,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "provider_failures": [],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:08:55Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "proxyError": null,
+          "status": "failed"
+        }
+      }
+    },
+    {
+      "assessment": "Owner filter applied, overdue selected but not submitted before done. Correctly rejected. Added server-held goal checks that withhold done until actual applied filters match.",
+      "evidence": {
+        "started_at": "2026-10-20T20:12:30Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "decisions": [
+          {
+            "intent": "show_crm_data",
+            "query": "overdue_leads",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "leads",
+            "navigate": true
+          }
+        ],
+        "verifications": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1302,
+              "completion_tokens": 101,
+              "total_tokens": 1403
+            },
+            "duration_seconds": 0.893,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1199,
+              "completion_tokens": 36,
+              "total_tokens": 1235
+            },
+            "action": "click_control",
+            "duration_seconds": 0.469,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1209,
+              "completion_tokens": 84,
+              "total_tokens": 1293
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.533,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1246,
+              "completion_tokens": 80,
+              "total_tokens": 1326
+            },
+            "action": "click_control",
+            "duration_seconds": 0.499,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1348,
+              "completion_tokens": 66,
+              "total_tokens": 1414
+            },
+            "action": "choose_option",
+            "duration_seconds": 0.602,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1414,
+              "completion_tokens": 79,
+              "total_tokens": 1493
+            },
+            "action": "done",
+            "duration_seconds": 1.788,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "provider_failures": [],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:12:44Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "proxyError": null,
+          "status": "failed"
+        }
+      }
+    },
+    {
+      "assessment": "First batched run rejected an invalid provider completion after initial navigation. Exact shape/finish reason was not captured then; subsequent diagnostics record only enums/counts/usage and the final run passed.",
+      "evidence": {
+        "started_at": "2026-10-20T20:30:01Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "decisions": [
+          {
+            "intent": "show_crm_data",
+            "query": "overdue_leads",
+            "audience": "mine",
+            "status": "any",
+            "period": "overdue",
+            "destination": "leads",
+            "navigate": true
+          }
+        ],
+        "verifications": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1327,
+              "completion_tokens": 78,
+              "total_tokens": 1405
+            },
+            "duration_seconds": 0.318,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1284,
+              "completion_tokens": 41,
+              "total_tokens": 1325
+            },
+            "action": "click_control",
+            "duration_seconds": 0.352,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "provider_failures": [],
+        "paid_cost": "not measured",
+        "human_development_hours": "not measured",
+        "finished_at": "2026-10-20T20:30:09Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "proxyError": "invalid_response",
+          "status": "failed"
+        }
+      }
+    }
+  ],
+  "performance": {
+    "equivalent_tasks": [
+      "Find my overdue leads.",
+      "Open Atlas Industries.",
+      "Prepare a follow-up note for this customer."
+    ],
+    "before_batching_abc_seconds": 127.276,
+    "after_batching_abc_seconds": 64.443,
+    "before_batching_all_scenarios_calls": 32,
+    "after_batching_all_scenarios_calls": 20,
+    "conditions": "Fictional equivalent scenarios; provider budgets/cache state differed. ABC includes separate simulated user Save action. Historical Phase 2 timestamps span about 268 seconds and also include fixture/login setup.",
+    "per_scenario_seconds": {
+      "overdue0": 5.317,
+      "record1": 51.291,
+      "note2": 7.419,
+      "help3": 1.057,
+      "help4": 49.974,
+      "help5": 1.264,
+      "facts6": 1.061,
+      "empty7": 3.917,
+      "refusal8": 44.003,
+      "analytics9": 4.48,
+      "clarify10": 1.008
+    }
+  },
+  "post_live_change": "Only malformed-provider diagnostic parsing was hardened afterward; a new regression and the full final suite passed. Valid execution paths were unchanged.",
+  "privacy": "No raw provider prompts/responses or customer history retained in reports. Scenario names/records are fictional. Numeric usage/latency, intent enums and verification booleans only.",
+  "separate_save": "Capybara simulates a distinct user Save action after the agent completes; only a note is recorded. This is not observed real customer approval.",
+  "human_hours": "not measured",
+  "coding_agent_tokens": "not measured",
+  "paid_cost": "not measured",
+  "usage_scope": "Named runs only; not total project/account usage. Small diagnostic batches also called real Groq without persisted usage totals. Some early rejected completions lack usage metadata.",
+  "docker_build": "not verified; Linux daemon unavailable",
+  "limitations": [
+    "Quota waits reached roughly 50 seconds even on ordinary questions. One cancellable retry only; daily/long waits need user retry.",
+    "Model interpretation/explanations can be wrong; counts/rows/dates are server-derived for the interpreted query.",
+    "Conversation/pacing/limits are process-local and need shared storage for multiple workers/instances.",
+    "Best-effort masking does not provide perfect anonymity. Titles/search/task text may contain sensitive information.",
+    "Unsaved form state is browser-observed; the server cannot independently inspect it. No agent submission exists.",
+    "Six-step/one-goal browser tasks, bounded lists and no extension or unrestricted SQL/JS tools."
+  ],
+  "screenshots": [
+    "phase21-overdue-2026-10-20.png",
+    "phase21-conversation-2026-10-20.png"
+  ],
+  "modified_since_phase21_start": [
+    "AGENT.md",
+    "CHALLENGE_LOG.md",
+    "README.md",
+    "app/assets/stylesheets/page_agent.css",
+    "app/controllers/page_agent/completions_controller.rb",
+    "app/controllers/tasks_controller.rb",
+    "app/javascript/controllers/page_agent_controller.js",
+    "app/javascript/page_agent/entry.js",
+    "app/javascript/page_agent/safe_dom.js",
+    "app/services/page_agent/error.rb",
+    "app/services/page_agent/groq_client.rb",
+    "app/services/page_agent/protocol.rb",
+    "app/services/page_agent/request_gate.rb",
+    "app/views/page_agent/_panel.html.erb",
+    "app/views/tasks/index.html.erb",
+    "config/initializers/filter_parameter_logging.rb",
+    "config/routes.rb",
+    "docs/PAGE_AGENT_PHASE2_TR.md",
+    "script/verify_page_agent.rb",
+    "test/integration/page_agent_test.rb",
+    "test/models/page_agent_test.rb",
+    "test/support/page_agent_test_support.rb",
+    "test/system/page_agent_test.rb"
+  ],
+  "created_since_phase21_start": [
+    "app/controllers/copilot/messages_controller.rb",
+    "app/services/copilot/assistant.rb",
+    "app/services/copilot/conversation.rb",
+    "app/services/copilot/crm_reader.rb",
+    "app/services/copilot/outcome.rb",
+    "app/services/copilot/planner.rb",
+    "app/services/page_agent/pacing.rb",
+    "docs/COPILOT_PHASE21_TR.md",
+    "docs/evidence/phase21-conversation-2026-10-20.png",
+    "docs/evidence/phase21-copilot-2026-10-20.json",
+    "docs/evidence/phase21-overdue-2026-10-20.png",
+    "script/verify_copilot.rb",
+    "test/integration/copilot_test.rb",
+    "test/models/copilot_test.rb",
+    "test/system/copilot_test.rb"
+  ]
+}

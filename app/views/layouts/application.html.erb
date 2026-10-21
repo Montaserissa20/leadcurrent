@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %><%= csp_meta_tag %>
   <% if controller_name.in?(%w[settings passwords]) %><meta name="turbo-cache-control" content="no-cache"><% end %>
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <%= stylesheet_link_tag "application", "pro", "ai", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "pro", "ai", "page_agent", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 </head>
 <body>
@@ -23,7 +23,7 @@
     <p class="nav-heading">WORKSPACE</p>
     <nav aria-label="Main navigation">
       <% [["◫", "Overview", root_path], ["↗", "Leads", leads_path], ["◇", "Opportunities", opportunities_path], ["▥", "Pipeline", pipeline_path], ["◴", "Analytics", analytics_path], ["✓", "Tasks", tasks_path], ["◷", "Activity", activity_path]].each do |icon, label, url| %>
-        <%= link_to url, class: "nav-link #{'active' if request.path == url}" do %><span aria-hidden="true"><%= icon %></span><%= label %><% end %>
+        <%= link_to url, class: "nav-link #{'active' if request.path == url}", aria: { label: label } do %><span aria-hidden="true"><%= icon %></span><%= label %><% end %>
       <% end %>
     </nav>
     <div class="sidebar-note"><span class="live-dot"></span>Every relationship counts.<p>Keep your next move in sight.</p></div>
@@ -34,6 +34,7 @@
     <header class="topbar"><div class="topbar-start"><button type="button" class="icon-button mobile-menu" data-action="appearance#toggleMenu" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button><span class="breadcrumb">Workspace <span>/</span> <strong><%= content_for(:page_title).presence || 'Overview' %></strong></span></div><div class="topbar-end"><span class="today"><%= Date.current.strftime('%a, %d %b') %></span><button type="button" class="icon-button" data-action="appearance#toggleTheme" aria-label="Toggle color theme">◐</button><%= link_to "+ New lead", new_lead_path, class: "button small" %></div></header>
     <main id="main-content"><%= render "shared/flash" %><%= yield %></main>
   </div>
+  <%= render "page_agent/panel" if page_agent_available? %>
 <% else %>
   <main class="auth-shell"><%= render "shared/flash" %><%= yield %></main>
 <% end %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post "copilot/messages", to: "copilot/messages#create"
+  post "copilot/outcome", to: "copilot/messages#outcome"
+  post "agent/chat/completions", to: "page_agent/completions#create"
   root "dashboard#index"
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"

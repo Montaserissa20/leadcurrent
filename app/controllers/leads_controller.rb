@@ -2,7 +2,8 @@ class LeadsController < ApplicationController
   def index
     records = filter_records(scope(Lead))
     records = records.overdue.where.not(status: %w[converted disqualified]) if params[:attention] == "overdue"
-    @leads = records.includes(:company, :contact, :owner).order(updated_at: :desc).limit(100)
+    ordering = params[:attention] == "overdue" ? { first_contact_deadline: :asc, id: :asc } : { updated_at: :desc }
+    @leads = records.includes(:company, :contact, :owner).order(ordering).limit(100)
   end
   def show
     @lead = scope(Lead).find(params[:id])

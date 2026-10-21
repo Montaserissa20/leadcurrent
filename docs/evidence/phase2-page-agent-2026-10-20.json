@@ -1,0 +1,911 @@
+{
+  "date": "2026-10-20",
+  "baseline_commit": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+  "branch": "phase2/page-agent",
+  "phase2_committed": false,
+  "github_push": false,
+  "railway_deployed": false,
+  "remote_phase2_ci": "not run: local-only boundary",
+  "packages": {
+    "@page-agent/core": "1.12.4",
+    "@page-agent/page-controller": "1.12.4",
+    "zod": "4.5.1",
+    "esbuild": "0.25.12"
+  },
+  "baseline_tests": {
+    "rails": {
+      "tests": 89,
+      "assertions": 1301,
+      "seed": 2543
+    },
+    "system": {
+      "tests": 11,
+      "assertions": 150,
+      "seed": 13594
+    },
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "final_checks": {
+    "result": "PASS",
+    "rails": {
+      "tests": 104,
+      "assertions": 1526,
+      "seed": 40814,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "system": {
+      "tests": 17,
+      "assertions": 250,
+      "seed": 13495,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "live": {
+      "tests": 1,
+      "assertions": 34,
+      "seed": 17208,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "zeitwerk": "PASS",
+    "production_assets": "PASS; dummy production secret, no database operations; local manifest removed afterward",
+    "brakeman": {
+      "version": "8.1.0",
+      "warnings": 0,
+      "errors": 0,
+      "windows_fallback_diagnostics": true
+    },
+    "npm_audit": {
+      "vulnerabilities": 0,
+      "scope": "all locked dependencies including dev/build"
+    },
+    "source_review": {
+      "result": "PASS",
+      "source_files": 253,
+      "exact_real_local_key_scan": [
+        "reviewable Git source including untracked nonignored files",
+        "app/assets/builds/page_agent.js",
+        "log/test.log"
+      ],
+      "phase1_log_preserved": true,
+      "phase2_prompt_preserved": true,
+      "protected_domain_models_database_csp_unchanged": true,
+      "branch_and_baseline_checked": true
+    },
+    "gitleaks": {
+      "version": "8.30.1",
+      "scope": "snapshot of tracked and nonignored untracked source; ignored local data never copied",
+      "raw_exit_code": 1,
+      "raw_findings": 2,
+      "new_findings": 0,
+      "reviewed_unchanged_false_positives": [
+        {
+          "file": "docs/VERIFICATION_TR.md",
+          "line": 39,
+          "reason": "public Git commit identifier"
+        },
+        {
+          "file": "test/integration/authentication_test.rb",
+          "line": 46,
+          "reason": "synthetic integration-test password"
+        }
+      ]
+    },
+    "documentation": {
+      "markdown_files": 26,
+      "local_links": 248,
+      "tables": 36,
+      "protected_files_unchanged": 20,
+      "ignore_checks": 16,
+      "local_master_key_unchanged": true,
+      "errors": 0
+    }
+  },
+  "real_named_tool_compatibility": {
+    "started_at": "2026-10-20T14:24:28Z",
+    "model": "openai/gpt-oss-20b",
+    "mocked": false,
+    "result": "PASS",
+    "content_logged": false,
+    "named_function": "AgentOutput",
+    "usage": {
+      "prompt_tokens": 592,
+      "completion_tokens": 40,
+      "total_tokens": 632
+    },
+    "finished_at": "2026-10-20T14:24:29Z"
+  },
+  "final_real_browser": {
+    "started_at": "2026-10-20T14:52:48Z",
+    "mocked": false,
+    "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+    "result": "PASS",
+    "scenarios": [
+      {
+        "task": "Find my overdue leads.",
+        "result": "PASS",
+        "page_path": "/leads",
+        "executed_steps": 6,
+        "activity": [
+          "click_control: Leads — Clicked Leads. Page is now /leads. No CRM data submitted.",
+          "choose_option: Owner — Selected Owner = Me. Apply Filter next.",
+          "choose_option: First contact — Selected First contact = Overdue. Apply Filter next.",
+          "choose_option: Owner — Selected Owner = Me. Apply Filter next.",
+          "click_control: Filter — Clicked Filter. Page is now /leads?q=&status=&owner_id=2586&attention=overdue&commit=Filter. No CRM data submitted.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true,
+        "own_records_filtered": true
+      },
+      {
+        "task": "Open Atlas Industries.",
+        "result": "PASS",
+        "page_path": "/leads/3785",
+        "executed_steps": 2,
+        "activity": [
+          "click_control: Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h — Clicked Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h. Page is now /leads/3785. No CRM data submitted.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true,
+        "own_records_filtered": null
+      },
+      {
+        "task": "Prepare a follow-up note for this customer.",
+        "result": "PASS",
+        "page_path": "/leads/3785",
+        "executed_steps": 3,
+        "activity": [
+          "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+          "fill_field: Prepare an unsaved follow-up note; user must manually Save action — An unsaved note is already present and was not overwritten. Finish with done; the user must review it.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true,
+        "own_records_filtered": null
+      }
+    ],
+    "provider_completions": [
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1158,
+          "completion_tokens": 68,
+          "total_tokens": 1226
+        },
+        "action": "click_control"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1166,
+          "completion_tokens": 73,
+          "total_tokens": 1239
+        },
+        "action": "choose_option"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1210,
+          "completion_tokens": 80,
+          "total_tokens": 1290
+        },
+        "action": "choose_option"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1257,
+          "completion_tokens": 41,
+          "total_tokens": 1298
+        },
+        "action": "choose_option"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1321,
+          "completion_tokens": 81,
+          "total_tokens": 1402
+        },
+        "action": "click_control"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1446,
+          "completion_tokens": 57,
+          "total_tokens": 1503
+        },
+        "action": "done"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1098,
+          "completion_tokens": 45,
+          "total_tokens": 1143
+        },
+        "action": "click_control"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1166,
+          "completion_tokens": 57,
+          "total_tokens": 1223
+        },
+        "action": "done"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1035,
+          "completion_tokens": 45,
+          "total_tokens": 1080
+        },
+        "action": "fill_field"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1123,
+          "completion_tokens": 97,
+          "total_tokens": 1220
+        },
+        "action": "fill_field"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1185,
+          "completion_tokens": 64,
+          "total_tokens": 1249
+        },
+        "action": "done"
+      }
+    ],
+    "human_effort": "not measured",
+    "coding_agent_tokens": "not measured",
+    "paid_cost": "not measured",
+    "separate_user_submit": "PASS: note only; no first contact or task",
+    "finished_at": "2026-10-20T14:57:16Z",
+    "navigation": [
+      {
+        "attention": null,
+        "path": "/leads"
+      },
+      {
+        "attention": "overdue",
+        "path": "/leads"
+      },
+      {
+        "attention": null,
+        "path": "/leads/3785"
+      },
+      {
+        "attention": null,
+        "path": "/leads/3785"
+      }
+    ],
+    "csp_violations": 0,
+    "diagnostic": {
+      "failureCode": null,
+      "lastAttempt": {
+        "targetPresent": false,
+        "targetType": null,
+        "tool": "done"
+      },
+      "proxyErrorCode": null
+    }
+  },
+  "final_browser_usage_sum": {
+    "prompt_tokens": 13165,
+    "completion_tokens": 708,
+    "total_tokens": 13873
+  },
+  "earlier_single_user_browser_pass": {
+    "started_at": "2026-10-20T14:40:20Z",
+    "mocked": false,
+    "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+    "result": "PASS",
+    "scenarios": [
+      {
+        "task": "Find my overdue leads.",
+        "result": "PASS",
+        "page_path": "/leads",
+        "executed_steps": 2,
+        "activity": [
+          "click_control: Overdue contacts1First-contact attention — Clicked Overdue contacts1First-contact attention. Page is now /leads?attention=overdue. No CRM data submitted.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true
+      },
+      {
+        "task": "Open Atlas Industries.",
+        "result": "PASS",
+        "page_path": "/leads/3594",
+        "executed_steps": 2,
+        "activity": [
+          "click_control: Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h — Clicked Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h. Page is now /leads/3594. No CRM data submitted.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true
+      },
+      {
+        "task": "Prepare a follow-up note for this customer.",
+        "result": "PASS",
+        "page_path": "/leads/3594",
+        "executed_steps": 3,
+        "activity": [
+          "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+          "fill_field: Prepare an unsaved follow-up note; user must manually Save action — An unsaved note is already present and was not overwritten. Finish with done; the user must review it.",
+          "done — Task completed"
+        ],
+        "crm_unchanged": true
+      }
+    ],
+    "provider_completions": [
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1049,
+          "completion_tokens": 82,
+          "total_tokens": 1131
+        },
+        "action": "click_control"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1065,
+          "completion_tokens": 119,
+          "total_tokens": 1184
+        },
+        "action": "done"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 957,
+          "completion_tokens": 50,
+          "total_tokens": 1007
+        },
+        "action": "click_control"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1052,
+          "completion_tokens": 64,
+          "total_tokens": 1116
+        },
+        "action": "done"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 934,
+          "completion_tokens": 78,
+          "total_tokens": 1012
+        },
+        "action": "fill_field"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1029,
+          "completion_tokens": 75,
+          "total_tokens": 1104
+        },
+        "action": "fill_field"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1080,
+          "completion_tokens": 87,
+          "total_tokens": 1167
+        },
+        "action": "done"
+      }
+    ],
+    "human_effort": "not measured",
+    "coding_agent_tokens": "not measured",
+    "paid_cost": "not measured",
+    "separate_user_submit": "PASS: note only; no first contact or task",
+    "finished_at": "2026-10-20T14:43:04Z",
+    "navigation": [
+      {
+        "attention": "overdue",
+        "path": "/leads"
+      },
+      {
+        "attention": null,
+        "path": "/leads/3594"
+      },
+      {
+        "attention": null,
+        "path": "/leads/3594"
+      }
+    ],
+    "csp_violations": 0,
+    "diagnostic": {
+      "failureCode": null,
+      "lastAttempt": {
+        "targetPresent": false,
+        "targetType": null,
+        "tool": "done"
+      },
+      "proxyErrorCode": null
+    }
+  },
+  "earlier_unsuccessful_attempts": [
+    {
+      "attempt": 1,
+      "assessment": "Scenario A opened a record instead of leaving the overdue list visible. Clarified find/show versus explicit open intent.",
+      "evidence": {
+        "started_at": "2026-10-20T14:24:53Z",
+        "mocked": false,
+        "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+        "result": "FAIL",
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1030,
+              "completion_tokens": 43,
+              "total_tokens": 1073
+            }
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1012,
+              "completion_tokens": 94,
+              "total_tokens": 1106
+            }
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1065,
+              "completion_tokens": 79,
+              "total_tokens": 1144
+            }
+          }
+        ],
+        "human_effort": "not measured",
+        "coding_agent_tokens": "not measured",
+        "paid_cost": "not measured",
+        "finished_at": "2026-10-20T14:26:12Z"
+      }
+    },
+    {
+      "attempt": 2,
+      "assessment": "Agent failed after applying the overdue filter; exact cause was not captured. Do not infer a provider error code.",
+      "evidence": {
+        "started_at": "2026-10-20T14:27:30Z",
+        "mocked": false,
+        "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+        "result": "FAIL",
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1049,
+              "completion_tokens": 55,
+              "total_tokens": 1104
+            }
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1031,
+              "completion_tokens": 81,
+              "total_tokens": 1112
+            }
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1069,
+              "completion_tokens": 78,
+              "total_tokens": 1147
+            }
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1163,
+              "completion_tokens": 77,
+              "total_tokens": 1240
+            }
+          }
+        ],
+        "human_effort": "not measured",
+        "coding_agent_tokens": "not measured",
+        "paid_cost": "not measured",
+        "finished_at": "2026-10-20T14:28:54Z",
+        "navigation": [
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          },
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          }
+        ],
+        "csp_violations": 0
+      }
+    },
+    {
+      "attempt": 3,
+      "assessment": "One completion followed by a safe model/protocol-unavailable error. Exact provider HTTP status/code was not captured.",
+      "evidence": {
+        "started_at": "2026-10-20T14:30:55Z",
+        "mocked": false,
+        "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+        "result": "FAIL",
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1049,
+              "completion_tokens": 52,
+              "total_tokens": 1101
+            },
+            "action": "click_control"
+          }
+        ],
+        "human_effort": "not measured",
+        "coding_agent_tokens": "not measured",
+        "paid_cost": "not measured",
+        "finished_at": "2026-10-20T14:31:27Z",
+        "navigation": [
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          }
+        ],
+        "csp_violations": 0,
+        "diagnostic": null
+      }
+    },
+    {
+      "attempt": 4,
+      "assessment": "All three agent tasks passed; overall test failed at the separate user-save assertion because an ActiveRecord association was cached. Reloading the record fixed the verification; note preparation was also made idempotent.",
+      "evidence": {
+        "started_at": "2026-10-20T14:34:36Z",
+        "mocked": false,
+        "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+        "result": "FAIL",
+        "scenarios": [
+          {
+            "task": "Find my overdue leads.",
+            "result": "PASS",
+            "page_path": "/leads",
+            "executed_steps": 2,
+            "activity": [
+              "click_control: Overdue contacts1First-contact attention — Clicked Overdue contacts1First-contact attention. Page is now /leads?attention=overdue. No CRM data submitted.",
+              "done — Task completed"
+            ],
+            "crm_unchanged": true
+          },
+          {
+            "task": "Open Atlas Industries.",
+            "result": "PASS",
+            "page_path": "/leads/3593",
+            "executed_steps": 2,
+            "activity": [
+              "click_control: Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h — Clicked Open Fictional Atlas 40-seat subscription at Atlas Industries; New; Overdue by 4.0h. Page is now /leads/3593. No CRM data submitted.",
+              "done — Task completed"
+            ],
+            "crm_unchanged": true
+          },
+          {
+            "task": "Prepare a follow-up note for this customer.",
+            "result": "PASS",
+            "page_path": "/leads/3593",
+            "executed_steps": 5,
+            "activity": [
+              "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+              "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+              "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+              "fill_field: Prepare an unsaved follow-up note; user must manually Save action — UNSAVED note prepared. No contact or task recorded. The user must review and manually click Save action.",
+              "done — Task completed"
+            ],
+            "crm_unchanged": true
+          }
+        ],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1049,
+              "completion_tokens": 45,
+              "total_tokens": 1094
+            },
+            "action": "click_control"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1062,
+              "completion_tokens": 141,
+              "total_tokens": 1203
+            },
+            "action": "done"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 957,
+              "completion_tokens": 39,
+              "total_tokens": 996
+            },
+            "action": "click_control"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1048,
+              "completion_tokens": 87,
+              "total_tokens": 1135
+            },
+            "action": "done"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 930,
+              "completion_tokens": 80,
+              "total_tokens": 1010
+            },
+            "action": "fill_field"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1004,
+              "completion_tokens": 69,
+              "total_tokens": 1073
+            },
+            "action": "fill_field"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1054,
+              "completion_tokens": 64,
+              "total_tokens": 1118
+            },
+            "action": "fill_field"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1104,
+              "completion_tokens": 85,
+              "total_tokens": 1189
+            },
+            "action": "fill_field"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1188,
+              "completion_tokens": 57,
+              "total_tokens": 1245
+            },
+            "action": "done"
+          }
+        ],
+        "human_effort": "not measured",
+        "coding_agent_tokens": "not measured",
+        "paid_cost": "not measured",
+        "finished_at": "2026-10-20T14:38:10Z",
+        "navigation": [
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          },
+          {
+            "attention": null,
+            "path": "/leads/3593"
+          },
+          {
+            "attention": null,
+            "path": "/leads/3593"
+          }
+        ],
+        "csp_violations": 0,
+        "diagnostic": {
+          "failureCode": null,
+          "lastAttempt": {
+            "targetPresent": false,
+            "targetType": null,
+            "tool": "done"
+          },
+          "proxyErrorCode": null
+        }
+      }
+    },
+    {
+      "attempt": 6,
+      "assessment": "Multi-user scenario selected Me/Overdue correctly but repeated GET filtering and reached the six-step cap before done. Added applied URL feedback and policy to group filters and finish immediately.",
+      "evidence": {
+        "started_at": "2026-10-20T14:47:24Z",
+        "mocked": false,
+        "environment": "local test PostgreSQL + real Groq + official Page Agent + browser",
+        "result": "FAIL",
+        "scenarios": [],
+        "provider_completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1107,
+              "completion_tokens": 68,
+              "total_tokens": 1175
+            },
+            "action": "click_control"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1112,
+              "completion_tokens": 117,
+              "total_tokens": 1229
+            },
+            "action": "choose_option"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1157,
+              "completion_tokens": 71,
+              "total_tokens": 1228
+            },
+            "action": "click_control"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1256,
+              "completion_tokens": 77,
+              "total_tokens": 1333
+            },
+            "action": "choose_option"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1327,
+              "completion_tokens": 88,
+              "total_tokens": 1415
+            },
+            "action": "click_control"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1447,
+              "completion_tokens": 46,
+              "total_tokens": 1493
+            },
+            "action": "click_control"
+          }
+        ],
+        "human_effort": "not measured",
+        "coding_agent_tokens": "not measured",
+        "paid_cost": "not measured",
+        "finished_at": "2026-10-20T14:49:39Z",
+        "navigation": [
+          {
+            "attention": null,
+            "path": "/leads"
+          },
+          {
+            "attention": "",
+            "path": "/leads"
+          },
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          },
+          {
+            "attention": "overdue",
+            "path": "/leads"
+          }
+        ],
+        "csp_violations": 0,
+        "diagnostic": {
+          "failureCode": "execution_error",
+          "lastAttempt": {
+            "targetPresent": true,
+            "targetType": "filter",
+            "tool": "click_control"
+          },
+          "proxyErrorCode": null
+        }
+      }
+    }
+  ],
+  "separate_submission": "Capybara simulates the separate test-user Save action click after the agent has completed; it is not an agent tool and not an observed real customer approval.",
+  "data": "Fictional local test data, transactional rollback; no production customer data.",
+  "screenshot": "phase2-page-agent-2026-10-20.png",
+  "human_development_hours": "not measured",
+  "coding_agent_tokens": "not measured",
+  "paid_api_cost": "not measured",
+  "usage_scope": "Provider token counts belong only to the named runs; they are not the total development or billed usage.",
+  "docker_image_build": "not verified: Docker Linux daemon unavailable",
+  "limitations": [
+    "Six-step cap and 25-second pacing; probabilistic tools may repeat or fail.",
+    "Masking is best effort; record titles/search/task text can contain sensitive data.",
+    "Process-local quotas reset on restart and need a shared store before multiple workers/instances.",
+    "Provider rate limits/model availability may change; Stop cannot guarantee cancellation of an already-started server HTTP call.",
+    "No external AI-customer API, extension, arbitrary JavaScript or autonomous CRM writes."
+  ],
+  "changed_files": {
+    "modified": [
+      ".github/workflows/ci.yml",
+      ".gitignore",
+      "AGENT.md",
+      "CHALLENGE_LOG.md",
+      "Dockerfile",
+      "README.md",
+      "app/controllers/application_controller.rb",
+      "app/controllers/leads_controller.rb",
+      "app/views/layouts/application.html.erb",
+      "app/views/leads/index.html.erb",
+      "app/views/opportunities/index.html.erb",
+      "app/views/shared/_filters.html.erb",
+      "bin/render-build.sh",
+      "config/importmap.rb",
+      "config/initializers/filter_parameter_logging.rb",
+      "config/routes.rb"
+    ],
+    "created": [
+      "app/assets/builds/.keep",
+      "app/assets/stylesheets/page_agent.css",
+      "app/controllers/page_agent/completions_controller.rb",
+      "app/helpers/page_agent_helper.rb",
+      "app/javascript/controllers/page_agent_controller.js",
+      "app/javascript/page_agent/entry.js",
+      "app/javascript/page_agent/safe_dom.js",
+      "app/javascript/page_agent/zod_csp.js",
+      "app/services/page_agent/error.rb",
+      "app/services/page_agent/groq_client.rb",
+      "app/services/page_agent/protocol.rb",
+      "app/services/page_agent/request_gate.rb",
+      "app/views/page_agent/_panel.html.erb",
+      "docs/PAGE_AGENT_PHASE2_TR.md",
+      "docs/evidence/phase2-page-agent-2026-10-20.json",
+      "docs/evidence/phase2-page-agent-2026-10-20.png",
+      "package-lock.json",
+      "package.json",
+      "script/build_page_agent.mjs",
+      "script/verify_page_agent.rb",
+      "script/verify_page_agent_tool_call.rb",
+      "test/integration/page_agent_test.rb",
+      "test/models/page_agent_test.rb",
+      "test/support/page_agent_test_support.rb",
+      "test/system/page_agent_test.rb",
+      "vendor/licenses/browser-use-NOTICE.txt",
+      "vendor/licenses/chalk-LICENSE.txt",
+      "vendor/licenses/esbuild-LICENSE.txt",
+      "vendor/licenses/page-agent-LICENSE.txt",
+      "vendor/licenses/zod-LICENSE.txt"
+    ]
+  },
+  "post_live_change": "Added denial of form submission overrides/targets and legacy data-method links; final deterministic browser regressions exercise a Filter button changed to POST after observation. No further live provider calls after this defense."
+}

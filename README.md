@@ -33,6 +33,26 @@ Mevcut yerel PostgreSQL'in çalıştığından emin olun; AI için yeni migratio
 
 **20 Ekim üretim doğrulama:** [75209db özelliği](https://github.com/Montaserissa20/leadcurrent/commit/75209db1eb4a3935f9dab67d7f76d74abf847af6) için [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39413540929) ve Railway deployment kaydı success. Saat **14:16 Europe/Istanbul** gerçek public browser turunda **6/6 PASS**: login, kayıtlı kurgusal lead, dört AI kontrolü, bir gerçek Groq analizi (`openai/gpt-oss-20b`), değişmeyen lead durumu/deadline, mevcut lead-to-Won akışı ve mobil tema. `/up` 200 / database connected. [Tam teslim kaydı ve dosya listesi](docs/evidence/phase1-release-2026-10-20.json). Bu kanıtı ekleyen belge commit'inin CI/deployment durumu teslimde ayrıca sorgulanır.
 
+## Phase 2 — AI Agent (yerel dal)
+
+Gerçek `@page-agent/core@1.12.4` ile authenticated CRM'de **AI Agent** paneli eklendi. Groq tool calls gerçek DOM link/GET filtrelerini çalıştırır ve kaydedilmemiş not hazırlayabilir; kayıt/contact/stage/task submit edemez. Phase 1 client değişmedi. Önce `npm ci --ignore-scripts` ve `npm run build` gerekir (Node 22); ardından mevcut Rails/PostgreSQL sunucusunu çalıştırın. Paket build'i aynı origin'den Propshaft ile sunulur; CDN/demo model yoktur. [Türkçe Phase 2 mimari, güvenlik, test ve demo raporu](docs/PAGE_AGENT_PHASE2_TR.md).
+
+Bu çalışma `phase2/page-agent` dalındadır. Bu phase için **GitHub push / Railway deploy yapılmaz**; önceki Phase 1 üretim kanıtları Phase 2 dağıtımı anlamına gelmez. Gerçek ve mock doğrulama sonuçları [CHALLENGE_LOG.md](CHALLENGE_LOG.md) Phase 2 bölümünde ayrı kaydedilir. Normal testlerden önce npm build gerekir; gerçek demo ayrıca `LEADCURRENT_LIVE_AGENT=1`, server-only `GROQ_API_KEY` ve yerel test PostgreSQL kullanır. Tam kurulum ve A/B/C demo komutları yukarıdaki Türkçe rapordadır.
+
+Phase 2 başlangıç sürümünün yerel kanıtı: **121 test / 1,776 assertion**, gerçek çok kullanıcılı Groq A/B/C demosu **PASS** (11 completion, 13,873 ölçülmüş provider token). Owner=Me gerçekten uygulanır; not yalnız ayrı kullanıcı tıklamasıyla kaydedilir. [Gerçek yerel kanıt](docs/evidence/phase2-page-agent-2026-10-20.json). Önceki başarısız denemeler challenge kaydında korunur. Docker image build ve Phase 2 üretim dağıtımı doğrulanmış değildir.
+
+## Phase 2.1 — LeadCurrent AI Copilot (yerel)
+
+**21 Ekim Phase 2 finalizasyonu:** Copilot artık gerçek workspace ekip/rol sayılarını, lead toplamlarını/durumunu, müşteri kayıtlarını, para birimi ayrı pipeline özetini, hareketsiz fırsatları ve follow-up bağlamını dar Rails okuma araçlarıyla yanıtlar. “How many users are in my team?” PostgreSQL sayısını gösterir; online/active durumu uydurmaz. “How many of them are salespeople?” bağlamı korur. Resmî Page Agent, Safe Mode ve insan denetimindeki kayıtlar korunur. [Güncel teknik rapor, test kanıtı ve kısa Türkçe demo](docs/COPILOT_PHASE2_FINAL_TR.md). Yalnız yerel review commit/ZIP; GitHub push/Railway deploy yapılmaz.
+
+**Kabul sınırı:** son otomasyon **166 test / 2205 assertion PASS**. Gerçek senaryoların geliştirme sırasındaki geçişleri kayıtlıdır; son kesintisiz canlı kabul Groq günlük token kotası nedeniyle **BLOCKED (5/13)**. Üç ek team paraphrase canlıda koşulmadı. Bu review snapshot'ı Phase 2 tamamen doğrulandı veya deploy edildi anlamına gelmez; kota uygunken canlı kabul tekrar gerekir.
+
+AI Agent girişindeki panel artık konuşmalı **LeadCurrent AI Copilot**. Nasıl kullanılır/opportunity/pipeline sorularını gerçek Groq ile açıklar; CRM sorularında Rails'in scoped sayı/kayıt/deadline sonuçlarını gösterir. Navigation/search/filter ve unsaved note için resmî Page Agent sürer. Mesajlar ana cevap, friendly Agent activity varsayılan kapalıdır; Stop, New chat ve kısa süreli bağlam vardır. Model done metni başarı kanıtı sayılmaz. Bir GET formunun filtreleri güvenle tek adımda uygulanabilir; agent kayıt/contact/status/task/password/email submit edemez.
+
+Yerel son sonuç **149 test / 2,043 assertion**, ayrıca **11 gerçek Groq/browser senaryosu / 116 assertion PASS**; 20 gerçek completion / 28,833 ölçülmüş token. Aynı A/B/C demo 127.3 → 64.4 saniye, toplam çağrı 32 → 20; quota/cache koşulları farklıdır ve 50 saniyeye yakın beklemeler hâlâ olabilir. Phase 1 ve resmi zaman/workflow kuralları değişmedi. [Türkçe mimari, sınırlar ve çalıştırma](docs/COPILOT_PHASE21_TR.md), [ölçülmüş kanıt ve değişen dosyalar](docs/evidence/phase21-copilot-2026-10-20.json).
+
+Önce Node 22 ile `npm ci --ignore-scripts` / `npm run build`, mevcut PostgreSQL ve server-only `GROQ_API_KEY` gerekir. Ayrı opt-in canlı kontrol `LEADCURRENT_LIVE_AGENT=1` ile `bundle exec ruby script/verify_copilot.rb`; normal CI provider'ı fake eder. Kod `phase2/page-agent` üzerinde commit edilmemiştir: **push ve Railway deploy yapılmadı**.
+
 ## Teknolojiler
 
 Ruby 3.4.7, Rails 8.1.4, PostgreSQL 17, Hotwire/Turbo, Stimulus, Propshaft, Minitest, Capybara/Selenium, GitHub Actions; canlıda Railway/Docker, alternatif Render yapılandırması. Sürüm kanıtı: [Gemfile.lock](Gemfile.lock), [CI](.github/workflows/ci.yml). React, Redis, mikroservis veya AI sağlayıcısı temel işleyiş için gerekli değildir.
@@ -203,6 +223,17 @@ bundle exec rails server -b 127.0.0.1 -p 3100
 Yerel adres: **http://127.0.0.1:3100**. Geliştirme demo hesabı: **demo@leadcurrent.test**, parola: **LeadCurrentDemo!2026**. Bunlar kurgusal, yalnızca development demo bilgileridir. Production seed varsayılan parolayı kabul etmez; `DEMO_PASSWORD` ortam değişkeni gerekir. Ya da /signup ile yeni izole workspace oluşturun.
 
 Windows yardımcısı yalnızca proje içindeki `.local/postgres` cluster'ını loopback **55432** portunda başlatır. Trust authentication yalnızca yerel geliştirme içindir. Mevcut PostgreSQL 5432 servisi ve Fixture verisi kullanılmaz. Durdurmak için aynı yardımcıya `-Action stop` verin.
+
+Mevcut kurulumu her açışta önce PostgreSQL'i, ardından Rails'i başlatın; yeniden seed veya migration gerekmez:
+
+```powershell
+Set-Location D:\LeadCurrent
+powershell -ExecutionPolicy Bypass -File bin\local-postgres.ps1 -Action start
+# 3100 portunda çalışan Rails yoksa:
+bundle exec rails server -b 127.0.0.1 -p 3100
+```
+
+Veritabanını değiştirmeden durum kontrolü: `powershell -ExecutionPolicy Bypass -File bin\local-postgres.ps1 -Action status`. Yardımcı açık cluster'ı yeniden başlatmaz; port/cluster uyuşmazlığını, bağlantı ve başlangıç hatalarını bildirir. Başlangıç log'u `.local/postgres.log` içindedir. Rails 8.1 bağlantıyı ilk sorguya kadar açmayabilir; gerçek kontrol: `bundle exec rails runner "ActiveRecord::Base.connection.select_value('SELECT 1'); puts ActiveRecord::Base.connection.active?"` (`true`). Sorgusuz `active?` tek başına `false` dönebilir.
 
 Kendi PostgreSQL kurulumunuzu kullanmak için `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD` ayarlayın. Linux/macOS: bu değişkenleri export edin, `bundle install`, `bundle exec rails db:prepare db:seed` ve `bundle exec rails server` çalıştırın. Varsayılan bağımsız DB isimleri `leadcurrent_development` / `leadcurrent_test`. `.env.example` yalnızca örnektir; env dosyası otomatik yüklenmez.
 

@@ -29,6 +29,12 @@ jobs:
       CI: 'true'
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Build pinned Page Agent assets
+        run: npm ci --ignore-scripts && npm run build
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version

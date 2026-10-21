@@ -476,3 +476,1661 @@ The existing sales workflow must continue to work correctly.
 
 Start with the repository inspection and baseline testing, then implement Phase 1 systematically.
 ```
+
+## Phase 2 — Alibaba Page Agent (20 October 2026)
+
+Baseline: [65bcd55cfbd55ca1d91691bb1d873e0560fd76b0](https://github.com/Montaserissa20/leadcurrent/commit/65bcd55cfbd55ca1d91691bb1d873e0560fd76b0). Branch: `phase2/page-agent`. Phase 2 remains local: **no GitHub push or Railway deployment is authorized**. Phase 1's historical publication evidence above is preserved.
+
+Why continue: the working Rails CRM already has tenant permissions, customer records and deployed Groq advice. The new user pain point is manual navigation/filtering/form preparation even after reading advice; this is the assignment's objective, not measured customer feedback. This week's promise: an authentic Alibaba DOM/tool-calling agent, scoped to navigation, filtering, reading and unsaved note preparation, with explicit human submission. Unlike Phase 1's text advice, Phase 2 must visibly interact with real controls. No external AI-customer API.
+
+Baseline actual tests (Groq mocked, no API key in the test process): Rails seed 2543, **89 tests / 1,301 assertions**; browser seed 13594, **11 tests / 150 assertions**; all zero failures/errors/skips. Total **100 tests / 1,451 assertions**. Phase 1 keeps `tool_choice: none` because it is a read-only structured adviser; Page Agent requires a separate tool-calling transport.
+
+Implementation and measured local acceptance are recorded after the original prompt below. Human hours, coding-agent tokens and paid costs remain unmeasured. Phase 2 publication remains prohibited.
+
+### Phase 2 original prompt (verbatim)
+
+SHA-256 of supplied UTF-8 text: 374af9094e5c3d41c1bdc9b8d2fdf9b1d7ab74cfb7387f7994f43ffa7f2de010.
+
+```text
+# CODEX TASK — LeadCurrent Phase 2: Integrate Alibaba Page Agent
+
+You are upgrading my existing LeadCurrent CRM SaaS with a real, embedded browser-interaction AI agent.
+
+Repository: https://github.com/Montaserissa20/leadcurrent
+
+Production website: https://leadcurrent-production.up.railway.app
+
+Existing technology:
+- Ruby 3.4.7 / Rails 8.1.4
+- PostgreSQL
+- Hotwire, Turbo, Stimulus, importmap and Propshaft
+- Existing Groq-powered AI Sales Assistant
+- Existing deterministic Next Best Action
+- GitHub Actions and Railway
+
+Phase 1 has already been committed and deployed.
+
+**This is Phase 2 only. Do not rebuild the project or begin the external AI-customer API feature.**
+
+## 1. Mandatory inspection
+
+Before changing code:
+
+1. Read AGENTS.md, AGENT.md, README.md and CHALLENGE_LOG.md.
+2. Inspect the existing Rails layout, JavaScript architecture, Content Security Policy, authentication and workspace permissions.
+3. Identify the current Git commit SHA and record it as the Phase 2 baseline.
+4. Run the existing automated tests.
+5. Review the Phase 1 Groq client and understand why it currently uses `tool_choice: none`.
+6. Inspect the official Alibaba Page Agent documentation and actual published package API.
+
+Official sources:
+- https://github.com/alibaba/page-agent
+- https://alibaba.github.io/page-agent/
+- https://alibaba.github.io/page-agent/docs/features/models/
+- https://alibaba.github.io/page-agent/docs/introduction/limitations/
+- https://alibaba.github.io/page-agent/docs/advanced/page-agent-core/
+
+Use the authentic Alibaba Page Agent implementation, not a custom imitation with the same name.
+
+Verify the current package version and APIs before integration.
+
+## 2. Main goal
+
+Integrate Alibaba Page Agent directly into LeadCurrent.
+
+Users should be able to give natural-language instructions and watch the agent interact with their CRM interface.
+
+Example:
+
+User: "Find my overdue leads and open the most urgent customer."
+
+Expected behavior:
+
+1. The agent observes the available CRM interface.
+2. It navigates to Leads.
+3. It applies the appropriate overdue filter.
+4. It identifies the most urgent available lead.
+5. It opens the customer record.
+6. It displays the completed actions in the agent panel.
+
+This must be real Page Agent execution using the website DOM and genuine model responses.
+
+Do not simulate navigation using a hardcoded keyword-to-route chatbot.
+
+## 3. User interface
+
+Add an **AI Agent** entry point to the authenticated LeadCurrent layout.
+
+Design a modern right-side panel consistent with the existing brand, light/dark themes and mobile layout.
+
+The panel should include:
+
+- Header: "LeadCurrent AI Agent"
+- Short description of what the agent can do
+- Natural-language task input
+- Example task suggestions
+- Run button
+- Stop button
+- Current status (idle, thinking, acting, completed, failed)
+- A readable step-by-step activity display
+- Final task result
+- Clear warnings and error messages
+
+Suggested example tasks:
+
+- "Show my overdue leads."
+- "Find Atlas Industries."
+- "Open opportunities in negotiation."
+- "Show today's pending follow-ups."
+- "Find this customer and prepare a follow-up note."
+- "Navigate to sales analytics."
+
+Make sure the panel does not obstruct navigation or important CRM controls.
+
+The user should be able to see the agent interacting with the page.
+
+Reuse existing CSS, Stimulus and Turbo conventions rather than introducing React.
+
+## 4. Use the real Alibaba library
+
+Use the official `page-agent` package or the officially maintained `@page-agent/core` components, depending on which best supports an embedded LeadCurrent panel.
+
+The core requirement is authentic Page Agent execution with DOM-based interaction and model tool calls.
+
+The official API includes functionality such as:
+
+- execute(task)
+- stop()
+- execution status and activity events
+- customFetch for authentication or proxy integration
+
+Verify these interfaces against the installed version.
+
+Integrate the library as a pinned, locally built JavaScript asset served from the LeadCurrent origin.
+
+The project currently uses importmap and Propshaft. Introduce only the minimum build tooling needed for Page Agent, and preserve the existing Rails frontend architecture.
+
+Do not load the demo CDN or use Alibaba's public testing LLM in production.
+
+Document any new npm dependencies, version lockfiles, build commands, licensing, Docker requirements and GitHub CI updates.
+
+Maintain the existing Content Security Policy. Do not use unsafe-inline or expose secrets to client JavaScript.
+
+## 5. Groq connection
+
+I already have `GROQ_API_KEY` configured in Windows and Railway.
+
+The current AI model is:
+
+`openai/gpt-oss-20b`
+
+First, test whether this model supports the actual tool-calling interactions Page Agent requires.
+
+Important:
+
+The Phase 1 Groq client deliberately disables tools and uses a strict read-only sales-advice response format.
+
+Do not modify or break that working integration.
+
+Build a separate server-side transport/proxy for Page Agent using a fixed Groq provider endpoint.
+
+Requirements:
+
+- API key remains server-side.
+- Browser sends requests only to our same-origin Rails proxy.
+- Authenticate every proxy request using the existing session.
+- Preserve CSRF protections.
+- Never accept arbitrary target URLs, provider hosts or API keys from the browser.
+- Allowlist the supported model and protocol options.
+- Validate and bound request payload size, message structure and completion tokens.
+- Preserve the tool-call structures required by Page Agent.
+- Use TLS verification and bounded timeouts.
+- Apply sensible account, workspace and provider request limits.
+- Handle 401, 403, 429, timeouts and unsupported model behavior safely.
+- Avoid logging prompts, customer records, credentials and model responses.
+
+If Groq's current model is incompatible with Page Agent, do not fake success.
+
+Document the exact incompatibility and evaluate another Groq model with verified tool support.
+
+Do not switch providers or require an additional paid API without informing me first.
+
+Important: Page Agent often needs multiple LLM requests for one task. Account for model context limits, free-tier token limits, and realistic provider usage.
+
+## 6. Safety and permissions
+
+The agent operates inside an authenticated CRM containing potentially sensitive customer data.
+
+Treat all page content, user instructions and model responses as untrusted.
+
+### Safe mode (mandatory)
+
+The first version should support:
+
+- Navigation
+- Searching
+- Filtering
+- Opening accessible customer records
+- Reading visible information
+- Preparing form fields without submitting them
+
+It must NOT autonomously:
+
+- Submit completed customer-contact records
+- Create or delete customers
+- Convert leads
+- Change opportunity status
+- Mark opportunities Won or Lost
+- Complete tasks
+- Modify passwords or account settings
+- Change ownership
+- Send email or messages
+- Execute arbitrary JavaScript
+- Access another workspace
+- Exfiltrate page content to unrelated websites
+
+Require a separate, visible user interaction to approve and submit changes.
+
+**Important:** Do not rely on the LLM system prompt alone to enforce safety.
+
+Inspect the actual Page Agent tools and interaction hooks. Remove or constrain dangerous capabilities where supported.
+
+If reliable enforcement of read-only/prepare-only behavior cannot be demonstrated, disable those actions in Phase 2 instead of claiming they are safe.
+
+Retain Rails authorization and workflow validations as defense in depth.
+
+Never use an agent as a reason to bypass server-side permissions.
+
+Do not enable experimental JavaScript execution capabilities.
+
+### Privacy
+
+Page Agent can inspect page DOM content, and part of that content may be sent to Groq.
+
+Implement practical protections:
+
+- Avoid exposing password forms and security settings to agent observation.
+- Mask contact emails, phone numbers, sensitive customer notes and credentials when possible.
+- Use documented page-content transformation hooks where available.
+- Limit the amount of page text supplied to the model.
+- Do not include hidden customer records or server-side data outside the authorized visible page.
+- Use only fictional test customers for live verification.
+- Explain residual limitations; masking is not perfect anonymity.
+
+Do not silently transmit entire customer histories to the model.
+
+## 7. Working with Rails Turbo navigation
+
+LeadCurrent uses Turbo and Stimulus rather than a conventional JavaScript SPA.
+
+Page Agent is primarily designed for interaction with the current page.
+
+Verify how it behaves when Turbo navigates between LeadCurrent screens.
+
+Ensure:
+- The agent panel remains usable.
+- Running tasks are properly stopped or restored when navigation changes.
+- Event listeners do not multiply after Turbo visits.
+- Old agent instances are disposed of when appropriate.
+- A full reload does not silently continue an unknown task.
+- Browser back/forward navigation does not break the interface.
+
+If multi-page tasks are not reliable without the optional extension, demonstrate and document the supported in-page behavior rather than pretending the agent can navigate indefinitely.
+
+Do not require installation of a browser extension for the core Phase 2 demo.
+
+## 8. Improve interface semantics if necessary
+
+The agent should understand existing controls through accessible DOM structure.
+
+Make narrow, appropriate improvements to:
+
+- Navigation labels
+- Lead search and filters
+- Opportunity status filters
+- Task lists
+- Customer record links
+- Form labels
+
+Prefer semantic HTML, accessible names and stable selectors.
+
+Do not redesign every page.
+
+Do not create hidden privileged shortcuts only the agent can use.
+
+## 9. Automated testing
+
+Add genuine test coverage.
+
+At minimum test:
+
+1. The AI Agent panel renders for authenticated users.
+2. Unauthenticated users cannot call the LLM proxy.
+3. Cross-workspace access remains blocked.
+4. The Groq key never appears in HTML, JavaScript, responses or logs.
+5. The proxy refuses arbitrary remote URLs and unsupported methods.
+6. The proxy correctly forwards supported tool-call data.
+7. Tool-call errors are handled without crashing the CRM.
+8. The Stop button interrupts a running task.
+9. Loading and duplicate execution are handled.
+10. Navigation and filtering work through real browser interactions.
+11. Forbidden actions are blocked under Safe Mode.
+12. Customer-contact activities are not falsely recorded.
+13. CRM state remains unchanged after read-only agent tasks.
+14. UI works with Turbo navigation and browser refresh.
+15. Mobile and dark mode remain functional.
+16. Existing Phase 1 AI functions still pass.
+17. Existing 24-hour, 4-hour and 72-hour time-rule tests still pass.
+18. Existing lead-to-Won workflow tests still pass.
+
+Use mocked LLM transport for CI tests.
+
+Where possible, test actual Page Agent DOM interactions in a browser with a deterministic tool-calling model fixture, not just mocked screenshots or hardcoded route changes.
+
+Add a separate opt-in real Groq browser test using a fictional LeadCurrent workspace.
+
+Do not run real Groq requests in normal CI.
+
+If a real multi-step browser task does not work, record the actual failure and fix it rather than claiming it passed.
+
+## 10. Mandatory CHALLENGE_LOG.md update
+
+This is required for my university assignment.
+
+Preserve all previous Phase 1 documentation and evidence.
+
+Append a new Phase 2 section recording:
+
+- Phase 2 baseline commit
+- The original instruction/prompt, preserved accurately
+- Why we continued the LeadCurrent project
+- The specific new user pain point
+- Phase 2 objective and promise
+- Actual implemented changes
+- Genuine Git commits and test results
+- Real Page Agent integration evidence
+- Successful and unsuccessful Groq attempts
+- Development time and token usage if genuinely measured
+- Unverified information and known limitations
+- What changed compared with the previous week
+- Whether our originally promised behavior is demonstrably working
+
+Do not invent development time, API costs, token counts, successful tests or customer feedback.
+
+Explain why Page Agent provides a different experience from Phase 1's text-based AI Sales Assistant.
+
+Create a short Turkish technical report under `docs/` for Phase 2 architecture, safety, tests and demonstration instructions.
+
+Update AGENT.md and README appropriately.
+
+## 11. Demonstration acceptance criteria
+
+Prepare a real browser demonstration involving a fictional Atlas Industries lead.
+
+Scenario A:
+User: "Find my overdue leads."
+
+The agent navigates or filters to find overdue customer records and shows the result.
+
+Scenario B:
+User: "Open Atlas Industries."
+
+The agent locates and opens the customer record using the real interface.
+
+Scenario C:
+User: "Prepare a follow-up note for this customer."
+
+The agent prepares content or fills a permitted form, but does not save or submit it automatically.
+
+The salesperson manually confirms and submits the action.
+
+The demonstration must show that the agent performed meaningful page interaction rather than simply answering with text.
+
+Keep the original CRM workflow operational.
+
+## 12. Implementation order
+
+1. Inspect the repository and official Page Agent APIs.
+2. Record baseline test results and update CHALLENGE_LOG.md.
+3. Verify Groq tool-call compatibility through a minimal test.
+4. Integrate the official Page Agent JavaScript library.
+5. Build the secure Rails LLM proxy.
+6. Implement the right-side AI Agent interface.
+7. Add constrained navigation and safe-mode interactions.
+8. Verify Turbo behavior and privacy boundaries.
+9. Run browser, integration and regression tests.
+10. Run the optional real provider demonstration.
+11. Update documentation and prepare the final report.
+
+Do not introduce new features outside Phase 2.
+
+## 13. Strict boundaries
+
+- Do not replace Ruby on Rails.
+- Do not rebuild LeadCurrent.
+- Do not damage the existing AI Sales Assistant.
+- Do not remove existing tests.
+- Do not modify the sales deadline constants or transition rules.
+- Do not bypass organization access boundaries.
+- Do not expose GROQ_API_KEY.
+- Do not use Alibaba's public demo model for real customer data.
+- Do not implement the AI purchasing-customer API yet.
+- Do not force-push or rewrite Git history.
+- Do not push changes to GitHub yet.
+- Do not deploy to Railway yet.
+- Do not claim success unless tested.
+
+Keep Phase 2 on the local development branch until I review the results.
+
+## 14. Final report
+
+When finished, tell me:
+
+1. Which official Alibaba package and version were integrated.
+2. How the Page Agent connects to Groq.
+3. What users can actually ask it to do.
+4. Whether multi-page Turbo navigation works.
+5. Which actions are prevented for safety.
+6. Actual automated test results.
+7. Results of real Groq/Page Agent verification.
+8. Whether existing CRM features still work.
+9. Which files were created and modified.
+10. Any blockers, cost or security limitations.
+11. How to run and demonstrate Phase 2 locally.
+
+**Success criterion:**
+
+I can open LeadCurrent, click "AI Agent," enter "Find my overdue leads," and watch the real Alibaba Page Agent interact with the CRM interface using a genuine LLM, without exposing my API key or modifying customer data without approval.
+
+Start by auditing the repository and testing Groq's compatibility with Alibaba Page Agent. Then implement the feature systematically.
+```
+
+### Phase 2 implementation and measured acceptance
+
+Official `@page-agent/core@1.12.4` and `@page-agent/page-controller@1.12.4` execute the real observe/model/tool loop. Pinned Zod 4.5.1 and build-only esbuild 0.25.12 produce a locally served Propshaft/importmap asset; Node 22 is needed at build time. Actual published types/source and upstream `9eb6b6646500264d9034dd466a4270cb9fc1ef1e` were inspected. MIT notices are in `vendor/licenses/` and the bundle. The right-side Stimulus panel supports Run/Stop, live steps, safe errors, light/dark and mobile. Docker/CI/Render builds now include npm build; Docker's final runtime remains Ruby only.
+
+The separate authenticated/CSRF-protected `PageAgent::CompletionsController` sends bounded canonical AgentOutput requests through server-only Groq HTTPS to `openai/gpt-oss-20b`. Browser-supplied endpoints/keys/models/protocol options are rejected. Phase 1 client, sales services/models/database configuration and 24/4/72-hour constants/transitions remain unchanged. Narrow UI changes add company search, explicit overdue filtering, urgency ordering and accessible navigation/record labels.
+
+SafeDom allows only observed same-origin read links, GET filters/search and unsaved note preparation. Tokens are rebuilt and method/target/visibility are checked at execution. Broad click/input, arbitrary JavaScript, external URLs and settings are unavailable. CRM submit/contact/conversion/stage/task/ownership actions cannot be selected. Existing unsaved text is preserved; note preparation sets Add a note and clears scheduled follow-up without submitting. Password/security/contact/history text is excluded from observations; redaction remains best effort. Raw provider prompts/answers/credentials are not logged; console/debugger output is stripped without weakening CSP. Shared Phase 1/provider in-flight ownership and bounded account/workspace/provider quotas prevent unbounded calls, but the store is process-local.
+
+| Actual check | Result |
+|---|---|
+| Rails, seed 40814 | 104 tests / 1,526 assertions; zero failures/errors/skips |
+| Browser, seed 13495 | 17 tests / 250 assertions; zero failures/errors/skips |
+| Total regular tests | **121 tests / 1,776 assertions**; real library/DOM/Turbo with mocked provider transport |
+| Existing regression coverage | Original 100 tests retained; Phase 1 advice, password/workspace rules, lead-to-Won and exact 24/4/72-hour cases pass |
+| Autoload / Brakeman | PASS / 0 errors and 0 security warnings (Windows fallback diagnostics emitted) |
+| Npm audit / production assets | 0 dependency vulnerabilities / PASS |
+| Secret/source review | Exact real local key absent from source, built JS and test log; original prompts/Phase 1 log/domain source preserved; see evidence JSON for scan scope |
+| Gitleaks 8.30.1, source snapshot | 2 reviewed unchanged false positives: public commit SHA in docs/VERIFICATION_TR.md:39 and synthetic test password in test/integration/authentication_test.rb:46; no new findings |
+| Docker / remote CI / Railway | Image build unverified (Linux daemon unavailable); Phase 2 remote CI/deployment not attempted |
+
+### Real Groq and browser results, including failures
+
+The key was initially missing from this Windows session/User/Machine scopes. The user restored the local Windows User variable and replied “configured”; its value was never requested in chat or printed. Minimal named-tool compatibility **PASS**, 2026-10-20T14:24:28Z–2026-10-20T14:24:29Z: AgentOutput, 592 prompt + 40 completion = **632 actual provider tokens**. No provider/model switch was needed.
+
+Final multi-user fictional-workspace browser run **PASS**, 2026-10-20T14:52:48Z–2026-10-20T14:57:16Z UTC, seed 17208, **1 test / 34 assertions**. Scenario A navigated to Leads, selected **Owner=Me + Overdue**, submitted the real GET filter and excluded a colleague's overdue record. Scenario B clicked the real Atlas customer link through Turbo. Scenario C filled an unsaved Add a note form; all three tasks left lead/tasks/activities/audits unchanged. The separate Capybara test-user Save action click then recorded **only a note**, with no first contact, status change or task. This simulates the required separate human interaction; it is not customer feedback or an observed human approval.
+
+This run made **11 real provider completions**, 13,165 prompt + 708 completion = **13,873 measured tokens**; browser CSP violations: 0. [Local fictional-data screenshot](docs/evidence/phase2-page-agent-2026-10-20.png) and [redacted structured evidence, prior attempts and limits](docs/evidence/phase2-page-agent-2026-10-20.json). An earlier single-user run also passed (7 completions, 7,721 tokens); the later run strengthens the “my records” acceptance with a colleague fixture.
+
+Unsuccessful attempts are retained rather than hidden: (1) opened a record when the test expected the filtered list; (2) failed after applying the overdue filter, exact cause not captured; (3) safe model/protocol error after one completion, exact provider code not captured; (4) all agent tasks passed but the final test-user-save assertion used a cached association, fixed with reload; (6) a multi-user attempt repeated GET filtering and reached the six-step cap before done. The latter led to applied-URL feedback and grouped-filter/finish guidance. No forbidden CRM write was accepted. The final run is evidence of demonstrated acceptance, not a guarantee every probabilistic task succeeds.
+
+### What changed this week, scope and honest unknowns
+
+Phase 1 gives text analysis/advice/drafts. Phase 2 visibly acts through the existing interface: real DOM observation, tool choice, Turbo navigation, owner/overdue filters, accessible customer link, unsaved form preparation. The promised A/B/C behavior is demonstrated locally with genuine Groq and actual Page Agent. Other suggested tasks remain bounded by the same visible controls and six-step limit; this is not unlimited browser autonomy or an extension.
+
+Human development time, coding-agent tokens, paid API cost and customer feedback were **not measured**. Provider usage above is only for the specified runs, not total development/billed usage. Residual risks: probabilistic repetition/failure, title/query/task data may be sensitive despite masking, free-tier/provider quotas, process-local limiter restart/multiworker limits, finite observation size and no guaranteed continuation across full document reload. Stop prevents further browser actions but an in-flight server call can still finish.
+
+No Phase 2 commit was created: changes remain reviewable in the local `phase2/page-agent` working tree. HEAD is the real baseline `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`; no new Git SHA is invented. **No GitHub push, history rewrite, remote Phase 2 CI run or Railway deployment.** Historical Phase 1 production evidence remains unchanged. [Turkish architecture, safety and local demonstration guide](docs/PAGE_AGENT_PHASE2_TR.md).
+
+## Phase 2.1 — Conversational Copilot (20 October 2026)
+
+Baseline HEAD: `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`, local `phase2/page-agent`. Phase 2 was already uncommitted; a source-hash snapshot records the actual worktree at this correction's start. No invented Phase 2 commit. No GitHub push or Railway deployment.
+
+User-observed defects: overdue navigation returned tool chatter without verified matches; ordinary help went through a forced AgentOutput tool protocol and could fail generation. Root causes confirmed in code: only DOM actions/done exist, observations omit full query results, and the panel accepts the model's done text without a database outcome check. The library's done activity itself returns generic “Task completed”. This is a correction to the existing project, not a new project or Phase 3.
+
+Baseline run: Rails seed 37061, 104 tests / 1,526 assertions / zero failures/errors/skips. System seed 15392, 17 tests / 249 assertions / one failure in existing ProWorkspaceTest: expected stage toast existed only in hidden text. Unchanged isolated rerun seed 28098: 1 test / 7 assertions, passed. Earlier Phase 2 evidence is preserved above; this new run is not falsely reported green.
+
+Objective: a model-routed conversation for help/clarification/refusal and narrow read-only verified CRM answers, with official Page Agent execution retained for safe UI actions. Raw tool steps become secondary. Authentication, tenant boundaries, CSP, privacy and 24/4/72-hour rules remain authoritative. Implementation and final evidence are recorded below when verified; development hours and paid cost are not measured.
+
+### Phase 2.1 supplied prompt (verbatim)
+
+```text
+# CODEX TASK — LeadCurrent Phase 2.1: Upgrade Page Agent into a Conversational AI Copilot
+
+We need to improve the existing Alibaba Page Agent integration in my LeadCurrent CRM.
+
+**This is a correction and improvement of Phase 2, NOT a new project.**
+
+My actual browser testing exposed two serious usability problems.
+
+### Problem 1 — Technical tool steps instead of useful answers
+
+User input:
+
+"Which leads are overdue?"
+
+The agent successfully applied the overdue filter but displayed:
+
+- click_control: Filter
+- choose_option: First contact — Overdue
+- click_control: Filter
+- done: Task completed
+
+It then said overdue leads were visible without reporting which leads matched or whether there were any results.
+
+This is not satisfactory.
+
+The user should receive a helpful, factual answer, such as:
+
+"I found 3 overdue leads. Here are their names and deadlines. I've opened the filtered Leads page."
+
+The company names, counts, and deadlines must come from actual authorized CRM records, never fabricated by the LLM.
+
+The low-level technical steps should be available in an optional expandable activity log, not presented as the primary answer.
+
+### Problem 2 — Ordinary conversation fails
+
+User input:
+
+"Tell me how can I use the system."
+
+The current agent returns:
+
+"Groq could not produce a supported agent action."
+
+This is unacceptable for a conversational AI assistant.
+
+The system should recognize that the user is requesting guidance, not a browser action, and explain how LeadCurrent works.
+
+The agent must not require users to type specific keywords or copy the provided example tasks.
+
+## 1. Inspect the existing implementation
+
+Before changing anything:
+
+- Read AGENTS.md, AGENT.md, README.md and CHALLENGE_LOG.md.
+- Inspect the existing Phase 1 AI Sales Assistant.
+- Inspect the Phase 2 PageAgentCore integration.
+- Inspect the Groq proxy and AgentOutput tool schema.
+- Inspect SafeDom, the DOM observation transformation, and the UI activity renderer.
+- Read the existing Phase 2 test and verification results.
+- Preserve the current Rails authentication, workspace isolation and business rules.
+- Record the current baseline commit.
+- Run the existing test suite.
+
+Understand the root cause of unsupported actions before changing the architecture.
+
+Do not simply hide error messages or add hardcoded responses.
+
+## 2. Create one intelligent AI Copilot experience
+
+Keep the existing official Alibaba Page Agent library.
+
+Add a Groq-powered conversational layer so users can ask questions or instruct the CRM through one panel.
+
+The Copilot must understand at least these categories:
+
+**A. General CRM questions**
+
+Examples:
+
+- How can I use LeadCurrent?
+- What is a lead?
+- What's the difference between a lead and an opportunity?
+- Explain the sales pipeline.
+- What does Won or Lost mean?
+- How do I add a customer?
+- How do I manage follow-up tasks?
+- How does the AI Sales Assistant work?
+
+Provide useful, natural conversational answers.
+
+**B. Navigation and interface instructions**
+
+Examples:
+
+- Take me to the pipeline.
+- Open Analytics.
+- Find Atlas Industries.
+- Show me negotiation opportunities.
+- Where can I change my password?
+- Show me overdue leads.
+
+Use the existing Page Agent for supported browser actions.
+
+For security-sensitive pages such as Settings, the Copilot may provide navigation instructions or an authorized ordinary link rather than exposing those pages to unrestricted agent observation.
+
+**C. CRM data questions**
+
+Examples:
+
+- Which leads are overdue?
+- How many leads need attention today?
+- Who is my most urgent customer?
+- What opportunities are currently in negotiation?
+- What follow-up tasks are pending?
+
+Use actual permitted CRM records.
+
+Do not invent counts, company names, dates, statuses, budgets or deadlines.
+
+**D. Unsupported or forbidden actions**
+
+Examples:
+
+- Send this email automatically.
+- Delete every lead.
+- Mark this opportunity as Won.
+- Change another user's password.
+
+Respond naturally with what the assistant cannot do, why, and what safe manual alternative is available.
+
+Do not return an internal tool error just because no action is permitted.
+
+## 3. Model-based intent understanding
+
+Implement a reliable Groq-powered intent and response mechanism.
+
+Possible structured intents:
+
+- answer_question
+- read_crm_data
+- page_action
+- clarify
+- unsupported_action
+
+These are architectural suggestions, not a requirement to use these exact strings.
+
+Do NOT implement this as a list of hardcoded keyword rules.
+
+Natural variations such as:
+
+"Show my late leads"
+
+"Do I have customers waiting for contact?"
+
+"Who is overdue?"
+
+should be understood as related requests when the context supports that interpretation.
+
+The assistant must handle ordinary spelling mistakes and different phrasings.
+
+Use validated structured responses with bounded input/output sizes and a safe fallback.
+
+No client-side provider key.
+
+Keep the existing Phase 1 AI Sales Assistant operational.
+
+Choose whether to extend the current Groq Page Agent protocol with safe answer/clarification capabilities or introduce a separate intent router and help responder. Explain the architectural choice.
+
+## 4. Give accurate CRM answers
+
+The assistant must distinguish:
+
+- General explanation
+- Database-derived facts
+- Model-generated recommendations
+- Unknown or unavailable information
+
+For data questions, implement narrow, explicit, read-only Rails query capabilities using WorkspaceAccess and existing domain services.
+
+Examples:
+
+- overdue lead count and bounded lead list
+- pending follow-up count and bounded task list
+- lead status breakdown
+- opportunities by current stage
+- existing NextBestAction priorities
+
+Use existing authoritative deadline calculations and NextBestAction logic.
+
+Never ask the LLM to invent SQL, execute arbitrary queries, access arbitrary models or choose unrestricted record identifiers.
+
+Restrict queries to the current authenticated user's authorized organization and visibility scope.
+
+Return record links only when the user is permitted to open those records.
+
+Do not claim that a filter contains results before checking the actual filtered records.
+
+When there are no matches, say so clearly.
+
+If data retrieval fails, report that the result could not be verified.
+
+## 5. Improve the AI panel
+
+Keep the existing LeadCurrent visual design, dark mode and responsive layout.
+
+Rename or enhance the current panel to:
+
+**LeadCurrent AI Copilot**
+
+Design the interaction around a conversation.
+
+The primary response should be concise, helpful and written in natural language.
+
+For example:
+
+User:
+"How can I use LeadCurrent?"
+
+Assistant:
+"LeadCurrent helps you manage leads, opportunities, follow-ups and sales activities. You can create leads, track conversations, move qualified leads into opportunities, and monitor deadlines. Would you like me to show you the Leads page or explain the pipeline?"
+
+For an overdue-lead request, show actual results in a readable form with authorized links.
+
+Add:
+
+- Clear assistant and user messages
+- Loading/working feedback
+- Human-friendly final answers
+- Optional expandable "Agent activity" section
+- A Stop button for running tasks
+- Error recovery without losing the conversation
+- Short-lived conversation context for follow-up questions
+- Accessible focus, labels and keyboard navigation
+- Responsive behavior for desktop and mobile
+
+Keep the activity log, but collapse it by default.
+
+Replace raw messages like:
+
+"click_control: Filter"
+
+with human-friendly activity such as:
+
+"Applied the overdue-lead filter."
+
+Do not falsely describe an action as completed unless it was observed successfully.
+
+Use safe text rendering, never unrestricted model-generated HTML.
+
+## 6. Make the agent work with natural instructions
+
+The existing Page Agent should continue interacting with actual visible DOM controls.
+
+Do not replace it with a keyword-to-URL chatbot.
+
+Improve its instruction handling so it can:
+
+- Understand user intent
+- Observe permitted CRM controls
+- Navigate to the relevant page
+- Select appropriate filters
+- Verify the resulting page
+- Produce a useful final explanation
+- Ask clarifying questions when necessary
+
+Keep the existing official PageAgentCore observe → plan → tool → observe execution cycle.
+
+Keep the same-origin Groq proxy and never expose GROQ_API_KEY.
+
+When a task ends, verify the observed outcome instead of blindly trusting the model's done message.
+
+If the requested action is unsupported, explain the limitation conversationally rather than reporting "unsupported agent action."
+
+## 7. Continue to enforce Safe Mode
+
+This improvement must NOT weaken security to achieve more flexible conversation.
+
+The Copilot may:
+
+- Answer questions
+- Read permitted CRM summaries
+- Navigate
+- Search and filter
+- Open authorized records
+- Prepare unsaved notes
+- Produce drafts for manual review
+
+It may NOT automatically:
+
+- Submit contact records
+- Send emails or messages
+- Delete records
+- Change lead or opportunity status
+- Mark deals Won or Lost
+- Complete tasks
+- Modify deadlines
+- Change user accounts or passwords
+- Execute arbitrary JavaScript
+- Access another workspace
+
+Keep the existing SafeDom allowlists, CSRF enforcement, authorization checks, privacy protections and Content Security Policy.
+
+Conversational flexibility must not mean unrestricted tool execution.
+
+Treat user notes, page content and retrieved data as untrusted.
+
+## 8. Improve response times
+
+The current agent waits approximately 25 seconds between model steps, creating excessive delays.
+
+Investigate the real reason for this pacing.
+
+Check:
+- Groq free-tier requests-per-minute and tokens-per-minute limits
+- Existing Phase 1 and Phase 2 shared request limits
+- Actual measured tokens and latency per model step
+- Whether multiple interactions can safely be batched
+- Whether navigation tasks require unnecessary model calls
+
+Improve responsiveness without exceeding provider limits.
+
+Use adaptive pacing where appropriate, bounded retries or backoff for 429 responses, and clear progress feedback.
+
+Do not simply remove the delay if doing so would cause repeated rate-limit failures.
+
+Report measured before/after completion times for equivalent tasks when possible.
+
+## 9. Test real user expectations
+
+Add automated and real browser tests for:
+
+1. "Tell me how can I use the system?" produces useful CRM help.
+2. "Explain what an opportunity is" produces a conversational answer.
+3. "Show me overdue leads" navigates or filters and reports actual results.
+4. "Which leads are late?" handles a natural paraphrase.
+5. Empty overdue results are reported honestly.
+6. "Find Atlas Industries" opens the correct authorized customer.
+7. "Go to analytics" navigates successfully.
+8. "Prepare a follow-up note" does not submit anything.
+9. "Mark this deal won" refuses autonomous submission and explains manual approval.
+10. Unrecognized requests produce clarification instead of an internal error.
+11. Cross-workspace data remains inaccessible.
+12. Groq API failures display safe, helpful feedback.
+13. Conversational context works for a short follow-up question.
+14. Low-level tool logs remain accessible but collapsed.
+15. Existing Phase 1 AI functions remain operational.
+16. Existing Phase 2 browser actions remain operational.
+17. Existing time rules and CRM workflows are unchanged.
+
+Mock provider calls in CI.
+
+Run a separate optional real Groq test with fictional customer data.
+
+Distinguish actual live API tests from mocked tests.
+
+## 10. Documentation
+
+Update:
+
+- AGENT.md
+- README.md
+- CHALLENGE_LOG.md
+- Phase 2 technical documentation
+
+Explain:
+
+- Why the original Phase 2 agent failed conversational questions
+- How the AI decides between answering and acting
+- How CRM facts are retrieved safely
+- How the Page Agent interacts with actual UI controls
+- The difference between Copilot explanations and verified CRM data
+- Current limitations
+- Real performance measurements and API usage, if measured
+- Successful and unsuccessful test results
+
+Do not invent evidence.
+
+## 11. Final requirements
+
+Do not push to GitHub yet.
+
+Do not deploy to Railway yet.
+
+Do not regenerate or expose API credentials.
+
+Do not rebuild LeadCurrent or replace Rails.
+
+Do not change the official 24-hour, 4-hour or 72-hour business rules.
+
+Do not add an unrestricted SQL or JavaScript execution tool.
+
+Do not implement Phase 3's external purchasing-agent API.
+
+When finished, report:
+
+1. Root cause of the previous failures.
+2. New architecture.
+3. Files changed.
+4. Real capabilities.
+5. Automated test results.
+6. Real Groq/browser verification.
+7. Security limitations.
+8. Performance before and after.
+9. Steps for local testing.
+
+**Acceptance criterion:**
+
+A user should be able to ask LeadCurrent AI Copilot ordinary questions about the CRM, request actual customer information, or instruct the Page Agent to perform safe UI actions, without memorizing example commands.
+
+The assistant must return useful, verified answers rather than raw tool calls or unsupported-action errors.
+
+Start by diagnosing the two observed failures, then implement and verify the improvements.
+```
+
+### Phase 2.1 final implementation and verification
+
+The conversational layer is a separate fixed-Groq strict JSON planner/help responder, retaining official PageAgentCore/PageController 1.12.4. Natural language maps to validated help/read/show/action/clarify/refusal intents; there is no keyword-to-URL classifier. Read/show questions use narrow WorkspaceAccess queries for authoritative counts, bounded linked records, actual deadlines, task status, opportunity stages and unchanged NextBestAction priorities. Model data-answer prose is ignored. General explanations are labelled AI/product-guide, verified CRM facts separately; unknown/empty/unverified results remain explicit.
+
+Safe UI actions remain genuine DOM observation/model tools. The panel is a conversation with source labels, context, Run/Stop/New chat, recovery and collapsed friendly activity. The server-held, session/user/workspace-bound plan controls completion: done is withheld until observed authorized destination/filters match, then only done is offered; final outcome is checked again. Model success/failure text is not a substitute for state verification. Unsaved notes additionally use browser-observed form checks and a separate user Save action, never agent submission. Owner/closed-record note requests receive a natural permission explanation. A single batch can change up to four existing search/select fields from the SAME approved GET filter form and submit it; all fields are checked first. Other forms, notes, overrides, POST, JS, settings/account/status/ownership/task writes and external links remain blocked. Phase 1 source, models, DB configuration, constants and transition services remain unchanged.
+
+The original fixed 25-second delay was a conservative Phase 2 precaution. The new 400ms base delay uses numeric provider token/reset headers, conservative reservation and local reset deadlines, sharing the existing request/in-flight budgets. One cancellable 429 retry honors up to 60 seconds; no timeout/invalid-output retries or extra provider. Planner completion is bounded to 600 tokens, browser tools 512, raw response 24KB; strict action schema removes unnecessary reflection output. Server-defined product guide and input/record bounds remain explicit; no raw provider prompts/responses are logged. Conversation MemoryStore is 2MB, four previous turns, 10-minute idle/30-minute absolute life, bound to the existing login session. Multiworker/shared-store, privacy and provider limitations remain.
+
+| Actual final check | Result |
+|---|---|
+| Rails seed 50371 | 124 tests / 1,692 assertions, 0 failures/errors/skips |
+| Browser seed 33590 | 25 tests / 351 assertions, 0 failures/errors/skips |
+| Regular total | **149 tests / 2,043 assertions**; normal HTTP transport mocked, actual library/DOM/Turbo used |
+| Live seed 11016 | **11 scenarios, 1 test / 116 assertions**, all PASS; real Groq and fictional rollback data |
+| Named strict tool compatibility | PASS, 824 actual provider tokens |
+| Autoload / production assets | PASS; no deployment inference |
+| Brakeman / npm audit | 0 warnings/errors / 0 dependency vulnerabilities; Windows fallback diagnostics recorded |
+
+Final real run 2026-10-20T20:33:45Z–2026-10-20T20:36:41Z UTC: 20 genuine completions, 26,701 prompt + 2,132 completion = **28,833 measured tokens**, 0 CSP violations. Help, opportunity explanation, short follow-up, verified overdue records, no matches, Atlas, Analytics, unsaved note, separate test-user save, Won refusal and ambiguity clarification passed. CRM state remained unchanged after each AI request; the separate simulated user Save action recorded only a note, no first contact/status/task. This is Capybara user-approval simulation, not actual customer feedback or agent approval. The last live run was followed only by malformed-provider diagnostic parser hardening, covered by an added regression and the complete final suite.
+
+Measured equivalent A/B/C + separate user save: **127.276s before batching → 64.443s after**. All 11 cases: 32 → 20 model calls. Overdue task: 58.808s/7 calls → 5.317s/4 calls. Provider budgets/cache differed. Ordinary help 1.057s and data question 1.061s passed, but another help turn waited 49.974s for quota; latency is not uniformly low. Historical Phase 2's timestamp range is about 268s and includes setup/login, so it is a less controlled comparison.
+
+Failed live attempts remain in the JSON evidence: two correct-data/non-navigation classifications; HTTP 400/tool_use_failed; opened Atlas rejected by the earlier verifier (exact field not captured); premature done after selecting but not applying overdue; first batch run invalid response (exact shape/finish reason not captured then). They motivated the authoritative show intent, strict schema, state-based completion contract and safe response diagnostics. Early test implementation failures (CSRF parsing, renamed UI expectation, unavailable Minitest mock helper and synthetic quota exhaustion) were fixed and the final suite rerun. Baseline's unrelated toast visibility failure and unchanged isolated pass are retained above. No failed run was converted into fake success.
+
+Source/secret and documentation scan scope/results are recorded in the final JSON evidence. Human hours, coding-agent tokens, customer feedback and paid API cost were **not measured**. Usage totals belong to the specified runs; diagnostic calls/partly measured rejected responses are not an account-wide bill. No new Phase 2.1 commit, GitHub push, remote CI or Railway deployment. HEAD remains `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0` on `phase2/page-agent`. Docker image building remains unverified without its Linux daemon.
+
+[Turkish architecture and local instructions](docs/COPILOT_PHASE21_TR.md), [structured evidence and complete Phase 2.1 changed-file list](docs/evidence/phase21-copilot-2026-10-20.json), [overdue screenshot](docs/evidence/phase21-overdue-2026-10-20.png), [conversation screenshot](docs/evidence/phase21-conversation-2026-10-20.png). Previous Phase 1/2 log and evidence are preserved.
+
+Final source review **PASS**: 268 reviewable files; 78 protected source files unchanged; prior Phase 1/2 log and the exact supplied Phase 2.1 prompt preserved; real local key absent from source, compiled JS and test log. Gitleaks 8.30.1 raw exit 1, exactly two reviewed unchanged false positives (`docs/VERIFICATION_TR.md:39` public commit hash and `test/integration/authentication_test.rb:46` synthetic password), no new findings. Documentation: 27 Markdown files, 259 local links, 38 tables, 19 required README sections, 20 earlier protected files unchanged, 16 ignore checks, local master key unchanged, zero validation errors. `git diff --check` passed.
+
+## Phase 2 finalization ? 21 October 2026
+
+Original Phase 2 baseline and current pre-finalization HEAD: `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`, branch `phase2/page-agent`. The actual starting tree already contained 268 reviewed source files and uncommitted Phase 2/2.1 plus the local PostgreSQL helper repair. The original baseline was captured before changes; no older GitHub source was substituted. Baseline Rails seed 37289: 124 tests / 1692 assertions; browser seed 5184: 25 / 351, all passed.
+
+User-observed usability gap: the team-size question fell through to general help because no team query existed in the closed planner schema. Settings already permits both roles to read their own team roster. Decision: continue the existing architecture with explicit read capabilities; no pivot/rebuild or Phase 3. This combines genuine LLM understanding, authorized PostgreSQL facts and official Alibaba DOM actions, with human-controlled writes; it does not establish industry novelty or absent Salesforce functionality.
+
+### Finalization original prompt (verbatim)
+
+Supplied UTF-8 file SHA-256: 2330e0482878f7aa879efda634fdf3308c8b20ecf4b4d699c2bb4ac4965afad2. Line endings normalized in Markdown.
+
+```text
+# CODEX TASK — LeadCurrent Phase 2 Finalization: Intelligent, Database-Aware AI Copilot
+
+You are working on my existing LeadCurrent Ruby on Rails CRM application.
+
+Repository: https://github.com/Montaserissa20/leadcurrent
+
+Local project: `D:\LeadCurrent`
+
+Production: https://leadcurrent-production.up.railway.app
+
+## Objective
+
+**Complete and polish Phase 2 of LeadCurrent AI Copilot.**
+
+Phase 1 already integrated a Groq-powered AI Sales Assistant.
+
+Phase 2 integrated the official Alibaba Page Agent and subsequently added conversational AI capabilities.
+
+The system now successfully:
+- Answers general questions about LeadCurrent.
+- Holds natural conversations.
+- Finds overdue leads.
+- Reports verified customer records.
+- Interacts with permitted browser controls.
+- Navigates the CRM.
+- Prepares notes without automatically submitting them.
+
+Do not rebuild these working features.
+
+However, during testing, we found an important remaining limitation.
+
+### Actual user test
+
+User:
+
+"How many users are they in the team?"
+
+Current Copilot answer:
+
+"I don't have real-time access to the team roster, but you can view the current number of users in the team by navigating to Settings → Team → Members."
+
+**This is not the experience we want.**
+
+LeadCurrent already stores organization users in PostgreSQL.
+
+The Copilot should understand this as a database question and, if the current user has permission, retrieve the actual number.
+
+Example of the expected answer:
+
+"Your workspace currently has 5 team members: 1 manager and 4 salespeople."
+
+The numbers above are examples only.
+
+**All actual numbers must come from the database.**
+
+The goal is to build a more intelligent, reliable, and context-aware Copilot using our existing Groq API, Rails database, and Page Agent.
+
+---
+
+# 1. Understand the existing project
+
+Before writing code:
+
+1. Read `AGENTS.md`, `AGENT.md`, `README.md`, and `CHALLENGE_LOG.md`.
+2. Inspect the existing AI Sales Assistant.
+3. Inspect the official Alibaba Page Agent integration.
+4. Inspect the current conversational Copilot architecture.
+5. Inspect the Groq proxy and model-based intent handling.
+6. Inspect the existing read-only CRM data tools.
+7. Inspect `User`, `Organization`, `Lead`, `Opportunity`, `Task`, `Activity`, and their relationships.
+8. Inspect `WorkspaceAccess`, roles, and the Settings/Team page permissions.
+9. Inspect the current UI and browser tests.
+10. Record the current Git branch and commit SHA.
+11. Run the current automated tests to establish a baseline.
+
+Do not overwrite the working local Phase 2.1 changes with the older Phase 1 version from GitHub.
+
+Keep the existing Phase 2 development branch.
+
+---
+
+# 2. Make the Copilot understand actual CRM information
+
+Extend the Copilot with safe, structured, read-only tools.
+
+These tools should answer meaningful business questions from the user's actual LeadCurrent workspace.
+
+## A. Team information
+
+Implement an authorized team-information tool.
+
+Support questions such as:
+
+- "How many users are in my team?"
+- "How many people work in this workspace?"
+- "How many salespeople do we have?"
+- "Are there any managers?"
+- "What's our team size?"
+- "Tell me how many members are registered."
+
+Retrieve this information from existing `User` and `Organization` records.
+
+Requirements:
+
+- Scope all queries to the authenticated user's organization.
+- Respect existing role permissions.
+- If the current role cannot access a particular team detail, explain that limitation without exposing restricted data.
+- Never include users from another organization.
+- Do not invent users, names, or roles.
+- Do not invent an `active` status if the existing schema does not have one.
+- Distinguish registered team members from currently online users; do not claim to know online status without reliable session evidence.
+- Clearly specify whether the count includes the current user.
+- Minimize sharing team data with Groq.
+
+Example verified response:
+
+"Your workspace has 5 registered users, including you: 1 manager and 4 salespeople."
+
+## B. Lead intelligence
+
+Support questions such as:
+
+- "How many leads do we have?"
+- "Which leads are overdue?"
+- "Which customers need attention today?"
+- "How many leads are qualified?"
+- "Which new customers haven't been contacted?"
+- "Who is my most urgent customer?"
+- "Show leads assigned to me."
+- "What is the status of Atlas Industries?"
+
+Use existing Rails models and business services.
+
+For overdue leads, use the actual first-contact deadline logic.
+
+For urgent recommendations, use our existing `NextBestAction` service rather than asking the LLM to calculate priority scores.
+
+Support equivalent natural-language questions, even when they do not contain example keywords.
+
+## C. Opportunity intelligence
+
+Support:
+
+- "How many opportunities do we have?"
+- "How many deals have we won?"
+- "Which opportunities are in negotiation?"
+- "Show my lost deals."
+- "What deals are waiting for proposals?"
+- "Which opportunities have been inactive?"
+- "What is our current sales pipeline?"
+
+Use actual organization-scoped data.
+
+Respect existing opportunity stages and transition rules.
+
+Do not add together monetary values using different currencies unless the answer clearly separates the currencies.
+
+## D. Tasks and follow-ups
+
+Support:
+
+- "How many tasks do I have today?"
+- "Do I have any overdue follow-ups?"
+- "Which customers should I contact first?"
+- "What tasks are still pending?"
+- "What should I focus on today?"
+
+Use the current user's timezone and existing task/deadline rules.
+
+Distinguish future scheduled tasks from completed contact activities.
+
+Do not claim that scheduling a task completes a first contact.
+
+## E. General system questions
+
+Preserve conversational support for:
+
+- "How can I use LeadCurrent?"
+- "What is a lead?"
+- "How does the sales pipeline work?"
+- "What is the difference between a lead and an opportunity?"
+- "How do I create a customer?"
+- "How do I change my password?"
+- "How does Next Best Action work?"
+- "What can you do for me?"
+
+These should produce natural answers without attempting unnecessary browser actions.
+
+---
+
+# 3. Implement a secure Rails tool layer
+
+Create or extend a dedicated read-only CRM tool system.
+
+Possible architecture:
+
+- `Copilot::ToolRegistry`
+- `Copilot::CrmReader`
+- `Copilot::ToolExecutor`
+- `Copilot::ResponseFormatter`
+
+These names are suggestions. Follow the existing project conventions if the relevant components already exist.
+
+Use explicit, allowlisted operations such as:
+
+- `get_team_summary`
+- `get_lead_summary`
+- `list_overdue_leads`
+- `get_urgent_leads`
+- `get_opportunity_summary`
+- `list_opportunities_by_stage`
+- `get_task_summary`
+- `get_customer_summary`
+
+Do not implement a separate tool if an existing safe tool already provides the capability.
+
+The LLM can select a supported operation and provide validated parameters.
+
+However, **Rails must remain the authority over data access and calculations**.
+
+Never allow the model to:
+
+- Execute arbitrary SQL.
+- Choose arbitrary Rails classes.
+- Execute Ruby code.
+- Run terminal commands.
+- Call arbitrary URLs.
+- Bypass authorization.
+- Access unrestricted database records.
+- Request arbitrary columns.
+- Modify database records through read-only tools.
+
+Use an explicit tool schema, strict argument validation, and appropriate result-size limits.
+
+Reuse `WorkspaceAccess`, existing services, and role checks.
+
+Do not create a second inconsistent implementation of the 24-hour, 4-hour, or 72-hour rules.
+
+---
+
+# 4. Improve natural-language understanding
+
+The Copilot should not depend on a short list of keywords.
+
+Examples:
+
+"How many people are working with me?"
+
+"What's the size of our sales team?"
+
+"Do we have more than three users?"
+
+These should all be recognized as team-information questions.
+
+Likewise:
+
+"Which customers are late?"
+
+"Who have I forgotten to contact?"
+
+"Do I have any overdue leads?"
+
+should produce relevant, real CRM information when the request is clear enough.
+
+Continue using Groq for model-based understanding.
+
+The system should intelligently choose between:
+
+1. Answering a general question.
+2. Reading authorized CRM data.
+3. Executing a safe Page Agent interaction.
+4. Combining a data answer with navigation.
+5. Asking a clarifying question.
+6. Explaining that an action is unsupported.
+
+Do not force every question through Page Agent's DOM interaction loop.
+
+If a question can be answered accurately through a Rails database query, prefer that over several slow browser-agent steps.
+
+Do not use keyword matching as the primary intent classifier.
+
+---
+
+# 5. Maintain conversation context
+
+Make the Copilot understand short follow-up questions.
+
+Example:
+
+User: "How many leads are overdue?"
+
+Copilot: "There are 3 overdue leads."
+
+User: "Which one is the most urgent?"
+
+Copilot should understand that "which one" refers to the overdue leads in the preceding question.
+
+Another example:
+
+User: "How many people are in our team?"
+
+Copilot: "There are 5 registered team members."
+
+User: "How many are salespeople?"
+
+Copilot should understand that the user is still asking about team membership.
+
+Requirements:
+
+- Use bounded, short-lived conversation history.
+- Scope the conversation to the current authenticated user and workspace.
+- Never mix conversations across organizations or accounts.
+- Do not let previous messages override security policies.
+- Do not persist sensitive history unnecessarily.
+- Clear private conversation content on logout.
+- Handle Turbo navigation safely.
+- Apply input, history and token limits.
+
+---
+
+# 6. Make results factual and useful
+
+The assistant must clearly distinguish:
+
+**Verified CRM data**
+
+Data retrieved from authorized PostgreSQL queries.
+
+**AI interpretation**
+
+Suggestions, explanations, and generated language.
+
+**Unknown information**
+
+Anything that cannot be established from available records.
+
+For database questions, attach or preserve structured query results so the displayed counts and record identities come from Rails rather than being freely generated by the model.
+
+When possible, render verified numerical facts directly in Rails.
+
+Example:
+
+User: "How many opportunities are in negotiation?"
+
+Good:
+
+"You have 4 opportunities in Negotiation."
+
+Bad:
+
+"You probably have around 4 opportunities."
+
+If a query returns zero results, state that explicitly.
+
+If access is denied, explain it appropriately.
+
+If the database or AI provider is unavailable, show a safe error rather than fabricated results.
+
+Do not use "I don't have real-time access" when the appropriate authorized database tool is available.
+
+---
+
+# 7. Preserve and improve Alibaba Page Agent
+
+Keep the official Alibaba Page Agent.
+
+The Copilot should still be able to:
+
+- Navigate between pages.
+- Search for leads.
+- Apply permitted filters.
+- Open customer records.
+- Show opportunities.
+- Find overdue records.
+- Prepare unsaved notes.
+
+Maintain the actual DOM observation and tool-execution system.
+
+Do not replace real Page Agent execution with hardcoded routes pretending to be AI actions.
+
+Improve the user experience:
+
+- Show the useful answer first.
+- Collapse technical steps into an optional "Agent activity" section.
+- Use understandable activity descriptions.
+- Verify navigation results before reporting success.
+- Avoid unnecessary page actions when Rails can answer directly.
+- Preserve the Stop functionality.
+- Handle unsupported actions conversationally.
+
+An answer may combine both functions:
+
+"I found 3 overdue leads. I've also opened the filtered Leads page."
+
+Only claim that navigation occurred if the Page Agent actually performed and verified it.
+
+---
+
+# 8. Safety requirements
+
+Keep the existing Phase 2 Safe Mode.
+
+The Copilot can:
+
+- Read authorized data.
+- Answer questions.
+- Navigate and filter.
+- Open permitted records.
+- Prepare drafts.
+- Fill approved unsaved note fields.
+
+It must NOT autonomously:
+
+- Save customer activities.
+- Mark first contact as completed.
+- Change lead status.
+- Move opportunities between stages.
+- Mark deals Won or Lost.
+- Delete records.
+- Complete tasks.
+- Send messages.
+- Change passwords.
+- Modify user accounts.
+- Run arbitrary SQL or JavaScript.
+
+Keep human approval for database-changing actions.
+
+Do not weaken the existing SafeDom allowlists, session authentication, CSRF protections, Content Security Policy, or workspace isolation.
+
+Treat CRM free text and browser content as untrusted, including prompt-injection attempts.
+
+Keep `GROQ_API_KEY` on the server only.
+
+Do not include unnecessary personal data in provider requests.
+
+---
+
+# 9. Performance and free-tier efficiency
+
+We are using Groq because we do not want to host our own AI model.
+
+Continue using the existing working model:
+
+`openai/gpt-oss-20b`
+
+Do not install or deploy Ollama or a new local LLM.
+
+Do not require GPU hardware.
+
+Do not introduce additional paid providers.
+
+Improve efficiency where practical:
+
+- Avoid Groq calls for deterministic calculations that Rails already performs.
+- Avoid unnecessary repeated model calls.
+- Keep database results compact.
+- Limit conversation history.
+- Retain safe rate limiting.
+- Handle Groq 429 responses gracefully.
+- Show progress for genuinely long Page Agent operations.
+- Avoid excessive 25-second delays for simple CRM questions.
+
+Do not remove existing rate-limit protections just to make the UI appear faster.
+
+Preserve model configurability and the existing provider transport.
+
+---
+
+# 10. Improve the Copilot UI
+
+Make the existing interface feel like one useful AI assistant rather than separate experimental features.
+
+Keep the LeadCurrent visual identity and responsive design.
+
+Improve:
+
+- Conversation readability.
+- Long-answer scrolling.
+- Input positioning.
+- Loading indicators.
+- Clear error messages.
+- Follow-up questions.
+- Verified-data labels.
+- Clickable authorized customer records.
+- Expandable agent activity.
+- Mobile layout.
+- Light and dark mode.
+- Keyboard usability.
+
+Avoid excessive nested scrolling and large technical logs.
+
+The user should be able to ask a question and immediately understand the answer.
+
+Keep responses concise by default.
+
+---
+
+# 11. Automated tests
+
+Add real regression coverage for:
+
+**Team queries**
+- Manager gets correct organization team counts.
+- Salesperson gets only information permitted by the existing access policy.
+- Cross-organization users are excluded.
+- Role counts match database records.
+- Zero-member edge cases are handled consistently with the data model.
+- Natural paraphrases route to the same safe capability.
+
+**CRM questions**
+- Verified lead counts.
+- Overdue lead filtering.
+- Correct Next Best Action priority.
+- Opportunity stage counts.
+- Pending and overdue tasks.
+- Timezone boundaries.
+- Empty query results.
+- Unauthorized record rejection.
+
+**Conversation**
+- Follow-up references work.
+- Missing information is not invented.
+- General CRM explanations still work.
+- Invalid tool arguments are rejected.
+- Groq failures do not crash the app.
+
+**Page Agent**
+- Safe navigation still works.
+- Actual DOM controls are used.
+- Technical steps are collapsed.
+- Unsaved note preparation does not submit.
+- Forbidden actions remain blocked.
+- Turbo navigation remains functional.
+
+**Regression**
+- Phase 1 AI Sales Assistant still works.
+- Phase 2 browser agent still works.
+- All lead/opportunity transition rules remain unchanged.
+- All existing 24h/4h/72h deadline tests pass.
+- GitHub CI does not require an API key or live Groq requests.
+
+Use mocked model responses for normal automated tests and a separate opt-in live integration test.
+
+---
+
+# 12. Real browser verification
+
+After passing automated tests, use a fictional local workspace and real Groq requests to verify:
+
+1. "Tell me how I can use the system."
+2. "How many users are in my team?"
+3. "How many of them are salespeople?"
+4. "How many leads do we have?"
+5. "Which leads are overdue?"
+6. "Which one needs attention first?"
+7. "Show my opportunities in negotiation."
+8. "What follow-ups are due today?"
+9. "Open Atlas Industries."
+10. "Prepare a follow-up note for this customer."
+
+Verify each database-derived answer against the actual PostgreSQL data.
+
+Confirm the agent cannot submit the prepared note without a separate manual user action.
+
+Clearly distinguish mocked tests from real Groq tests.
+
+Do not claim that a test passed unless it actually ran successfully.
+
+Do not modify production customer data.
+
+---
+
+# 13. Finalize university documentation
+
+Update:
+
+- `CHALLENGE_LOG.md`
+- `AGENT.md`
+- `README.md`
+- Phase 2 technical documentation
+
+Preserve all Phase 1 evidence.
+
+Record:
+
+- The original Phase 2 baseline.
+- The current pre-finalization baseline.
+- Why we continued rather than pivoted.
+- The specific usability problems observed in manual testing.
+- The new verified-data capabilities.
+- Real tests and results.
+- Groq tool usage if measured.
+- Known limitations.
+- Genuine time measurements if available.
+- Unfinished promises.
+- Actual source commits.
+- Final decision: continue, pivot, or kill, with reasoning.
+
+Include the original prompt accurately when available; never fabricate original prompts, working hours, API costs or measurements.
+
+Explain how LeadCurrent now differs from a simple Salesforce-style CRM clone:
+
+- Real LLM integration.
+- Context-aware CRM questions.
+- Verified, authorized database answers.
+- Browser interaction using Alibaba Page Agent.
+- Human-controlled business changes.
+
+Do not claim these ideas are absent from Salesforce or unique to the entire CRM industry without evidence.
+
+Prepare a short Turkish demo guide suitable for presenting the feature to the professor.
+
+---
+
+# 14. Final quality checks
+
+Before declaring Phase 2 complete:
+
+1. Run the full Rails test suite.
+2. Run browser/system tests.
+3. Run Zeitwerk checks.
+4. Run Brakeman.
+5. Run the Node/Page Agent build.
+6. Verify the production asset build.
+7. Verify Ruby and JavaScript syntax.
+8. Review authentication, tenant isolation and AI rate limits.
+9. Verify no API keys or credentials are tracked or staged.
+10. Ensure no PostgreSQL database data was destroyed.
+11. Check the Dockerfile and GitHub CI build requirements.
+12. Verify the local application still starts and loads.
+
+Avoid unnecessary architectural changes.
+
+If a critical feature fails, repair it before marking Phase 2 complete.
+
+---
+
+# 15. Git and packaging
+
+Keep all work on the existing Phase 2 development branch.
+
+When implementation and tests are complete:
+
+- Review the exact changes.
+- Create a local commit with a descriptive message.
+- Do not force-push.
+- Do not push to GitHub yet.
+- Do not deploy to Railway yet.
+
+Our previous manually created ZIP accidentally contained `config/master.key`, `.git`, and local PostgreSQL files.
+
+This must not happen again.
+
+Use the existing `script/package_source.rb` safe packaging workflow, or an equivalent verified Git-tracked-source-only export.
+
+Never include:
+
+- `config/master.key`
+- `.env` secrets
+- `.git`
+- `.local/postgres`
+- Local databases
+- Logs
+- `node_modules`
+- API keys
+- Production credentials
+
+Verify the actual archive file list before providing it.
+
+Generate a clean review ZIP so I can upload it to ChatGPT for a final source-code review.
+
+---
+
+# 16. Final report
+
+When finished, give me:
+
+1. A summary of the improvements.
+2. The reason the team-count question previously failed.
+3. The new read-only CRM tools.
+4. The model/tool-selection architecture.
+5. Example questions that now work.
+6. Actual automated test counts and results.
+7. Actual live Groq test results.
+8. Security and authorization results.
+9. Performance improvements, if measured.
+10. Files changed and local commit SHA.
+11. Path to the clean source-only ZIP.
+12. Known limitations and remaining problems.
+
+**Definition of done:**
+
+I can ask LeadCurrent AI Copilot ordinary questions, request verified CRM information, and give natural-language navigation instructions without memorizing example prompts.
+
+When I ask, "How many users are in my team?", the system retrieves the authorized, actual number from PostgreSQL rather than claiming it cannot access the information.
+
+Alibaba Page Agent must continue working, existing sales workflows must remain intact, and no database changes may occur without user approval.
+
+Do not start Phase 3.
+
+Do not push to GitHub or Railway until I approve the final reviewed version.
+
+Start with the current Phase 2 implementation, diagnose missing CRM data capabilities, implement the smallest reliable improvements, and complete the final tests.
+```
+
+
+### Finalization review snapshot ? measured result and live quota block
+
+**Status: local review snapshot; final continuous live acceptance BLOCKED. Do not mark Phase 2 fully verified or deployed.** Continue the existing CRM/LLM/DOM architecture; no Phase3, pivot, push or Railway changes. A local review commit is used to create the requested safe source ZIP; its actual SHA is resolved from Git HEAD, the ZIP name/comment and delivery message, not invented inside its own commit.
+
+Implemented organization-scoped registered team/role counts following the existing both-role Settings roster policy; no identities, online/active inference or new write authority. Extended lead totals/stages/assigned/uncontacted/customer status, separate-currency pipeline and inactive opportunity reads. Existing overdue reads now include the first eligible official NBA recommendation, so follow-up urgency needs no duplicate tool. Tasks use the user's timezone. Strict per-query arguments and escaped bounded queries remain authoritative; model fact prose is ignored. The planner remains genuine Groq gpt-oss-20b with temperature0, not a keyword router. Ten schema fields now omit the redundant navigate boolean; Rails derives it from intent. A genuine diagnostic of the previous rejected JSON found 10 fields and exactly missing navigate; replay after the change passed with the same bounded note context, without raising token caps.
+
+Record opening uses the same scoped customer summary only to choose a list type, then official Page Agent must use visible DOM navigation/search/record controls. Zero/ambiguous matches remain explicit. No privileged route/record ID is placed into its instruction. Canonical action policy no longer requests reflection fields; verified completion uses a separate short done-only policy/schema, independently enforced. SafeDom and official library source/allowlists unchanged. Logout purges that login's private cached conversation/pending plan. The only authentication-controller change is that purge; existing login/password/CSRF algorithms remain. Panel composer, scrolling, source labels, keyboard, mobile and optional activity were refined.
+
+Final normal tests (mocked HTTP; real official library/browser DOM/Turbo): Rails seed38909 **139 tests /1820 assertions**, browser seed44039 **27 /385**, total **166 /2205**, zero failure/error/skip. Zeitwerk, Node locked ci/build, npm audit0, production assets and 120 Ruby/12 JS syntax passed. Brakeman0 warnings/errors with Windows Ractor/fork fallback diagnostics. Docker/CI source requirements reviewed, including the existing final-stage mkdir fix; Linux Docker daemon unavailable, so no image build or remote CI/deployment success is claimed.
+
+Real API evidence: **16 runs**, 15 partial/failed and one focused note subset PASS (seed35567, 1 test/12 assertions, 3 real completions, 4297 measured tokens). Every one of the ten requested scenario TYPES had at least one observed pass across iterations. That is NOT a final-source single-run pass. The last schema run seed47881 (2026-10-21T09:16:15Z?09:17:56Z) passed first5/13 and stopped at the urgency follow-up with provider429/TPD. Three extra team paraphrases were not reached and are not claimed live. Provider response numeric-only diagnosis: TPD limit200000, used197642, requested2419, Retry-After27s; account-wide at observation, not a project bill or a guarantee that the remaining full run can fit after27s. Repeated live iterations consumed the available budget; further live requests stopped.
+
+Across the 16 recorded runs: 89 successfully reported completions, 162847 prompt +9310 completion = **172157 measured tokens**, including repeated prefixes of failed runs. Rejected responses and separate diagnostics are not fully metered. Human hours, development-agent tokens and paid API costs are unmeasured. Failures retained: redundant overdue period rejected; earlier workspace owner scope carried into explicit my; read/show intent drift; duplicate urgency query selection; quota waits/retry exhaustion; Atlas searched in the wrong filtered list; HTTP400/tool generation; missing navigate JSON. Not all provider tool errors have a proven single cause. No failed run was relabelled all-pass. Test-only interquestion quota pacing reads existing budget windows and reports waits separately; no rate limits or invalid-output retry protections were removed.
+
+Existing development data hashes unchanged for all non-session tables (2 users,7 leads,4 opportunities). Actual local browser login, dashboard, lists, customer profiles, Phase1 four controls and Copilot open/close passed; /up HTTP200/database connected. No reset/drop/seed/migration or production DB operation. Phase1 evidence and all prior challenge text remain preserved. Local master key remains unchanged/ignored. Source policy and final archive are independently checked before delivery; their exact commit/archive hash is delivered outside this self-referencing document.
+
+[Current Turkish technical report and professor demo](docs/COPILOT_PHASE2_FINAL_TR.md), [full structured evidence including all run records and changed files](docs/evidence/phase2-finalization-2026-10-21.json), [actual fictional team-count screenshot](docs/evidence/phase2-team-2026-10-21.png). Known remaining work: recover Groq quota, rerun full opt-in live acceptance and extra paraphrases; retain safe model-error handling, bounded candidates, process-local limits, lack of online status and unverified Docker/deployment limitations. Decision: **CONTINUE, review locally; release remains unapproved and live acceptance remains incomplete.**

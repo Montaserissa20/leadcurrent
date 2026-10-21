@@ -9,6 +9,15 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.7
+FROM node:22-bookworm-slim AS agent_assets
+WORKDIR /workspace
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY script/build_page_agent.mjs ./script/build_page_agent.mjs
+COPY vendor/licenses ./vendor/licenses
+COPY app/javascript/page_agent ./app/javascript/page_agent
+RUN npm run build
+
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -42,6 +51,7 @@ RUN bundle install && \
 
 # Copy application code
 COPY . .
+COPY --from=agent_assets /workspace/app/assets/builds /rails/app/assets/builds
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/

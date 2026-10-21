@@ -1,0 +1,2912 @@
+{
+  "status": "LOCAL_REVIEW_SNAPSHOT_FINAL_LIVE_ACCEPTANCE_BLOCKED",
+  "date": "2026-10-21",
+  "timezone": "Europe/Istanbul",
+  "branch": "phase2/page-agent",
+  "original_phase2_baseline": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+  "pre_finalization_head": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+  "pre_finalization_dirty_source_files": 268,
+  "source_commit_note": "This evidence is part of the local review commit; use Git HEAD, the ZIP filename and Git archive comment for its actual SHA. No push/deploy.",
+  "baseline": {
+    "rails": {
+      "seed": 37289,
+      "tests": 124,
+      "assertions": 1692
+    },
+    "browser": {
+      "seed": 5184,
+      "tests": 25,
+      "assertions": 351
+    },
+    "failures_errors_skips": 0
+  },
+  "final_automated": {
+    "rails": {
+      "tests": 139,
+      "assertions": 1820,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 38909
+    },
+    "browser": {
+      "tests": 27,
+      "assertions": 385,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 44039
+    },
+    "tests": 166,
+    "assertions": 2205,
+    "provider_transport": "mocked; real library/DOM/Turbo in system tests"
+  },
+  "checks": {
+    "zeitwerk": "PASS",
+    "brakeman_warnings": 0,
+    "brakeman_errors": 0,
+    "brakeman_windows_fallback_diagnostics": true,
+    "npm_ci_build": "PASS",
+    "npm_audit_vulnerabilities": 0,
+    "production_assets": "PASS; no database operations",
+    "syntax": {
+      "ruby": 120,
+      "javascript": 12
+    },
+    "docker_ci_source_review": "PASS; Node22/npm build/PostgreSQL17/final mkdir preserved",
+    "docker_image_build": "NOT RUN: Linux daemon pipe unavailable",
+    "remote_ci": "NOT RUN; no push",
+    "railway_deployment": "NOT RUN; no deploy"
+  },
+  "development_data": {
+    "all_non_session_table_contents_match_before_browser_baseline": true,
+    "users": 2,
+    "leads": 7,
+    "opportunities": 4,
+    "migrations_reset_seed_drop": false,
+    "health_http": 200,
+    "database": "connected",
+    "existing_login_crm_ai_interfaces_browser": "PASS; no live AI calls in this local smoke check"
+  },
+  "live": {
+    "status": "BLOCKED",
+    "all_requested_scenario_types_observed_passing_across_iterations": [
+      "help",
+      "lead_count",
+      "negotiation",
+      "note",
+      "overdue",
+      "record",
+      "salespeople",
+      "tasks",
+      "team",
+      "urgent"
+    ],
+    "not_a_final_single_run_pass": true,
+    "extra_three_team_paraphrases": "NOT REACHED; not claimed as live passes",
+    "latest_final_schema_run": {
+      "seed": 47881,
+      "started_at": "2026-10-21T09:16:15Z",
+      "finished_at": "2026-10-21T09:17:56Z",
+      "passed_scenarios": 5,
+      "stopped_at": "Which one needs attention first?",
+      "failure": "provider HTTP429 rate_limit_exceeded"
+    },
+    "quota_observation": {
+      "source": "separate genuine provider rejection, numeric/type-only diagnostic",
+      "scope": "TPD",
+      "limit": 200000,
+      "used": 197642,
+      "requested": 2419,
+      "retry_after_seconds": 27,
+      "scope_note": "Account-wide provider token bucket at observation, not a project bill or remaining-scenario estimate"
+    },
+    "planner_diagnostic": {
+      "before_schema_simplification": {
+        "http": 400,
+        "code": "json_validate_failed",
+        "json_parsed": true,
+        "field_count": 10,
+        "missing_fields": [
+          "navigate"
+        ],
+        "mentions_token_or_length": false
+      },
+      "after_removal": "PASS with the same four-turn note context; Rails derives navigate from intent; cap stays600"
+    },
+    "measured_successful_completions": 89,
+    "measured_successful_completion_usage": {
+      "prompt_tokens": 162847,
+      "completion_tokens": 9310,
+      "total_tokens": 172157
+    },
+    "usage_limitations": "Includes repeated failed-run prefixes. Rejected response usage and separate diagnostics are not fully metered; not total account/billing usage. Paid cost/human hours unmeasured.",
+    "test_only_interquestion_pacing": "Actual existing cache/header windows; waits separately recorded, no limiter reset or bypass. Not a guarantee of rapid consecutive user requests.",
+    "attempts": [
+      {
+        "local_report": "copilot-final-live-20261021082859.json",
+        "started_at": "2026-10-21T08:28:59Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.319,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.04,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.16,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 43.026,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1732,
+              "completion_tokens": 254,
+              "total_tokens": 1986
+            },
+            "duration_seconds": 0.848,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1774,
+              "completion_tokens": 91,
+              "total_tokens": 1865
+            },
+            "duration_seconds": 0.546,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1819,
+              "completion_tokens": 72,
+              "total_tokens": 1891
+            },
+            "duration_seconds": 0.702,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1864,
+              "completion_tokens": 124,
+              "total_tokens": 1988
+            },
+            "duration_seconds": 0.591,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1906,
+              "completion_tokens": 116,
+              "total_tokens": 2022
+            },
+            "duration_seconds": 0.546,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 3,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:29:52Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 9095,
+          "completion_tokens": 657,
+          "total_tokens": 9752
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021083054.json",
+        "started_at": "2026-10-21T08:30:54Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.271,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 0.872,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.047,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 41.758,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1732,
+              "completion_tokens": 253,
+              "total_tokens": 1985
+            },
+            "duration_seconds": 0.846,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1774,
+              "completion_tokens": 75,
+              "total_tokens": 1849
+            },
+            "duration_seconds": 0.375,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1819,
+              "completion_tokens": 127,
+              "total_tokens": 1946
+            },
+            "duration_seconds": 0.559,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1864,
+              "completion_tokens": 94,
+              "total_tokens": 1958
+            },
+            "duration_seconds": 0.294,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1906,
+              "completion_tokens": 158,
+              "total_tokens": 2064
+            },
+            "duration_seconds": 0.715,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          }
+        ],
+        "failures": [
+          {
+            "intent": "show_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "overdue",
+            "destination": "leads",
+            "surface": "invalid_decision.copilot"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 3,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:31:45Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 9095,
+          "completion_tokens": 707,
+          "total_tokens": 9802
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021083300.json",
+        "started_at": "2026-10-21T08:33:00Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 0.969,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 0.925,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.006,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 43.811,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.241,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which one needs attention first?",
+            "expected": "urgent",
+            "result": "PASS",
+            "seconds": 1.113,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1765,
+              "completion_tokens": 190,
+              "total_tokens": 1955
+            },
+            "duration_seconds": 0.519,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1807,
+              "completion_tokens": 92,
+              "total_tokens": 1899
+            },
+            "duration_seconds": 0.437,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1852,
+              "completion_tokens": 86,
+              "total_tokens": 1938
+            },
+            "duration_seconds": 0.548,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1897,
+              "completion_tokens": 81,
+              "total_tokens": 1978
+            },
+            "duration_seconds": 0.355,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1939,
+              "completion_tokens": 101,
+              "total_tokens": 2040
+            },
+            "duration_seconds": 0.703,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1942,
+              "completion_tokens": 159,
+              "total_tokens": 2101
+            },
+            "duration_seconds": 0.574,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1942,
+              "completion_tokens": 105,
+              "total_tokens": 2047
+            },
+            "duration_seconds": 0.557,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1312,
+              "completion_tokens": 44,
+              "total_tokens": 1356
+            },
+            "action": "click_control",
+            "duration_seconds": 0.283,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1239,
+              "completion_tokens": 90,
+              "total_tokens": 1329
+            },
+            "action": "apply_filters",
+            "duration_seconds": 0.552,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1226,
+              "completion_tokens": 92,
+              "total_tokens": 1318
+            },
+            "action": "done",
+            "duration_seconds": 0.52,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "urgent_overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "show_crm_data",
+            "query": "opportunities",
+            "audience": "workspace",
+            "status": "negotiation",
+            "period": "all",
+            "destination": "opportunities",
+            "navigate": true
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 3,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:34:43Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 16921,
+          "completion_tokens": 1040,
+          "total_tokens": 17961
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021083616.json",
+        "started_at": "2026-10-21T08:36:16Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.66,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.302,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.461,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 41.655,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.32,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1868,
+              "completion_tokens": 266,
+              "total_tokens": 2134
+            },
+            "duration_seconds": 0.682,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1910,
+              "completion_tokens": 95,
+              "total_tokens": 2005
+            },
+            "duration_seconds": 0.364,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1955,
+              "completion_tokens": 116,
+              "total_tokens": 2071
+            },
+            "duration_seconds": 0.536,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2000,
+              "completion_tokens": 108,
+              "total_tokens": 2108
+            },
+            "duration_seconds": 0.667,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2042,
+              "completion_tokens": 77,
+              "total_tokens": 2119
+            },
+            "duration_seconds": 0.376,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2046,
+              "completion_tokens": 90,
+              "total_tokens": 2136
+            },
+            "duration_seconds": 0.569,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "leads",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "leads",
+            "navigate": false
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:37:13Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 11821,
+          "completion_tokens": 752,
+          "total_tokens": 12573
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021083924.json",
+        "started_at": "2026-10-21T08:39:24Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.547,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.453,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.587,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 42.211,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.531,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which one needs attention first?",
+            "expected": "urgent",
+            "result": "PASS",
+            "seconds": 1.622,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1947,
+              "completion_tokens": 180,
+              "total_tokens": 2127
+            },
+            "duration_seconds": 0.6,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1989,
+              "completion_tokens": 70,
+              "total_tokens": 2059
+            },
+            "duration_seconds": 0.596,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2034,
+              "completion_tokens": 99,
+              "total_tokens": 2133
+            },
+            "duration_seconds": 0.673,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2079,
+              "completion_tokens": 74,
+              "total_tokens": 2153
+            },
+            "duration_seconds": 0.247,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2121,
+              "completion_tokens": 75,
+              "total_tokens": 2196
+            },
+            "duration_seconds": 0.536,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2124,
+              "completion_tokens": 116,
+              "total_tokens": 2240
+            },
+            "duration_seconds": 0.563,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2123,
+              "completion_tokens": 97,
+              "total_tokens": 2220
+            },
+            "duration_seconds": 0.313,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "show_crm_data",
+            "query": "opportunities",
+            "audience": "mine",
+            "status": "negotiation",
+            "period": "all",
+            "destination": "opportunities",
+            "navigate": true
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:40:34Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 14417,
+          "completion_tokens": 711,
+          "total_tokens": 15128
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021084315.json",
+        "started_at": "2026-10-21T08:43:15Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.465,
+            "test_harness_wait_seconds": 0.017,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.495,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.459,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 1.336,
+            "test_harness_wait_seconds": 46.023,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.817,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which one needs attention first?",
+            "expected": "urgent",
+            "result": "PASS",
+            "seconds": 1.529,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1947,
+              "completion_tokens": 185,
+              "total_tokens": 2132
+            },
+            "duration_seconds": 0.511,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1989,
+              "completion_tokens": 66,
+              "total_tokens": 2055
+            },
+            "duration_seconds": 0.608,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2034,
+              "completion_tokens": 71,
+              "total_tokens": 2105
+            },
+            "duration_seconds": 0.441,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2079,
+              "completion_tokens": 166,
+              "total_tokens": 2245
+            },
+            "duration_seconds": 0.448,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2121,
+              "completion_tokens": 100,
+              "total_tokens": 2221
+            },
+            "duration_seconds": 0.741,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2125,
+              "completion_tokens": 175,
+              "total_tokens": 2300
+            },
+            "duration_seconds": 0.378,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2125,
+              "completion_tokens": 95,
+              "total_tokens": 2220
+            },
+            "duration_seconds": 0.306,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "leads",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "leads",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "opportunities",
+            "audience": "mine",
+            "status": "negotiation",
+            "period": "all",
+            "destination": "opportunities",
+            "navigate": false
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:45:29Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 14420,
+          "completion_tokens": 858,
+          "total_tokens": 15278
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021084758.json",
+        "started_at": "2026-10-21T08:47:58Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.968,
+            "test_harness_wait_seconds": 0.029,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.443,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.484,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 1.561,
+            "test_harness_wait_seconds": 48.03,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.617,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which one needs attention first?",
+            "expected": "urgent",
+            "result": "PASS",
+            "seconds": 1.606,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Show my opportunities in negotiation.",
+            "expected": "negotiation",
+            "result": "PASS",
+            "seconds": 5.907,
+            "test_harness_wait_seconds": 46.016,
+            "calls": 4,
+            "crm_unchanged": true
+          },
+          {
+            "question": "What follow-ups are due today?",
+            "expected": "tasks",
+            "result": "PASS",
+            "seconds": 1.245,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2064,
+              "completion_tokens": 207,
+              "total_tokens": 2271
+            },
+            "duration_seconds": 0.865,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2106,
+              "completion_tokens": 70,
+              "total_tokens": 2176
+            },
+            "duration_seconds": 0.522,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2151,
+              "completion_tokens": 148,
+              "total_tokens": 2299
+            },
+            "duration_seconds": 0.407,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2196,
+              "completion_tokens": 92,
+              "total_tokens": 2288
+            },
+            "duration_seconds": 0.669,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2238,
+              "completion_tokens": 73,
+              "total_tokens": 2311
+            },
+            "duration_seconds": 0.61,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2241,
+              "completion_tokens": 104,
+              "total_tokens": 2345
+            },
+            "duration_seconds": 0.473,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2240,
+              "completion_tokens": 86,
+              "total_tokens": 2326
+            },
+            "duration_seconds": 0.311,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1332,
+              "completion_tokens": 42,
+              "total_tokens": 1374
+            },
+            "action": "click_control",
+            "duration_seconds": 0.285,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1257,
+              "completion_tokens": 85,
+              "total_tokens": 1342
+            },
+            "action": "apply_filters",
+            "duration_seconds": 0.487,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1236,
+              "completion_tokens": 77,
+              "total_tokens": 1313
+            },
+            "action": "done",
+            "duration_seconds": 0.422,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2243,
+              "completion_tokens": 71,
+              "total_tokens": 2314
+            },
+            "duration_seconds": 0.363,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2239,
+              "completion_tokens": 135,
+              "total_tokens": 2374
+            },
+            "duration_seconds": 0.464,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1152,
+              "completion_tokens": 48,
+              "total_tokens": 1200
+            },
+            "action": "click_control",
+            "duration_seconds": 0.475,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "show_crm_data",
+            "query": "opportunities",
+            "audience": "mine",
+            "status": "negotiation",
+            "period": "all",
+            "destination": "opportunities",
+            "navigate": true
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "pending_tasks",
+            "audience": "mine",
+            "status": "any",
+            "period": "today",
+            "destination": "tasks",
+            "navigate": false
+          },
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "record",
+            "navigate": true
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T08:50:54Z",
+        "csp_violations": 0,
+        "usage": {
+          "prompt_tokens": 24695,
+          "completion_tokens": 1238,
+          "total_tokens": 25933
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021085256.json",
+        "started_at": "2026-10-21T08:52:56Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2061,
+              "completion_tokens": 77,
+              "total_tokens": 2138
+            },
+            "duration_seconds": 0.332,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1140,
+              "completion_tokens": 51,
+              "total_tokens": 1191
+            },
+            "action": "fill_field",
+            "duration_seconds": 0.946,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1209,
+              "completion_tokens": 142,
+              "total_tokens": 1351
+            },
+            "action": "click_control",
+            "duration_seconds": 0.638,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "record",
+            "navigate": true
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "record",
+          "note"
+        ],
+        "manual_fixture_start": "Existing filtered Opportunities page; subsequent navigation must use real Page Agent.",
+        "finished_at": "2026-10-21T08:53:08Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "lastAttempt": {
+            "targetPresent": true,
+            "targetType": "filter",
+            "tool": "click_control"
+          },
+          "proxyError": "invalid_response",
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 4410,
+          "completion_tokens": 270,
+          "total_tokens": 4680
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021085645.json",
+        "started_at": "2026-10-21T08:56:45Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Open Atlas Industries.",
+            "expected": "record",
+            "result": "PASS",
+            "seconds": 4.353,
+            "test_harness_wait_seconds": 0.003,
+            "calls": 4,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2061,
+              "completion_tokens": 77,
+              "total_tokens": 2138
+            },
+            "duration_seconds": 0.337,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1198,
+              "completion_tokens": 38,
+              "total_tokens": 1236
+            },
+            "action": "click_control",
+            "duration_seconds": 0.388,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1347,
+              "completion_tokens": 43,
+              "total_tokens": 1390
+            },
+            "action": "click_control",
+            "duration_seconds": 0.265,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1222,
+              "completion_tokens": 61,
+              "total_tokens": 1283
+            },
+            "action": "done",
+            "duration_seconds": 0.339,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "record",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "unclassified"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "record",
+          "note"
+        ],
+        "manual_fixture_start": "Existing filtered Opportunities page; subsequent navigation must use real Page Agent.",
+        "finished_at": "2026-10-21T08:57:52Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "lastAttempt": null,
+          "proxyError": null,
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 5828,
+          "completion_tokens": 219,
+          "total_tokens": 6047
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021085900.json",
+        "started_at": "2026-10-21T08:59:00Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2069,
+              "completion_tokens": 137,
+              "total_tokens": 2206
+            },
+            "duration_seconds": 0.62,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "note",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "tool_use_failed"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "note"
+        ],
+        "manual_fixture_start": "Existing editable lead page; note preparation must use real Page Agent.",
+        "finished_at": "2026-10-21T08:59:07Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "lastAttempt": null,
+          "proxyError": "tool_call_failed",
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 2069,
+          "completion_tokens": 137,
+          "total_tokens": 2206
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021090054.json",
+        "started_at": "2026-10-21T09:00:54Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2069,
+              "completion_tokens": 145,
+              "total_tokens": 2214
+            },
+            "duration_seconds": 0.679,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1228,
+              "completion_tokens": 100,
+              "total_tokens": 1328
+            },
+            "action": "fill_field",
+            "duration_seconds": 0.495,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "note",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "tool_use_failed"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "note"
+        ],
+        "manual_fixture_start": "Existing editable lead page; note preparation must use real Page Agent.",
+        "finished_at": "2026-10-21T09:01:04Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "lastAttempt": {
+            "targetPresent": true,
+            "targetType": "note",
+            "tool": "fill_field"
+          },
+          "proxyError": "tool_call_failed",
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 3297,
+          "completion_tokens": 245,
+          "total_tokens": 3542
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021090219.json",
+        "started_at": "2026-10-21T09:02:19Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2069,
+              "completion_tokens": 132,
+              "total_tokens": 2201
+            },
+            "duration_seconds": 0.454,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1213,
+              "completion_tokens": 84,
+              "total_tokens": 1297
+            },
+            "action": "fill_field",
+            "duration_seconds": 0.49,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "note",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "tool_use_failed",
+            "generated_function": "unrecognized",
+            "action_wrapper": true,
+            "done_action": false
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "note"
+        ],
+        "manual_fixture_start": "Existing editable lead page; note preparation must use real Page Agent.",
+        "finished_at": "2026-10-21T09:02:31Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "lastAttempt": {
+            "targetPresent": true,
+            "targetType": "note",
+            "tool": "fill_field"
+          },
+          "proxyError": "tool_call_failed",
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 3282,
+          "completion_tokens": 216,
+          "total_tokens": 3498
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021090357.json",
+        "started_at": "2026-10-21T09:03:57Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2069,
+              "completion_tokens": 137,
+              "total_tokens": 2206
+            },
+            "duration_seconds": 0.726,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "note",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "tool_use_failed",
+            "generated_function": "unrecognized",
+            "action_wrapper": true,
+            "done_action": false
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "note"
+        ],
+        "manual_fixture_start": "Existing editable lead page; note preparation must use real Page Agent.",
+        "finished_at": "2026-10-21T09:04:08Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": "execution_error",
+          "lastAttempt": null,
+          "proxyError": "tool_call_failed",
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 2069,
+          "completion_tokens": 137,
+          "total_tokens": 2206
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021090514.json",
+        "started_at": "2026-10-21T09:05:14Z",
+        "result": "PASS",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Prepare a follow-up note for this customer.",
+            "expected": "note",
+            "result": "PASS",
+            "seconds": 4.345,
+            "test_harness_wait_seconds": 0.02,
+            "calls": 3,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2069,
+              "completion_tokens": 133,
+              "total_tokens": 2202
+            },
+            "duration_seconds": 0.377,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1214,
+              "completion_tokens": 90,
+              "total_tokens": 1304
+            },
+            "action": "fill_field",
+            "duration_seconds": 0.659,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 748,
+              "completion_tokens": 43,
+              "total_tokens": 791
+            },
+            "action": "done",
+            "duration_seconds": 0.439,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "note",
+            "navigate": true
+          }
+        ],
+        "failures": [],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "diagnostic_subset": [
+          "note"
+        ],
+        "manual_fixture_start": "Existing editable lead page; note preparation must use real Page Agent.",
+        "note_submission": "No submit occurred; all CRM table contents unchanged after every request. No manual save was performed.",
+        "finished_at": "2026-10-21T09:05:28Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "lastAttempt": {
+            "targetPresent": false,
+            "targetType": null,
+            "tool": "done"
+          },
+          "proxyError": null,
+          "status": "completed"
+        },
+        "usage": {
+          "prompt_tokens": 4031,
+          "completion_tokens": 266,
+          "total_tokens": 4297
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021090658.json",
+        "started_at": "2026-10-21T09:06:58Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.741,
+            "test_harness_wait_seconds": 0.018,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.345,
+            "test_harness_wait_seconds": 0.001,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.629,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 1.617,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.864,
+            "test_harness_wait_seconds": 36.014,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which one needs attention first?",
+            "expected": "urgent",
+            "result": "PASS",
+            "seconds": 1.642,
+            "test_harness_wait_seconds": 0.001,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Show my opportunities in negotiation.",
+            "expected": "negotiation",
+            "result": "PASS",
+            "seconds": 6.782,
+            "test_harness_wait_seconds": 32.018,
+            "calls": 4,
+            "crm_unchanged": true
+          },
+          {
+            "question": "What follow-ups are due today?",
+            "expected": "tasks",
+            "result": "PASS",
+            "seconds": 1.527,
+            "test_harness_wait_seconds": 0.002,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Open Atlas Industries.",
+            "expected": "record",
+            "result": "PASS",
+            "seconds": 6.045,
+            "test_harness_wait_seconds": 53.017,
+            "calls": 4,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2064,
+              "completion_tokens": 187,
+              "total_tokens": 2251
+            },
+            "duration_seconds": 0.787,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2106,
+              "completion_tokens": 70,
+              "total_tokens": 2176
+            },
+            "duration_seconds": 0.29,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2151,
+              "completion_tokens": 99,
+              "total_tokens": 2250
+            },
+            "duration_seconds": 0.658,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2196,
+              "completion_tokens": 99,
+              "total_tokens": 2295
+            },
+            "duration_seconds": 0.702,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2238,
+              "completion_tokens": 73,
+              "total_tokens": 2311
+            },
+            "duration_seconds": 0.616,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2241,
+              "completion_tokens": 104,
+              "total_tokens": 2345
+            },
+            "duration_seconds": 0.559,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2240,
+              "completion_tokens": 94,
+              "total_tokens": 2334
+            },
+            "duration_seconds": 0.798,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1389,
+              "completion_tokens": 97,
+              "total_tokens": 1486
+            },
+            "action": "click_control",
+            "duration_seconds": 0.534,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1314,
+              "completion_tokens": 95,
+              "total_tokens": 1409
+            },
+            "action": "apply_filters",
+            "duration_seconds": 0.377,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 878,
+              "completion_tokens": 42,
+              "total_tokens": 920
+            },
+            "action": "done",
+            "duration_seconds": 0.549,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2243,
+              "completion_tokens": 71,
+              "total_tokens": 2314
+            },
+            "duration_seconds": 0.543,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2239,
+              "completion_tokens": 94,
+              "total_tokens": 2333
+            },
+            "duration_seconds": 0.798,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1270,
+              "completion_tokens": 40,
+              "total_tokens": 1310
+            },
+            "action": "click_control",
+            "duration_seconds": 0.42,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 1409,
+              "completion_tokens": 52,
+              "total_tokens": 1461
+            },
+            "action": "click_control",
+            "duration_seconds": 0.577,
+            "surface": "completion.page_agent"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 869,
+              "completion_tokens": 41,
+              "total_tokens": 910
+            },
+            "action": "done",
+            "duration_seconds": 0.449,
+            "surface": "completion.page_agent"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "show_crm_data",
+            "query": "opportunities",
+            "audience": "mine",
+            "status": "negotiation",
+            "period": "all",
+            "destination": "opportunities",
+            "navigate": true
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "pending_tasks",
+            "audience": "mine",
+            "status": "any",
+            "period": "today",
+            "destination": "tasks",
+            "navigate": false
+          },
+          {
+            "intent": "page_action",
+            "query": "none",
+            "audience": "mine",
+            "status": "any",
+            "period": "all",
+            "destination": "record",
+            "navigate": true
+          }
+        ],
+        "failures": [
+          {
+            "status": 400,
+            "code": "json_validate_failed"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T09:10:27Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "lastAttempt": null,
+          "proxyError": null,
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 26847,
+          "completion_tokens": 1258,
+          "total_tokens": 28105
+        }
+      },
+      {
+        "local_report": "copilot-final-live-20261021091615.json",
+        "started_at": "2026-10-21T09:16:15Z",
+        "result": "FAIL",
+        "mocked": false,
+        "scenarios": [
+          {
+            "question": "Tell me how I can use the system.",
+            "expected": "help",
+            "result": "PASS",
+            "seconds": 1.115,
+            "test_harness_wait_seconds": 0.003,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many users are in my team?",
+            "expected": "team",
+            "result": "PASS",
+            "seconds": 1.052,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many of them are salespeople?",
+            "expected": "salespeople",
+            "result": "PASS",
+            "seconds": 1.076,
+            "test_harness_wait_seconds": 41.019,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "How many leads do we have?",
+            "expected": "lead_count",
+            "result": "PASS",
+            "seconds": 1.876,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          },
+          {
+            "question": "Which leads are overdue?",
+            "expected": "overdue",
+            "result": "PASS",
+            "seconds": 1.218,
+            "test_harness_wait_seconds": 0.0,
+            "calls": 1,
+            "crm_unchanged": true
+          }
+        ],
+        "completions": [
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2023,
+              "completion_tokens": 216,
+              "total_tokens": 2239
+            },
+            "duration_seconds": 0.652,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2065,
+              "completion_tokens": 68,
+              "total_tokens": 2133
+            },
+            "duration_seconds": 0.559,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2110,
+              "completion_tokens": 107,
+              "total_tokens": 2217
+            },
+            "duration_seconds": 0.541,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2155,
+              "completion_tokens": 136,
+              "total_tokens": 2291
+            },
+            "duration_seconds": 1.436,
+            "surface": "completion.copilot"
+          },
+          {
+            "model": "openai/gpt-oss-20b",
+            "usage": {
+              "prompt_tokens": 2197,
+              "completion_tokens": 72,
+              "total_tokens": 2269
+            },
+            "duration_seconds": 0.608,
+            "surface": "completion.copilot"
+          }
+        ],
+        "decisions": [
+          {
+            "intent": "answer_question",
+            "query": "none",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "team_summary",
+            "audience": "workspace",
+            "status": "salesperson",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "lead_status",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          },
+          {
+            "intent": "read_crm_data",
+            "query": "overdue_leads",
+            "audience": "workspace",
+            "status": "any",
+            "period": "all",
+            "destination": "none",
+            "navigate": false
+          }
+        ],
+        "failures": [
+          {
+            "status": 429,
+            "code": "rate_limit_exceeded"
+          }
+        ],
+        "paid_cost": "not measured",
+        "human_hours": "not measured",
+        "expected_facts": {
+          "team_total": 3,
+          "team_roles": {
+            "manager": 1,
+            "salesperson": 2
+          },
+          "leads": 4,
+          "overdue": 2,
+          "today_followups": 1,
+          "urgent_priority": 100,
+          "negotiation": 1
+        },
+        "finished_at": "2026-10-21T09:17:56Z",
+        "csp_violations": 0,
+        "diagnostic": {
+          "failure": null,
+          "lastAttempt": null,
+          "proxyError": null,
+          "status": "failed"
+        },
+        "usage": {
+          "prompt_tokens": 10550,
+          "completion_tokens": 599,
+          "total_tokens": 11149
+        }
+      }
+    ]
+  },
+  "security_review": {
+    "team_roster_policy": "both existing roles read own registered organization counts; manager-only member creation unchanged",
+    "no_online_active_inference": true,
+    "tenant_scoping_and_association_rescoping": true,
+    "db_calculations_authoritative": true,
+    "phase1_domain_time_rules_db_config_unchanged": true,
+    "auth_change": "only logout conversation purge; login/password/CSRF algorithms unchanged",
+    "safe_dom_and_official_library_sources_unchanged": true,
+    "provider_transport_changes": "planner temperature0 and safe json_validate_failed classification; endpoint/TLS/timeouts/key handling/token/rate caps unchanged",
+    "provider_tool_policy_changes": "no reflection instruction; short separately verified done-only completion policy",
+    "no_autonomous_crm_writes": true,
+    "actual_local_secrets_scan_and_archive_verification": "Performed at source review/package delivery; see final delivery result, not a deployment claim"
+  },
+  "finalization_files": {
+    "modified": [
+      "AGENT.md",
+      "CHALLENGE_LOG.md",
+      "README.md",
+      "app/assets/stylesheets/page_agent.css",
+      "app/controllers/sessions_controller.rb",
+      "app/javascript/controllers/page_agent_controller.js",
+      "app/services/copilot/assistant.rb",
+      "app/services/copilot/conversation.rb",
+      "app/services/copilot/crm_reader.rb",
+      "app/services/copilot/outcome.rb",
+      "app/services/copilot/planner.rb",
+      "app/services/page_agent/groq_client.rb",
+      "app/services/page_agent/protocol.rb",
+      "app/views/page_agent/_panel.html.erb",
+      "docs/COPILOT_PHASE21_TR.md",
+      "docs/PAGE_AGENT_PHASE2_TR.md",
+      "test/integration/copilot_test.rb",
+      "test/models/copilot_test.rb",
+      "test/support/page_agent_test_support.rb",
+      "test/system/copilot_test.rb"
+    ],
+    "created": [
+      "docs/COPILOT_PHASE2_FINAL_TR.md",
+      "docs/evidence/phase2-finalization-2026-10-21.json",
+      "docs/evidence/phase2-team-2026-10-21.png",
+      "script/verify_copilot_finalization.rb",
+      "test/models/copilot_data_test.rb"
+    ]
+  },
+  "complete_phase2_commit_files": [
+    ".github/workflows/ci.yml",
+    ".gitignore",
+    "AGENT.md",
+    "CHALLENGE_LOG.md",
+    "Dockerfile",
+    "README.md",
+    "app/assets/builds/.keep",
+    "app/assets/stylesheets/page_agent.css",
+    "app/controllers/application_controller.rb",
+    "app/controllers/copilot/messages_controller.rb",
+    "app/controllers/leads_controller.rb",
+    "app/controllers/page_agent/completions_controller.rb",
+    "app/controllers/sessions_controller.rb",
+    "app/controllers/tasks_controller.rb",
+    "app/helpers/page_agent_helper.rb",
+    "app/javascript/controllers/page_agent_controller.js",
+    "app/javascript/page_agent/entry.js",
+    "app/javascript/page_agent/safe_dom.js",
+    "app/javascript/page_agent/zod_csp.js",
+    "app/services/copilot/assistant.rb",
+    "app/services/copilot/conversation.rb",
+    "app/services/copilot/crm_reader.rb",
+    "app/services/copilot/outcome.rb",
+    "app/services/copilot/planner.rb",
+    "app/services/page_agent/error.rb",
+    "app/services/page_agent/groq_client.rb",
+    "app/services/page_agent/pacing.rb",
+    "app/services/page_agent/protocol.rb",
+    "app/services/page_agent/request_gate.rb",
+    "app/views/layouts/application.html.erb",
+    "app/views/leads/index.html.erb",
+    "app/views/opportunities/index.html.erb",
+    "app/views/page_agent/_panel.html.erb",
+    "app/views/shared/_filters.html.erb",
+    "app/views/tasks/index.html.erb",
+    "bin/local-postgres.ps1",
+    "bin/render-build.sh",
+    "config/importmap.rb",
+    "config/initializers/filter_parameter_logging.rb",
+    "config/routes.rb",
+    "docs/COPILOT_PHASE21_TR.md",
+    "docs/COPILOT_PHASE2_FINAL_TR.md",
+    "docs/PAGE_AGENT_PHASE2_TR.md",
+    "docs/evidence/phase2-finalization-2026-10-21.json",
+    "docs/evidence/phase2-page-agent-2026-10-20.json",
+    "docs/evidence/phase2-page-agent-2026-10-20.png",
+    "docs/evidence/phase2-team-2026-10-21.png",
+    "docs/evidence/phase21-conversation-2026-10-20.png",
+    "docs/evidence/phase21-copilot-2026-10-20.json",
+    "docs/evidence/phase21-overdue-2026-10-20.png",
+    "package-lock.json",
+    "package.json",
+    "script/build_page_agent.mjs",
+    "script/verify_copilot.rb",
+    "script/verify_copilot_finalization.rb",
+    "script/verify_page_agent.rb",
+    "script/verify_page_agent_tool_call.rb",
+    "test/integration/copilot_test.rb",
+    "test/integration/page_agent_test.rb",
+    "test/models/copilot_data_test.rb",
+    "test/models/copilot_test.rb",
+    "test/models/page_agent_test.rb",
+    "test/support/page_agent_test_support.rb",
+    "test/system/copilot_test.rb",
+    "test/system/page_agent_test.rb",
+    "vendor/licenses/browser-use-NOTICE.txt",
+    "vendor/licenses/chalk-LICENSE.txt",
+    "vendor/licenses/esbuild-LICENSE.txt",
+    "vendor/licenses/page-agent-LICENSE.txt",
+    "vendor/licenses/zod-LICENSE.txt"
+  ],
+  "known_limits": [
+    "Final uninterrupted real acceptance remains blocked by provider TPD; do not mark Phase2 fully verified.",
+    "Model intent/owner references can still be wrong; strict schemas do not establish semantic truth.",
+    "Provider HTTP400/tool generation failures observed; safe failures retained. No invalid-output retries added.",
+    "Process-local conversation/rate stores require shared storage before multiworker.",
+    "Bounded lists/NBA candidates are not exhaustive global ranking.",
+    "No online/active-user metric, no automatic writes or Phase3.",
+    "Docker image and remote deployment unverified."
+  ],
+  "decision": "CONTINUE; preserve working CRM/LLM/DOM integration, review this snapshot, recover provider budget and rerun final live acceptance before release."
+}

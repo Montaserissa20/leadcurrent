@@ -1,0 +1,4 @@
+DOM processing and prompts in Alibaba Page Agent derive from browser-use.
+Browser Use <https://github.com/browser-use/browser-use>
+Copyright (c) 2024 Gregor Zunic
+Licensed under the MIT License (permission and disclaimer included in page-agent-LICENSE.txt).

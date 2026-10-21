@@ -1,0 +1,8 @@
+{
+  "name": "leadcurrent-page-agent",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node script/build_page_agent.mjs" },
+  "dependencies": { "@page-agent/core": "1.12.4", "@page-agent/page-controller": "1.12.4", "zod": "4.5.1" },
+  "devDependencies": { "esbuild": "0.25.12" }
+}

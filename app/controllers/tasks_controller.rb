@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
     records = scope(Task)
+    records = records.where(owner_id:params[:owner_id]) if params[:owner_id].present?
     if params[:contact_id].present?
       contact = scope(Contact).find(params[:contact_id])
       records = records.where(lead_id: scope(Lead).where(contact_id: contact.id).select(:id))
