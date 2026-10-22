@@ -2181,3 +2181,186 @@ Fresh development fingerprint records all 11 non-session tables. Existing login,
 Limited real Groq acceptance: exactly one bounded run (seed recorded in evidence), 2026-10-22T15:14:30Z–15:18:10Z, **8/8 selected scenarios PASS**, **1 test/105 assertions**, zero failures/errors/skips. Help, registered-team count, salesperson follow-up, overdue rows, urgency follow-up, actual Negotiation owner/stage filtering, visible-control Atlas navigation and UNSAVED note all passed. **16 real requests/completions**, **26290 prompt +1436 completion =27726 measured tokens**; no provider errors/429, no blocked extra request, no CRM writes, no CSP violations. Test time220.083s includes191.059s explicit quota pacing, not a new speed benchmark. No further real calls were made. The old TPD block did not recur for this scope; the remaining full13 run, lead-count/tasks live rerun and three extra team paraphrases are not claimed. Automated tests cover those read capabilities. Free-tier quota/headroom for another run or deployment is not guaranteed; paid cost and human hours unmeasured. Decision: ready for approval within this disclosed verification scope, not deployed or full-live-certified.
 
 Final source review: 6 existing files changed and2 new documentation/evidence files; 267 existing tracked files unchanged, including164 protected runtime/config/build sources and10 historical evidence files. Historical challenge prefix preserved. Exact local-secret/signature/path policy passed272 source files. Redacted Gitleaks raw exit1 contains exactly2 unchanged reviewed false positives (public commit SHA and synthetic password fixture), zero confirmed credentials. Markdown/link/ignore checks passed29 files/282 links/41 tables/19 required README sections/16 ignore checks. Final commit and source-only archive are resolved after this documentation is committed; exact SHA, archive hash/content checks and clean status are supplied in the delivery manifest rather than fabricated in a self-referencing commit. No push/deploy authorization is implied by this local readiness result.
+
+
+## 22 October 2026 — authorized Phase 2 GitHub publication
+
+Original approved user task, verbatim:
+
+```text
+# CODEX TASK — Push LeadCurrent Phase 2 to GitHub
+
+Phase 2 of LeadCurrent has been completed, reviewed, and prepared for release.
+
+**I explicitly authorize you to commit and push the completed Phase 2 implementation to my existing GitHub repository.**
+
+Repository: https://github.com/Montaserissa20/leadcurrent
+
+Local project: `D:\LeadCurrent`
+
+Production: https://leadcurrent-production.up.railway.app
+
+## 1. Inspect the repository
+
+Before pushing:
+
+- Read `AGENTS.md`, `AGENT.md`, and `CHALLENGE_LOG.md`.
+- Verify that you're working in the correct LeadCurrent project.
+- Inspect `git status`, the current branch, remote configuration, and commit history.
+- Preserve all completed Phase 1 and Phase 2 features.
+- Verify that the latest Phase 2 code includes the improved database-aware AI Copilot.
+
+The previously reviewed local Phase 2 release commit was:
+
+`e220800f460f12159e5d613e4c550e63d9eb465c`
+
+The last verified GitHub `main` commit was:
+
+`65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`
+
+Check the actual current state rather than assuming those commits are still the latest.
+
+## 2. Perform final safety checks
+
+Before committing or pushing:
+
+- Check that `config/master.key` is not tracked or staged.
+- Exclude `.env` secrets, API keys, passwords, local PostgreSQL data, logs, and `.local` files.
+- Exclude `node_modules`, `.git` metadata, and generated ZIP archives.
+- Verify that `GROQ_API_KEY` never appears in committed files.
+- Preserve the production database configuration.
+- Do not run database resets or destructive migrations.
+
+Our previous full-project ZIPs contained private local files. **Do not push or upload those ZIPs. Only commit intended source files.**
+
+If you discover an exposed credential, stop and report it before pushing.
+
+## 3. Verify the completed implementation
+
+Confirm that Phase 2 includes:
+
+- Groq-powered conversational AI Copilot.
+- Official Alibaba Page Agent integration.
+- Authorized team-member counts.
+- Real lead, opportunity, and task intelligence.
+- Natural-language CRM questions.
+- Short conversation context.
+- Safe UI navigation and filtering.
+- Human approval for database-changing actions.
+- Existing Phase 1 AI Sales Assistant.
+- Updated documentation and `CHALLENGE_LOG.md`.
+
+Do not rebuild or redesign the implementation.
+
+## 4. Run final checks
+
+Run the available automated verification:
+
+- Rails tests.
+- Browser/system tests.
+- Node dependency installation and JavaScript build.
+- Zeitwerk.
+- Brakeman.
+- Production asset compilation.
+- Git secret scanning.
+
+Make sure the tests don't require a real Groq API key.
+
+Do not rerun the expensive live Groq acceptance suite unless essential; its available evidence has already been recorded.
+
+If a required test fails, investigate and fix the issue before pushing.
+
+## 5. Commit and push to main
+
+After successful checks:
+
+1. Fetch the latest `origin/main`.
+2. Check for remote changes or divergence.
+3. Preserve the Phase 2 commit history.
+4. Commit any remaining reviewed Phase 2 source changes.
+5. Integrate Phase 2 into `main` using a normal fast-forward workflow when possible.
+6. Push to the existing `origin/main`.
+
+Use a descriptive commit message if a new commit is necessary, such as:
+
+`feat: complete Groq AI Copilot and Alibaba Page Agent integration`
+
+**Do not create a new repository.**
+
+**Do not force-push, reset remote history, or overwrite new remote commits.**
+
+If the branch has diverged or contains unexpected changes, stop and report the situation instead of forcing the push.
+
+## 6. Verify GitHub Actions
+
+After pushing:
+
+- Confirm the new commit appears on GitHub `main`.
+- Retrieve the actual commit SHA and URL.
+- Check the GitHub Actions workflow triggered by that commit.
+- Confirm the Rails, browser, security, and JavaScript build jobs pass.
+- Report any failures accurately.
+
+If CI fails, investigate and fix the issue, then push a normal follow-up commit and recheck CI.
+
+## 7. Check Railway deployment
+
+Railway may automatically deploy when `main` changes.
+
+Use the existing Railway service. Do not create a new project or database.
+
+Check:
+
+- Whether Railway deployed the new commit.
+- Whether the Docker/Node build succeeded.
+- Whether `/up` reports a healthy application.
+- Whether the existing login page remains accessible.
+- Whether the AI Copilot assets are available.
+
+Preserve existing Railway variables, including `GROQ_API_KEY` and `GROQ_MODEL`.
+
+Do not display secret values.
+
+Do not make unrelated Railway configuration changes or reset production data.
+
+If authenticated browser verification is possible safely, use only fictional test data. Otherwise provide manual testing instructions.
+
+Do not claim a live Groq test passed unless it was actually performed.
+
+## 8. Update release evidence
+
+Update `CHALLENGE_LOG.md` and relevant release documentation with:
+
+- Actual pushed commit.
+- GitHub Actions URL and results.
+- Railway deployment status.
+- Verified production functionality.
+- Remaining limitations.
+
+Do not invent successful tests or deployment evidence.
+
+Commit and push any necessary documentation-only follow-up using the normal workflow.
+
+## 9. Final report
+
+When finished, provide:
+
+1. GitHub commit SHA and URL.
+2. Confirmation that Phase 2 is on `main`.
+3. Test results.
+4. GitHub Actions status and URL.
+5. Railway deployment status.
+6. Confirmation that no secrets were committed.
+7. Any remaining issues.
+8. Simple steps to test the live Copilot.
+
+**Success criterion:** Phase 2 is safely published to the existing LeadCurrent GitHub repository, GitHub Actions passes, and Railway successfully deploys the new version without losing any existing CRM data.
+
+Do not begin Phase 3 yet.
+
+Proceed with the push now.
+```
+
+Explicit approval superseded the historical local-only boundary. Fetched actual origin/main65bcd55; preserved reviewed `e220800f460f12159e5d613e4c550e63d9eb465c` and its parent63184c6 through a normal fast-forward/main push. No force/reset/history overwrite/new repository or Phase3. Fresh local Rails139/1820 seed55542 and browser27/385 seed20164, total166/2205, passed; npm locked build, Zeitwerk, Brakeman0 and production assets passed. Source272 and exact-secret history392 checks passed; Gitleaks outgoing two commits0 findings. No master key/env secrets/local DB/log/node_modules/archive data pushed.
+
+Exact feature-commit [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39811052953) passed every Node/Rails/Chrome/autoload/security/production-assets step. Actual CI logs independently showed139/1820 and27/385. Railway had no feature-commit deployment record and production lacked new Page Agent assets at 2026-10-22T16:11:29.461Z; health/login still worked on the previous version. No successful Phase2 deployment or live production Groq test is claimed. No Railway credentials/configuration/database changes, production fixtures, reset/seed/destructive migrations. Available Railway integration was discovered/offered, not connected; deployment completion requires existing-service access or a manual Deploy Latest Commit. Historical8-case local acceptance preserved, expensive suite not rerun. [Publication report](docs/PHASE2_PUBLICATION.md), [evidence](docs/evidence/phase2-publication-2026-10-22.json). Documentation-only follow-up/final-tip CI checked separately after push; no future result fabricated.

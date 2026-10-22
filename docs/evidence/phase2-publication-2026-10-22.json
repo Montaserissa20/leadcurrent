@@ -1,0 +1,259 @@
+{
+  "recorded_at": "2026-10-22T16:14:37.324447+00:00",
+  "feature_commit": "e220800f460f12159e5d613e4c550e63d9eb465c",
+  "commit_url": "https://github.com/Montaserissa20/leadcurrent/commit/e220800f460f12159e5d613e4c550e63d9eb465c",
+  "previous_main": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+  "branch": "main",
+  "push": "normal fast-forward of two reviewed Phase2 commits; history preserved; no force/reset",
+  "local_verification": {
+    "rails": {
+      "tests": 139,
+      "assertions": 1820,
+      "seed": 55542,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "browser": {
+      "tests": 27,
+      "assertions": 385,
+      "seed": 20164,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "node_locked_install_build": "PASS",
+    "zeitwerk": "PASS",
+    "brakeman": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "production_assets": "PASS; no host DB operations"
+  },
+  "source_security": {
+    "working_source_files": 272,
+    "exact_secret_history_unique_blobs": 392,
+    "local_credential_matches": 0,
+    "forbidden_paths": 0,
+    "gitleaks_new_commits": 2,
+    "gitleaks_findings": 0,
+    "no_master_key_env_secrets_local_db_logs_node_modules_or_archives_published": true
+  },
+  "github": {
+    "checked_at": "2026-10-22T16:12:06.121Z",
+    "sha": "e220800f460f12159e5d613e4c550e63d9eb465c",
+    "main_sha": "e220800f460f12159e5d613e4c550e63d9eb465c",
+    "main_matches": true,
+    "workflow_candidates": [
+      {
+        "id": 39811256118,
+        "name": "github_actions in / for actions/checkout - Update #1645616340",
+        "sha": "e220800f460f12159e5d613e4c550e63d9eb465c",
+        "status": "completed"
+      },
+      {
+        "id": 39811052953,
+        "name": "LeadCurrent CI",
+        "sha": "e220800f460f12159e5d613e4c550e63d9eb465c",
+        "status": "completed"
+      }
+    ],
+    "workflows": [
+      {
+        "id": 39811052953,
+        "sha": "e220800f460f12159e5d613e4c550e63d9eb465c",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/Montaserissa20/leadcurrent/actions/runs/39811052953",
+        "jobs": [
+          {
+            "id": 119937070043,
+            "name": "test",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [
+              {
+                "name": "Set up job",
+                "conclusion": "success"
+              },
+              {
+                "name": "Initialize containers",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/checkout@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/setup-node@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Build pinned Page Agent assets",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run ruby/setup-ruby@v1",
+                "conclusion": "success"
+              },
+              {
+                "name": "Prepare PostgreSQL",
+                "conclusion": "success"
+              },
+              {
+                "name": "Domain and HTTP workflow tests",
+                "conclusion": "success"
+              },
+              {
+                "name": "Real browser workflow tests",
+                "conclusion": "success"
+              },
+              {
+                "name": "Autoload check",
+                "conclusion": "success"
+              },
+              {
+                "name": "Security scan",
+                "conclusion": "success"
+              },
+              {
+                "name": "Production assets",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/upload-artifact@v4",
+                "conclusion": "skipped"
+              },
+              {
+                "name": "Post Run actions/setup-node@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Post Run actions/checkout@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Stop containers",
+                "conclusion": "success"
+              },
+              {
+                "name": "Complete job",
+                "conclusion": "success"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "status_contexts": [],
+    "checks": [
+      {
+        "name": "Dependabot",
+        "status": "completed",
+        "conclusion": "success",
+        "app": "github-actions",
+        "url": "https://github.com/Montaserissa20/leadcurrent/actions/runs/39811256118/job/119937797389"
+      },
+      {
+        "name": "test",
+        "status": "completed",
+        "conclusion": "success",
+        "app": "github-actions",
+        "url": "https://github.com/Montaserissa20/leadcurrent/actions/runs/39811052953/job/119937070043"
+      }
+    ],
+    "deployments": [],
+    "recent_deployment_commits": [
+      {
+        "id": 7198312791,
+        "sha": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+        "environment": "resourceful-nature / production",
+        "created_at": "2026-10-20T11:19:18Z"
+      },
+      {
+        "id": 7198221555,
+        "sha": "75209db1eb4a3935f9dab67d7f76d74abf847af6",
+        "environment": "resourceful-nature / production",
+        "created_at": "2026-10-20T11:14:33Z"
+      },
+      {
+        "id": 7141896961,
+        "sha": "346722284e94ce01a442bbc8d3c7e0a0ef47ebf7",
+        "environment": "resourceful-nature / production",
+        "created_at": "2026-10-17T15:42:38Z"
+      }
+    ]
+  },
+  "ci_counts_from_actual_job_logs": {
+    "job": "119937070043",
+    "checked_at": "2026-10-22T16:11:32.581Z",
+    "counts": [
+      {
+        "tests": 139,
+        "assertions": 1820,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "tests": 27,
+        "assertions": 385,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      }
+    ],
+    "raw_logs_saved": false
+  },
+  "production_http": {
+    "checked_at": "2026-10-22T16:11:29.461Z",
+    "base": "https://leadcurrent-production.up.railway.app",
+    "stage": "latest",
+    "checks": [
+      {
+        "path": "/up",
+        "status": 200,
+        "health": {
+          "status": "ok",
+          "database": "connected"
+        }
+      },
+      {
+        "path": "/login",
+        "status": 200,
+        "password_form_present": true,
+        "csp_present": true,
+        "unsafe_eval": false
+      },
+      {
+        "path": "/leads",
+        "status": 302,
+        "redirect_path": "/login"
+      }
+    ],
+    "page_agent": {
+      "importmap_present": false
+    }
+  },
+  "railway": {
+    "state": "NOT_DEPLOYED_OR_NOT_VERIFIED",
+    "feature_commit_deployment_records": 0,
+    "new_page_agent_asset_present": false,
+    "last_reported_successful_sha": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
+    "last_successful_github_deployment_record": 7198312791,
+    "authenticated_connection_available": false,
+    "plugin_discovered_not_connected": true,
+    "railway_configuration_or_variables_changed": false,
+    "provider_build_logs_accessed": false,
+    "next_step": "Connect Railway or use Deploy Latest Commit on existing LeadCurrent service, then verify exact latest main SHA and public Page Agent assets."
+  },
+  "production_authenticated_or_groq_check": "NOT_RUN: new runtime not present; no production fixtures created or customer data modified",
+  "prior_live_acceptance": "Historical local eight-case Groq run retained; expensive suite not rerun",
+  "preservation": {
+    "phase1_ai_schema_and_production_db_config_unchanged": true,
+    "existing_development_non_session_table_hashes_unchanged": true,
+    "no_reset_seed_or_destructive_migration": true,
+    "no_phase3_or_ai_customer_integration": true
+  },
+  "documentation_followup": "A documentation-only follow-up records this measured partial release. Its SHA/CI are verified separately after push. Do not relabel this snapshot as a successful Railway release."
+}

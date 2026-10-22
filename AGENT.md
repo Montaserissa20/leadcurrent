@@ -82,6 +82,10 @@ script/verify_copilot_finalization.rb now offers LEADCURRENT_LIVE_RELEASE_SMOKE=
 
 Actual limited live result: one run, 8/8 selected scenarios PASS, 1 test/105 assertions, 16 real requests/completions, 27726 measured tokens; no provider failures/429, zero CSP violations and no CRM-table writes. Quota pacing accounted for 191.059 seconds of a 220.083-second test. No further live requests were made. The 21 October daily quota block did not recur in this selected run; a full 13-scenario final-source pass is still not claimed. Development's 11 non-session table fingerprints remain unchanged (2 users,7 leads,4 opportunities).
 
+## Phase 2 GitHub publication (22 October, explicitly approved)
+
+The user's Push LeadCurrent Phase2 task explicitly authorizes normal main push, checking existing Railway deployment and a documentation-only evidence follow-up. It supersedes older local-only/no-push rules above. Feature `e220800f460f12159e5d613e4c550e63d9eb465c` is on existing origin/main through fast-forward, exact [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39811052953) passed (166 tests/2205 assertions), no new secrets/private files. No Phase3/new service/database/destructive DB operation. Current Railway observation: no feature deployment record/new asset, old runtime healthy; do not claim Phase2 deployed. Railway credentials/integration are unavailable until user connects or triggers existing-service Deploy Latest Commit. Preserve all variables and historical evidence. Read docs/PHASE2_PUBLICATION.md and docs/evidence/phase2-publication-2026-10-22.json; final-tip CI/deployment checked separately after documentation push.
+
 ## Source map
 
 - app/models: persistence, validations, workflow update guards.
