@@ -2134,3 +2134,50 @@ Across the 16 recorded runs: 89 successfully reported completions, 162847 prompt
 Existing development data hashes unchanged for all non-session tables (2 users,7 leads,4 opportunities). Actual local browser login, dashboard, lists, customer profiles, Phase1 four controls and Copilot open/close passed; /up HTTP200/database connected. No reset/drop/seed/migration or production DB operation. Phase1 evidence and all prior challenge text remain preserved. Local master key remains unchanged/ignored. Source policy and final archive are independently checked before delivery; their exact commit/archive hash is delivered outside this self-referencing document.
 
 [Current Turkish technical report and professor demo](docs/COPILOT_PHASE2_FINAL_TR.md), [full structured evidence including all run records and changed files](docs/evidence/phase2-finalization-2026-10-21.json), [actual fictional team-count screenshot](docs/evidence/phase2-team-2026-10-21.png). Known remaining work: recover Groq quota, rerun full opt-in live acceptance and extra paraphrases; retain safe model-error handling, bounded candidates, process-local limits, lack of online status and unverified Docker/deployment limitations. Decision: **CONTINUE, review locally; release remains unapproved and live acceptance remains incomplete.**
+
+## 22 October 2026 — Phase 2 final release preparation
+
+User request, preserved verbatim:
+
+```text
+# LeadCurrent — Phase 2 Final Release Preparation
+
+We have completed Phase 2 of LeadCurrent, including:
+
+- Groq-powered conversational AI Copilot.
+- Official Alibaba Page Agent.
+- Authorized database tools for team, leads, opportunities, and tasks.
+- Natural-language questions and follow-up context.
+- Safe DOM navigation and human-controlled changes.
+
+Your task is to finalize Phase 2 for release. **Do not add new features or begin Phase 3.**
+
+1. Inspect the current local Phase 2 implementation and preserve all existing work.
+2. Run all automated Rails, browser, JavaScript build, security, and production-asset checks. Fix regressions.
+3. Verify team counts, overdue leads, opportunities, natural conversation, Page Agent navigation, and unsaved-note preparation.
+4. Run a limited real Groq acceptance test if sufficient quota is available. Avoid repeatedly exhausting the free tier. Record any remaining quota-related blockers accurately.
+5. Keep `openai/gpt-oss-20b` as the default. Do not introduce unverified fallback models or additional providers.
+6. Verify workspace isolation, read-only agent restrictions, credential protection, and the production Docker/Node build.
+7. Update `CHALLENGE_LOG.md`, `AGENT.md`, README, and the Turkish presentation guide with genuine evidence.
+8. Scan the Git changes and ensure no secrets, `.local` data, `config/master.key`, logs, or database files are included.
+9. Create a final local commit and clean source-only review archive.
+10. Produce a release-readiness report with test results, known limitations, commit SHA, and exact deployment steps.
+
+**Do not push to GitHub or deploy to Railway yet.** Wait for my approval of the final report.
+
+Preserve Phase 1, all sales business rules, and the existing working database. Do not start the AI-customer integration.
+
+Success criterion: Phase 2 is verified, documented, and ready for a safe GitHub/Railway release.
+```
+
+Started from clean local `63184c6420deafc18029d09b164f9b91d20283df` on `phase2/page-agent`; all existing Phase2/2.1 work preserved. No app, domain, auth, schema, database config, Dockerfile, dependency lock or production setting changes. Only the opt-in acceptance harness gains a bounded release-smoke mode, plus documentation/evidence. This is not a new product feature or Phase3. The model remains openai/gpt-oss-20b with no fallback/provider addition.
+
+Fresh normal Rails **139 tests/1820 assertions** (seed38868) and headless Edge **27/385** (seed5144), total **166/2205**, passed without failures/errors/skips. Normal HTTP is mocked; official Page Agent, DOM, Turbo and database authorization are real. Locked npm ci/build, npm audit0, Zeitwerk, 120 Ruby/12 JS syntax, production assets and Brakeman0 warnings/errors passed. Ruby advisory scan in a disposable container found no vulnerabilities against ruby-advisory-db commit `5fd86bbd406995ea4ed2df84651b209e28072031` (1266 advisories). No audit tool was added to application dependencies.
+
+Docker Desktop Linux engine was initially stopped; starting it enabled a genuine production image build. Fresh-container PostgreSQL17 and Rails production startup passed /up200/connected, /login200, CSP without unsafe-eval, compiled Page Agent asset200 (537726 bytes), UID1000 and writable db/log/tmp. The real entrypoint ran three existing migrations only on the disposable empty database; zero users/leads were seeded. The working host DB was never prepared/reset/seeded/migrated. Temporary containers/network were removed individually. Two verification-harness failures were retained: internal-network port publishing unavailable, then a case-sensitive HTTP-header lookup; correcting the checker produced PASS without an application change. Initial advisory execution had a missing executable PATH; the ephemeral tool's explicit bindir fixed that check. These failed checks are not counted as successful product tests.
+
+Fresh development fingerprint records all 11 non-session tables. Existing login, all CRM lists, Phase1's four AI controls on both record types, Copilot open/close and logout passed in a real browser without live AI calls. Team read is 2 registered members (1 manager/1 salesperson), includes requester; online unknown. Detailed limited-live results, final source/secret review, packaging, remaining limitations and approval-only deployment instructions are recorded in the [release report](docs/PHASE2_RELEASE_READINESS.md) and [dated evidence](docs/evidence/phase2-release-preparation-2026-10-22.json). Historical unsuccessful live attempts remain intact. No GitHub push or Railway deployment was performed.
+
+Limited real Groq acceptance: exactly one bounded run (seed recorded in evidence), 2026-10-22T15:14:30Z–15:18:10Z, **8/8 selected scenarios PASS**, **1 test/105 assertions**, zero failures/errors/skips. Help, registered-team count, salesperson follow-up, overdue rows, urgency follow-up, actual Negotiation owner/stage filtering, visible-control Atlas navigation and UNSAVED note all passed. **16 real requests/completions**, **26290 prompt +1436 completion =27726 measured tokens**; no provider errors/429, no blocked extra request, no CRM writes, no CSP violations. Test time220.083s includes191.059s explicit quota pacing, not a new speed benchmark. No further real calls were made. The old TPD block did not recur for this scope; the remaining full13 run, lead-count/tasks live rerun and three extra team paraphrases are not claimed. Automated tests cover those read capabilities. Free-tier quota/headroom for another run or deployment is not guaranteed; paid cost and human hours unmeasured. Decision: ready for approval within this disclosed verification scope, not deployed or full-live-certified.
+
+Final source review: 6 existing files changed and2 new documentation/evidence files; 267 existing tracked files unchanged, including164 protected runtime/config/build sources and10 historical evidence files. Historical challenge prefix preserved. Exact local-secret/signature/path policy passed272 source files. Redacted Gitleaks raw exit1 contains exactly2 unchanged reviewed false positives (public commit SHA and synthetic password fixture), zero confirmed credentials. Markdown/link/ignore checks passed29 files/282 links/41 tables/19 required README sections/16 ignore checks. Final commit and source-only archive are resolved after this documentation is committed; exact SHA, archive hash/content checks and clean status are supplied in the delivery manifest rather than fabricated in a self-referencing commit. No push/deploy authorization is implied by this local readiness result.

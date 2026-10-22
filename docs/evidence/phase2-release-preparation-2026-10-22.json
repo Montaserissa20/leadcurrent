@@ -1,0 +1,629 @@
+{
+  "date": "2026-10-22",
+  "recorded_at": "2026-10-22T15:21:58.760355+00:00",
+  "baseline_commit": "63184c6420deafc18029d09b164f9b91d20283df",
+  "branch": "phase2/page-agent",
+  "release_commit_resolution": "git log -1 --format=%H -- docs/PHASE2_RELEASE_READINESS.md; actual final SHA also delivered outside its own commit",
+  "release_state": "ready_for_user_approval_with_disclosed_limited_live_scope",
+  "push_performed": false,
+  "railway_deployment_performed": false,
+  "feature_changes": false,
+  "model": "openai/gpt-oss-20b",
+  "fallbacks_added": false,
+  "checks": {
+    "rails": {
+      "tests": 139,
+      "assertions": 1820,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 38868,
+      "seconds": 11.570099
+    },
+    "browser": {
+      "tests": 27,
+      "assertions": 385,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 5144,
+      "seconds": 108.554247
+    },
+    "limited_real_groq": {
+      "tests": 1,
+      "assertions": 105,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 11426,
+      "seconds": 220.083224
+    },
+    "node_locked_install_build": "PASS",
+    "npm_audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "ruby_javascript_syntax": {
+      "ruby": {
+        "files": 120,
+        "errors": []
+      },
+      "javascript": {
+        "files": 12,
+        "errors": []
+      }
+    },
+    "zeitwerk": "PASS",
+    "production_assets": "PASS; no host DB operations",
+    "brakeman": {
+      "version": "8.1.0",
+      "warnings": 0,
+      "errors": 0
+    },
+    "gem_advisories": {
+      "result": "no vulnerabilities found",
+      "tool_version": "0.9.3",
+      "advisories": 1266,
+      "database_commit": "5fd86bbd406995ea4ed2df84651b209e28072031",
+      "environment": "disposable container; no Gemfile or lockfile modification"
+    },
+    "docker_build": {
+      "result": "PASS",
+      "engine": "29.8.1",
+      "image_id": "sha256:38d7cd436eb276750975b260cb2b7d09870f492559a161f20a25170853c1f43a",
+      "source_note": "Application/Docker/Node build sources unchanged through release; documentation and acceptance harness only differ from initial built context"
+    },
+    "docker_production_smoke": {
+      "image": "leadcurrent:phase2-review",
+      "isolated_database": true,
+      "host_database_used": false,
+      "result": "PASS",
+      "checks": {
+        "production_health": "HTTP 200, database connected",
+        "login_and_csp": "HTTP 200, CSP present, no unsafe-eval",
+        "compiled_page_agent": {
+          "http": 200,
+          "bytes": 537726
+        },
+        "runtime_filesystem": {
+          "uid": 1000,
+          "runtime": {
+            "db": true,
+            "log": true,
+            "tmp": true
+          },
+          "forbidden": []
+        },
+        "entrypoint_migrations_no_seeds": "3|0|0"
+      },
+      "image_id": "sha256:38d7cd436eb276750975b260cb2b7d09870f492559a161f20a25170853c1f43a",
+      "cleanup_exit_codes": {
+        "leadcurrent-release-6cb0883c-app": 0,
+        "leadcurrent-release-6cb0883c-pg": 0,
+        "leadcurrent-release-6cb0883c": 0
+      }
+    },
+    "development_browser": {
+      "result": "PASS",
+      "checks": [
+        "PASS /up: HTTP 200, database connected",
+        "PASS existing demo login and dashboard",
+        "PASS Phase 2.1 Copilot panel opens/closes with active JavaScript",
+        "PASS CRM page /leads",
+        "PASS CRM page /opportunities",
+        "PASS CRM page /tasks",
+        "PASS CRM page /analytics",
+        "PASS existing lead and Phase 1 AI panel (all four modes)",
+        "PASS existing opportunity and Phase 1 AI panel (all four modes)",
+        "PASS logout; verification login session removed"
+      ]
+    },
+    "development_data": {
+      "unchanged": true,
+      "compared_at": "2026-10-22T15:21:58Z",
+      "tables": 11,
+      "counts": {
+        "activities": 4,
+        "ar_internal_metadata": 1,
+        "audit_events": 36,
+        "companies": 7,
+        "contacts": 7,
+        "leads": 7,
+        "opportunities": 4,
+        "organizations": 1,
+        "schema_migrations": 3,
+        "tasks": 0,
+        "users": 2
+      }
+    },
+    "preservation": {
+      "protected_runtime_configuration_build_files_unchanged": 164,
+      "historical_evidence_files_unchanged": 10,
+      "master_key_unchanged": true,
+      "host_database_reset_seed_migrate": false,
+      "old_project_touched": false
+    }
+  },
+  "live_run": {
+    "started_at": "2026-10-22T15:14:30Z",
+    "result": "PASS",
+    "mocked": false,
+    "scenarios": [
+      {
+        "question": "Tell me how I can use the system.",
+        "expected": "help",
+        "result": "PASS",
+        "seconds": 0.989,
+        "test_harness_wait_seconds": 0.003,
+        "calls": 1,
+        "crm_unchanged": true
+      },
+      {
+        "question": "How many users are in my team?",
+        "expected": "team",
+        "result": "PASS",
+        "seconds": 1.209,
+        "test_harness_wait_seconds": 0.0,
+        "calls": 1,
+        "crm_unchanged": true
+      },
+      {
+        "question": "How many of them are salespeople?",
+        "expected": "salespeople",
+        "result": "PASS",
+        "seconds": 1.084,
+        "test_harness_wait_seconds": 0.0,
+        "calls": 1,
+        "crm_unchanged": true
+      },
+      {
+        "question": "Which leads are overdue?",
+        "expected": "overdue",
+        "result": "PASS",
+        "seconds": 0.919,
+        "test_harness_wait_seconds": 48.017,
+        "calls": 1,
+        "crm_unchanged": true
+      },
+      {
+        "question": "Which one needs attention first?",
+        "expected": "urgent",
+        "result": "PASS",
+        "seconds": 1.706,
+        "test_harness_wait_seconds": 0.0,
+        "calls": 1,
+        "crm_unchanged": true
+      },
+      {
+        "question": "Show my opportunities in negotiation.",
+        "expected": "negotiation",
+        "result": "PASS",
+        "seconds": 6.036,
+        "test_harness_wait_seconds": 34.01,
+        "calls": 4,
+        "crm_unchanged": true
+      },
+      {
+        "question": "Open Atlas Industries.",
+        "expected": "record",
+        "result": "PASS",
+        "seconds": 7.199,
+        "test_harness_wait_seconds": 55.018,
+        "calls": 4,
+        "crm_unchanged": true
+      },
+      {
+        "question": "Prepare a follow-up note for this customer.",
+        "expected": "note",
+        "result": "PASS",
+        "seconds": 4.568,
+        "test_harness_wait_seconds": 54.011,
+        "calls": 3,
+        "crm_unchanged": true
+      }
+    ],
+    "completions": [
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2023,
+          "completion_tokens": 183,
+          "total_tokens": 2206
+        },
+        "duration_seconds": 0.499,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2065,
+          "completion_tokens": 68,
+          "total_tokens": 2133
+        },
+        "duration_seconds": 0.711,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2110,
+          "completion_tokens": 107,
+          "total_tokens": 2217
+        },
+        "duration_seconds": 0.596,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2153,
+          "completion_tokens": 72,
+          "total_tokens": 2225
+        },
+        "duration_seconds": 0.433,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2198,
+          "completion_tokens": 154,
+          "total_tokens": 2352
+        },
+        "duration_seconds": 1.231,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2200,
+          "completion_tokens": 89,
+          "total_tokens": 2289
+        },
+        "duration_seconds": 0.713,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1389,
+          "completion_tokens": 37,
+          "total_tokens": 1426
+        },
+        "action": "click_control",
+        "duration_seconds": 0.987,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1314,
+          "completion_tokens": 93,
+          "total_tokens": 1407
+        },
+        "action": "apply_filters",
+        "duration_seconds": 0.347,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 878,
+          "completion_tokens": 47,
+          "total_tokens": 925
+        },
+        "action": "done",
+        "duration_seconds": 0.58,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2200,
+          "completion_tokens": 117,
+          "total_tokens": 2317
+        },
+        "duration_seconds": 0.501,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1270,
+          "completion_tokens": 40,
+          "total_tokens": 1310
+        },
+        "action": "click_control",
+        "duration_seconds": 1.698,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1409,
+          "completion_tokens": 41,
+          "total_tokens": 1450
+        },
+        "action": "click_control",
+        "duration_seconds": 0.94,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 869,
+          "completion_tokens": 43,
+          "total_tokens": 912
+        },
+        "action": "done",
+        "duration_seconds": 0.875,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 2202,
+          "completion_tokens": 170,
+          "total_tokens": 2372
+        },
+        "duration_seconds": 1.102,
+        "surface": "completion.copilot"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 1238,
+          "completion_tokens": 129,
+          "total_tokens": 1367
+        },
+        "action": "fill_field",
+        "duration_seconds": 1.063,
+        "surface": "completion.page_agent"
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "prompt_tokens": 772,
+          "completion_tokens": 46,
+          "total_tokens": 818
+        },
+        "action": "done",
+        "duration_seconds": 0.679,
+        "surface": "completion.page_agent"
+      }
+    ],
+    "decisions": [
+      {
+        "intent": "answer_question",
+        "query": "none",
+        "audience": "workspace",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "team_summary",
+        "audience": "workspace",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "team_summary",
+        "audience": "workspace",
+        "status": "salesperson",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "overdue_leads",
+        "audience": "workspace",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "read_crm_data",
+        "query": "overdue_leads",
+        "audience": "workspace",
+        "status": "any",
+        "period": "all",
+        "destination": "none",
+        "navigate": false
+      },
+      {
+        "intent": "show_crm_data",
+        "query": "opportunities",
+        "audience": "mine",
+        "status": "negotiation",
+        "period": "all",
+        "destination": "opportunities",
+        "navigate": true
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "workspace",
+        "status": "any",
+        "period": "all",
+        "destination": "record",
+        "navigate": false
+      },
+      {
+        "intent": "page_action",
+        "query": "none",
+        "audience": "mine",
+        "status": "any",
+        "period": "all",
+        "destination": "note",
+        "navigate": false
+      }
+    ],
+    "failures": [],
+    "paid_cost": "not measured",
+    "human_hours": "not measured",
+    "release_smoke": {
+      "max_requests": 16,
+      "max_measured_tokens": 40000,
+      "requests": 16,
+      "blocked_requests": 0,
+      "scenario_types": [
+        "help",
+        "team",
+        "salespeople",
+        "overdue",
+        "urgent",
+        "negotiation",
+        "record",
+        "note"
+      ],
+      "scope": "Eight selected scenarios; excludes lead count, tasks and three extra team paraphrases. Not full 13-scenario acceptance. Token budget uses successful metered completions and may be exceeded by the final in-flight response."
+    },
+    "expected_facts": {
+      "team_total": 3,
+      "team_roles": {
+        "manager": 1,
+        "salesperson": 2
+      },
+      "leads": 4,
+      "overdue": 2,
+      "today_followups": 1,
+      "urgent_priority": 100,
+      "negotiation": 1
+    },
+    "note_submission": "No submit occurred; all CRM table contents unchanged after every request. No manual save was performed.",
+    "finished_at": "2026-10-22T15:18:10Z",
+    "csp_violations": 0,
+    "diagnostic": {
+      "failure": null,
+      "lastAttempt": {
+        "targetPresent": false,
+        "targetType": null,
+        "tool": "done"
+      },
+      "proxyError": null,
+      "status": "completed"
+    },
+    "usage": {
+      "prompt_tokens": 26290,
+      "completion_tokens": 1436,
+      "total_tokens": 27726
+    }
+  },
+  "live_total_test_seconds": 220.083224,
+  "live_harness_pacing_seconds": 191.059,
+  "live_scope_exclusions": [
+    "lead_count live rerun",
+    "tasks live rerun",
+    "three extra team paraphrases",
+    "full thirteen-scenario acceptance"
+  ],
+  "quota_status": "No provider 429/errors in this selected run. Historical 21 October TPD failure preserved. No guarantee of remaining or future quota. No additional real calls made.",
+  "failed_verification_attempts": [
+    {
+      "check": "first isolated-container harness",
+      "outcome": "port unavailable with internal network; no application change",
+      "cleanup": {
+        "leadcurrent-release-a04440fa-app": 0,
+        "leadcurrent-release-a04440fa-pg": 0,
+        "leadcurrent-release-a04440fa": 0
+      }
+    },
+    {
+      "check": "second isolated-container harness",
+      "outcome": "case-sensitive header lookup; actual health passed; no application change",
+      "cleanup": {
+        "leadcurrent-release-f0c49957-app": 0,
+        "leadcurrent-release-f0c49957-pg": 0,
+        "leadcurrent-release-f0c49957": 0
+      }
+    },
+    {
+      "check": "first gem advisory command",
+      "outcome": "executable not on PATH; retried once in disposable container with explicit bindir"
+    }
+  ],
+  "diagnostics": [
+    "Ruby fiddle deprecation warning on Windows",
+    "Brakeman Ractor/Process.fork fallback on Windows, exit0 and zero scan errors"
+  ],
+  "known_limitations": [
+    "full13 not rerun; extra paraphrases not live verified",
+    "process-local state; single serving process and replica required",
+    "model/provider errors and quota/latency possible",
+    "read result and NBA candidate bounds",
+    "masking is not anonymity",
+    "unsaved note is browser observation, human submit required",
+    "remote CI, Railway settings, backup and deployed SHA not verified"
+  ],
+  "artifact_delivery": "Final reviewed source scan, commit, archive path/file count/hash and clean status resolved in delivery manifest after this evidence is committed.",
+  "final_source_review": {
+    "source_policy": {
+      "result": "PASS",
+      "files": 272,
+      "exact_local_secret_matching": true,
+      "credential_signature_matching": true,
+      "forbidden_paths": 0
+    },
+    "source_review": {
+      "baseline_commit": "63184c6420deafc18029d09b164f9b91d20283df",
+      "changed_existing_files": [
+        "AGENT.md",
+        "CHALLENGE_LOG.md",
+        "README.md",
+        "docs/COPILOT_PHASE2_FINAL_TR.md",
+        "docs/FINAL_PRESENTATION_TR.md",
+        "script/verify_copilot_finalization.rb"
+      ],
+      "new_files": [
+        "docs/PHASE2_RELEASE_READINESS.md",
+        "docs/evidence/phase2-release-preparation-2026-10-22.json"
+      ],
+      "unchanged_tracked_files": 267,
+      "all_application_business_database_build_and_authentication_sources_unchanged": true,
+      "local_master_key_unchanged": true,
+      "review_snapshot": "D:\\LeadCurrent\\.local\\release-source-review-final-20261022"
+    },
+    "gitleaks": {
+      "raw_exit": 1,
+      "findings": 2,
+      "confirmed_credentials": 0,
+      "reviewed_unchanged_false_positives": [
+        {
+          "file": "docs/VERIFICATION_TR.md",
+          "line": 39,
+          "rule": "generic-api-key"
+        },
+        {
+          "file": "test/integration/authentication_test.rb",
+          "line": 46,
+          "rule": "generic-api-key"
+        }
+      ],
+      "redacted": true
+    },
+    "documentation": {
+      "markdownFiles": 29,
+      "localLinks": 282,
+      "tables": 41,
+      "requiredSections": 19,
+      "protectedFilesUnchanged": 20,
+      "localMasterKeyUnchanged": true,
+      "ignoreChecks": 16,
+      "errors": []
+    },
+    "historical_challenge_prefix_preserved": true,
+    "reviewed_at": "2026-10-22"
+  }
+}

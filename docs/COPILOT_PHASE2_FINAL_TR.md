@@ -1,5 +1,7 @@
 # LeadCurrent Phase 2 — Veritabanını bilen Copilot
 
+**22 Ekim güncellemesi:** aşağıdaki 21 Ekim sonuçları tarihsel finalizasyon kaydıdır. Yeniden otomasyon, gerçek Docker production smoke, sınırlı Groq kabulü ve kalan sınırlar için [güncel release-readiness raporunu](PHASE2_RELEASE_READINESS.md) okuyun. Yeni feature/Phase3, GitHub push veya Railway deploy yapılmadı.
+
 21 Ekim 2026. Yalnız yerel `phase2/page-agent` dalı. Phase 2 başlangıcı ve finalizasyon öncesi HEAD: `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`. HEAD aynı olsa da finalizasyon **268 dosyalık, commit edilmemiş çalışan Phase 2.1 kaynak ağacından** başladı; GitHub'daki Phase 1 sürümüne dönülmedi. İnceleme paketi tamamlanan yerel commit'ten üretilir; gerçek SHA teslim mesajında, ZIP adında ve Git archive metadata'sındadır. Push/deploy yetkisi yoktur.
 
 **Durum: yerel kod incelemesine hazır; Phase 2 tam canlı kabulü BLOCKED.** Final otomasyon **166 test / 2205 assertion**, sıfır hata/başarısızlık/skip. İstenen 10 senaryo türünün her biri geliştirme sırasında en az bir gerçek geçişte başarılı oldu; bu, son kaynakta tek kesintisiz başarılı run değildir. Son 10-alanlı schema run'ı ilk **5/13** senaryodan sonra Groq TPD kotasına takıldı. Üç ek team paraphrase canlıda çalıştırılamadı. Phase 2 tamamen doğrulandı/tamamlandı veya yayına hazır iddiası yoktur; kota toparlandıktan sonra son canlı kabul tekrar gerekir.

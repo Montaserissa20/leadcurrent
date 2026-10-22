@@ -1,5 +1,18 @@
 # Beş dakikalık canlı sunum
 
+**22 Ekim 2026 Phase 2 notu:** aşağıdaki Railway kanıtı Phase1'in tarihsel üretim kontrolüdür. Phase2 henüz push/deploy edilmedi; Copilot'u yerelde sunun. Yeni [release-readiness raporu](PHASE2_RELEASE_READINESS.md) ve [ölçülmüş kanıt](evidence/phase2-release-preparation-2026-10-22.json) güncel kapsamı açıklar. Otomasyon 166 test/2205 assertion geçti; gerçek Docker production smoke izole, geçici PostgreSQL üzerinde geçti. Bunlar Railway başarısı değildir.
+
+Sınırlı gerçek Groq + resmî Page Agent kabulü **8/8 senaryo, 105 assertion PASS**: yardım, ekip, rol devam sorusu, overdue, öncelik devam sorusu, Negotiation filtresi, kayıt açma ve kaydedilmemiş not. 16 gerçek completion/27726 ölçülmüş token, sıfır provider hatası/429, sıfır CRM yazması. Bu test tam 13 senaryoyu, ilave ekip parafrazlarını veya üretim dağıtımını doğrulamaz; ücretsiz kotayı zorlamamak için tekrarlanmadı.
+
+## Phase 2 için yerel Copilot sunumu
+
+1. Mevcut PostgreSQL ve tek Rails sunucusunu kullanın; yeniden seed/reset yapmayın. `npm ci --ignore-scripts` ve `npm run build` Node22 ile çalışır. Anahtar yalnız server env'de olmalı; ekrana veya chat'e yazmayın.
+2. **AI Agent** açın. “Tell me how I can use the system.” ile AI explanation; “How many users are in my team?” ve “How many of them are salespeople?” ile gerçek DB/rol sayıları ve konuşma bağlamını gösterin. Kayıtlı üyelik online kişi sayısı değildir. Mevcut development workspace 2 kayıtlı üyedir; canlı test fixture'ı 3 üyedir.
+3. “Which leads are overdue?” ve “Which one needs attention first?” sorun. Verified CRM data, yetkili linkler ve mevcut NBA önceliğini gösterin. 24 saat temas, 4 saat uyarı ve 72 saat hareketsizlik kuralları değişmedi.
+4. “Show my opportunities in negotiation.” gerçek görünür kontrollerle owner/aşama filtresini uygular. Yalnız modelin done sözüne değil, sayfa ve seçili filtrelere bakın.
+5. Kendi workspace'inizdeki kurgusal bir müşteri adını kullanarak “Open …” deyin; test fixture'ındaki Atlas adının gerçek development verinizde bulunacağını varsaymayın. “Prepare a follow-up note for this customer.” ile **kaydedilmemiş** notu gösterin. Save action'a basılmadıkça veri değişmez; contact/stage/task submit yetkisi yoktur.
+6. Provider/quota hatasını gizlemeyin veya tekrar tekrar çağrı göndermeyin. Sınırlı canlı test tam 13 senaryo kabulü değildir; tarihli rapordaki gerçek PASS/FAIL/kapsamı söyleyin. Phase1 akışı aşağıdaki mevcut sunumla korunur.
+
 Canlı uygulama: https://leadcurrent-production.up.railway.app — 16 Ekim 2026 üretim kontrolü ve kapsamı [test raporunda](PRODUCTION_TEST_REPORT.md). Parola göstermeyin; kendi özel sunum hesabınızı kullanın. Önce `/up` ve son ilgili [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml) run'ını kontrol edin. Ekranda eski QA kayıtlarını değiştirmek yerine yeni, kurgusal bir sunum kaydı oluşturun.
 
 ## 0:00–0:30 — SaaS, müşteri ve aort dilimi

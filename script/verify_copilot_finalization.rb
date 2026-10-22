@@ -11,6 +11,24 @@ require 'fileutils'
 class LiveCopilotFinalizationCheck < ApplicationSystemTestCase
   test 'real language team facts follow-ups scoped CRM and actual safe DOM execution' do
     report={started_at:Time.now.utc.iso8601,result:'FAIL',mocked:false,scenarios:[],completions:[],decisions:[],failures:[],paid_cost:'not measured',human_hours:'not measured'}
+    # Optional release smoke: one bounded run, never a replacement for full acceptance.
+    # The real transport and all production limits remain in use. Stop spending on
+    # the first provider failure, even if the browser offers its normal one retry.
+    if ENV['LEADCURRENT_LIVE_RELEASE_SMOKE']=='1'
+      original_factory=PageAgent::GroqClient.http_factory
+      report[:release_smoke]={max_requests:16,max_measured_tokens:40_000,requests:0,blocked_requests:0}
+      PageAgent::GroqClient.http_factory=->(uri) do
+        budget=report[:release_smoke]
+        tokens=report[:completions].sum{|entry|entry.fetch(:usage,{}).fetch('total_tokens',0)}
+        if report[:failures].any? || budget[:requests]>=budget[:max_requests] || tokens>=budget[:max_measured_tokens]
+          budget[:blocked_requests]+=1
+          budget[:stop_reason]=report[:failures].any? ? 'previous_provider_failure' : 'local_smoke_budget'
+          raise PageAgent::Error.new(:unavailable)
+        end
+        budget[:requests]+=1
+        original_factory.call(uri)
+      end
+    end
     subscriptions=%w[completion.copilot completion.page_agent decision.copilot invalid_decision.copilot failure.page_agent].map do |name|
       ActiveSupport::Notifications.subscribe(name) do |_n,_s,_f,_id,payload|
         if name=='invalid_decision.copilot'
@@ -62,6 +80,12 @@ class LiveCopilotFinalizationCheck < ApplicationSystemTestCase
       ["What's the size of our sales team?",'team'],
       ['Do we have more than three users?','team']
     ]
+    if report[:release_smoke]
+      smoke_types=%w[help team salespeople overdue urgent negotiation record note]
+      questions=questions.uniq(&:last).select{|_question,expected|smoke_types.include?(expected)}
+      report[:release_smoke][:scenario_types]=questions.map(&:last)
+      report[:release_smoke][:scope]='Eight selected scenarios; excludes lead count, tasks and three extra team paraphrases. Not full 13-scenario acceptance. Token budget uses successful metered completions and may be exceeded by the final in-flight response.'
+    end
     if ENV['LEADCURRENT_LIVE_SCENARIOS']
       selected=ENV['LEADCURRENT_LIVE_SCENARIOS'].split(',')
       abort 'Unknown diagnostic scenario' unless (selected-questions.map(&:last)).empty?
@@ -161,6 +185,7 @@ class LiveCopilotFinalizationCheck < ApplicationSystemTestCase
     report[:note_submission]='No submit occurred; all CRM table contents unchanged after every request. No manual save was performed.'
     report[:result]='PASS'
   ensure
+    PageAgent::GroqClient.http_factory=original_factory if original_factory
     subscriptions&.each{|subscription|ActiveSupport::Notifications.unsubscribe(subscription)}
     Capybara.default_max_wait_time=previous if previous
     if report
