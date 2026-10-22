@@ -7,6 +7,7 @@ class LeadsController < ApplicationController
   end
   def show
     @lead = scope(Lead).find(params[:id])
+    @source_inquiry = scope(AgentInquiry).find_by(accepted_lead_id: @lead.id)
     @profile = CustomerProfile.new(current_user, @lead)
     @recommendation = NextBestAction.new(current_user).call(record: @lead, limit: 1).first
   end

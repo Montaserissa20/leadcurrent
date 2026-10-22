@@ -35,6 +35,8 @@ jobs:
           cache: npm
       - name: Build pinned Page Agent assets
         run: npm ci --ignore-scripts && npm run build
+      - name: Purchasing agent Python client tests (no provider calls)
+        run: python3 -m unittest discover -s examples/purchasing_agent/tests
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version

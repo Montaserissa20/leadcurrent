@@ -1,0 +1,8 @@
+<% content_for :page_title, "Credential created" %>
+<section class="panel inquiry-secret-panel" data-controller="credential-display">
+  <span class="eyebrow">SHOWN ONCE</span><h1>Credential created</h1><p><strong><%= @credential.name %></strong> can submit inquiries only to this workspace. This does not establish the requester's identity or purchasing authority.</p>
+  <p>Copy the credential into the external client's private environment now. It cannot be retrieved again. Do not paste it into a prompt, source file, screenshot or shared terminal transcript.</p>
+  <code id="agent-issued-token" class="inquiry-issued-token" data-credential-display-target="secret"><%= @issued_token %></code>
+  <p class="form-hint">Scope: inquiries:create · Store as LEADCURRENT_AGENT_TOKEN locally. Only a digest is saved by LeadCurrent.</p>
+  <%= link_to "Back to credentials", agent_credentials_path, class: "button secondary" %>
+</section>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_17_000100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_22_000100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,65 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_17_000100) do
     t.index ["organization_id"], name: "index_activities_on_organization_id"
     t.check_constraint "((lead_id IS NOT NULL)::integer + (opportunity_id IS NOT NULL)::integer) = 1", name: "activity_parent"
     t.check_constraint "kind::text = ANY (ARRAY['contact'::character varying, 'note'::character varying]::text[])", name: "activity_kind"
+  end
+
+  create_table "agent_credentials", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "created_by_id", null: false
+    t.string "name", limit: 80, null: false
+    t.string "identifier", limit: 24, null: false
+    t.string "token_digest", limit: 64, null: false
+    t.string "scope", default: "inquiries:create", null: false
+    t.datetime "expires_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_agent_credentials_on_created_by_id"
+    t.index ["identifier"], name: "index_agent_credentials_on_identifier", unique: true
+    t.index ["organization_id", "id"], name: "agent_credentials_workspace_identity", unique: true
+    t.index ["organization_id"], name: "index_agent_credentials_on_organization_id"
+    t.index ["token_digest"], name: "index_agent_credentials_on_token_digest", unique: true
+    t.check_constraint "identifier::text ~ '^[a-f0-9]{24}$'::text AND token_digest::text ~ '^[a-f0-9]{64}$'::text", name: "agent_credential_digest_shape"
+    t.check_constraint "scope::text = 'inquiries:create'::text", name: "agent_credential_scope"
+  end
+
+  create_table "agent_inquiries", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "agent_credential_id", null: false
+    t.bigint "reviewed_by_id"
+    t.bigint "accepted_lead_id"
+    t.string "company_name", limit: 150, null: false
+    t.string "contact_name", limit: 150
+    t.string "contact_email", limit: 254
+    t.string "product_or_service", limit: 200, null: false
+    t.integer "quantity"
+    t.string "currency", limit: 3
+    t.decimal "stated_budget", precision: 14, scale: 2
+    t.text "requirements"
+    t.string "desired_timeline", limit: 200
+    t.text "message", null: false
+    t.string "status", default: "pending_review", null: false
+    t.datetime "submitted_at", null: false
+    t.datetime "reviewed_at"
+    t.string "review_reason", limit: 500
+    t.string "idempotency_digest", limit: 64, null: false
+    t.string "payload_digest", limit: 64, null: false
+    t.jsonb "submitted_payload", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["accepted_lead_id"], name: "index_agent_inquiries_on_accepted_lead_id", unique: true
+    t.index ["agent_credential_id", "idempotency_digest"], name: "agent_inquiry_durable_idempotency", unique: true
+    t.index ["agent_credential_id"], name: "index_agent_inquiries_on_agent_credential_id"
+    t.index ["organization_id", "status", "submitted_at"], name: "agent_inquiry_inbox"
+    t.index ["organization_id"], name: "index_agent_inquiries_on_organization_id"
+    t.index ["reviewed_by_id"], name: "index_agent_inquiries_on_reviewed_by_id"
+    t.check_constraint "(currency IS NULL OR (currency::text = ANY (ARRAY['USD'::character varying, 'EUR'::character varying, 'TRY'::character varying]::text[]))) AND (stated_budget IS NULL OR currency IS NOT NULL AND stated_budget >= 0::numeric AND stated_budget <= 999999999999.99)", name: "agent_inquiry_money"
+    t.check_constraint "(status::text = 'accepted'::text) = (accepted_lead_id IS NOT NULL)", name: "agent_inquiry_acceptance"
+    t.check_constraint "char_length(company_name::text) >= 1 AND char_length(company_name::text) <= 150 AND char_length(product_or_service::text) >= 1 AND char_length(product_or_service::text) <= 200 AND char_length(message) >= 1 AND char_length(message) <= 2000 AND (requirements IS NULL OR char_length(requirements) <= 3000)", name: "agent_inquiry_text_bounds"
+    t.check_constraint "jsonb_typeof(submitted_payload) = 'object'::text AND idempotency_digest::text ~ '^[a-f0-9]{64}$'::text AND payload_digest::text ~ '^[a-f0-9]{64}$'::text", name: "agent_inquiry_receipt_shape"
+    t.check_constraint "quantity IS NULL OR quantity >= 1 AND quantity <= 1000000", name: "agent_inquiry_quantity"
+    t.check_constraint "status::text = 'pending_review'::text AND reviewed_by_id IS NULL AND reviewed_at IS NULL OR status::text <> 'pending_review'::text AND reviewed_by_id IS NOT NULL AND reviewed_at IS NOT NULL", name: "agent_inquiry_review_evidence"
+    t.check_constraint "status::text = ANY (ARRAY['pending_review'::character varying, 'needs_information'::character varying, 'accepted'::character varying, 'rejected'::character varying]::text[])", name: "agent_inquiry_status"
   end
 
   create_table "audit_events", force: :cascade do |t|
@@ -81,6 +140,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_17_000100) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_leads_on_company_id"
     t.index ["contact_id"], name: "index_leads_on_contact_id"
+    t.index ["organization_id", "id"], name: "leads_workspace_identity", unique: true
     t.index ["organization_id", "status", "first_contact_deadline"], name: "idx_on_organization_id_status_first_contact_deadlin_95a370b813"
     t.index ["organization_id"], name: "index_leads_on_organization_id"
     t.index ["owner_id"], name: "index_leads_on_owner_id"
@@ -156,6 +216,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_17_000100) do
     t.datetime "updated_at", null: false
     t.boolean "password_change_required", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id", "id"], name: "users_workspace_identity", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.check_constraint "role::text = ANY (ARRAY['manager'::character varying, 'salesperson'::character varying]::text[])", name: "user_role"
   end
@@ -164,6 +225,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_17_000100) do
   add_foreign_key "activities", "opportunities"
   add_foreign_key "activities", "organizations"
   add_foreign_key "activities", "users", column: "actor_id"
+  add_foreign_key "agent_credentials", "organizations"
+  add_foreign_key "agent_credentials", "users", column: ["organization_id", "created_by_id"], primary_key: ["organization_id", "id"], name: "agent_credential_issuer_workspace"
+  add_foreign_key "agent_inquiries", "agent_credentials", column: ["organization_id", "agent_credential_id"], primary_key: ["organization_id", "id"], name: "agent_inquiry_credential_workspace"
+  add_foreign_key "agent_inquiries", "leads", column: ["organization_id", "accepted_lead_id"], primary_key: ["organization_id", "id"], name: "agent_inquiry_lead_workspace"
+  add_foreign_key "agent_inquiries", "organizations"
+  add_foreign_key "agent_inquiries", "users", column: ["organization_id", "reviewed_by_id"], primary_key: ["organization_id", "id"], name: "agent_inquiry_reviewer_workspace"
   add_foreign_key "audit_events", "organizations"
   add_foreign_key "audit_events", "users", column: "actor_id"
   add_foreign_key "companies", "organizations"

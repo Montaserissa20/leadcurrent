@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :agent_inquiries, only: :create, defaults: { format: :json }
+    end
+  end
+  resources :agent_credentials, only: %i[index create] do
+    post :revoke, on: :member
+  end
+  resources :agent_inquiries, only: %i[index show] do
+    post :review, on: :member
+    post :analyze, on: :member
+  end
   post "copilot/messages", to: "copilot/messages#create"
   post "copilot/outcome", to: "copilot/messages#outcome"
   post "agent/chat/completions", to: "page_agent/completions#create"

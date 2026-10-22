@@ -1,5 +1,13 @@
 # LeadCurrent
 
+## Phase 3 — AI müşteri agent (yerel inceleme)
+
+**22 Ekim 2026:** `phase3/agent-customer` dalında gerçek dış Python satın alma agent'ı, workspace'e bağlı/revoke edilebilir bearer credential, ayrı ve **doğrulanmamış** inquiry inbox'ı, isteğe bağlı Groq qualification ve manager onayından sonra mevcut `CreateLead` ile lead oluşturma eklendi. 24 saatlik ilk temas kuralı lead yaratıldığında başlar; agent onay/satış/ödeme yapamaz. Default model `openai/gpt-oss-20b` korundu. Önceki “Phase 3 başlatma” kısıtları tarihsel Phase 2 görevine aittir; yeni kullanıcı brief'i yalnız yerel Phase 3 geliştirmesini onayladı.
+
+**Yerel doğrulama:** Rails 164/2108 + browser 29/436 = **193 test/2544 assertion PASS**, ayrıca 7 Python testi; gerçek Docker/Node ve izole production-start kontrolü PASS. Ayrı Python → gerçek Groq → HTTP inquiry → insan kabulü → Phase 1 analiz → Phase 2 scoped sorgu demosu **1 test/48 assertion PASS**, 4 completion/4808 ölçülmüş token. İlk 403 girişimi de korunur; ücret/saat ölçülmedi. Mevcut müşteri satırları değişmedi; additive migration gereklidir. **Phase 3 push / remote CI / Railway deployment / production acceptance: PENDING.** Main korunur; onay gelmeden yayın yok.
+
+[Teknik rapor, güvenlik, sınırlamalar ve release adımları](docs/AGENT_CUSTOMER_PHASE3.md) · [Kesin PowerShell komutları ve kısa Türkçe sunum](docs/AGENT_CUSTOMER_DEMO_TR.md) · [Python istemci](examples/purchasing_agent/README.md) · [Gerçek ölçülmüş kanıt](docs/evidence/phase3-agent-customer-2026-10-22.json).
+
 **22 Ekim Phase2 GitHub yayını:** onaylı `e220800` mevcut main dalına normal fast-forward ile push edildi; feature ve `903b095` belge commit'lerinin exact-commit LeadCurrent CI kontrolleri **PASS** (166 test/2205 assertion). **Railway dağıtımı ve production acceptance: PENDING.** Kullanıcı platform engelini bildirdi ve Railway beklenmeden GitHub tesliminin bitirilmesini istedi. [Doğrulanmış yayın/CI kanıtı ve platform açılınca deployment adımları](docs/PHASE2_PUBLICATION.md). Aşağıdaki yerel-only kayıtlar önceki tarihsel hazırlık aşamalarıdır.
 
 [![LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml/badge.svg)](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml)

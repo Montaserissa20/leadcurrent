@@ -73,5 +73,7 @@ credentials.json
 /.pytest_cache/
 /coverage/
 /node_modules/
+__pycache__/
+*.pyc
 /app/assets/builds/*
 !/app/assets/builds/.keep

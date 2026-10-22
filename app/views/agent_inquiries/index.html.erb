@@ -1,0 +1,22 @@
+<% content_for :page_title, "Agent inquiries" %>
+<section class="page-heading"><div><span class="eyebrow">MACHINE INQUIRIES · HUMAN DECISIONS</span><h1>Agent Inquiries</h1><p>Prospective buyers can be agents. Their claims stay separate from your CRM until a manager accepts them.</p></div><% if current_user.manager? %><%= link_to "Manage agent credentials", agent_credentials_path, class: "button secondary" %><% end %></section>
+<div class="inquiry-metrics" aria-label="Inquiry summary">
+  <% [["Total inquiries", @counts.values.sum, nil], ["Pending review", @counts.fetch("pending_review", 0), "pending_review"], ["Needs information", @counts.fetch("needs_information", 0), "needs_information"], ["Accepted", @counts.fetch("accepted", 0), "accepted"], ["Rejected", @counts.fetch("rejected", 0), "rejected"]].each do |label, count, status| %>
+    <%= link_to agent_inquiries_path(status: status), class: "stat-card" do %><small><%= label %></small><strong><%= count %></strong><% end %>
+  <% end %>
+</div>
+<section class="panel">
+  <%= form_with url: agent_inquiries_path, method: :get, class: "filters" do |f| %><div class="field"><%= f.label :status, "Inquiry status" %><%= f.select :status, [["All statuses", ""]] + AgentInquiry::STATUSES.map { |s| [s.humanize, s] }, selected: @status %></div><%= f.submit "Filter", class: "button secondary" %><% end %>
+  <p class="form-hint">Latest 100 matching inquiries. Authenticated source ≠ verified company. Totals cover this workspace.</p>
+  <div class="inquiry-list">
+    <% @inquiries.each do |inquiry| %>
+      <%= link_to agent_inquiry_path(inquiry), class: "inquiry-card" do %>
+        <div class="inquiry-card-heading"><h2><%= inquiry.company_name %></h2><span class="badge neutral"><%= inquiry.status.humanize %></span></div>
+        <p><%= inquiry.quantity ? "#{inquiry.quantity} × " : "" %><%= inquiry.product_or_service %></p>
+        <p class="muted">Stated budget: <%= inquiry.stated_budget ? "#{inquiry.stated_budget.to_s('F')} #{inquiry.currency}" : "Not supplied" %> · Timeline: <%= inquiry.desired_timeline.presence || "Not supplied" %></p>
+        <div class="inquiry-meta"><span>External AI Agent</span><span>Identity: Unverified</span><time datetime="<%= inquiry.submitted_at.iso8601 %>"><%= l inquiry.submitted_at, format: :short %></time></div>
+      <% end %>
+    <% end %>
+    <% if @inquiries.empty? %><div class="empty-state"><h2>No matching inquiries</h2><p>Authorized external agents can send a purchasing inquiry. Nothing becomes a lead automatically.</p></div><% end %>
+  </div>
+</section>

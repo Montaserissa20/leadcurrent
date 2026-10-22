@@ -1,0 +1,528 @@
+{
+  "date": "2026-10-22",
+  "project": "LeadCurrent",
+  "phase": 3,
+  "branch": "phase3/agent-customer",
+  "baseline_commit": "e8c3e0da485994567c948e40fbeb4cc32a4dc312",
+  "publication": {
+    "phase3_push": "NOT PERFORMED — approval required",
+    "phase3_remote_ci": "NOT RUN — local branch only",
+    "railway": "PENDING — platform block reported by user",
+    "production_acceptance": "PENDING / NOT RUN",
+    "production_contacted": false
+  },
+  "baseline": {
+    "rails": {
+      "tests": 139,
+      "assertions": 1820,
+      "seed": 20008
+    },
+    "browser": {
+      "tests": 27,
+      "assertions": 385,
+      "seed": 38958
+    }
+  },
+  "final": {
+    "rails": {
+      "tests": 164,
+      "assertions": 2108,
+      "seed": 17603,
+      "result": "PASS"
+    },
+    "browser": {
+      "tests": 29,
+      "assertions": 436,
+      "seed": 9596,
+      "result": "PASS"
+    },
+    "rails_and_browser_total": {
+      "tests": 193,
+      "assertions": 2544
+    },
+    "python": {
+      "tests": 7,
+      "result": "PASS",
+      "external_transport": "mocked"
+    },
+    "zeitwerk": "PASS",
+    "brakeman": {
+      "version": "8.1.0",
+      "warnings": 0,
+      "errors": 0
+    },
+    "node_locked_install_build": "PASS — Node22, zero npm advisories at install",
+    "production_assets": "PASS",
+    "development_browser_checks": 12
+  },
+  "migration": {
+    "file": "db/migrate/20261022000100_create_agent_intake.rb",
+    "type": "additive; two new tables, constraints and supporting composite indexes",
+    "previous_schema_migrations": 3,
+    "final_schema_migrations": 4,
+    "upgrade_test": "PASS",
+    "development_existing_application_table_count": 9,
+    "existing_rows_unchanged": true,
+    "comparison": "read-only per-table row-content SHA256; original tables only; excludes sessions and schema metadata",
+    "new_development_tables_empty": true,
+    "reset_drop_seed": false
+  },
+  "container": {
+    "image": "leadcurrent:phase3-review",
+    "isolated_database": true,
+    "host_database_used": false,
+    "result": "PASS",
+    "checks": {
+      "production_health": "HTTP 200, database connected",
+      "login_and_csp": "HTTP 200, CSP present, no unsafe-eval",
+      "compiled_page_agent": {
+        "http": 200,
+        "bytes": 537760
+      },
+      "runtime_filesystem": {
+        "uid": 1000,
+        "runtime": {
+          "db": true,
+          "log": true,
+          "tmp": true
+        },
+        "forbidden": []
+      },
+      "entrypoint_migrations_no_seeds": "4|0|0"
+    },
+    "image_id": "sha256:69d37d4d97c3072b68f50824db807b4d47eb0f34ac5ab7ebc0e8af4889b411ab",
+    "cleanup_exit_codes": {
+      "leadcurrent-release-48d21be9-app": 0,
+      "leadcurrent-release-48d21be9-pg": 0,
+      "leadcurrent-release-48d21be9": 0
+    }
+  },
+  "real_attempts": [
+    {
+      "started_at": "2026-10-22T17:06:00Z",
+      "mocked": false,
+      "result": "FAIL",
+      "steps": [
+        {
+          "name": "manager UI issues workspace-bound digest-only credential",
+          "result": "PASS",
+          "secret_logged": false
+        },
+        {
+          "name": "separate deterministic Python process makes real HTTP submission and durable replay",
+          "result": "PASS",
+          "groq_calls": 0
+        }
+      ],
+      "completions": [],
+      "paid_cost": "not measured",
+      "human_hours": "not measured",
+      "production": "not contacted",
+      "buyer_attempts": [
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-a-demo-20261022",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 201,
+          "receipt": {
+            "inquiry_id": 58,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": false
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        },
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-a-demo-20261022",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 200,
+          "receipt": {
+            "inquiry_id": 58,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": true
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        },
+        {
+          "mode": "ai",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-b-demo-20261022",
+          "credential_logged": false,
+          "model": "openai/gpt-oss-20b",
+          "result": "FAIL",
+          "error_code": "groq_http_403"
+        }
+      ],
+      "finished_at": "2026-10-22T17:06:06Z",
+      "usage": {},
+      "buyer_usage": {},
+      "fixture_lifecycle": "Fictional local test transaction rolls back; existing development database not modified."
+    },
+    {
+      "started_at": "2026-10-22T17:07:44Z",
+      "mocked": false,
+      "result": "PASS",
+      "steps": [
+        {
+          "name": "manager UI issues workspace-bound digest-only credential",
+          "result": "PASS",
+          "secret_logged": false
+        },
+        {
+          "name": "separate deterministic Python process makes real HTTP submission and durable replay",
+          "result": "PASS",
+          "groq_calls": 0
+        },
+        {
+          "name": "real Groq buyer in separate Python process submits actual pending inquiry",
+          "result": "PASS",
+          "usage": {
+            "prompt_tokens": 646,
+            "completion_tokens": 191,
+            "total_tokens": 837
+          },
+          "http_status": 201
+        },
+        {
+          "name": "real Groq qualification of saved inquiry; decision unchanged",
+          "result": "PASS"
+        },
+        {
+          "name": "human acceptance through CreateLead yields linked New lead with 24-hour deadline and audit, no contact/purchase",
+          "result": "PASS"
+        },
+        {
+          "name": "existing Phase1 real Groq Sales Assistant analyzes the accepted lead",
+          "result": "PASS"
+        },
+        {
+          "name": "existing Phase2 real Groq Copilot finds the accepted lead through authorized database queries",
+          "result": "PASS"
+        }
+      ],
+      "completions": [
+        {
+          "model": "openai/gpt-oss-20b",
+          "usage": {
+            "prompt_tokens": 542,
+            "completion_tokens": 244,
+            "total_tokens": 786
+          },
+          "surface": "completion.ai"
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "usage": {
+            "prompt_tokens": 872,
+            "completion_tokens": 191,
+            "total_tokens": 1063
+          },
+          "surface": "completion.ai"
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "usage": {
+            "prompt_tokens": 2026,
+            "completion_tokens": 96,
+            "total_tokens": 2122
+          },
+          "duration_seconds": 0.414,
+          "surface": "completion.copilot"
+        }
+      ],
+      "paid_cost": "not measured",
+      "human_hours": "not measured",
+      "production": "not contacted",
+      "buyer_attempts": [
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-a-demo-20261022",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 201,
+          "receipt": {
+            "inquiry_id": 59,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": false
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        },
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-a-demo-20261022",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 200,
+          "receipt": {
+            "inquiry_id": 59,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": true
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        },
+        {
+          "mode": "ai",
+          "fictional_demo": true,
+          "idempotency_key": "phase3-mode-b-demo-20261022",
+          "credential_logged": false,
+          "model": "openai/gpt-oss-20b",
+          "usage": {
+            "prompt_tokens": 646,
+            "completion_tokens": 191,
+            "total_tokens": 837
+          },
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 201,
+          "receipt": {
+            "inquiry_id": 60,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": false
+          },
+          "inquiry": {
+            "company_name": "Fictional Meridian Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "business software subscriptions with team management and reporting",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000",
+            "requirements": "team management and reporting",
+            "desired_timeline": "within 30 days",
+            "message": "We are a fictional startup seeking pricing for 50 business software subscriptions with team management and reporting. Our proposed budget is 10000 USD, not approved. Desired timeline is within 30 days. Request a quotation, not a purchase."
+          }
+        }
+      ],
+      "test_harness_quota_wait_seconds": 60,
+      "finished_at": "2026-10-22T17:08:53Z",
+      "usage": {
+        "prompt_tokens": 3440,
+        "completion_tokens": 531,
+        "total_tokens": 3971
+      },
+      "buyer_usage": {
+        "prompt_tokens": 646,
+        "completion_tokens": 191,
+        "total_tokens": 837
+      },
+      "fixture_lifecycle": "Fictional local test transaction rolls back; existing development database not modified."
+    }
+  ],
+  "real_usage": {
+    "successful_completions": 4,
+    "prompt_tokens": 4086,
+    "completion_tokens": 722,
+    "total_tokens": 4808,
+    "rejected_403_usage": "not reported",
+    "financial_cost": "not measured",
+    "human_hours": "not measured",
+    "agent_development_hours": "not measured",
+    "further_live_calls_after_pass": false
+  },
+  "live_scope_note": "Passing valid workflow precedes final small owner/reason validation and archive-scanning guards, which passed the final normal tests; no expensive duplicate live run.",
+  "screenshots": [
+    {
+      "path": "phase3-inbox-2026-10-22.png",
+      "source": "actual passing local live demo; fictional data; no credential-page capture",
+      "sha256": "43b6eb6ad12bf78a5f59c6a04e67941a101cd9784e0b8c0e33342ff8d7fd4c24"
+    },
+    {
+      "path": "phase3-accepted-lead-2026-10-22.png",
+      "source": "actual passing local live demo; fictional accepted lead",
+      "sha256": "6c30d0df0184b775bdcc3c4bb550f98f75c3b09ea2b9a6f43f47769ccc9c146f"
+    }
+  ],
+  "limitations": [
+    "Authenticating possession does not verify company, authority or budget.",
+    "Process-local rate/Groq limits require a shared implementation before multiple workers or replicas.",
+    "AI interpretation is fallible and never authorizes writes.",
+    "No outbound email, inquiry edit/polling API, payment or quotation acceptance.",
+    "Free-text redaction is best-effort, not anonymity.",
+    "Latest100 inquiry list; no pagination.",
+    "GitHub/Railway release and production acceptance require later approval and verification."
+  ],
+  "commit_archive_note": "Exact local Phase3 SHA, actual ZIP hash and final source/secret audit are reported in the post-commit local delivery; no self-referencing hash or future verification is fabricated.",
+  "source_review": {
+    "source_files_excluding_runtime_keep_files": 308,
+    "existing_modified_files": [
+      ".dockerignore",
+      ".github/workflows/ci.yml",
+      ".gitignore",
+      "AGENT.md",
+      "CHALLENGE_LOG.md",
+      "README.md",
+      "app/controllers/leads_controller.rb",
+      "app/models/organization.rb",
+      "app/views/layouts/application.html.erb",
+      "app/views/leads/show.html.erb",
+      "config/initializers/filter_parameter_logging.rb",
+      "config/routes.rb",
+      "db/schema.rb",
+      "script/package_source.rb"
+    ],
+    "new_files": [
+      "app/assets/stylesheets/agent_inquiries.css",
+      "app/controllers/agent_credentials_controller.rb",
+      "app/controllers/agent_inquiries_controller.rb",
+      "app/controllers/api/v1/agent_inquiries_controller.rb",
+      "app/javascript/controllers/credential_display_controller.js",
+      "app/models/agent_credential.rb",
+      "app/models/agent_inquiry.rb",
+      "app/services/agent_intake/error.rb",
+      "app/services/agent_intake/payload.rb",
+      "app/services/agent_intake/qualifier.rb",
+      "app/services/agent_intake/request_gate.rb",
+      "app/services/agent_intake/submit.rb",
+      "app/services/review_agent_inquiry.rb",
+      "app/views/agent_credentials/created.html.erb",
+      "app/views/agent_credentials/index.html.erb",
+      "app/views/agent_inquiries/index.html.erb",
+      "app/views/agent_inquiries/show.html.erb",
+      "config/initializers/agent_inquiry_ingress.rb",
+      "db/migrate/20261022000100_create_agent_intake.rb",
+      "docs/AGENT_CUSTOMER_DEMO_TR.md",
+      "docs/AGENT_CUSTOMER_PHASE3.md",
+      "docs/evidence/phase3-accepted-lead-2026-10-22.png",
+      "docs/evidence/phase3-agent-customer-2026-10-22.json",
+      "docs/evidence/phase3-inbox-2026-10-22.png",
+      "examples/purchasing_agent/README.md",
+      "examples/purchasing_agent/client.py",
+      "examples/purchasing_agent/tests/test_client.py",
+      "lib/agent_inquiry_ingress.rb",
+      "script/verify_agent_customer.rb",
+      "test/integration/agent_intake_test.rb",
+      "test/models/agent_intake_test.rb",
+      "test/models/concurrent_agent_intake_test.rb",
+      "test/support/agent_intake_test_support.rb",
+      "test/system/agent_intake_test.rb"
+    ],
+    "unchanged_preexisting_files": 263,
+    "unexpected_existing_changes": [],
+    "local_master_key_unchanged": true,
+    "historical_challenge_prefix_preserved": true,
+    "original_phase3_prompt_verbatim": true,
+    "local_main_and_origin_tracking_main": "e8c3e0da485994567c948e40fbeb4cc32a4dc312",
+    "push_performed": false
+  },
+  "syntax": {
+    "ruby": {
+      "files": 140,
+      "errors": []
+    },
+    "javascript": {
+      "files": 13,
+      "errors": []
+    },
+    "python": {
+      "files": 2,
+      "errors": []
+    }
+  },
+  "documentation_validation": {
+    "markdownFiles": 33,
+    "localLinks": 315,
+    "tables": 46,
+    "requiredSections": 19,
+    "protectedFilesUnchanged": 263,
+    "localMasterKeyUnchanged": true,
+    "ignoreChecks": 18,
+    "errors": []
+  },
+  "security_review": {
+    "working_source_policy": "PASS — all source files, actual local key/provider-secret matching and format signatures; private paths excluded",
+    "gitleaks_source": {
+      "actual_credentials_found": 0,
+      "reviewed_unchanged_generic_pattern_findings": [
+        {
+          "file": "docs/VERIFICATION_TR.md",
+          "line": 39,
+          "classification": "public commit hash",
+          "baseline_content_unchanged": true
+        },
+        {
+          "file": "test/integration/authentication_test.rb",
+          "line": 46,
+          "classification": "synthetic overlong-password test input",
+          "baseline_content_unchanged": true
+        }
+      ]
+    },
+    "git_diff_whitespace": "PASS outside CHALLENGE_LOG; four Markdown hard-break trailing spaces are preserved inside the exact original prompt rather than rewriting it",
+    "secret_format_negative_test": "PASS — package scanner rejects generated agent and Groq credential formats",
+    "archived_source_verification": "Performed after final commit; exact SHA, ZIP contents/hash and outgoing-commit scan recorded in local delivery"
+  },
+  "development_counts": {
+    "activities": 4,
+    "audit_events": 36,
+    "companies": 7,
+    "contacts": 7,
+    "leads": 7,
+    "opportunities": 4,
+    "organizations": 1,
+    "tasks": 0,
+    "users": 2
+  }
+}

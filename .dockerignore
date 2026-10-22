@@ -33,6 +33,8 @@
 
 # Ignore assets.
 /node_modules/
+**/__pycache__/
+**/*.pyc
 /app/assets/builds/*
 !/app/assets/builds/.keep
 /public/assets

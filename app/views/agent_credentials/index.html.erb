@@ -1,0 +1,20 @@
+<% content_for :page_title, "Agent credentials" %>
+<%= link_to "← Agent inquiries", agent_inquiries_path, class: "back-link" %>
+<section class="page-heading"><div><span class="eyebrow">MANAGER CONTROL</span><h1>Agent credentials</h1><p>Authorize inquiry submission to this workspace. Authentication does not verify a buyer's identity.</p></div></section>
+<div class="detail-grid">
+  <section class="panel"><h2>Create a credential</h2><p class="muted">Inquiry submission only. The secret is shown once; keep it outside code and chat.</p>
+    <%= form_with scope: :agent_credential, url: agent_credentials_path, data: { turbo: false } do |f| %>
+      <div class="field"><%= f.label :name, "Credential name" %><%= f.text_field :name, required: true, maxlength: 80, autocomplete: "off" %></div>
+      <div class="field"><%= f.label :expires_at, "Expires at (optional)" %><%= f.datetime_local_field :expires_at %><small class="muted">Your timezone: <%= current_user.time_zone %>. Leave empty for no scheduled expiry.</small></div>
+      <%= f.submit "Generate credential", class: "button", data: { disable_with: "Generating…" } %>
+    <% end %>
+  </section>
+  <section class="panel"><h2>Workspace credentials</h2><p class="form-hint">Latest 100. Revocation immediately blocks new submissions and retries; existing inquiries remain reviewable.</p>
+    <% @credentials.each do |credential| %>
+      <div class="inquiry-credential"><div><strong><%= credential.name %></strong><small class="muted">Identifier: <%= credential.identifier %> · inquiries:create</small><span class="badge neutral"><%= credential.revoked_at ? "Revoked" : credential.active? ? "Active" : "Expired" %></span><small class="muted">Created <%= l credential.created_at, format: :short %><% if credential.expires_at %> · Expires <%= l credential.expires_at, format: :short %><% end %></small></div>
+        <% if credential.revoked_at.nil? %><%= button_to "Revoke", revoke_agent_credential_path(credential), class: "button secondary small", data: { turbo_confirm: "Revoke this inquiry credential? Existing inquiries will remain." } %><% end %>
+      </div>
+    <% end %>
+    <% if @credentials.empty? %><p class="empty-state">No credentials yet. Generate one for an authorized purchasing agent.</p><% end %>
+  </section>
+</div>

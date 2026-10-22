@@ -51,6 +51,8 @@ module LeadCurrentSourcePackage
     text = bytes.dup.force_encoding(Encoding::UTF_8)
     raise "Unverifiable text encoding: #{name}" unless text.valid_encoding?
     signatures = [
+      /\blc_agent_[a-f0-9]{24}\.[A-Za-z0-9_-]{43}\b/,
+      /\bgsk_[A-Za-z0-9_-]{20,}\b/,
       /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
       /\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{35,})\b/,
       /\b(?:sk-(?:proj-)?[A-Za-z0-9_-]{24,}|nvapi-[A-Za-z0-9_-]{24,})\b/,

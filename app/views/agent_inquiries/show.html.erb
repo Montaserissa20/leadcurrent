@@ -1,0 +1,40 @@
+<% content_for :page_title, "Inquiry details" %>
+<%= link_to "← Agent inquiries", agent_inquiries_path, class: "back-link" %>
+<section class="page-heading"><div><span class="eyebrow">EXTERNAL AI AGENT · IDENTITY UNVERIFIED</span><h1><%= @inquiry.company_name %></h1><p>Inquiry #<%= @inquiry.id %> · Submitted <%= l @inquiry.submitted_at, format: :long %> · <%= current_user.time_zone %></p></div><span class="badge neutral"><%= @inquiry.status.humanize %></span></section>
+<div class="inquiry-notice"><strong>Requester claims, not verified company information.</strong><p>API authentication identifies an authorized credential, not a verified company or buyer. A proposed budget is not approved funding; accepting intake is not a purchase.</p></div>
+<div class="detail-grid">
+  <div>
+    <section class="panel"><h2>Claimed purchasing request</h2><dl class="profile-facts">
+      <% [["Product or service", @inquiry.product_or_service], ["Quantity", @inquiry.quantity], ["Stated budget", @inquiry.stated_budget ? "#{@inquiry.stated_budget.to_s('F')} #{@inquiry.currency}" : nil], ["Desired timeline", @inquiry.desired_timeline], ["Claimed contact name", @inquiry.contact_name], ["Claimed contact email", @inquiry.contact_email]].each do |label, value| %><div><dt><%= label %></dt><dd><%= value.presence || "Not supplied" %></dd></div><% end %>
+      </dl><h3>Requirements</h3><p class="inquiry-prose"><%= @inquiry.requirements.presence || "Not supplied" %></p><h3>Agent message</h3><p class="inquiry-prose"><%= @inquiry.message %></p>
+      <details><summary>Original submitted fields</summary><p class="form-hint">Preserved unverified request. Credential/header/idempotency secrets are never included.</p><pre class="inquiry-json"><%= JSON.pretty_generate(@inquiry.submitted_payload) %></pre></details>
+    </section>
+    <section class="panel" id="inquiry-analysis"><h2>AI inquiry qualification</h2><p class="form-hint">Optional Groq interpretation for human review. It cannot verify identity, accept/reject, send messages or create CRM records. Results are not saved and disappear on refresh.</p>
+      <% if current_user.manager? %><%= button_to "Analyze with AI", analyze_agent_inquiry_path(@inquiry), class: "button secondary", form: { data: { turbo: false } }, data: { disable_with: "Analyzing…" } %><% else %><p>A manager can request AI qualification.</p><% end %>
+      <% if @ai_error %><p class="flash alert" role="alert"><%= @ai_error %> Manual review remains available.</p><% end %>
+      <% if @analysis %><div class="inquiry-ai-answer"><span class="eyebrow">AI INTERPRETATION · UNVERIFIED CLAIMS</span><small class="muted">Model: <%= @analysis.model %> · Human review status: <%= @inquiry.status.humanize %></small>
+        <h3>Request summary</h3><p><%= @analysis.answer.fetch("summary") %></p><h3>Potential opportunity</h3><p><%= @analysis.answer.fetch("potential_opportunity") %></p><h3>Missing or unverified information</h3><ul><% @analysis.answer.fetch("missing_information").each do |item| %><li><%= item %></li><% end %></ul><h3>Suggested next step</h3><p><%= @analysis.answer.fetch("suggested_next_step") %></p><small class="muted">Based on saved fields: <%= @analysis.answer.fetch("evidence_fields").map(&:humanize).join(", ") %></small>
+      </div><% end %>
+    </section>
+  </div>
+  <div>
+    <section class="panel"><h2>Human review</h2>
+      <% if @inquiry.reviewed_at %><p>Last decision: <strong><%= @inquiry.status.humanize %></strong> by <%= @inquiry.reviewed_by.name %>, <%= l @inquiry.reviewed_at, format: :long %>.</p><% if @inquiry.review_reason.present? %><p><%= @inquiry.review_reason %></p><% end %><% end %>
+      <% if @inquiry.accepted_lead %><p>The human-accepted intake is linked to an ordinary lead. Identity, budget and purchasing authority remain unverified.</p><%= link_to "Open created lead →", lead_path(@inquiry.accepted_lead_id), class: "button" %><% end %>
+      <% if @inquiry.reviewable? && current_user.manager? %>
+        <% if @inquiry.missing_lead_fields.any? %><p class="inquiry-warning">Acceptance requires a supplied contact name and valid email. Missing: <%= @inquiry.missing_lead_fields.map(&:humanize).join(", ") %>. Request more information; no contact will be invented.</p><% end %>
+        <%= form_with url: review_agent_inquiry_path(@inquiry) do |f| %>
+          <div class="field"><%= f.label :owner_id, "Lead owner" %><%= f.select :owner_id, @owners.map { |u| [u.name, u.id] }, selected: current_user.id %></div>
+          <p class="form-hint">Accept creates a new lead with the existing 24-hour first-contact clock starting now. It does not record contact or a purchase.</p>
+          <%= f.button "Accept inquiry", name: "decision", value: "accept", class: "button full", disabled: @inquiry.missing_lead_fields.any?, data: { turbo_submits_with: "Accepting…" } %>
+        <% end %>
+        <%= form_with url: review_agent_inquiry_path(@inquiry), class: "inquiry-secondary-review" do |f| %>
+          <div class="field"><%= f.label :reason, "Review reason (optional)" %><%= f.text_area :reason, rows: 3, maxlength: 500 %></div>
+          <% if @inquiry.status == "pending_review" %><%= f.button "Request more information", name: "decision", value: "request_information", class: "button secondary full" %><% end %>
+          <%= f.button "Reject inquiry", name: "decision", value: "reject", class: "button secondary full" %>
+        <% end %>
+        <p class="form-hint">These actions record a human decision only. Requesting information does not send an email; obtain a new complete submission with a fresh idempotency key.</p>
+      <% elsif @inquiry.reviewable? %><p>Only a workspace manager can accept, reject or request more information.</p><% end %>
+    </section>
+  </div>
+</div>

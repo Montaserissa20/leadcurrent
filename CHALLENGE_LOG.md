@@ -2383,3 +2383,859 @@ The user previously selected that they would trigger Deploy Latest Commit; no ne
 GitHub `main` independently verified at `903b09508c495390bf6377f064122dbdf29c93fd`, which preserves reviewed Phase2 `e220800` and parent63184c6. Exact [documentation-checkpoint LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39813080017) completed successfully, including Node build, Rails, browser, Zeitwerk, security and production assets. Feature CI39811052953 and local166/2205 evidence remain intact. Normal tests require no real Groq key; no expensive live suite was rerun.
 
 Final source-only documentation update records the explicit PENDING statuses and existing-service deployment/acceptance steps for later platform recovery. It is pushed normally; final main SHA and its exact CI are verified after that commit exists and supplied in delivery, without inventing self-referencing hashes or future deployment results. Existing application/business/schema/database settings remain unchanged. [Final publication instructions](docs/PHASE2_PUBLICATION.md), [structured evidence](docs/evidence/phase2-publication-2026-10-22.json).
+
+
+## 22 October 2026 — Phase 3: actual AI-agent-to-business inquiry (local review)
+
+Starting project: existing independent LeadCurrent at D:\LeadCurrent, baseline `e8c3e0da485994567c948e40fbeb4cc32a4dc312`, verified clean before changes. Existing URL: https://leadcurrent-production.up.railway.app (historical Phase1 production evidence; Phase2 Railway deployment externally blocked per user, still pending). Continued on new `phase3/agent-customer` without resetting main, touching D:\ruby_project, overwriting Phase2 or resetting/seeded customer data. This new user brief explicitly authorizes local Phase3 and supersedes the earlier no-Phase3 boundary. No publication/deploy/production variables changed.
+
+**Pain point and source:** the professor asks “What if your customer were an AI agent?” in the user's original brief below. The practical problem is receiving machine-originated buyer requests while preserving human control and not trusting claimed company/budget/authority. This is a project requirement, not a fabricated customer interview or evidence that other CRMs lack agent integrations. **Continue rather than pivot:** the existing workspace model, CreateLead, Groq and Phase1/2 provide the right foundation. **Promise:** an external actual AI buyer can submit an authenticated inquiry, see a real receipt and stop; the human sees unverified claims and alone can create a normal lead.
+
+**Built:** organization-bound manager-issued once-visible/revocable/expiring digest-only credentials; independently authenticated bounded JSON intake; strict field/type and duplicate-key validation; rate caps; durable credential-key idempotency/conflicts; immutable dedicated source records; scoped responsive light/dark inbox; optional fixed-20b saved-data qualification; manager review/reject/needs-info; locked atomic existing CreateLead acceptance, tenant constraints, fresh24h deadline and audit. Separate Python stdlib deterministic and real Groq buyer modes use fixed local action schemas/destinations and no arbitrary code/payment tools. No trusted lead, completed contact, opportunity/Won or purchase is created by an incoming request/model response.
+
+**Measured evidence:** baseline Rails139/1820 seed20008 and browser27/385 seed38958 passed. Final Rails164/2108 seed17603 and browser29/436 seed9596 passed, total193/2544; Python7 passed; normal provider transport mocked. Zeitwerk, Brakeman zero warnings/errors, Node22 locked build, production assets, upgrade from existing three-migration schema and actual Linux Docker production startup against isolated PostgreSQL17/four migrations passed. Nine original development application-table content hashes remained unchanged, new tables empty; sessions/schema metadata excluded. Direct DB constraint/race tests, secret-free Rails request log capture, CSRF/password checks, missing contacts and real CreateLead failure rollback passed. Actual development browser smoke12/12 passed. A copied smoke initially incorrectly required Page Agent on the new protected routes; the checker was corrected, not the route allowlist.
+
+**Real live attempt1:** 2026-10-22T17:06:00Z–17:06:06Z. Actual deterministic Python POST201 and repeat200 passed; real Groq buyer HTTP403 failed, no successful completions reported. Preserved as FAIL, not a quota claim. Added an honest application User-Agent to Python transport; subsequent full run worked, without claiming all403 causes proven. **Attempt2:** 17:07:44Z–17:08:53Z,1test/48assertions seed51631 PASS,69.31s including60s test-only quota pause. Actual separate Python buyer → saved inquiry/inbox → real qualification → human approval/CreateLead/source/deadline → real Phase1 analysis → real Phase2 authorized lead query all passed. No production contacted, fictional fixtures rolled back. Four successful real completions,4808 measured tokens (4086prompt+722completion): buyer837,qualification786,Phase1 1063,Phase2 2122. No429 in passing run. Rejected403 has unreported usage, not assumed free. Later owner/reason/archive guards passed normal tests; no extra live calls after success. **Human/agent development hours, paid financial cost, savings/revenue were not measured.**
+
+**Security and limitations:** possession is not corporate verification; stolen tokens can submit pending claims until revoke/expiry. Tenant-scoped reads/services/composite FKs, locks/unique indexes, early body/log bounds, strict JSON and escaped views protect the workflow. Prompt controls do not prove AI prose factual; no execution/write authority, AI labels and human verification remain mandatory. Free-text redaction is imperfect. Minute quotas/Groq gates are process-local: centralize before multiple workers/replicas. Latest100 lists; no outbound email, OAuth verification, inquiry update/polling API, quotation acceptance or payment. Missing contact requires a new complete inquiry rather than fabricated data. Source scanner adds agent/Groq signatures; actual final ZIP must exclude every private/runtime path and be verified. Historical generic Gitleaks false positives require individual review, not suppressed actual keys.
+
+**Commit references:** Phase2 baseline `e8c3e0da485994567c948e40fbeb4cc32a4dc312` preserved; Phase3 local commit and archive hash are reported after the reviewed source commit exists, avoiding impossible self-reference. [Technical report](docs/AGENT_CUSTOMER_PHASE3.md), [short Turkish presentation/demo commands](docs/AGENT_CUSTOMER_DEMO_TR.md), [structured observations and actual screenshots](docs/evidence/phase3-agent-customer-2026-10-22.json). All earlier evidence retained.
+
+**Unfinished commitments:** user review/approval, normal GitHub publication and exact Phase3 CI, then existing-service Railway deployment when available, additive production migration with backup and actual production acceptance. These are PENDING, not failed local tests or completed deployment. No public tunnel/new service/production environment change. **Decision: CONTINUE** to human review of the local result: the actual agent-to-business scenario and existing CRM integration passed. Keep production release gated; no pivot or kill is supported by the measured result.
+
+### Original Phase 3 Codex prompt (verbatim)
+
+````text
+# CODEX TASK — LeadCurrent Phase 3: AI Agent as a Customer
+
+You are working on my existing LeadCurrent Ruby on Rails CRM SaaS.
+
+This is the final major development phase of my university project.
+
+**Do not rebuild the application. Extend the existing working system.**
+
+## 1. Project context
+
+Repository:
+https://github.com/Montaserissa20/leadcurrent
+
+Local project:
+`D:\LeadCurrent`
+
+Production:
+https://leadcurrent-production.up.railway.app
+
+Technology:
+- Ruby 3.4.7 / Rails 8.1.4
+- PostgreSQL
+- Hotwire, Turbo, Stimulus, importmap, Propshaft
+- Existing Groq AI integration
+- Existing Alibaba Page Agent
+- GitHub Actions
+- Railway Docker deployment
+
+Completed features:
+
+**Phase 1:** AI Sales Assistant with real Groq integration, customer analysis, activity summaries, AI-enhanced recommendations, and follow-up drafting.
+
+**Phase 2:** Conversational AI Copilot with Alibaba Page Agent, safe browser interaction, CRM database queries, natural-language questions, team information, and authorized sales analytics.
+
+Both phases are already in the GitHub repository.
+
+The current Phase 2 GitHub baseline, last checked, is:
+
+`e8c3e0da485994567c948e40fbeb4cc32a4dc312`
+
+Verify the actual current branch and HEAD before making changes.
+
+Railway deployment of Phase 2 is currently blocked externally. Do not treat that as a code failure and do not create another Railway service.
+
+## 2. Main objective
+
+My professor asked:
+
+**"What if your customer were an AI agent?"**
+
+We want LeadCurrent to support two kinds of customers:
+
+1. Human customers, handled through the existing CRM.
+2. External AI agents acting as prospective buyers.
+
+An external AI purchasing agent should be able to communicate with LeadCurrent through a secure API and submit an actual purchasing inquiry.
+
+LeadCurrent should:
+
+1. Authenticate the external agent.
+2. Receive and validate the inquiry.
+3. Store the inquiry separately from trusted CRM leads.
+4. Clearly mark the information as unverified.
+5. Optionally analyze it with Groq.
+6. Present it to a human salesperson.
+7. Allow an authorized human to accept or reject it.
+8. Convert accepted inquiries into ordinary LeadCurrent leads through existing domain services.
+
+**Do not allow unknown AI agents to create trusted leads, accept purchases, change deals, or bypass human approval.**
+
+This must be a functioning system, not merely a chatbot pretending to be a customer.
+
+---
+
+# 3. Inspect the existing application first
+
+Before implementation:
+
+- Read `AGENTS.md`.
+- Read `AGENT.md`.
+- Read `README.md`.
+- Read `CHALLENGE_LOG.md`.
+- Inspect the current Rails routes.
+- Inspect Organization, User, Company, Contact, Lead, Opportunity and AuditEvent.
+- Inspect CreateLead, WorkspaceAccess and the workflow services.
+- Inspect the existing Groq client and Phase 1/2 AI services.
+- Inspect database schema and migrations.
+- Inspect the authentication and authorization architecture.
+- Inspect current tests and CI configuration.
+- Inspect current Docker and Railway configuration.
+
+Run existing automated tests and record the baseline.
+
+Do not overwrite Phase 2 with an older GitHub version.
+
+Do not modify `D:\ruby_project`.
+
+Do not reset the existing PostgreSQL database.
+
+---
+
+# 4. Feature A — Secure External Agent API
+
+Build a secure API that allows an external AI purchasing agent to submit a sales inquiry.
+
+Suggested endpoint:
+
+`POST /api/v1/agent_inquiries`
+
+Use JSON requests and JSON responses.
+
+Example request:
+
+```json
+{
+  "company_name": "Atlas AI Procurement",
+  "contact_name": "Alex Morgan",
+  "contact_email": "buyer@example.test",
+  "product_or_service": "Business software subscriptions",
+  "quantity": 50,
+  "currency": "USD",
+  "stated_budget": 10000,
+  "requirements": "We need 50 subscriptions with team management and reporting.",
+  "desired_timeline": "Within 30 days",
+  "message": "Please provide licensing information and pricing."
+}
+```
+
+The submitted information is a *claim made by the requester*, not independently verified company information.
+
+The API must:
+
+- Validate required fields.
+- Enforce reasonable field lengths.
+- Validate email and structured quantity/currency fields where supplied.
+- Reject malformed JSON.
+- Reject excessive request sizes.
+- Reject unsupported fields or safely ignore them according to an explicit schema.
+- Apply request rate limits.
+- Produce predictable JSON error responses.
+- Never expose Rails stack traces or internal secrets.
+- Return a receipt containing the new inquiry identifier and review status.
+- Avoid automatically creating a trusted CRM lead.
+
+Do not require unsupported contact details at submission time if an inquiry can safely remain pending with missing information.
+
+Do not invent missing email addresses, contacts, or company details.
+
+## API authentication
+
+Implement secure, workspace-bound agent credentials.
+
+I recommend:
+
+- A manager-only interface to generate an agent API credential.
+- Random, high-entropy credentials.
+- Store only a secure digest, never the original token.
+- Display the token only once when created.
+- Support revocation.
+- Optional expiration.
+- Bearer-token authentication.
+- Constant-time credential comparison where applicable.
+- Explicit API scopes such as `inquiries:create`.
+
+An agent credential must belong to one specific LeadCurrent organization.
+
+A requester must not be able to choose or override its organization by supplying `organization_id`.
+
+The credential determines the destination workspace.
+
+Use a separate API authentication mechanism, not a fake Rails user session.
+
+Ensure the API does not accept session cookies as a substitute for bearer authentication.
+
+Keep browser CSRF protections intact. Any CSRF exception must be narrowly restricted to the independently authenticated token-only API.
+
+Do not print bearer tokens in logs, exception messages, audit records, or generated documentation.
+
+---
+
+# 5. Feature B — Agent Inquiry persistence
+
+Create a dedicated model for inbound agent inquiries.
+
+Suggested model:
+
+`AgentInquiry`
+
+Suggested attributes:
+
+- organization_id
+- agent_credential_id
+- company_name
+- contact_name
+- contact_email
+- product_or_service
+- quantity
+- currency
+- stated_budget
+- requirements
+- desired_timeline
+- message
+- status
+- submitted_at
+- reviewed_at
+- reviewed_by_id
+- accepted_lead_id
+- AI qualification fields if needed
+
+Follow the existing database conventions.
+
+Suggested statuses:
+
+- pending_review
+- needs_information
+- accepted
+- rejected
+
+You may simplify this if it improves reliability.
+
+Use strict allowed transitions.
+
+Do not permit accepted or rejected inquiries to be silently resubmitted or approved twice.
+
+Use database transactions, row locking where appropriate, and database constraints to protect against duplicate approvals.
+
+Implement request idempotency so an external agent retry does not create multiple identical inquiry records.
+
+Use a client-supplied idempotency key bound to the authenticated credential and a durable uniqueness constraint.
+
+Reject use of the same idempotency key with a different payload.
+
+Ensure submitted inquiries are permanently scoped to the correct organization.
+
+Preserve the original inquiry payload needed for later review, subject to field limits and appropriate privacy handling.
+
+Do not introduce destructive migrations.
+
+---
+
+# 6. Feature C — Agent Inquiry Inbox
+
+Create a new section in LeadCurrent:
+
+**Agent Inquiries**
+
+Add it to the authenticated sidebar.
+
+Only authorized users should access it.
+
+Build a polished interface consistent with the existing LeadCurrent design.
+
+The page should include:
+
+- Total inquiries
+- Pending review count
+- Accepted inquiries
+- Rejected inquiries
+- Status filters
+- Recent inquiry list
+- Inquiry details
+- Submission timestamp
+- Source: External AI Agent
+- Claimed company information
+- Product and quantity requested
+- Stated budget and timeline
+- Optional AI qualification result
+- Human review actions
+
+A useful inquiry card might show:
+
+**Atlas AI Procurement**
+
+50 software subscriptions  
+Stated budget: $10,000  
+Status: Pending Review  
+Source: External AI Agent  
+Identity: Unverified
+
+The interface must clearly distinguish:
+
+- Information supplied by the external agent.
+- Data verified by LeadCurrent.
+- AI-generated interpretations.
+- Human review decisions.
+
+Do not label an external company as verified merely because its API request was authenticated.
+
+Support light mode, dark mode, desktop and mobile.
+
+Use the existing Rails/Hotwire frontend rather than introducing another frontend framework.
+
+---
+
+# 7. Feature D — Groq AI Inquiry Qualification
+
+Reuse our existing server-side Groq integration.
+
+Default model:
+
+`openai/gpt-oss-20b`
+
+Do not require a new AI provider or local GPU.
+
+The AI should analyze incoming inquiries and help the salesperson understand them.
+
+Example AI output:
+
+**Request summary**
+
+The requester claims to represent a company seeking 50 software subscriptions.
+
+**Potential opportunity**
+
+The inquiry includes a product category, quantity, and proposed budget.
+
+**Missing information**
+
+The required security features, actual decision-maker, and purchasing authority have not been verified.
+
+**Suggested next step**
+
+Confirm licensing requirements and request verification of the buyer's authority before preparing a quotation.
+
+Requirements:
+
+- Use actual saved inquiry data.
+- Never invent verified company identities.
+- Never invent approved budgets.
+- Never claim that an inquiry was accepted when it is pending.
+- Never automatically accept or reject an inquiry.
+- Never create a Lead or Opportunity from an LLM response.
+- Label AI interpretations clearly.
+- Validate generated structured responses.
+- Treat incoming text as untrusted data.
+- Defend against prompt injection in agent-submitted messages.
+- Keep provider secrets on the Rails server.
+- Handle API timeouts, 429 responses, and missing Groq configuration gracefully.
+
+Avoid automatic AI qualification on every incoming API request if that would unnecessarily consume our limited Groq free-tier quota.
+
+Prefer an explicit **Analyze with AI** action or controlled background processing with strict limits.
+
+If Groq is unavailable, the inquiry must remain accessible and reviewable without AI.
+
+No fake AI analysis or fabricated fallback text.
+
+---
+
+# 8. Feature E — Human Approval
+
+This is the most important security boundary.
+
+An external AI agent can submit an inquiry, but **only an authorized human decides whether it becomes a lead**.
+
+Implement:
+
+- Accept Inquiry
+- Reject Inquiry
+- Request More Information, if feasible
+
+Use existing manager/owner authorization conventions.
+
+Manager-only approval is acceptable if it provides a safer and clearer workflow.
+
+On acceptance:
+
+1. Confirm the inquiry is still eligible for approval.
+2. Validate all fields required by the existing Lead creation service.
+3. If information is missing, leave the inquiry pending or mark it as needing information.
+4. Select a valid owner from the current organization.
+5. Use the existing `CreateLead` domain service or a narrowly adapted equivalent.
+6. Create Company, Contact, and Lead consistently.
+7. Associate the new Lead with its originating inquiry.
+8. Record the approval and lead creation in the existing audit system.
+9. Mark the inquiry Accepted.
+10. Prevent a second acceptance from creating duplicate leads.
+
+Preserve atomic behavior. A failed lead creation must not leave the inquiry falsely marked Accepted.
+
+**Important first-contact rule:**
+
+The ordinary 24-hour first-contact deadline should begin when the real Lead is created through human acceptance, using the existing LeadCurrent deadline service.
+
+Do not mark the incoming agent message as a completed customer contact.
+
+Do not automatically create a Won opportunity or mark a purchase completed.
+
+On rejection:
+
+- Record who rejected the inquiry and when.
+- Optionally store a short reason.
+- Do not delete the original submission.
+- Do not create a customer record.
+
+All review actions must be protected against CSRF, tampering, cross-workspace access, and double submission.
+
+---
+
+# 9. Feature F — Real External AI Purchasing Agent
+
+Build a small, separate Python demonstration client.
+
+Suggested location:
+
+`examples/purchasing_agent/`
+
+The purpose is to demonstrate an AI acting as the buyer, not simply a human clicking a form.
+
+The demo should use a real Groq-powered model to turn a purchasing goal into a structured inquiry.
+
+Example goal:
+
+"We are a fictional startup that needs 50 software subscriptions for our employees. Our proposed budget is $10,000. We want to ask LeadCurrent for a quotation."
+
+Expected agent behavior:
+
+1. Receive the purchasing objective.
+2. Identify information required by LeadCurrent's public agent API.
+3. Generate or request the missing details without fabricating company verification.
+4. Prepare a structured inquiry.
+5. Validate the inquiry using a fixed local schema.
+6. Submit it to the API using its authorized agent credential.
+7. Receive and display the inquiry receipt.
+8. Stop rather than autonomously accepting an offer or making a purchase.
+
+Use a fixed allowlisted API base URL supplied through configuration.
+
+Do not allow the LLM to choose arbitrary network destinations.
+
+Do not give the model access to arbitrary Python execution, filesystem operations, or shell commands.
+
+The Groq API key and LeadCurrent agent credential must remain outside prompts and source code.
+
+The buyer agent may choose a structured `submit_inquiry` tool call, but only the trusted Python application should execute the HTTPS request.
+
+Require an explicit allowlisted action schema.
+
+Clearly distinguish fictional demonstration information from real business claims.
+
+## Two testing modes
+
+**Mode A — Deterministic client**
+
+A simple API smoke test using fictional, predefined data, with no LLM calls.
+
+This verifies authentication, validation, persistence, and idempotency.
+
+**Mode B — Real AI purchasing agent**
+
+A real Groq-powered agent that receives a purchasing goal and submits the inquiry through its permitted tool.
+
+This verifies the actual agent-to-business concept.
+
+Mode B must not be simulated with hardcoded successful model responses.
+
+Allow the real AI demo to be run manually and independently of normal CI.
+
+Use existing Groq credentials when available.
+
+Do not exhaust the free daily quota by repeatedly running unnecessary model tests.
+
+---
+
+# 10. End-to-end demonstration
+
+Prepare a complete demonstration for my professor.
+
+Use fictional companies and local data.
+
+Scenario:
+
+**Step 1 — LeadCurrent manager**
+
+The manager generates a workspace-bound agent API credential.
+
+**Step 2 — External AI purchasing agent**
+
+The agent receives:
+
+"Find a way to request pricing for 50 software subscriptions with a proposed budget of $10,000."
+
+**Step 3 — API communication**
+
+The agent submits the actual request to the running LeadCurrent Rails API.
+
+Show the real HTTP request/response, with credentials redacted.
+
+**Step 4 — Incoming inquiry**
+
+The Agent Inquiries inbox displays the newly received request.
+
+**Step 5 — Groq qualification**
+
+The manager clicks Analyze with AI.
+
+The AI explains what the buyer requested, which information remains unverified, and the recommended response.
+
+**Step 6 — Human approval**
+
+The manager reviews and accepts the inquiry.
+
+The application creates an ordinary LeadCurrent lead through the authorized workflow.
+
+**Step 7 — Verify ordinary CRM functionality**
+
+Open the newly created lead.
+
+Demonstrate that:
+
+- It belongs to the correct organization.
+- It has the correct owner.
+- It has the correct first-contact deadline.
+- It is linked to its source inquiry.
+- The external agent cannot alter it.
+- Phase 1 AI Sales Assistant can analyze the lead.
+- Phase 2 Copilot can find the lead through authorized queries.
+
+The demo should prove real integration between all three phases.
+
+Do not use a canned screenshot or hardcoded success response as evidence.
+
+---
+
+# 11. Security requirements
+
+Treat this as an internet-facing API design even though the initial testing is local.
+
+Mandatory protections:
+
+- Cryptographically strong agent credentials.
+- Secure token storage and revocation.
+- No secrets in source control.
+- No secrets in logs.
+- No unrestricted API access.
+- Organization isolation.
+- Explicit API scopes.
+- Bounded request sizes.
+- Strict JSON validation.
+- Rate limiting.
+- Idempotency.
+- Duplicate approval protection.
+- Auditability.
+- Safe exception handling.
+- No arbitrary SQL execution.
+- No arbitrary network access from the model.
+- No automatic sales-stage changes.
+- No autonomous purchasing or payment.
+- Prompt-injection protections.
+- Sensitive information minimization.
+- Controlled access to inquiry data.
+
+Keep the API independent from the normal browser login session.
+
+If using process-local rate limits, document that production with multiple replicas requires a shared limiter.
+
+Use database-backed or otherwise durable idempotency.
+
+Preserve current password handling, Content Security Policy, session rules, CSRF protection, and existing Rails authorizations.
+
+Review the threat model for:
+- Forged company identities
+- Stolen API credentials
+- Cross-tenant data access
+- Replayed requests
+- Duplicate submissions
+- Prompt injection
+- API flooding
+- Approval race conditions
+- Malicious or oversized input
+
+---
+
+# 12. Automated tests
+
+Write comprehensive Minitest and browser tests.
+
+At minimum verify:
+
+### API authentication
+- Missing credential returns 401.
+- Invalid credential returns 401.
+- Revoked credential returns 401.
+- Expired credential returns 401.
+- Valid credential can submit only permitted inquiries.
+- Credential cannot access another organization.
+- Request-supplied organization IDs cannot change the destination tenant.
+
+### API behavior
+- Valid inquiry is persisted.
+- Malformed JSON is rejected.
+- Missing required fields are rejected.
+- Invalid data types are rejected.
+- Oversized input is rejected.
+- Rate limits are enforced.
+- Identical idempotent retries do not create duplicate records.
+- Reusing an idempotency key with different content is rejected.
+- API responses never expose secrets.
+
+### Human review
+- Manager can review an authorized inquiry.
+- Unauthorized users cannot approve.
+- Cross-workspace approval fails.
+- Acceptance creates the expected company/contact/lead.
+- Rejection does not create a lead.
+- Missing required contact information prevents invalid acceptance.
+- Concurrent approval does not create duplicate leads.
+- Accepted leads follow the existing deadline rules.
+- Approval and rejection produce appropriate audit evidence.
+- Agent submissions do not count as completed first contact.
+
+### AI qualification
+- Correct saved inquiry context is supplied.
+- Model output is safely validated.
+- Prompt injection cannot execute an action.
+- Groq errors do not corrupt inquiry data.
+- AI does not change the inquiry decision.
+- AI cannot access another workspace.
+
+### Regression
+- Phase 1 AI Sales Assistant passes.
+- Phase 2 Page Agent passes.
+- Existing Copilot database queries pass.
+- Existing lead and opportunity transitions pass.
+- 24-hour, 4-hour and 72-hour rules pass.
+- Password/security tests pass.
+
+Normal CI must mock external LLM calls.
+
+Add a separate, explicitly enabled real Groq acceptance test.
+
+Do not require paid API usage for GitHub Actions.
+
+---
+
+# 13. Performance and costs
+
+Keep the project suitable for a university demonstration and Groq's free tier.
+
+Do not:
+- Train a new foundation model.
+- Install a large local model.
+- Require GPU hosting.
+- Add paid cloud services unnecessarily.
+- Add new AI providers without a demonstrated need.
+
+Use the existing Groq model:
+
+`openai/gpt-oss-20b`
+
+Make API usage efficient.
+
+Use the existing Rails and PostgreSQL architecture.
+
+Measure real provider token use only when available.
+
+Never fabricate token counts, development hours, cost savings or revenue projections.
+
+---
+
+# 14. Documentation and university requirements
+
+Update:
+
+- `README.md`
+- `AGENT.md`
+- `CHALLENGE_LOG.md`
+
+Create a Phase 3 technical report and short Turkish presentation guide under `docs/`.
+
+Preserve all earlier Phase 1 and Phase 2 evidence.
+
+The mandatory `CHALLENGE_LOG.md` must preserve its existing content and add a new Phase 3 section including:
+
+- Starting project and baseline commit
+- Existing live URL
+- Customer pain point and supporting source
+- Why we continued rather than pivoted
+- Phase 3 promise
+- What was actually built
+- Real tests and evidence
+- Original Codex prompt, preserved accurately
+- Commit references
+- Human and agent development time, if actually measured
+- Provider usage and financial costs, if actually measured
+- Known limitations
+- Unfinished commitments
+- Final continue/pivot/kill decision with justification
+
+Explain the business value:
+
+Traditional CRM systems primarily receive information through human-facing forms and integrations.
+
+Our adaptation demonstrates a machine-to-machine sales inquiry workflow in which external AI agents can act as prospective buyers, while human salespeople retain control over acceptance and commercial decisions.
+
+Do not claim that Salesforce or other CRM platforms lack AI-agent integrations unless supported by current evidence.
+
+Prepare a concise Turkish explanation answering:
+
+"Bir müşteri AI agent olsaydı, LeadCurrent nasıl çalışırdı?"
+
+Also explain how the architecture differs from a generic chatbot.
+
+---
+
+# 15. Local development and deployment restrictions
+
+Railway deployment is currently blocked by the platform.
+
+Therefore:
+
+- Implement and test locally.
+- Keep working on a new Phase 3 development branch.
+- Do not overwrite or reset the Phase 2 main branch.
+- Do not push to GitHub yet.
+- Do not deploy to Railway yet.
+- Do not create another Railway project.
+- Do not change production environment variables.
+- Do not reset or destroy the local database.
+
+Use additive migrations and preserve existing customer records.
+
+Verify that new migrations work from the current production-equivalent schema on a test database.
+
+Do not require an immediately accessible public URL to test the external Python purchasing agent; it can communicate with Rails running locally.
+
+Do not publicly expose localhost through an unauthenticated tunnel.
+
+---
+
+# 16. Implementation sequence
+
+Follow this order:
+
+1. Audit the existing repository.
+2. Record baseline tests and commit.
+3. Design the AgentInquiry and AgentCredential models.
+4. Implement secure token authentication.
+5. Implement the inquiry submission API.
+6. Implement durable idempotency and rate limits.
+7. Build the Agent Inquiries inbox.
+8. Implement manager-controlled approval/rejection.
+9. Reuse the existing CreateLead service.
+10. Implement optional Groq qualification.
+11. Create the external Python purchasing-agent demo.
+12. Add comprehensive security, integration and browser tests.
+13. Perform the real end-to-end demonstration locally.
+14. Verify Phase 1 and Phase 2 regression tests.
+15. Update documentation and CHALLENGE_LOG.md.
+16. Prepare the final review package.
+
+Keep the work focused. Do not add unrelated features.
+
+---
+
+# 17. Final verification
+
+Before declaring success:
+
+- Run all Rails tests.
+- Run browser/system tests.
+- Run Zeitwerk checks.
+- Run Brakeman.
+- Run JavaScript/Page Agent build.
+- Run production asset compilation.
+- Check migrations.
+- Verify database constraints.
+- Verify no credentials are staged.
+- Verify no current customer data was lost.
+- Verify the external client can submit an authenticated request.
+- Verify the manager can review and accept it.
+- Verify existing LeadCurrent AI capabilities still work.
+
+If a real Groq test is blocked by free-tier limits, document that honestly and preserve all mocked/integration evidence.
+
+Do not mark an unperformed real API test as successful.
+
+---
+
+# 18. Final delivery
+
+At the end, report:
+
+1. What was implemented.
+2. How the external purchasing agent works.
+3. How agent authentication and workspace isolation work.
+4. How inquiries are stored and reviewed.
+5. How AI qualification works.
+6. How approval creates a normal CRM lead.
+7. How duplicate requests are prevented.
+8. The real test results.
+9. Real Groq demonstration results.
+10. Security findings.
+11. Files created and modified.
+12. Database migrations added.
+13. Local commit SHA.
+14. Exact local demo commands.
+15. Known limitations.
+16. What remains before a GitHub/Railway release.
+
+Create a clean, source-only review ZIP.
+
+Exclude:
+- `config/master.key`
+- `.git`
+- `.local`
+- PostgreSQL files
+- `.env` secrets
+- `node_modules`
+- Logs
+- API keys
+- Local archives
+
+Verify the actual ZIP contents.
+
+**Do not push to GitHub or deploy to Railway until I approve the reviewed Phase 3 result.**
+
+## FINAL SUCCESS CRITERION
+
+I can run LeadCurrent locally, start an external AI purchasing agent in a separate Python process, and have that agent submit a real authenticated purchasing inquiry to the Rails API.
+
+The inquiry appears in the CRM with unverified identity status.
+
+A human manager can ask Groq to analyze it, review the information, and approve it.
+
+Only after approval does LeadCurrent create an ordinary lead using existing business rules.
+
+Phase 1 and Phase 2 continue functioning correctly.
+
+This must demonstrate an actual **AI-agent-to-business workflow**, not a static chatbot response or a simulated screenshot.
+
+Begin with the repository audit and architecture design, then implement and test Phase 3 systematically.
+````
