@@ -1,8 +1,10 @@
 # Phase 2 GitHub publication — 22 October 2026
 
-**GitHub publication and exact-commit CI: PASS. Railway Phase2 deployment: NOT VERIFIED / still serving the previous version at the recorded check.** The user explicitly approved publishing Phase2; this supersedes prior local-only restrictions. No feature redesign, fallback/provider, Phase3 or AI-customer integration was added.
+**GitHub publication and exact-commit CI: PASS. Railway deployment: PENDING. Phase2 production acceptance: PENDING / not run.** The user reports that Railway deployment is blocked by the platform and explicitly requests finishing without waiting. Deployment monitoring/attempts stop here; existing production configuration, service and database remain unchanged. No feature redesign, fallback/provider, Phase3 or AI-customer integration was added.
 
 Published feature commit: [`e220800f460f12159e5d613e4c550e63d9eb465c`](https://github.com/Montaserissa20/leadcurrent/commit/e220800f460f12159e5d613e4c550e63d9eb465c). Existing `origin/main` was fetched and confirmed at `65bcd55cfbd55ca1d91691bb1d873e0560fd76b0`; both reviewed Phase2 commits were fast-forwarded normally. No force-push, reset, new repository or remote-history overwrite.
+
+Documentation checkpoint [`903b09508c495390bf6377f064122dbdf29c93fd`](https://github.com/Montaserissa20/leadcurrent/commit/903b09508c495390bf6377f064122dbdf29c93fd) is also on main; its [exact-commit LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/39813080017) passed every Node/Rails/browser/autoload/security/production-asset step. This final documentation update records the user's platform-block instruction; its eventual SHA and exact CI are verified separately in delivery after pushing.
 
 ## Verified checks
 
@@ -19,17 +21,19 @@ Published feature commit: [`e220800f460f12159e5d613e4c550e63d9eb465c`](https://g
 
 CI's Node build, Rails, browser, autoload, security and production-asset steps all passed for the published feature SHA. Tests do not require a real Groq key. This is application CI, not Dependabot. `.local`, master key, secret env files, local PostgreSQL data, logs, node_modules and ZIPs were not published. Environment-variable names in source are configuration references, never their actual key values. Phase1 AI code, schema and production database configuration are unchanged.
 
-## Railway observation and remaining blocker
+## Railway and production acceptance — PENDING
+
+The user's 22 October instruction states that Railway deployment is currently blocked by the platform. This is user-reported platform status, not an independently diagnosed provider incident. The user withdrew the requirement to wait for Railway and requested final GitHub delivery using existing evidence. No more deployment attempts, polling or production acceptance runs are required for this handoff. Both **Railway deployment** and **Phase2 production acceptance testing** remain **PENDING** until the platform is available and real acceptance is performed.
 
 At **2026-10-22T16:11:29.461Z**, [production health](https://leadcurrent-production.up.railway.app/up) returned HTTP200 with database connected; login returned200, CSP was present without unsafe-eval, and anonymous `/leads` redirected to `/login`. **The new Page Agent importmap/bundle was absent.** GitHub reports no deployment/status for the Phase2 feature commit; latest reported successful Railway source remains `65bcd55`, deployment record7198312791. Existing-service link: [LeadCurrent Railway service](https://railway.com/project/190a3879-78ad-4f79-ac79-a4c6cab0775a/service/c66b7e7f-7372-40cc-b08b-45b56347954e).
 
-A passing CI/build is not a successful Railway release. No authenticated Railway CLI/API/plugin connection is available. An eligible Railway integration was discovered and offered; it was not treated as connected. Deployment logs/settings, variables, backups and complete production DB contents were not accessed or changed. No new service/database, reset, seed or destructive migration was attempted. Production authenticated/Groq checks were not run against the old runtime, and no fictional production data was created during this publication attempt.
+A passing CI/build is not a successful Railway release. Earlier missing authenticated Railway access was recorded, but installation/connection is no longer a prerequisite to finishing this GitHub handoff. Deployment logs/settings, variables, backups and complete production DB contents were not accessed or changed. No new service/database, reset, seed or destructive migration was attempted. Production authenticated/Groq checks were not run against the old runtime, and no fictional production data was created during this publication attempt.
 
 The existing Docker/Node build and disposable PostgreSQL production-startup evidence remain in [prepublication verification](evidence/phase2-release-preparation-2026-10-22.json). Historical local real Groq acceptance (8 selected cases,16 requests,27726 metered tokens) was not repeated; this is not a new production AI pass. Full13/extra paraphrase acceptance and production DOM-note execution remain unverified. Process-local limits/cache still require one serving process/replica; provider quota/latency and intent errors remain possible.
 
-## Complete deployment and try the live Copilot
+## Deploy when Railway becomes available
 
-1. Connect an authenticated Railway integration, or open the **existing** LeadCurrent service linked above. Verify its GitHub source/branch points to `Montaserissa20/leadcurrent`, `main`. Inspect any disabled autodeploy/watch-path/Wait-for-CI condition; the cause has not been proven here.
+1. Once the platform permits deployment, open the **existing** LeadCurrent service linked above. Verify its existing GitHub source/branch is `Montaserissa20/leadcurrent`, `main`, and identify the final approved main SHA. Use the existing project/database; do not create replacements. Confirm a current database backup before release.
 2. After the latest main commit's **LeadCurrent CI** is green, use **Deploy Latest Commit** (command palette) for the connected branch. Do not blindly Redeploy the previous deployment: it may rebuild old source. Preserve `DATABASE_URL`, `SECRET_KEY_BASE`, `GROQ_API_KEY`, `GROQ_MODEL`, existing project and database. Default model remains `openai/gpt-oss-20b`. No variable values should be shared.
 3. Verify the exact deployed SHA equals latest `origin/main`, Docker logs include Node22 npm build and final mkdir/chown, and `/up` is200/DB connected. Confirm login and the `leadcurrent-page-agent` importmap/bundle are now present/HTTP200. Record the actual deployment result; do not infer it from this publication report.
 4. Sign in using your own workspace; open **AI Agent**. Ask “How many users are in my team?” and compare with Settings, then “How many of them are salespeople?” Registered membership is not online presence.
@@ -38,4 +42,4 @@ The existing Docker/Node build and disposable PostgreSQL production-startup evid
 
 These instructions follow the [official GitHub trigger/CI guidance](https://docs.railway.com/deployments/github-autodeploys), [start-command behavior](https://docs.railway.com/deployments/start-command) and [healthcheck documentation](https://docs.railway.com/deployments/healthchecks); no Railway settings were changed here.
 
-A necessary documentation-only follow-up records this measured partial release. Its exact SHA/CI and any subsequent Railway result are verified separately in final delivery; a future success is not invented inside this commit. [Structured evidence](evidence/phase2-publication-2026-10-22.json), [challenge history](../CHALLENGE_LOG.md), [historical release-preparation report](PHASE2_RELEASE_READINESS.md).
+A final documentation-only follow-up records this completed GitHub handoff with Railway/production acceptance explicitly deferred. Its exact SHA/CI are verified separately in final delivery; no future Railway success is invented. [Structured evidence](evidence/phase2-publication-2026-10-22.json), [challenge history](../CHALLENGE_LOG.md), [historical release-preparation report](PHASE2_RELEASE_READINESS.md).

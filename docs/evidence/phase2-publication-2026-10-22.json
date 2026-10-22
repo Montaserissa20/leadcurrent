@@ -236,7 +236,7 @@
     }
   },
   "railway": {
-    "state": "NOT_DEPLOYED_OR_NOT_VERIFIED",
+    "state": "PENDING_USER_REPORTED_PLATFORM_BLOCK",
     "feature_commit_deployment_records": 0,
     "new_page_agent_asset_present": false,
     "last_reported_successful_sha": "65bcd55cfbd55ca1d91691bb1d873e0560fd76b0",
@@ -245,7 +245,8 @@
     "plugin_discovered_not_connected": true,
     "railway_configuration_or_variables_changed": false,
     "provider_build_logs_accessed": false,
-    "next_step": "Connect Railway or use Deploy Latest Commit on existing LeadCurrent service, then verify exact latest main SHA and public Page Agent assets."
+    "next_step": "After platform recovery, deploy final approved main SHA on existing LeadCurrent service, preserve configuration/data, then verify real production acceptance.",
+    "monitoring_stopped_per_user_instruction": true
   },
   "production_authenticated_or_groq_check": "NOT_RUN: new runtime not present; no production fixtures created or customer data modified",
   "prior_live_acceptance": "Historical local eight-case Groq run retained; expensive suite not rerun",
@@ -255,5 +256,106 @@
     "no_reset_seed_or_destructive_migration": true,
     "no_phase3_or_ai_customer_integration": true
   },
-  "documentation_followup": "A documentation-only follow-up records this measured partial release. Its SHA/CI are verified separately after push. Do not relabel this snapshot as a successful Railway release."
+  "documentation_followup": "Final documentation records user-deferred Railway work; final main SHA/CI verified separately after push. No new production verification performed.",
+  "github_documentation_checkpoint": {
+    "checked_at": "2026-10-22T16:22:33.511Z",
+    "sha": "903b09508c495390bf6377f064122dbdf29c93fd",
+    "main_sha": "903b09508c495390bf6377f064122dbdf29c93fd",
+    "main_matches": true,
+    "workflows": [
+      {
+        "id": 39813080017,
+        "sha": "903b09508c495390bf6377f064122dbdf29c93fd",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/Montaserissa20/leadcurrent/actions/runs/39813080017",
+        "jobs": [
+          {
+            "id": 119944282886,
+            "name": "test",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [
+              {
+                "name": "Set up job",
+                "conclusion": "success"
+              },
+              {
+                "name": "Initialize containers",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/checkout@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/setup-node@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Build pinned Page Agent assets",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run ruby/setup-ruby@v1",
+                "conclusion": "success"
+              },
+              {
+                "name": "Prepare PostgreSQL",
+                "conclusion": "success"
+              },
+              {
+                "name": "Domain and HTTP workflow tests",
+                "conclusion": "success"
+              },
+              {
+                "name": "Real browser workflow tests",
+                "conclusion": "success"
+              },
+              {
+                "name": "Autoload check",
+                "conclusion": "success"
+              },
+              {
+                "name": "Security scan",
+                "conclusion": "success"
+              },
+              {
+                "name": "Production assets",
+                "conclusion": "success"
+              },
+              {
+                "name": "Run actions/upload-artifact@v4",
+                "conclusion": "skipped"
+              },
+              {
+                "name": "Post Run actions/setup-node@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Post Run actions/checkout@v6",
+                "conclusion": "success"
+              },
+              {
+                "name": "Stop containers",
+                "conclusion": "success"
+              },
+              {
+                "name": "Complete job",
+                "conclusion": "success"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "railway_requests_made": false
+  },
+  "latest_user_instruction": "Railway is blocked by the platform. Finish without waiting; mark deployment and production acceptance pending. Do not create another service, change production configuration or start Phase3.",
+  "release_status": {
+    "github": "PUBLISHED",
+    "ci": "PASS for feature e220800 and checkpoint 903b095; final documentation tip checked after push",
+    "railway_deployment": "PENDING — platform block reported by user",
+    "phase2_production_acceptance": "PENDING — NOT RUN"
+  }
 }

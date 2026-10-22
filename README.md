@@ -1,6 +1,6 @@
 # LeadCurrent
 
-**22 Ekim Phase2 GitHub yayını:** onaylı `e220800` mevcut main dalına normal fast-forward ile push edildi; exact-commit LeadCurrent CI **166 test/2205 assertion PASS**. **Railway Phase2 dağıtımı henüz doğrulanmadı:** son kontrolde eski runtime sağlıklı, yeni Copilot asset'i yok. [Gerçek yayın/CI kanıtı ve kalan deployment adımları](docs/PHASE2_PUBLICATION.md). Aşağıdaki yerel-only kayıtlar önceki tarihsel hazırlık aşamalarıdır.
+**22 Ekim Phase2 GitHub yayını:** onaylı `e220800` mevcut main dalına normal fast-forward ile push edildi; feature ve `903b095` belge commit'lerinin exact-commit LeadCurrent CI kontrolleri **PASS** (166 test/2205 assertion). **Railway dağıtımı ve production acceptance: PENDING.** Kullanıcı platform engelini bildirdi ve Railway beklenmeden GitHub tesliminin bitirilmesini istedi. [Doğrulanmış yayın/CI kanıtı ve platform açılınca deployment adımları](docs/PHASE2_PUBLICATION.md). Aşağıdaki yerel-only kayıtlar önceki tarihsel hazırlık aşamalarıdır.
 
 [![LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml/badge.svg)](https://github.com/Montaserissa20/leadcurrent/actions/workflows/ci.yml)
 
