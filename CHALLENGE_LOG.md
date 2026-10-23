@@ -3783,3 +3783,243 @@ All existing Phase 1, Phase 2, and Phase 3 functions continue working.
 
 Begin by inspecting the current code and routes, then implement, test, and document the Integration Center.
 ````
+
+
+## 23 October 2026 — approved Phase 3 and 3.1 GitHub publication
+
+The user explicitly authorizes normal GitHub main integration/push of completed Phase3/3.1, superseding earlier local-only rules. They expressly prohibit manual Railway/Render deployment, service/variable changes, automatic credential rotation and production data operations. GitHub may start automatic Railway deployments; observe/report, never assume success. No new feature, provider, branch deletion, reset/history rewrite or force push.
+
+**Repository verification:** clean local `phase3/integration-center` at `e8174c928a6c1a23cc9ec8d3e4f0a1561653b483`, parent Phase3 `87cd77ead659523482c0e9682b8c444a92c228d5`. Fresh origin fetch independently returned expected `e8c3e0da485994567c948e40fbeb4cc32a4dc312`, with0remote-only/2local-only commits and no conflict/divergence. Reviewed66changed files preserve all four feature areas and historical evidence. Existing main integrated by fast-forward, normal push succeeded and GitHub main independently matched `e8174c928a6c1a23cc9ec8d3e4f0a1561653b483`. No new repository. Original development branches retained.
+
+**Fresh automated checks:** Rails170/2278 seed16822, browser31/464 seed40395, total201/2742, all zero failures/errors/skips; Python7 PASS. Locked Node22 install/build (zero npm advisories), OpenAPI validator0.9.0 plus full/minimal/nullable/8invalid/13response examples, Zeitwerk, Brakeman0warnings/errors and production asset compilation PASS. Normal provider transports mocked; zero real Groq calls. No expensive live suite repeated; earlier actual4808-token Phase3 proof and zero-token Phase3.1 external HTTP proof remain preserved. No new application changes were needed.
+
+**Migration/data:** started the existing stopped local PostgreSQL17 cluster; did not initialize/create another database. Actual Phase2 three-migration schema loaded in a temporary schema inside the EXISTING test database, actual additive Phase3 migration applied and tenant/idempotency constraints verified; the entire probe DDL transaction rolled back. Public test schema remained intact. No production or working-development migration/reset/drop/seed. All11 fresh baseline application-table row contents unchanged (8leads,2credentials,1inquiry at start); local master key unchanged. PG/database configuration, passwords, Phase1/2 code, CreateLead and deployment configuration unchanged. Ruby fiddle future-dependency warnings are non-fatal; no unrelated Gemfile edit.
+
+**Security:** source326file exact-local-secret/signature/path checks PASS; full reachable-history477unique blobs PASS for both actual-secret and credential signatures, plus forbidden historical paths. Gitleaks8.30.1 full history returns exactly two generic matches in Phase3.1 evidence lines111/139: the same public test idempotency correlation nonce, no bearer authority. Values were generated for fictional test/replay, are not credentials and were individually reviewed; no new suppression. Existing historical hash/synthetic-test exceptions remain unchanged. No master.key/.env private keys/Groq or agent tokens/real PostgreSQL credentials/.local DB/node_modules/log data/ZIPs entered source or outgoing commits. Screenshot artifacts depict public documentation/fictional inbox/lead, never credential issuance. The screenshot-exposed token described by the user is not reused/published/rotated here; its owner must revoke it. [Railway's public incident notice](https://status.railway.com/) advises manual rotation/revocation of sensitive credentials stored there; this is not a claim that our source scan establishes account safety. No sensitive account settings accessed or secret rotations performed.
+
+**Exact feature CI:** [LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/40014748377) for `e8174c928a6c1a23cc9ec8d3e4f0a1561653b483` completed **success**. All required Node/Python/OpenAPI/Rails/browser/autoload/security/production-assets steps independently checked, not merely queued. The documentation-only follow-up commit's own CI is verified separately after it exists; final SHA/run URL are reported in delivery rather than inventing a self-reference or future result.
+
+**Hosting observation:** unauthenticated read-only baseline at2026-10-23T19:50:57Z returned `/up`503 and new docs/spec404 BEFORE the push. At19:51:53Z, GitHub deployment7287414168 and its pending Railway status confirmed automatic deployment of `e8174c928a6c1a23cc9ec8d3e4f0a1561653b483` to the existing production service. This was caused by the authorized GitHub push, not a manual agent deployment. Subsequent exact-commit deployment/status observations are preserved in the local final report. No authenticated Railway logs/settings/database access is available here; do not infer root cause or successful migration/production acceptance from the GitHub push, CI or platform-wide announcements. Production acceptance remains **PENDING / NOT RUN**. No Render deployment.
+
+### Manual deployment later — owner only, not performed in this task
+
+1. Revoke the screenshot-exposed agent credential; follow [Railway's incident notice](https://status.railway.com/) for manual rotation/revocation of secrets stored in environment variables (including Groq/database credentials where applicable). Review the platform's notifications/activity. No key values belong in Git/issues/screenshots. Confirm the existing database and backup it through the established owner operation; no backup or rotation was performed here.
+2. For Railway, open the EXISTING LeadCurrent service, verify GitHub main at the final delivered SHA and successful corresponding CI, then use the command palette **Deploy Latest Commit** only when ready. The existing Dockerfile builds pinned Node/Page Agent assets; keep existing service/config/DB connection. Its entrypoint db:prepare applies the already-reviewed additive migration to the existing database. Do not create another service/database, reset/seed production, force a schema rollback or alter build config merely to bypass platform trouble. If the source link needs recovery, owner follows [official GitHub autodeploy guidance](https://docs.railway.com/deployments/github-autodeploys); the agent did not reconnect accounts or alter access.
+3. Verify successful platform deployment against that exact SHA; `/up`200/database connected, login/CSP, `/agent-integrations` and downloadable `/api-docs/agent-inquiries/openapi.yaml`, official Page Agent assets, ordinary CRM, scoped credential/API/idempotency and human-only conversion. Use a short-lived fictional test credential under an approved production acceptance plan and revoke it afterward. Real AI calls are optional/quota-bound. Existing human approval,24h first contact,4h stage cooldown and72h inactivity rules remain authoritative. Do not claim production acceptance until actually performed.
+4. If the owner later explicitly chooses Render, use an existing approved web service tied to this repository/main and an approved EXISTING PostgreSQL connection. The repository's retained commands are `bash bin/render-build.sh` and `bundle exec puma -C config/puma.rb`, Ruby3.4.7/Node22, health `/up`; ensure `DEMO_SEED_ENABLED=false` before running that script against real data because it otherwise conditionally seeds. Do not apply the retained render.yaml Blueprint blindly: it declares a new database/demo defaults and is NOT an instruction to provision/reset data. Have the owner privately configure applicable secrets and a reachable secure existing DB URL, backup first and review the additive migration. See [Render's official Rails guide](https://render.com/docs/deploy-rails-8) for native-runtime mechanics; no Render service/configuration was changed or deployed in this task.
+
+Decision: continue the approved GitHub release, retain all prior work and finish exact-tip CI evidence. Hosting/security-owner follow-ups remain explicit; no provider token/time/cost savings fabricated. Human development hours/financial costs not measured; release checks consumed zero real Groq tokens.
+
+### Original final GitHub-release authorization (verbatim)
+
+````text
+# CODEX TASK — Final LeadCurrent Phase 3 + 3.1 GitHub Release
+
+I authorize you to commit and push the completed Phase 3 and Phase 3.1 implementation to my existing GitHub repository.
+
+## Project information
+
+- Local project: `D:\LeadCurrent`
+- GitHub: https://github.com/Montaserissa20/leadcurrent
+- Target branch: `main`
+- Last verified remote main commit: `e8c3e0da485994567c948e40fbeb4cc32a4dc312`
+
+Verify the actual latest remote commit before proceeding.
+
+## 1. Preserve all completed work
+
+The local project contains:
+
+**Phase 1 — AI Sales Assistant**
+- Groq-powered sales recommendations and customer analysis.
+
+**Phase 2 — AI Copilot**
+- Conversational AI.
+- Alibaba Page Agent.
+- Authorized CRM database queries and navigation.
+
+**Phase 3 — AI Agent as a Customer**
+- External purchasing-agent API.
+- Workspace-bound API credentials.
+- Agent Inquiry Inbox.
+- Groq inquiry qualification.
+- Human approval and conversion to CRM leads.
+- Python purchasing-agent demonstration.
+
+**Phase 3.1 — Agent Integration Center**
+- Integration documentation and developer UI.
+- Downloadable OpenAPI 3.1 specification.
+- cURL, PowerShell, and Python examples.
+- Copyable integration commands.
+- Deterministic API testing instructions.
+
+**All features must be preserved.**
+
+Do not overwrite the local Phase 3 code with the older GitHub version.
+
+## 2. Inspect Git and review changes
+
+Before pushing:
+
+1. Read `AGENTS.md`, `AGENT.md`, and `CHALLENGE_LOG.md`.
+2. Inspect `git status`, branch names, local commits, and remote configuration.
+3. Fetch the latest `origin/main`.
+4. Compare local Phase 3 changes against the remote branch.
+5. Check that all intended Phase 3 and Phase 3.1 files are included.
+6. Identify any unexpected divergence or uncommitted modifications.
+
+Preserve the existing commit history.
+
+Do not force-push, reset history, or delete branches.
+
+If there are unexpected conflicts or remote changes, stop and report them.
+
+## 3. Critical security checks
+
+Railway recently reported a security incident involving potentially exposed environment variables.
+
+Before pushing:
+
+- Scan staged files and Git history for accidentally included secrets.
+- Ensure `config/master.key` is excluded.
+- Exclude `.env` files containing secrets.
+- Exclude Groq API keys.
+- Exclude external-agent credentials.
+- Exclude PostgreSQL credentials.
+- Exclude `.local` database files.
+- Exclude `node_modules`, logs, temporary files, and generated ZIP archives.
+- Verify credentials are never hardcoded in the Python purchasing-agent examples.
+- Check documentation and test fixtures for accidentally copied real credentials.
+
+The user has previously exposed an agent credential in a screenshot. Do not reuse or publish that credential.
+
+Do not attempt to rotate secrets automatically or access sensitive account settings. Report any credential requiring manual rotation.
+
+If an actual secret is found in a tracked commit, stop and report the exposure rather than merely deleting it from the latest version.
+
+## 4. Final automated verification
+
+Run the relevant checks:
+
+- Complete Rails test suite.
+- Browser/system tests.
+- Python purchasing-agent tests.
+- JavaScript/Page Agent build.
+- Rails Zeitwerk.
+- Brakeman security scan.
+- Production asset compilation.
+- OpenAPI specification validation.
+- Migration compatibility tests.
+- Git secret scanning.
+
+Verify:
+
+- External API authentication.
+- Workspace isolation.
+- Inquiry idempotency.
+- Human-controlled lead conversion.
+- Phase 1 and Phase 2 regression tests.
+- Integration Center links and examples.
+
+Normal automated tests must not consume real Groq API tokens.
+
+Do not rerun expensive live Groq tests unnecessarily.
+
+Fix genuine regressions before pushing, without introducing unrelated features.
+
+Report any tests that could not be run.
+
+## 5. Commit and push Phase 3 + 3.1
+
+Once the checks pass:
+
+1. Ensure all intended Phase 3 and Phase 3.1 changes are committed.
+2. Preserve the existing development commits.
+3. Integrate the Phase 3 branch into local `main` safely.
+4. Confirm that the merge includes Phases 1, 2, 3, and 3.1.
+5. Push the updated `main` branch to the existing GitHub repository.
+
+Use normal Git history integration. Do not force-push.
+
+A suggested final commit message, if a commit is necessary:
+
+`feat: complete AI agent customer integration and developer portal`
+
+Do not create another repository.
+
+## 6. Verify GitHub Actions
+
+After pushing:
+
+- Confirm the new commit appears on remote `main`.
+- Record its complete SHA and GitHub URL.
+- Check the GitHub Actions workflows triggered by that specific commit.
+- Verify Rails, browser, security, and build checks pass.
+- Correct any code-related CI failures through normal follow-up commits.
+- Confirm the latest final commit has successful CI.
+
+Do not claim success until the corresponding workflow is complete.
+
+## 7. Railway and Render restrictions
+
+Railway has recently experienced infrastructure-related build failures and a security incident.
+
+Therefore:
+
+- Do not manually trigger a Railway deployment.
+- Do not create or delete Railway services.
+- Do not change Railway variables.
+- Do not rotate PostgreSQL credentials automatically.
+- Do not migrate or reset production data.
+- Do not deploy on Render.
+- Do not create another database.
+
+**Important:** GitHub pushes may trigger automatic Railway deployments. Check and report whether one starts, but do not assume it will succeed or treat an infrastructure failure as a code defect.
+
+Do not change deployment configuration merely to bypass an outage.
+
+The existing production database must remain intact.
+
+## 8. Final documentation
+
+Update the README and `CHALLENGE_LOG.md` only as necessary to record the actual release evidence.
+
+Make sure the documentation accurately explains:
+
+- All three main project phases.
+- The Agent Integration Center.
+- The external purchasing-agent demonstration.
+- The OpenAPI specification.
+- Authentication and human approval.
+- GitHub verification.
+- Known deployment limitations.
+
+Do not invent successful production tests.
+
+## 9. Final report
+
+When finished, provide:
+
+1. Final GitHub commit SHA and URL.
+2. Confirmation Phase 3 and Phase 3.1 are on `main`.
+3. Files and features included.
+4. Automated test counts and results.
+5. GitHub Actions run URL and status.
+6. Security scan results.
+7. Confirmation that no private credentials were committed.
+8. Railway deployment status, if observable.
+9. Any remaining blockers.
+10. Steps for manually deploying the final application on Railway or Render later.
+
+## Success criteria
+
+The existing GitHub repository contains the complete LeadCurrent application with all completed features from Phases 1, 2, 3, and 3.1.
+
+All required GitHub Actions tests pass.
+
+No secrets, local database files, or unnecessary generated artifacts are committed.
+
+The project is ready for deployment when the hosting platform is available.
+
+**Proceed with the final GitHub push now. Do not deploy to Railway or Render manually.**
+````

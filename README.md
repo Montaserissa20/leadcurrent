@@ -1,5 +1,13 @@
 # LeadCurrent
 
+## Phase 3 + 3.1 GitHub release — 23 October 2026
+
+**Yayın onaylandı:** Phase3 `87cd77e` ve Phase3.1 `e8174c928a6c1a23cc9ec8d3e4f0a1561653b483` mevcut `main` dalına normal fast-forward ile push edildi. Phase1/2 ve geçmiş commit'ler korundu. [Exact feature-commit LeadCurrent CI](https://github.com/Montaserissa20/leadcurrent/actions/runs/40014748377) **PASS**: Rails/browser, Python, OpenAPI, Node build, Zeitwerk, security ve production assets. Yeni yerel kontrol: **201 test/2742 assertion +7Python PASS**, migration compatibility ve secret/history scan PASS. Önceki yerel-only kayıtlar tarihsel hazırlık aşamalarıdır.
+
+**Hosting:** push mevcut Railway servisinde otomatik deployment başlattı; bu durum uygulama dağıtımının veya production kabulünün başarılı olduğu anlamına gelmez. Push öncesi public `/up` **503**, Integration Center/spec **404** idi. Agent manuel Railway/Render deploy, değişken/credential değişimi veya production DB işlemi yapmadı. Son gözlenen hosting durumu ve final-tip CI teslim raporunda ayrıca doğrulanır; production acceptance **PENDING / NOT RUN**. [Yayın güvenliği, manual deploy ve özgün onay kaydı](CHALLENGE_LOG.md#23-october-2026--approved-phase-3-and-31-github-publication).
+
+**Manuel güvenlik:** ekran görüntüsünde ifşa edilen agent credential'ını workspace yöneticisi revoke etmeli ve yeniden kullanmamalıdır. [Railway incident bildirimi](https://status.railway.com/) ortam değişkenlerinde saklanmış hassas credential'ların owner tarafından rotate/revoke edilmesini önerir; agent hiçbirini değiştirmedi. Repo/history'de gerçek private credential bulunmadı; iki non-secret replay nonce scanner eşleşmesi ayrı incelendi. Bu kaynak kod kontrolü dışarıda ifşa edilmiş credential'ları güvenli hale getirmez.
+
 ## Phase 3.1 — Agent Integrations (yerel inceleme)
 
 **23 Ekim 2026:** dış şirketlerin kendi AI agent'ları için herkese açık, secretsiz **Agent Integrations** merkezi; gerçek Rails API'siyle eşleşen indirilebilir **OpenAPI 3.1**; çalışan cURL/PowerShell/Python copy örnekleri ve modelsiz deterministic test rehberi eklendi. Agent istediği AI sağlayıcısını kullanabilir; bizim Groq/Copilot/Page Agent'ımız gerekli değildir. Credential ve human review güvenliği korunur. Yeni migration, sağlayıcı veya production değişikliği yok.
