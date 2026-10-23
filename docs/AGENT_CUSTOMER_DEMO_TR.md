@@ -80,3 +80,8 @@ Remove-Item Env:GROQ_API_KEY -ErrorAction SilentlyContinue
 22 Ekim gerçek yerel demoda ayrı Python alıcısı → gerçek HTTP → inbox → gerçek Groq qualification → insan kabulü → gerçek Phase 1 analizi → gerçek Phase 2 sorgusu **PASS**: 1 test/48 assertion. Dört gerçek completion, **4.808 ölçülmüş token**; finansal ücret ve geliştirme saati ölçülmedi. İlk denemede gerçek buyer isteği 403 verdi; kayıt korundu. Doğru uygulama User-Agent eklendikten sonraki tam tur geçti; 429 görülmedi. Gerçek ekran görüntüleri teknik raporda bulunur; token ekranı kaydedilmedi. Bu verifier kurgusal test transaction'ını geri alır; yukarıdaki elle demo ise yerelde gerçek kurgusal kayıt bırakır.
 
 Son otomatik sonuç: **193 Rails+browser testi / 2.544 assertion**, ayrıca **7 Python testi**, hepsi PASS. Docker'ın izole PostgreSQL ile production-start kontrolü geçti. Bunlar Railway deploy veya production kabulü değildir. Çoklu replica için ortak rate limiter, yayın öncesi kullanıcı onayı, exact-commit GitHub CI ve mevcut Railway servisinde kontrollü production testi hâlâ gereklidir.
+
+
+## Phase 3.1 — Başka şirketin agent entegrasyonu
+
+23 Ekim: http://127.0.0.1:3100/agent-integrations adresinden OpenAPI indirip gerçek endpoint, bearer/idempotency ve örnekleri gösterin. Dış agent herhangi bir modeli kullanabilir; Groq/Page Agent/Copilot zorunlu değildir. [Kesin deterministic komutlar, güvenlik ve kısa sunum](AGENT_INTEGRATION_GUIDE.md). Bu yerel geliştirme yayın/deploy değildir; mevcut örnek verileri korur.

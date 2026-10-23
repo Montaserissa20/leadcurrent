@@ -1,0 +1,281 @@
+openapi: 3.1.0
+info:
+  title: LeadCurrent External Agent Inquiries
+  version: 1.0.0
+  description: |
+    Provider-independent, server-to-server purchasing inquiry intake. Obtain an
+    inquiries:create credential from a LeadCurrent workspace manager. Possession
+    authenticates a workspace capability, NOT the claimed company, budget or authority.
+    Submissions remain unverified and create no CRM lead until a human manager approves.
+    No model provider, prompts or private reasoning are required. No browser login
+    cookie can replace bearer authentication. Browser CORS access is not enabled.
+    Production deployment of the local Phase 3 implementation is pending approval;
+    the production origin below is the existing service, not evidence of availability.
+servers:
+  - url: http://127.0.0.1:3100
+    description: Local Rails demonstration; loopback HTTP only
+  - url: https://leadcurrent-production.up.railway.app
+    description: Existing HTTPS service; deploy the approved Phase 3 commit before using this API
+tags:
+  - name: Agent inquiries
+paths:
+  /api/v1/agent_inquiries:
+    post:
+      operationId: submitAgentInquiry
+      summary: Submit an unverified purchasing inquiry
+      tags: [Agent inquiries]
+      security:
+        - agentBearer: []
+      description: |
+        Send application/json with a valid active workspace-issued bearer credential.
+        Maximum raw body is 16384 bytes; JSON must be an object with unique keys,
+        nesting at most 8 and only the ten documented fields. No query parameters.
+        Credential selects the organization: organization_id/status/owner fields are rejected.
+        Known credential content and forbidden control characters in text are rejected.
+        Strings are length-checked before trimming; blank optional strings become null.
+        Quantity must be a JSON integer token: 1.0 is rejected even though JSON Schema
+        considers it mathematically an integer. Stated budget is checked as a plain
+        decimal after parsing, not rounded; at most 12 integer digits and 2 decimals.
+        Limits: 60/IP, 10/credential and 30/workspace per minute, process-local.
+        Multi-worker/replica deployments require a shared limiter. No automatic LLM calls.
+        Idempotency is durable and credential-scoped. An identical payload and key
+        return the original inquiry/current review status; changed payload returns 409.
+        JSON object key order does not matter; omitted/null and string/number changes do.
+        Accepted/rejected inquiries are final; replay does not reopen them or create leads.
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Reuse for an identical retry. Use a fresh key for each new inquiry; never use a credential as the key.
+          schema:
+            type: string
+            minLength: 16
+            maxLength: 100
+            pattern: '^[A-Za-z0-9._:-]{16,100}$'
+          example: fictional-agent-demo-0001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InquiryRequest'
+            example:
+              company_name: Fictional Atlas Procurement
+              contact_name: Fictional Alex Buyer
+              contact_email: buyer@example.test
+              product_or_service: Software subscriptions
+              quantity: 50
+              currency: USD
+              stated_budget: '10000.00'
+              requirements: Team management and reporting for a fictional demonstration.
+              desired_timeline: Within 30 days
+              message: Please provide pricing. Proposed budget is unverified; this is not an order.
+      responses:
+        '201':
+          description: New inquiry persisted pending human review; no CRM lead created
+          headers:
+            Cache-Control:
+              schema: {type: string, const: no-store}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/InquiryReceipt'}
+              example: {inquiry_id: 123, status: pending_review, identity: unverified, replayed: false}
+        '200':
+          description: Identical retry returns the existing inquiry with its current status
+          headers:
+            Cache-Control:
+              schema: {type: string, const: no-store}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/InquiryReceipt'}
+              example: {inquiry_id: 123, status: pending_review, identity: unverified, replayed: true}
+        '400':
+          description: Malformed/duplicate JSON, invalid idempotency key, or query parameters
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              examples:
+                json:
+                  value: {error: {code: invalid_json, message: Send a valid JSON object with unique field names.}}
+                key:
+                  value: {error: {code: invalid_idempotency_key, message: Supply an Idempotency-Key of 16–100 permitted characters.}}
+                query:
+                  value: {error: {code: invalid_request, message: Do not supply query parameters.}}
+        '401':
+          description: Bearer credential missing, invalid, revoked, expired or not permitted; session cookies do not authorize
+          headers:
+            WWW-Authenticate:
+              schema: {type: string}
+              example: Bearer realm="LeadCurrent agent inquiries"
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: unauthorized, message: 'A valid, active inquiries:create bearer credential is required.'}}
+        '405':
+          description: Exact intake path called with a method other than POST (including GET/HEAD); body omitted for HEAD
+          headers:
+            Allow:
+              schema: {type: string, const: POST}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: method_not_allowed, message: Use POST for inquiry submission.}}
+        '409':
+          description: Same credential and idempotency key already used with a different payload
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: idempotency_conflict, message: This idempotency key was already used with different content.}}
+        '413':
+          description: Raw request exceeds 16384 bytes
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: request_too_large, message: Inquiry requests are limited to 16384 bytes.}}
+        '415':
+          description: Content-Type is not application/json
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: unsupported_media_type, message: Send application/json.}}
+        '422':
+          description: Unknown/missing field, invalid type, value, credential content or field length
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: invalid_fields, message: Inquiry fields do not match the documented schema.}}
+        '429':
+          description: IP, credential or workspace request limit reached; replay attempts also count
+          headers:
+            Retry-After:
+              schema: {type: string, const: '60'}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: rate_limited, message: Request limit reached. Wait a minute before retrying with the same idempotency key.}}
+        '503':
+          description: Unexpected intake failure; retry later with the same payload/key, never expose internal errors
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApiError'}
+              example: {error: {code: unavailable, message: Inquiry intake is temporarily unavailable. Retry with the same idempotency key.}}
+components:
+  securitySchemes:
+    agentBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: Opaque workspace credential (not JWT)
+      description: Manager-issued inquiries:create credential; digest-only storage, optional expiry and irreversible revocation. Never put tokens in URLs or prompts.
+  schemas:
+    InquiryRequest:
+      type: object
+      additionalProperties: false
+      required: [company_name, product_or_service, message]
+      description: Unverified requester claims. Optional contact information is needed before human lead acceptance; missing details are never invented.
+      properties:
+        company_name:
+          type: string
+          minLength: 1
+          maxLength: 150
+          pattern: '\S'
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+        contact_name:
+          type: [string, 'null']
+          maxLength: 150
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+        contact_email:
+          type: [string, 'null']
+          maxLength: 254
+          pattern: '^(?:\s*|[ \t\r\n]*[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*[ \t\r\n]*)$'
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+          description: Optional; blank becomes null. Nonblank trimmed value must pass Rails URI::MailTo::EMAIL_REGEXP. Do not invent an email.
+        product_or_service:
+          type: string
+          minLength: 1
+          maxLength: 200
+          pattern: '\S'
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+        quantity:
+          type: [integer, 'null']
+          minimum: 1
+          maximum: 1000000
+          description: A JSON integer token, not a string, boolean or decimal token such as 1.0.
+        currency:
+          type: [string, 'null']
+          maxLength: 3
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+          anyOf:
+            - enum: [USD, EUR, TRY, null]
+            - type: string
+              pattern: '^\s*$'
+          description: USD/EUR/TRY; optional blank becomes null. Required and nonblank when stated_budget is not null.
+        stated_budget:
+          description: Unverified proposed budget; plain decimal string or JSON number with at most 12 integer digits and 2 decimal places. No rounding. Currency required.
+          anyOf:
+            - type: 'null'
+            - type: string
+              pattern: '^\d{1,12}(?:\.\d{1,2})?$'
+            - type: number
+              minimum: 0
+              maximum: 999999999999.99
+              multipleOf: 0.01
+        requirements:
+          type: [string, 'null']
+          maxLength: 3000
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+        desired_timeline:
+          type: [string, 'null']
+          maxLength: 200
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+        message:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          pattern: '\S'
+          allOf: [{$ref: '#/components/schemas/IntakeText'}]
+      allOf:
+        - if:
+            required: [stated_budget]
+            properties:
+              stated_budget:
+                not: {type: 'null'}
+          then:
+            required: [currency]
+            properties:
+              currency: {enum: [USD, EUR, TRY]}
+    IntakeText:
+      type: [string, 'null']
+      pattern: '^[^\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]*$'
+      not:
+        type: string
+        pattern: '(?:lc_agent_[a-f0-9]{24}\.[A-Za-z0-9_-]{43}|\b(?:gsk_|sk-|ghp_)[A-Za-z0-9_-]{20,}|-----BEGIN .*PRIVATE KEY-----)'
+      description: Reject forbidden control characters and recognized credential formats; free-form content remains untrusted.
+    InquiryReceipt:
+      type: object
+      additionalProperties: false
+      required: [inquiry_id, status, identity, replayed]
+      properties:
+        inquiry_id: {type: integer, minimum: 1}
+        status:
+          type: string
+          enum: [pending_review, needs_information, accepted, rejected]
+          description: 'pending_review: awaiting a manager; needs_information: internal request for clarification, no email sent; accepted: human created an ordinary lead; rejected: retained without a lead. Accepted/rejected are final. No public polling or update endpoint exists.'
+        identity:
+          type: string
+          const: unverified
+          description: Remains unverified even after human acceptance into the CRM.
+        replayed: {type: boolean}
+    ApiError:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum: [invalid_json, invalid_fields, invalid_idempotency_key, invalid_request, unauthorized, method_not_allowed, idempotency_conflict, request_too_large, unsupported_media_type, rate_limited, unavailable]
+            message: {type: string}

@@ -1,0 +1,331 @@
+{
+  "date": "2026-10-23",
+  "phase": "3.1",
+  "baseline_commit": "87cd77ead659523482c0e9682b8c444a92c228d5",
+  "branch": "phase3/integration-center",
+  "local_page_url": "http://127.0.0.1:3100/agent-integrations",
+  "openapi_source": "docs/api/agent-inquiries.openapi.yaml",
+  "openapi_download_url": "http://127.0.0.1:3100/api-docs/agent-inquiries/openapi.yaml",
+  "public_local_http": "Integration Center and actual spec download HTTP200 verified",
+  "baseline": {
+    "rails": {
+      "tests": 164,
+      "assertions": 2108,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 8749,
+      "result": "PASS"
+    },
+    "browser": {
+      "tests": 29,
+      "assertions": 436,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 28802,
+      "result": "PASS"
+    }
+  },
+  "final": {
+    "rails": {
+      "tests": 170,
+      "assertions": 2278,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 33707,
+      "result": "PASS"
+    },
+    "browser": {
+      "tests": 31,
+      "assertions": 464,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seed": 7367,
+      "result": "PASS"
+    },
+    "python": {
+      "tests": 7,
+      "result": "PASS",
+      "provider_transport": "mocked"
+    },
+    "zeitwerk": "PASS",
+    "brakeman": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "node_locked_install_build": "PASS; npm reported zero vulnerabilities",
+    "production_assets": "PASS; prior development manifest state restored",
+    "openapi_validation": {
+      "tool": "openapi-spec-validator0.9.0",
+      "result": "PASS",
+      "scope": "CLI validity plus full/minimal/nullable requests,8 invalid cases,13 response examples"
+    },
+    "true_mobile_viewport_width": 390,
+    "rails_and_browser_total": {
+      "tests": 201,
+      "assertions": 2742
+    }
+  },
+  "deterministic_attempts": [
+    {
+      "started_at": "2026-10-23T04:29:56Z",
+      "result": "FAIL",
+      "groq_calls": 0,
+      "provider_tokens": 0,
+      "production_contacted": false,
+      "fictional_data": true,
+      "fixture_lifecycle": "Local Rails test transaction rolls back; development database untouched.",
+      "steps": [
+        {
+          "name": "Public integration center and actual OpenAPI HTTP download",
+          "result": "PASS"
+        }
+      ],
+      "finished_at": "2026-10-23T04:30:03Z"
+    },
+    {
+      "started_at": "2026-10-23T04:30:56Z",
+      "result": "PASS",
+      "groq_calls": 0,
+      "provider_tokens": 0,
+      "production_contacted": false,
+      "fictional_data": true,
+      "fixture_lifecycle": "Local Rails test transaction rolls back; development database untouched.",
+      "steps": [
+        {
+          "name": "Public integration center and actual OpenAPI HTTP download",
+          "result": "PASS"
+        },
+        {
+          "name": "Manager UI credential; separate Python actual POST201 then idempotent200; pending unverified inbox; no CRM creation",
+          "result": "PASS"
+        }
+      ],
+      "client_attempts": [
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase31-cece87e6e421e4421d7e367caa55aea7",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 201,
+          "receipt": {
+            "inquiry_id": 132,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": false
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        },
+        {
+          "mode": "deterministic",
+          "fictional_demo": true,
+          "idempotency_key": "phase31-cece87e6e421e4421d7e367caa55aea7",
+          "credential_logged": false,
+          "model": null,
+          "result": "PASS",
+          "submitted": true,
+          "http_status": 200,
+          "receipt": {
+            "inquiry_id": 132,
+            "status": "pending_review",
+            "identity": "unverified",
+            "replayed": true
+          },
+          "inquiry": {
+            "company_name": "Fictional Atlas Procurement",
+            "contact_name": "Fictional Alex Buyer",
+            "contact_email": "buyer@example.test",
+            "product_or_service": "Software subscriptions",
+            "quantity": 50,
+            "currency": "USD",
+            "stated_budget": "10000.00",
+            "requirements": "Team management and reporting for a fictional demonstration.",
+            "desired_timeline": "Within 30 days",
+            "message": "Please provide pricing for 50 subscriptions. Our proposed budget is unverified; this is an inquiry, not an order."
+          }
+        }
+      ],
+      "finished_at": "2026-10-23T04:31:03Z"
+    }
+  ],
+  "deterministic_passing_test": {
+    "tests": 1,
+    "assertions": 21,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "seed": 3005,
+    "result": "PASS"
+  },
+  "provider_usage": {
+    "groq_calls": 0,
+    "tokens": 0,
+    "expensive_live_tests_repeated": false,
+    "financial_cost": "not measured",
+    "human_development_hours": "not measured",
+    "agent_development_hours": "not measured"
+  },
+  "preservation": {
+    "development_application_tables": 11,
+    "all_baseline_rows_unchanged": true,
+    "current_counts": {
+      "activities": 4,
+      "agent_credentials": 2,
+      "agent_inquiries": 1,
+      "audit_events": 41,
+      "companies": 8,
+      "contacts": 8,
+      "leads": 8,
+      "opportunities": 4,
+      "organizations": 1,
+      "tasks": 0,
+      "users": 2
+    },
+    "migrations_added": 0,
+    "schema_database_configuration_core_authentication_phase1_phase2_phase3_intake_review_and_python_client_source": "unchanged"
+  },
+  "publication": {
+    "github_push": false,
+    "phase31_remote_ci": "NOT RUN — local only",
+    "railway_deployment": "PENDING; no attempt",
+    "production_acceptance": "PENDING / NOT RUN",
+    "production_configuration_changed": false
+  },
+  "screenshots": [
+    {
+      "path": "phase31-integration-center-light-2026-10-23.png",
+      "sha256": "0c5d02795a5b6feb2439fc88a44b461ec467ad6f5bc1900865f0a03fe4c3ad07",
+      "source": "Actual browser capture; no credential page; fictional data only in test inbox"
+    },
+    {
+      "path": "phase31-integration-center-dark-2026-10-23.png",
+      "sha256": "88742f6e60aefcdb5156f5cc2d57f5f7238b71e1585d00e62f93cdc6f2ad6c40",
+      "source": "Actual browser capture; no credential page; fictional data only in test inbox"
+    },
+    {
+      "path": "phase31-integration-center-mobile-2026-10-23.png",
+      "sha256": "fce83943f58c0f3357bc96cff4de7bb1a63a7a860ba12ddfe80cd0d36997974b",
+      "source": "Actual browser capture; no credential page; fictional data only in test inbox"
+    },
+    {
+      "path": "phase31-integration-inbox-2026-10-23.png",
+      "sha256": "3bd8597594d07178c423218e752a82845019cf0b516c304f9498c1f1e691263a",
+      "source": "Actual browser capture; no credential page; fictional data only in test inbox"
+    }
+  ],
+  "security": "Existing API/credential/review boundaries unchanged; no CORS relaxation, browser token tester, runtime provider dependency or private credential data in public docs. Final staged/commit/archive checks delivered after local commit.",
+  "source_review": {
+    "baseline": "87cd77ead659523482c0e9682b8c444a92c228d5",
+    "preexisting_tracked_files": 311,
+    "unchanged_preexisting_files": 302,
+    "existing_modified": [
+      ".github/workflows/ci.yml",
+      "AGENT.md",
+      "CHALLENGE_LOG.md",
+      "README.md",
+      "app/views/agent_inquiries/index.html.erb",
+      "config/routes.rb",
+      "docs/AGENT_CUSTOMER_DEMO_TR.md",
+      "docs/AGENT_CUSTOMER_PHASE3.md",
+      "examples/purchasing_agent/README.md"
+    ],
+    "new_files": [
+      "app/assets/stylesheets/agent_integrations.css",
+      "app/controllers/agent_integrations_controller.rb",
+      "app/javascript/controllers/integration_copy_controller.js",
+      "app/services/agent_integration_guide.rb",
+      "app/views/agent_integrations/index.html.erb",
+      "app/views/layouts/agent_integrations.html.erb",
+      "docs/AGENT_INTEGRATION_GUIDE.md",
+      "docs/api/agent-inquiries.openapi.yaml",
+      "docs/api/requirements-validation.txt",
+      "docs/evidence/phase31-integration-center-2026-10-23.json",
+      "docs/evidence/phase31-integration-center-dark-2026-10-23.png",
+      "docs/evidence/phase31-integration-center-light-2026-10-23.png",
+      "docs/evidence/phase31-integration-center-mobile-2026-10-23.png",
+      "docs/evidence/phase31-integration-inbox-2026-10-23.png",
+      "script/validate_agent_openapi.py",
+      "script/verify_agent_integration.rb",
+      "test/integration/agent_integrations_test.rb",
+      "test/system/agent_integrations_test.rb"
+    ],
+    "unexpected_changes": [],
+    "local_master_key_unchanged": true,
+    "historical_challenge_prefix_preserved": true,
+    "exact_original_prompt_preserved": true,
+    "syntax": {
+      "ruby": {
+        "files": 145,
+        "errors": []
+      },
+      "javascript": {
+        "files": 14,
+        "errors": []
+      },
+      "python": {
+        "files": 3,
+        "errors": []
+      }
+    },
+    "source_files_excluding_runtime_keep": 326
+  },
+  "documentation_validation": {
+    "markdownFiles": 34,
+    "localLinks": 334,
+    "tables": 47,
+    "requiredSections": 19,
+    "protectedFilesUnchanged": 302,
+    "localMasterKeyUnchanged": true,
+    "ignoreChecks": 18,
+    "errors": []
+  },
+  "security_review": {
+    "source_policy_files": 326,
+    "source_policy_result": "PASS — actual local-secret and credential-format scan; no forbidden private paths",
+    "gitleaks_full_source": {
+      "findings": 4,
+      "actual_credentials": 0,
+      "reviewed_false_positives": [
+        {
+          "file": "docs/VERIFICATION_TR.md",
+          "line": 39,
+          "reason": "unchanged public hash"
+        },
+        {
+          "file": "test/integration/authentication_test.rb",
+          "line": 46,
+          "reason": "unchanged synthetic overlong-password regression input"
+        },
+        {
+          "file": "docs/evidence/phase31-integration-center-2026-10-23.json",
+          "occurrences": 2,
+          "reason": "Actual identical replay idempotency nonce, explicitly generated for this fictional test; non-secret correlation identifier, no bearer authority"
+        }
+      ]
+    },
+    "public_docs": "Static contract/example data only; private credentials and tenant data excluded; action-local GET exceptions only",
+    "staged_commit_archive": "Verified after final local commit; exact outcome and ZIP hash recorded in delivery report",
+    "staged_gitleaks": {
+      "generic_pattern_findings": 2,
+      "actual_credentials": 0,
+      "classification": "Reviewed identical non-secret idempotency nonce occurrences in actual fictional HTTP replay evidence; no ignore/suppression added."
+    }
+  }
+}

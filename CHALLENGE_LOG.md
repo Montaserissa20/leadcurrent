@@ -3239,3 +3239,547 @@ This must demonstrate an actual **AI-agent-to-business workflow**, not a static 
 
 Begin with the repository audit and architecture design, then implement and test Phase 3 systematically.
 ````
+
+
+## 23 October 2026 — Phase 3.1 external AI-agent Integration Center
+
+Starting local Phase3 baseline `87cd77ead659523482c0e9682b8c444a92c228d5`, verified clean; new `phase3/integration-center` preserves that entire commit and main. The user requests developer integration improvements, not a Phase3 rebuild/new major phase. Existing live URL remains https://leadcurrent-production.up.railway.app; Railway/production acceptance still PENDING. No push, deploy, new service, production variables or migration/database reset. D:\ruby_project remains untouched.
+
+**Problem/source and promise:** the user's brief below asks how an outside company/agent developer learns the API, obtains scoped authorization and tests it. Continue the working Phase3 system rather than pivot: it already has the secure machine-to-business workflow. Promise a discoverable, provider-independent HTTPS/JSON contract and functioning CLI demonstration, without exposing credentials or relaxing human approval. This is user/professor project feedback, not a fabricated customer interview or competitor-exclusivity claim.
+
+**Built:** public GET /agent-integrations, dedicated responsive theme-aware developer page, keyboard disclosures, real clipboard copy controls with temporary feedback/manual-denial fallback, contextual inbox link, actual endpoint/headers, manager credential link, auth/idempotency/error/limits/testing explanations and explicit pending deployment. Public downloadable GET /api-docs/agent-inquiries/openapi.yaml, HTML/HTTP service-desc discovery, OpenAPI3.1.0 for the existing POST only. Examples contain fictional contract-derived data and private environment references, never saved tokens/CRM rows. Any outside model/provider can integrate without Groq/Page Agent/Copilot/our client, and no private prompts/reasoning are required. Existing Python client preserved. Maintained OpenAPI validation is development/CI-only; no runtime dependency or paid service. Official sources: [OpenAPI3.1](https://spec.openapis.org/oas/v3.1.1.html), [openapi-spec-validator](https://openapi-spec-validator.readthedocs.io/en/latest/).
+
+**Verification approach and honest iteration:** fresh source/customer hashes captured. Baseline Rails164/2108 seed8749 PASS and sequential browser29/436 seed28802 PASS. An accidentally overlapping initial browser baseline was interrupted and rerun sequentially; it is not counted as a pass. Early targeted checks found a wrong Minitest assertion name and Windows clipboard CRLF normalization in the test, then Selenium's string-valued boolean attribute; the harness was corrected and actual clipboard reads confirmed the copied text. Contract review corrected nullable-text schema semantics; the added validator checks null/minimal examples as well as all receipts/errors. True390px browser emulation replaced an outer-window resize that Edge clamps wider. Product auth/intake/workflows were not weakened for tests.
+
+**Actual deterministic acceptance:** first attempt reached public docs/download but navigated before Turbo login completed and failed to find a credential field. Awaiting the login redirect fixed this test navigation race. Preserved FAIL report; passing rerun1test/21assertions seed3005 proves UI-issued credential, separate Python actualPOST201 then identical replay200, same inquiry ID, own tenant, pending/unverified inbox and unchanged CRM counts. Fictional test fixtures roll back; no development customer rows are substituted or reset. Groq calls/tokens **0**, no real-AI rerun; prior Phase3 real4808-token evidence is historical and retained. Public3100 screenshots are real browser captures, including light/dark full-page and a true390px viewport, not mockups.
+
+Final full test counts/security/build/preservation observations are recorded after execution in [dated Phase3.1 evidence](docs/evidence/phase31-integration-center-2026-10-23.json) and the delivery report. [Developer/Turkish professor guide](docs/AGENT_INTEGRATION_GUIDE.md). Final local SHA and verified source-only ZIP are supplied after the reviewed commit exists, not fabricated as self-reference. Human/agent development hours, financial spend and cost savings were not measured. This task's LLM provider consumption is zero.
+
+**Security/limits:** public documentation contains no private records or issued secrets. GET-only action-local public exceptions, private management/review, bearer-only intake, tenant isolation, digest/revocation/idempotency/CSRF/CSP/body/rate/audit/human approval remain unchanged. Validated origin prevents shell/code syntax in examples. No CORS relaxation, browser tester/token storage, MCP server, self-registration, new provider/model or unrelated features. Process-local quotas need centralization for multiple workers/replicas; contact/identity remains unverified, no outbound email/polling/edit-in-place/payment. OpenAPI cannot express every wire-level numeric/parser detail; those are explicitly documented and Rails remains authoritative. Tool/clipboard permissions and provider quota may vary.
+
+**Unfinished:** explicit user review and GitHub approval, normal merge preserving localPhase3, exact remote CI, then existing-service Railway deployment/production acceptance when available. All PENDING. **Decision: CONTINUE** to local review because the actual authenticated integration works and developer discovery is now usable; no evidence supports pivot/kill. Source/archive security and current data preservation must pass before local delivery.
+
+Final Phase3.1 observations: Rails170/2278 seed33707; browser31/464 seed7367 (true390px), total201/2742, zero failures/errors/skips. Python7 PASS. Zeitwerk, Brakeman0, locked Node build/zero npm vulnerabilities, production assets and maintained OpenAPI validity/example checks PASS. All11 original application-table row contents unchanged, local master key unchanged,302 baseline source files unchanged with9 intended old-file changes. Syntax145Ruby/14JS/3Python and documentation34Markdown/334local links/47tables/19required sections/18ignore checks PASS. Source326 files passes exact-local-secret/signature/path policy. Gitleaks full-source4 generic matches individually reviewed: unchanged public commit hash and synthetic password test, plus2 occurrences of the actual non-secret idempotency correlation key in fictional replay evidence. No credential authority/value was exposed; do not falsely call the scanner output zero. No migration or new provider call. Commit/archive verification follows on the clean reviewed local tree and is reported with its actualSHA/hash, never as a future deployment.
+
+### Original Phase 3.1 Codex prompt (verbatim)
+
+````text
+# CODEX TASK — LeadCurrent Phase 3.1: External AI Agent Integration Center
+
+## Objective
+
+Improve the existing LeadCurrent Phase 3 implementation so that external companies and AI-agent developers can easily understand, integrate with, and test our secure purchasing-inquiry API.
+
+The goal is to transform our existing working agent API into a documented, developer-friendly integration.
+
+**Do not rebuild Phase 3. Do not introduce another AI provider or redesign the existing CRM.**
+
+## Project
+
+- Repository: https://github.com/Montaserissa20/leadcurrent
+- Local project: `D:\LeadCurrent`
+- Stack: Ruby on Rails 8.1.4, PostgreSQL, Hotwire, Stimulus, Groq, Alibaba Page Agent
+- Current local Phase 3 review baseline: `87cd77ead659` (verify actual local Git state)
+- Railway deployment is currently blocked.
+- Phase 3 is developed locally and has not yet been approved for a GitHub release.
+
+**IMPORTANT:** The GitHub `main` branch may contain only Phase 2. Preserve all existing local Phase 3 code. Do not overwrite it by checking out the older remote branch.
+
+Read `AGENTS.md`, `AGENT.md`, `README.md`, and `CHALLENGE_LOG.md` before implementing anything.
+
+---
+
+## 1. Create an Agent Integration Center
+
+Add a polished page called:
+
+**Agent Integrations**
+
+The page should explain how external AI purchasing agents can connect to LeadCurrent.
+
+Make it accessible through:
+
+- A link from the existing Agent Inquiries page.
+- An appropriate navigation entry or contextual link.
+- A direct, well-defined Rails route.
+
+Match the existing LeadCurrent UI design.
+
+Support:
+- Light and dark modes.
+- Desktop and mobile layouts.
+- Clean typography and responsive cards.
+- Copyable integration examples.
+- Helpful validation/error messages.
+- Accessible labels and keyboard interactions.
+
+### Page content
+
+Create the following sections:
+
+**A. Overview**
+
+Explain:
+
+"LeadCurrent allows authorized external AI agents to submit purchasing inquiries through a secure API. Submitted requests remain unverified until a human manager reviews them."
+
+Show a simple flow:
+
+External AI Agent → LeadCurrent API → Agent Inquiries → AI Qualification → Human Approval → CRM Lead
+
+**B. Connection details**
+
+Display:
+
+- API base URL.
+- Actual inquiry submission endpoint.
+- HTTP method.
+- Required headers.
+- Authentication type.
+- Idempotency requirements.
+- Supported request and response formats.
+
+Use the actual Rails routes and production configuration.
+
+Do not invent endpoints.
+
+**C. Authentication**
+
+Explain how a workspace manager creates an agent credential and shares it securely with an external integration.
+
+Add a link to the existing **Manage Agent Credentials** page.
+
+Explain that:
+
+- The credential belongs to one workspace.
+- It can be revoked.
+- It authorizes only permitted API actions.
+- It does not establish that the requester represents a verified company.
+
+Never display previously generated token values.
+
+**D. Example requests**
+
+Provide copyable examples for:
+
+1. cURL.
+2. PowerShell.
+3. Python using the `requests` library or standard library.
+
+Include correct authentication and idempotency headers.
+
+Use placeholder credentials such as `YOUR_AGENT_TOKEN`.
+
+Do not embed real credentials, API keys, customer data, or secrets.
+
+**E. API documentation**
+
+Provide a clear link to the OpenAPI specification and explain how developers can use it.
+
+**F. Testing guide**
+
+Explain how to test locally and against a deployed public HTTPS endpoint once available.
+
+---
+
+## 2. Publish a downloadable OpenAPI specification
+
+Create a valid OpenAPI 3.1 specification for the actual existing external-agent API.
+
+Suggested source location:
+
+`docs/api/agent-inquiries.openapi.yaml`
+
+Expose a downloadable version through a Rails route, for example:
+
+`GET /api-docs/agent-inquiries/openapi.yaml`
+
+The exact route may differ if another route better matches the existing application.
+
+The specification must accurately document:
+
+- The existing inquiry submission endpoint.
+- Bearer-token authentication.
+- The `Idempotency-Key` header.
+- Request JSON schema.
+- Required and optional fields.
+- Field types and limits.
+- Successful response schema.
+- Real HTTP status codes.
+- Validation errors.
+- Authentication errors.
+- Rate-limit errors.
+- Idempotency conflicts.
+- Meaning of each inquiry status.
+- The distinction between authenticated API source and verified customer identity.
+
+Inspect the implementation before documenting response fields and status codes.
+
+**Do not publish fictional endpoints or schemas that differ from the Rails application.**
+
+Include at least one fictional example request and response.
+
+The spec should be readable by:
+
+- OpenAPI-compatible development tools.
+- Other AI-agent frameworks.
+- Third-party developers.
+- Automated integration clients.
+
+Add automated validation of the OpenAPI document to the project's test or CI workflow using a maintained tool that does not require a paid service.
+
+Do not add an unnecessarily large dependency just to display the specification.
+
+---
+
+## 3. Make integration genuinely AI-agent friendly
+
+Any external AI agent that can make an authorized HTTPS request should be able to integrate with LeadCurrent.
+
+The external agent must **not** need to use:
+
+- Groq specifically.
+- Alibaba Page Agent.
+- Our internal Rails AI Copilot.
+- Our Python demonstration client.
+- The LeadCurrent browser interface.
+
+It only needs:
+
+1. The public API endpoint.
+2. The request schema.
+3. Valid workspace-issued credentials.
+4. Permission to submit inquiries.
+
+Add a clear explanation of these requirements to the Integration Center.
+
+The integration should be independent of the underlying external AI model.
+
+Do not require agents to expose their model provider, prompts, internal reasoning, or private system instructions.
+
+Document that authentication and commercial identity verification are different concepts.
+
+### Machine-readable discovery
+
+Make the downloadable OpenAPI description straightforward to discover from the integration page and README.
+
+If useful, add a minimal public API documentation landing page containing non-sensitive integration information.
+
+Do not build a full MCP server or introduce public agent self-registration as part of this task.
+
+---
+
+## 4. Provide an executable integration test
+
+We already have an external Python purchasing agent:
+
+`examples/purchasing_agent/client.py`
+
+Preserve it.
+
+Improve the documentation and, if needed, add a small developer-friendly test script.
+
+We want developers to test our API without consuming Groq tokens.
+
+### Deterministic test
+
+The developer should be able to:
+
+1. Generate an agent credential through LeadCurrent.
+2. Configure the API base URL.
+3. Configure the credential using an environment variable.
+4. Run a single command.
+5. Send a real fictional purchasing inquiry.
+6. Receive a genuine API response.
+7. Open LeadCurrent and see the new pending inquiry.
+
+Use unique idempotency keys for new test submissions.
+
+Explain that retrying the same request with the same key should not create another inquiry.
+
+Do not generate test data directly in the database as a substitute for an API request.
+
+### Optional real AI test
+
+Keep the existing Groq-powered mode for the professor's demonstration.
+
+Explain clearly that:
+
+- Deterministic mode tests API integration.
+- AI mode tests an actual model-generated purchasing request.
+- Real AI mode may consume free-tier tokens.
+- Both modes use the same authenticated LeadCurrent API.
+
+Do not rerun expensive live Groq tests unnecessarily.
+
+---
+
+## 5. Improve developer experience
+
+On the Integration Center page, add helpful functionality such as:
+
+- Copy API endpoint.
+- Copy cURL example.
+- Copy PowerShell example.
+- Copy Python example.
+- Download OpenAPI specification.
+- Open credential management.
+- View integration instructions.
+- View the Agent Inquiries inbox.
+
+Every interactive control must work.
+
+Do not add fake buttons or placeholder features.
+
+A copy button should show temporary success feedback.
+
+Clearly label examples that will create an actual test inquiry.
+
+Do not expose credentials in browser logs, analytics, error reports, or query strings.
+
+Avoid implementing a browser-based live API tester that stores or transmits credentials unnecessarily. A documented CLI test is sufficient.
+
+---
+
+## 6. Security requirements
+
+Preserve all current Phase 3 protections.
+
+These include:
+
+- Workspace-scoped credentials.
+- Credential hashing.
+- Token revocation.
+- Bearer authentication.
+- No session-cookie authentication for external agents.
+- Input validation.
+- Request-size limits.
+- Rate limiting.
+- Durable idempotency.
+- Tenant isolation.
+- Human approval before creating CRM leads.
+- Existing audit events.
+- Secure Groq credentials.
+- CSRF protection for normal browser actions.
+
+Do not weaken these protections to make integration easier.
+
+### Public documentation versus private credentials
+
+Public API documentation may be accessible without authentication because it should contain no secrets.
+
+However:
+
+- Credential creation must remain manager-only.
+- Credential revocation must remain manager-only.
+- Inquiry review must remain authorized.
+- Lead creation must remain human-controlled.
+- The API must continue requiring valid agent credentials.
+
+Do not create a public unauthenticated inquiry submission endpoint.
+
+Do not globally disable CSRF.
+
+Do not enable permissive CORS without a demonstrated browser-based requirement. Server-to-server integrations do not need unrestricted browser CORS.
+
+---
+
+## 7. UI design requirements
+
+Make the Integration Center feel like a real SaaS developer portal.
+
+Suggested visual structure:
+
+### Header
+
+**Agent Integrations**
+
+"Connect autonomous purchasing agents to your sales workflow."
+
+### Connection overview
+
+Cards for:
+
+- API Endpoint
+- Authentication
+- Request Format
+- Human Approval
+
+### Integration flow
+
+Visual representation:
+
+1. Configure agent.
+2. Authenticate request.
+3. Submit inquiry.
+4. Human reviews.
+5. Convert to lead.
+
+### Code example area
+
+Use tabs or another appropriate accessible control:
+
+- cURL
+- PowerShell
+- Python
+
+Each example should support copying.
+
+### Documentation area
+
+Include:
+
+- Download OpenAPI
+- Authentication guide
+- Testing guide
+- Existing Agent Inquiries
+
+Use the established LeadCurrent design system and responsive layout.
+
+Do not introduce React or a new UI framework.
+
+---
+
+## 8. Tests
+
+Add automated tests for:
+
+- Integration Center accessibility.
+- Unauthorized access to private management actions.
+- Valid downloadable OpenAPI document.
+- OpenAPI routes and schemas matching the implemented API.
+- Copyable examples containing correct endpoint paths.
+- No real credentials in examples.
+- No sensitive data exposed through public documentation.
+- Correct authentication documentation.
+- Correct idempotency documentation.
+- Deterministic external API testing.
+- Existing Phase 3 security regression tests.
+- Existing Phase 1 and Phase 2 functionality.
+
+Run:
+
+- Rails tests.
+- Browser tests.
+- Python tests.
+- Zeitwerk checks.
+- Brakeman.
+- JavaScript build.
+- Production asset compilation.
+
+If any test fails, identify the root cause and fix the regression.
+
+Report actual test counts and failures honestly.
+
+---
+
+## 9. Documentation
+
+Update:
+
+- `README.md`
+- `AGENT.md`
+- `CHALLENGE_LOG.md`
+- Relevant Phase 3 documentation.
+
+Add a new document:
+
+`docs/AGENT_INTEGRATION_GUIDE.md`
+
+Include:
+
+1. What the external-agent API does.
+2. How an outside company obtains authorization.
+3. How to create a credential.
+4. How to send a purchasing inquiry.
+5. How authentication works.
+6. How idempotency works.
+7. How to handle errors.
+8. How to import the OpenAPI specification.
+9. How to run the deterministic integration test.
+10. How to run the optional Groq-powered demonstration.
+11. How human approval protects the CRM.
+12. Current limitations.
+
+Also add a short Turkish explanation suitable for a university demonstration.
+
+Answer:
+
+**"Başka bir şirketin yapay zekâ ajanı LeadCurrent'a nasıl bağlanır?"**
+
+Explain that external agents communicate through HTTPS and do not need to use LeadCurrent's internal AI model.
+
+Record accurate Phase 3.1 work and evidence in `CHALLENGE_LOG.md`.
+
+---
+
+## 10. Development and Git rules
+
+Continue from the actual latest local Phase 3 code.
+
+Create an appropriate local development branch or continue the existing Phase 3 branch safely.
+
+Do not overwrite Phase 3 work with the older remote `main`.
+
+Do not modify or reset production or local customer databases.
+
+Do not introduce destructive migrations.
+
+Do not push to GitHub yet.
+
+Do not deploy to Railway.
+
+Do not introduce unrelated features.
+
+Do not begin a new major project phase.
+
+This task is an improvement to the completed Phase 3 integration experience.
+
+---
+
+## 11. Final deliverables
+
+When finished, provide:
+
+1. Summary of the Integration Center.
+2. Screenshot of the completed page.
+3. Working local page URL.
+4. OpenAPI specification file path and download URL.
+5. Supported example commands.
+6. Proof that the deterministic test works.
+7. Actual test results.
+8. Security review.
+9. Files modified.
+10. Local commit SHA.
+11. Any limitations.
+12. Exact steps for a professor to demonstrate an external AI agent connecting to LeadCurrent.
+
+Create a clean, source-only review ZIP.
+
+Exclude all:
+- API credentials.
+- Groq keys.
+- Rails master keys.
+- `.env` secrets.
+- `.git` metadata.
+- `node_modules`.
+- Local PostgreSQL files.
+- Logs.
+- Cached or generated private data.
+
+Inspect the archive before delivering it.
+
+**Do not push to GitHub or deploy to Railway until I approve the result.**
+
+## Success criteria
+
+A developer from another company can open LeadCurrent's Agent Integration documentation, understand how the API works, obtain authorized credentials, download a valid OpenAPI specification, and successfully submit a test inquiry from their own software.
+
+The resulting inquiry appears in LeadCurrent's Agent Inquiries inbox.
+
+The external agent can be powered by any AI provider, because integration depends on our documented HTTPS API rather than a particular model.
+
+All existing Phase 1, Phase 2, and Phase 3 functions continue working.
+
+Begin by inspecting the current code and routes, then implement, test, and document the Integration Center.
+````

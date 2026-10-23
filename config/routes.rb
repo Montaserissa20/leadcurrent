@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "agent-integrations", to: "agent_integrations#index", as: :agent_integrations
+  get "api-docs/agent-inquiries/openapi.yaml", to: "agent_integrations#openapi", as: :agent_inquiries_openapi, format: false
   namespace :api do
     namespace :v1 do
       resources :agent_inquiries, only: :create, defaults: { format: :json }

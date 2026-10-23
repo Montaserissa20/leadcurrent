@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-controller="appearance">
+<head>
+  <title>Agent Integrations · LeadCurrent</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Connect your purchasing agent to LeadCurrent's secure, provider-independent inquiry API.">
+  <%= csrf_meta_tags %><%= csp_meta_tag %>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="service-desc" type="application/yaml" href="<%= agent_inquiries_openapi_path %>">
+  <%= stylesheet_link_tag "application", "agent_integrations", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body class="integration-body">
+  <a href="#integration-content" class="integration-skip">Skip to integration guide</a>
+  <header class="integration-header"><div class="integration-header-inner">
+    <%= link_to agent_integrations_path, class: "brand", aria: { label: "LeadCurrent integration home" } do %><img src="/icon.svg" alt="" width="32" height="32">LeadCurrent<span class="integration-header-label">Developers</span><% end %>
+    <nav aria-label="Developer navigation"><a href="#testing">Testing guide</a><%= link_to "Agent Inquiries", agent_inquiries_path %><button type="button" class="icon-button" data-action="appearance#toggleTheme" aria-label="Toggle color theme">◐</button></nav>
+  </div></header>
+  <main id="integration-content" class="integration-container" data-controller="integration-copy"><%= yield %></main>
+  <footer class="integration-footer">LeadCurrent · Machine inquiries. Human decisions. <%= link_to "Sign in to your workspace", login_path %></footer>
+</body>
+</html>

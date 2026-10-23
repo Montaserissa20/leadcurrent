@@ -1,6 +1,14 @@
 # LeadCurrent
 
+## Phase 3.1 — Agent Integrations (yerel inceleme)
+
+**23 Ekim 2026:** dış şirketlerin kendi AI agent'ları için herkese açık, secretsiz **Agent Integrations** merkezi; gerçek Rails API'siyle eşleşen indirilebilir **OpenAPI 3.1**; çalışan cURL/PowerShell/Python copy örnekleri ve modelsiz deterministic test rehberi eklendi. Agent istediği AI sağlayıcısını kullanabilir; bizim Groq/Copilot/Page Agent'ımız gerekli değildir. Credential ve human review güvenliği korunur. Yeni migration, sağlayıcı veya production değişikliği yok.
+
+Yerel sayfa: **http://127.0.0.1:3100/agent-integrations** · OpenAPI: **http://127.0.0.1:3100/api-docs/agent-inquiries/openapi.yaml** · [Kaynak OpenAPI](docs/api/agent-inquiries.openapi.yaml) · [Tam entegrasyon ve kısa Türkçe sunum rehberi](docs/AGENT_INTEGRATION_GUIDE.md) · [Dated test/gerçek HTTP kanıtı](docs/evidence/phase31-integration-center-2026-10-23.json). Ayrı Python deterministic süreç gerçek201 + replay200 ile inbox'a ulaştı; **Groq çağrısı/token tüketimi 0**. `phase3/integration-center` yalnız yerel review dalıdır. Phase3/3.1 GitHub push, remote CI, Railway deployment ve production acceptance **PENDING**; onaydan önce yayın yok. Aşağıdaki önceki kanıtlar tarihsel olarak korunur.
+
 ## Phase 3 — AI müşteri agent (yerel inceleme)
+
+Phase 3.1 final kontrolü: **170 Rails testi/2278 assertion + 31 browser testi/464 assertion = 201 test/2742 assertion PASS**, ayrıca 7 Python testi. OpenAPI CLI ve örnek şema kontrolleri, Zeitwerk, Brakeman0, Node build ve production assets PASS. Gerçek deterministic HTTP demosu1/21 PASS; yeni Groq çağrısı yok. Mevcut11 uygulama tablosunun verisi ve önceki Phase1/2/3 core kaynakları korundu. [Phase3.1 ayrıntılı kanıt](docs/evidence/phase31-integration-center-2026-10-23.json).
 
 **22 Ekim 2026:** `phase3/agent-customer` dalında gerçek dış Python satın alma agent'ı, workspace'e bağlı/revoke edilebilir bearer credential, ayrı ve **doğrulanmamış** inquiry inbox'ı, isteğe bağlı Groq qualification ve manager onayından sonra mevcut `CreateLead` ile lead oluşturma eklendi. 24 saatlik ilk temas kuralı lead yaratıldığında başlar; agent onay/satış/ödeme yapamaz. Default model `openai/gpt-oss-20b` korundu. Önceki “Phase 3 başlatma” kısıtları tarihsel Phase 2 görevine aittir; yeni kullanıcı brief'i yalnız yerel Phase 3 geliştirmesini onayladı.
 

@@ -1,4 +1,5 @@
 <% content_for :page_title, "Agent inquiries" %>
+<p><%= link_to "Agent Integrations — API documentation & examples →", agent_integrations_path, class: "text-link" %></p>
 <section class="page-heading"><div><span class="eyebrow">MACHINE INQUIRIES · HUMAN DECISIONS</span><h1>Agent Inquiries</h1><p>Prospective buyers can be agents. Their claims stay separate from your CRM until a manager accepts them.</p></div><% if current_user.manager? %><%= link_to "Manage agent credentials", agent_credentials_path, class: "button secondary" %><% end %></section>
 <div class="inquiry-metrics" aria-label="Inquiry summary">
   <% [["Total inquiries", @counts.values.sum, nil], ["Pending review", @counts.fetch("pending_review", 0), "pending_review"], ["Needs information", @counts.fetch("needs_information", 0), "needs_information"], ["Accepted", @counts.fetch("accepted", 0), "accepted"], ["Rejected", @counts.fetch("rejected", 0), "rejected"]].each do |label, count, status| %>
