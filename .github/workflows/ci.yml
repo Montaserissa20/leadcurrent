@@ -37,7 +37,7 @@ jobs:
         run: npm ci --ignore-scripts && npm run build
       - name: Purchasing agent Python client tests (no provider calls)
         run: python3 -m unittest discover -s examples/purchasing_agent/tests
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
