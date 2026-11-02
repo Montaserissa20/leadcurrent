@@ -31,7 +31,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "capybara", "~> 3.40"
-  gem "selenium-webdriver", "~> 4.38"
+  gem "selenium-webdriver", "~> 4.52"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
